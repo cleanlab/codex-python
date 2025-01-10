@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from codex import CleanlabCodex, AsyncCleanlabCodex
+from codex import Cleanlab, AsyncCleanlab
 from codex.types import OrganizationSchemaPublic
 from tests.utils import assert_matches_type
 
@@ -18,14 +18,14 @@ class TestOrganizations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_retrieve(self, client: CleanlabCodex) -> None:
+    def test_method_retrieve(self, client: Cleanlab) -> None:
         organization = client.organizations.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationSchemaPublic, organization, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: CleanlabCodex) -> None:
+    def test_raw_response_retrieve(self, client: Cleanlab) -> None:
         response = client.organizations.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -36,7 +36,7 @@ class TestOrganizations:
         assert_matches_type(OrganizationSchemaPublic, organization, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: CleanlabCodex) -> None:
+    def test_streaming_response_retrieve(self, client: Cleanlab) -> None:
         with client.organizations.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -49,7 +49,7 @@ class TestOrganizations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: CleanlabCodex) -> None:
+    def test_path_params_retrieve(self, client: Cleanlab) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `organization_id` but received ''"):
             client.organizations.with_raw_response.retrieve(
                 "",
@@ -60,14 +60,14 @@ class TestAsyncOrganizations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncCleanlabCodex) -> None:
+    async def test_method_retrieve(self, async_client: AsyncCleanlab) -> None:
         organization = await async_client.organizations.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationSchemaPublic, organization, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncCleanlabCodex) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncCleanlab) -> None:
         response = await async_client.organizations.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -78,7 +78,7 @@ class TestAsyncOrganizations:
         assert_matches_type(OrganizationSchemaPublic, organization, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncCleanlabCodex) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncCleanlab) -> None:
         async with async_client.organizations.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -91,7 +91,7 @@ class TestAsyncOrganizations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncCleanlabCodex) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncCleanlab) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `organization_id` but received ''"):
             await async_client.organizations.with_raw_response.retrieve(
                 "",

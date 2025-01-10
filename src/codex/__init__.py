@@ -8,12 +8,12 @@ from ._client import (
     Client,
     Stream,
     Timeout,
+    Cleanlab,
     Transport,
     AsyncClient,
     AsyncStream,
-    CleanlabCodex,
+    AsyncCleanlab,
     RequestOptions,
-    AsyncCleanlabCodex,
 )
 from ._models import BaseModel
 from ._version import __title__, __version__
@@ -21,6 +21,7 @@ from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIR
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
+    CleanlabError,
     ConflictError,
     NotFoundError,
     APIStatusError,
@@ -28,7 +29,6 @@ from ._exceptions import (
     APITimeoutError,
     BadRequestError,
     APIConnectionError,
-    CleanlabCodexError,
     AuthenticationError,
     InternalServerError,
     PermissionDeniedError,
@@ -48,7 +48,7 @@ __all__ = [
     "NotGiven",
     "NOT_GIVEN",
     "Omit",
-    "CleanlabCodexError",
+    "CleanlabError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
@@ -68,8 +68,8 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
-    "CleanlabCodex",
-    "AsyncCleanlabCodex",
+    "Cleanlab",
+    "AsyncCleanlab",
     "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",

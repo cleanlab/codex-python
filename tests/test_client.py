@@ -20,7 +20,7 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from codex import CleanlabCodex, AsyncCleanlabCodex, APIResponseValidationError
+from codex import Cleanlab, AsyncCleanlab, APIResponseValidationError
 from codex._types import Omit
 from codex._models import BaseModel, FinalRequestOptions
 from codex._constants import RAW_RESPONSE_HEADER
@@ -42,7 +42,7 @@ def _low_retry_timeout(*_args: Any, **_kwargs: Any) -> float:
     return 0.1
 
 
-def _get_open_connections(client: CleanlabCodex | AsyncCleanlabCodex) -> int:
+def _get_open_connections(client: Cleanlab | AsyncCleanlab) -> int:
     transport = client._client._transport
     assert isinstance(transport, httpx.HTTPTransport) or isinstance(transport, httpx.AsyncHTTPTransport)
 
@@ -50,8 +50,8 @@ def _get_open_connections(client: CleanlabCodex | AsyncCleanlabCodex) -> int:
     return len(pool._requests)
 
 
-class TestCleanlabCodex:
-    client = CleanlabCodex(base_url=base_url, _strict_response_validation=True)
+class TestCleanlab:
+    client = Cleanlab(base_url=base_url, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -94,7 +94,7 @@ class TestCleanlabCodex:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"})
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"})
         assert client.default_headers["X-Foo"] == "bar"
 
         # does not override the already given value when not specified
@@ -126,7 +126,7 @@ class TestCleanlabCodex:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=True, default_query={"foo": "bar"})
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True, default_query={"foo": "bar"})
         assert _get_params(client)["foo"] == "bar"
 
         # does not override the already given value when not specified
@@ -249,7 +249,7 @@ class TestCleanlabCodex:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=True, timeout=httpx.Timeout(0))
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True, timeout=httpx.Timeout(0))
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -258,7 +258,7 @@ class TestCleanlabCodex:
     def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
-            client = CleanlabCodex(base_url=base_url, _strict_response_validation=True, http_client=http_client)
+            client = Cleanlab(base_url=base_url, _strict_response_validation=True, http_client=http_client)
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -266,7 +266,7 @@ class TestCleanlabCodex:
 
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
-            client = CleanlabCodex(base_url=base_url, _strict_response_validation=True, http_client=http_client)
+            client = Cleanlab(base_url=base_url, _strict_response_validation=True, http_client=http_client)
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -274,7 +274,7 @@ class TestCleanlabCodex:
 
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = CleanlabCodex(base_url=base_url, _strict_response_validation=True, http_client=http_client)
+            client = Cleanlab(base_url=base_url, _strict_response_validation=True, http_client=http_client)
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -283,15 +283,15 @@ class TestCleanlabCodex:
     async def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             async with httpx.AsyncClient() as http_client:
-                CleanlabCodex(base_url=base_url, _strict_response_validation=True, http_client=cast(Any, http_client))
+                Cleanlab(base_url=base_url, _strict_response_validation=True, http_client=cast(Any, http_client))
 
     def test_default_headers_option(self) -> None:
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"})
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"})
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = CleanlabCodex(
+        client2 = Cleanlab(
             base_url=base_url,
             _strict_response_validation=True,
             default_headers={
@@ -304,9 +304,7 @@ class TestCleanlabCodex:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_default_query_option(self) -> None:
-        client = CleanlabCodex(
-            base_url=base_url, _strict_response_validation=True, default_query={"query_param": "bar"}
-        )
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True, default_query={"query_param": "bar"})
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
         assert dict(url.params) == {"query_param": "bar"}
@@ -418,7 +416,7 @@ class TestCleanlabCodex:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, client: CleanlabCodex) -> None:
+    def test_multipart_repeating_array(self, client: Cleanlab) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -505,7 +503,7 @@ class TestCleanlabCodex:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = CleanlabCodex(base_url="https://example.com/from_init", _strict_response_validation=True)
+        client = Cleanlab(base_url="https://example.com/from_init", _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -513,23 +511,23 @@ class TestCleanlabCodex:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(CLEANLAB_CODEX_BASE_URL="http://localhost:5000/from/env"):
-            client = CleanlabCodex(_strict_response_validation=True)
+        with update_env(CLEANLAB_BASE_URL="http://localhost:5000/from/env"):
+            client = Cleanlab(_strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
         # explicit environment arg requires explicitness
-        with update_env(CLEANLAB_CODEX_BASE_URL="http://localhost:5000/from/env"):
+        with update_env(CLEANLAB_BASE_URL="http://localhost:5000/from/env"):
             with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                CleanlabCodex(_strict_response_validation=True, environment="production")
+                Cleanlab(_strict_response_validation=True, environment="production")
 
-            client = CleanlabCodex(base_url=None, _strict_response_validation=True, environment="production")
+            client = Cleanlab(base_url=None, _strict_response_validation=True, environment="production")
             assert str(client.base_url).startswith("https://api-alpha-o3gxj3oajfu.cleanlab.ai")
 
     @pytest.mark.parametrize(
         "client",
         [
-            CleanlabCodex(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
-            CleanlabCodex(
+            Cleanlab(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
+            Cleanlab(
                 base_url="http://localhost:5000/custom/path/",
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
@@ -537,7 +535,7 @@ class TestCleanlabCodex:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: CleanlabCodex) -> None:
+    def test_base_url_trailing_slash(self, client: Cleanlab) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -550,8 +548,8 @@ class TestCleanlabCodex:
     @pytest.mark.parametrize(
         "client",
         [
-            CleanlabCodex(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
-            CleanlabCodex(
+            Cleanlab(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
+            Cleanlab(
                 base_url="http://localhost:5000/custom/path/",
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
@@ -559,7 +557,7 @@ class TestCleanlabCodex:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: CleanlabCodex) -> None:
+    def test_base_url_no_trailing_slash(self, client: Cleanlab) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -572,8 +570,8 @@ class TestCleanlabCodex:
     @pytest.mark.parametrize(
         "client",
         [
-            CleanlabCodex(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
-            CleanlabCodex(
+            Cleanlab(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
+            Cleanlab(
                 base_url="http://localhost:5000/custom/path/",
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
@@ -581,7 +579,7 @@ class TestCleanlabCodex:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: CleanlabCodex) -> None:
+    def test_absolute_request_url(self, client: Cleanlab) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -592,7 +590,7 @@ class TestCleanlabCodex:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -603,7 +601,7 @@ class TestCleanlabCodex:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -624,7 +622,7 @@ class TestCleanlabCodex:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            CleanlabCodex(base_url=base_url, _strict_response_validation=True, max_retries=cast(Any, None))
+            Cleanlab(base_url=base_url, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
@@ -633,12 +631,12 @@ class TestCleanlabCodex:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = CleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        strict_client = Cleanlab(base_url=base_url, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=False)
+        client = Cleanlab(base_url=base_url, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -666,7 +664,7 @@ class TestCleanlabCodex:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = CleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        client = Cleanlab(base_url=base_url, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -709,7 +707,7 @@ class TestCleanlabCodex:
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
         self,
-        client: CleanlabCodex,
+        client: Cleanlab,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -740,7 +738,7 @@ class TestCleanlabCodex:
     @mock.patch("codex._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
-        self, client: CleanlabCodex, failures_before_success: int, respx_mock: MockRouter
+        self, client: Cleanlab, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -768,7 +766,7 @@ class TestCleanlabCodex:
     @mock.patch("codex._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
-        self, client: CleanlabCodex, failures_before_success: int, respx_mock: MockRouter
+        self, client: Cleanlab, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -793,8 +791,8 @@ class TestCleanlabCodex:
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
 
-class TestAsyncCleanlabCodex:
-    client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True)
+class TestAsyncCleanlab:
+    client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -839,9 +837,7 @@ class TestAsyncCleanlabCodex:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = AsyncCleanlabCodex(
-            base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
-        )
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"})
         assert client.default_headers["X-Foo"] == "bar"
 
         # does not override the already given value when not specified
@@ -873,7 +869,7 @@ class TestAsyncCleanlabCodex:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True, default_query={"foo": "bar"})
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True, default_query={"foo": "bar"})
         assert _get_params(client)["foo"] == "bar"
 
         # does not override the already given value when not specified
@@ -996,7 +992,7 @@ class TestAsyncCleanlabCodex:
         assert timeout == httpx.Timeout(100.0)
 
     async def test_client_timeout_option(self) -> None:
-        client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True, timeout=httpx.Timeout(0))
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True, timeout=httpx.Timeout(0))
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -1005,7 +1001,7 @@ class TestAsyncCleanlabCodex:
     async def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
-            client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True, http_client=http_client)
+            client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True, http_client=http_client)
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -1013,7 +1009,7 @@ class TestAsyncCleanlabCodex:
 
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
-            client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True, http_client=http_client)
+            client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True, http_client=http_client)
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -1021,7 +1017,7 @@ class TestAsyncCleanlabCodex:
 
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True, http_client=http_client)
+            client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True, http_client=http_client)
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -1030,19 +1026,15 @@ class TestAsyncCleanlabCodex:
     def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             with httpx.Client() as http_client:
-                AsyncCleanlabCodex(
-                    base_url=base_url, _strict_response_validation=True, http_client=cast(Any, http_client)
-                )
+                AsyncCleanlab(base_url=base_url, _strict_response_validation=True, http_client=cast(Any, http_client))
 
     def test_default_headers_option(self) -> None:
-        client = AsyncCleanlabCodex(
-            base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
-        )
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"})
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = AsyncCleanlabCodex(
+        client2 = AsyncCleanlab(
             base_url=base_url,
             _strict_response_validation=True,
             default_headers={
@@ -1055,7 +1047,7 @@ class TestAsyncCleanlabCodex:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_default_query_option(self) -> None:
-        client = AsyncCleanlabCodex(
+        client = AsyncCleanlab(
             base_url=base_url, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1169,7 +1161,7 @@ class TestAsyncCleanlabCodex:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, async_client: AsyncCleanlabCodex) -> None:
+    def test_multipart_repeating_array(self, async_client: AsyncCleanlab) -> None:
         request = async_client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -1256,7 +1248,7 @@ class TestAsyncCleanlabCodex:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = AsyncCleanlabCodex(base_url="https://example.com/from_init", _strict_response_validation=True)
+        client = AsyncCleanlab(base_url="https://example.com/from_init", _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -1264,23 +1256,23 @@ class TestAsyncCleanlabCodex:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(CLEANLAB_CODEX_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncCleanlabCodex(_strict_response_validation=True)
+        with update_env(CLEANLAB_BASE_URL="http://localhost:5000/from/env"):
+            client = AsyncCleanlab(_strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
         # explicit environment arg requires explicitness
-        with update_env(CLEANLAB_CODEX_BASE_URL="http://localhost:5000/from/env"):
+        with update_env(CLEANLAB_BASE_URL="http://localhost:5000/from/env"):
             with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncCleanlabCodex(_strict_response_validation=True, environment="production")
+                AsyncCleanlab(_strict_response_validation=True, environment="production")
 
-            client = AsyncCleanlabCodex(base_url=None, _strict_response_validation=True, environment="production")
+            client = AsyncCleanlab(base_url=None, _strict_response_validation=True, environment="production")
             assert str(client.base_url).startswith("https://api-alpha-o3gxj3oajfu.cleanlab.ai")
 
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncCleanlabCodex(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
-            AsyncCleanlabCodex(
+            AsyncCleanlab(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
+            AsyncCleanlab(
                 base_url="http://localhost:5000/custom/path/",
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
@@ -1288,7 +1280,7 @@ class TestAsyncCleanlabCodex:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: AsyncCleanlabCodex) -> None:
+    def test_base_url_trailing_slash(self, client: AsyncCleanlab) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1301,8 +1293,8 @@ class TestAsyncCleanlabCodex:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncCleanlabCodex(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
-            AsyncCleanlabCodex(
+            AsyncCleanlab(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
+            AsyncCleanlab(
                 base_url="http://localhost:5000/custom/path/",
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
@@ -1310,7 +1302,7 @@ class TestAsyncCleanlabCodex:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: AsyncCleanlabCodex) -> None:
+    def test_base_url_no_trailing_slash(self, client: AsyncCleanlab) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1323,8 +1315,8 @@ class TestAsyncCleanlabCodex:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncCleanlabCodex(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
-            AsyncCleanlabCodex(
+            AsyncCleanlab(base_url="http://localhost:5000/custom/path/", _strict_response_validation=True),
+            AsyncCleanlab(
                 base_url="http://localhost:5000/custom/path/",
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
@@ -1332,7 +1324,7 @@ class TestAsyncCleanlabCodex:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: AsyncCleanlabCodex) -> None:
+    def test_absolute_request_url(self, client: AsyncCleanlab) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1343,7 +1335,7 @@ class TestAsyncCleanlabCodex:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1355,7 +1347,7 @@ class TestAsyncCleanlabCodex:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1377,7 +1369,7 @@ class TestAsyncCleanlabCodex:
 
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True, max_retries=cast(Any, None))
+            AsyncCleanlab(base_url=base_url, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -1387,12 +1379,12 @@ class TestAsyncCleanlabCodex:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        strict_client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=False)
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1421,7 +1413,7 @@ class TestAsyncCleanlabCodex:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncCleanlabCodex(base_url=base_url, _strict_response_validation=True)
+        client = AsyncCleanlab(base_url=base_url, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -1465,7 +1457,7 @@ class TestAsyncCleanlabCodex:
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
         self,
-        async_client: AsyncCleanlabCodex,
+        async_client: AsyncCleanlab,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -1497,7 +1489,7 @@ class TestAsyncCleanlabCodex:
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
-        self, async_client: AsyncCleanlabCodex, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncCleanlab, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1526,7 +1518,7 @@ class TestAsyncCleanlabCodex:
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
-        self, async_client: AsyncCleanlabCodex, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncCleanlab, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
