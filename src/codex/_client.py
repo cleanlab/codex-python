@@ -13,6 +13,7 @@ from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
     Omit,
+    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -26,7 +27,7 @@ from ._utils import (
 from ._version import __version__
 from .resources import health
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import CodexError, APIStatusError
+from ._exceptions import APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -48,9 +49,9 @@ class Codex(SyncAPIClient):
     with_streaming_response: CodexWithStreamedResponse
 
     # client options
-    bearer_token: str
-    api_key: str
-    access_key: str
+    bearer_token: str | None
+    api_key: str | None
+    access_key: str | None
 
     def __init__(
         self,
@@ -86,26 +87,14 @@ class Codex(SyncAPIClient):
         """
         if bearer_token is None:
             bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
-            raise CodexError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
-            )
         self.bearer_token = bearer_token
 
         if api_key is None:
             api_key = os.environ.get("AUTHENTICATED_API_KEY")
-        if api_key is None:
-            raise CodexError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the AUTHENTICATED_API_KEY environment variable"
-            )
         self.api_key = api_key
 
         if access_key is None:
             access_key = os.environ.get("PUBLIC_ACCESS_KEY")
-        if access_key is None:
-            raise CodexError(
-                "The access_key client option must be set either by passing access_key to the client or by setting the PUBLIC_ACCESS_KEY environment variable"
-            )
         self.access_key = access_key
 
         if base_url is None:
@@ -150,16 +139,22 @@ class Codex(SyncAPIClient):
     @property
     def _http_bearer(self) -> dict[str, str]:
         bearer_token = self.bearer_token
+        if bearer_token is None:
+            return {}
         return {"Authorization": f"Bearer {bearer_token}"}
 
     @property
     def _authenticated_api_key(self) -> dict[str, str]:
         api_key = self.api_key
+        if api_key is None:
+            return {}
         return {"X-API-Key": api_key}
 
     @property
     def _public_access_key(self) -> dict[str, str]:
         access_key = self.access_key
+        if access_key is None:
+            return {}
         return {"X-Access-Key": access_key}
 
     @property
@@ -170,6 +165,27 @@ class Codex(SyncAPIClient):
             "X-Stainless-Async": "false",
             **self._custom_headers,
         }
+
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.bearer_token and headers.get("Authorization"):
+            return
+        if isinstance(custom_headers.get("Authorization"), Omit):
+            return
+
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        if self.access_key and headers.get("X-Access-Key"):
+            return
+        if isinstance(custom_headers.get("X-Access-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected one of bearer_token, api_key or access_key to be set. Or for one of the `Authorization`, `X-API-Key` or `X-Access-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,
@@ -269,9 +285,9 @@ class AsyncCodex(AsyncAPIClient):
     with_streaming_response: AsyncCodexWithStreamedResponse
 
     # client options
-    bearer_token: str
-    api_key: str
-    access_key: str
+    bearer_token: str | None
+    api_key: str | None
+    access_key: str | None
 
     def __init__(
         self,
@@ -307,26 +323,14 @@ class AsyncCodex(AsyncAPIClient):
         """
         if bearer_token is None:
             bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
-            raise CodexError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
-            )
         self.bearer_token = bearer_token
 
         if api_key is None:
             api_key = os.environ.get("AUTHENTICATED_API_KEY")
-        if api_key is None:
-            raise CodexError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the AUTHENTICATED_API_KEY environment variable"
-            )
         self.api_key = api_key
 
         if access_key is None:
             access_key = os.environ.get("PUBLIC_ACCESS_KEY")
-        if access_key is None:
-            raise CodexError(
-                "The access_key client option must be set either by passing access_key to the client or by setting the PUBLIC_ACCESS_KEY environment variable"
-            )
         self.access_key = access_key
 
         if base_url is None:
@@ -371,16 +375,22 @@ class AsyncCodex(AsyncAPIClient):
     @property
     def _http_bearer(self) -> dict[str, str]:
         bearer_token = self.bearer_token
+        if bearer_token is None:
+            return {}
         return {"Authorization": f"Bearer {bearer_token}"}
 
     @property
     def _authenticated_api_key(self) -> dict[str, str]:
         api_key = self.api_key
+        if api_key is None:
+            return {}
         return {"X-API-Key": api_key}
 
     @property
     def _public_access_key(self) -> dict[str, str]:
         access_key = self.access_key
+        if access_key is None:
+            return {}
         return {"X-Access-Key": access_key}
 
     @property
@@ -391,6 +401,27 @@ class AsyncCodex(AsyncAPIClient):
             "X-Stainless-Async": f"async:{get_async_library()}",
             **self._custom_headers,
         }
+
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.bearer_token and headers.get("Authorization"):
+            return
+        if isinstance(custom_headers.get("Authorization"), Omit):
+            return
+
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        if self.access_key and headers.get("X-Access-Key"):
+            return
+        if isinstance(custom_headers.get("X-Access-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected one of bearer_token, api_key or access_key to be set. Or for one of the `Authorization`, `X-API-Key` or `X-Access-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,
