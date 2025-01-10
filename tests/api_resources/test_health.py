@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from codex import Codex, AsyncCodex
+from codex import CleanlabCodex, AsyncCleanlabCodex
 from codex.types import HealthCheckResponse
 from tests.utils import assert_matches_type
 
@@ -18,12 +18,12 @@ class TestHealth:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_check(self, client: Codex) -> None:
+    def test_method_check(self, client: CleanlabCodex) -> None:
         health = client.health.check()
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    def test_raw_response_check(self, client: Codex) -> None:
+    def test_raw_response_check(self, client: CleanlabCodex) -> None:
         response = client.health.with_raw_response.check()
 
         assert response.is_closed is True
@@ -32,7 +32,7 @@ class TestHealth:
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    def test_streaming_response_check(self, client: Codex) -> None:
+    def test_streaming_response_check(self, client: CleanlabCodex) -> None:
         with client.health.with_streaming_response.check() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -43,12 +43,12 @@ class TestHealth:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_db(self, client: Codex) -> None:
+    def test_method_db(self, client: CleanlabCodex) -> None:
         health = client.health.db()
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    def test_raw_response_db(self, client: Codex) -> None:
+    def test_raw_response_db(self, client: CleanlabCodex) -> None:
         response = client.health.with_raw_response.db()
 
         assert response.is_closed is True
@@ -57,7 +57,7 @@ class TestHealth:
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    def test_streaming_response_db(self, client: Codex) -> None:
+    def test_streaming_response_db(self, client: CleanlabCodex) -> None:
         with client.health.with_streaming_response.db() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -68,12 +68,12 @@ class TestHealth:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_weaviate(self, client: Codex) -> None:
+    def test_method_weaviate(self, client: CleanlabCodex) -> None:
         health = client.health.weaviate()
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    def test_raw_response_weaviate(self, client: Codex) -> None:
+    def test_raw_response_weaviate(self, client: CleanlabCodex) -> None:
         response = client.health.with_raw_response.weaviate()
 
         assert response.is_closed is True
@@ -82,7 +82,7 @@ class TestHealth:
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    def test_streaming_response_weaviate(self, client: Codex) -> None:
+    def test_streaming_response_weaviate(self, client: CleanlabCodex) -> None:
         with client.health.with_streaming_response.weaviate() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -97,12 +97,12 @@ class TestAsyncHealth:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_check(self, async_client: AsyncCodex) -> None:
+    async def test_method_check(self, async_client: AsyncCleanlabCodex) -> None:
         health = await async_client.health.check()
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    async def test_raw_response_check(self, async_client: AsyncCodex) -> None:
+    async def test_raw_response_check(self, async_client: AsyncCleanlabCodex) -> None:
         response = await async_client.health.with_raw_response.check()
 
         assert response.is_closed is True
@@ -111,7 +111,7 @@ class TestAsyncHealth:
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    async def test_streaming_response_check(self, async_client: AsyncCodex) -> None:
+    async def test_streaming_response_check(self, async_client: AsyncCleanlabCodex) -> None:
         async with async_client.health.with_streaming_response.check() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -122,12 +122,12 @@ class TestAsyncHealth:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_db(self, async_client: AsyncCodex) -> None:
+    async def test_method_db(self, async_client: AsyncCleanlabCodex) -> None:
         health = await async_client.health.db()
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    async def test_raw_response_db(self, async_client: AsyncCodex) -> None:
+    async def test_raw_response_db(self, async_client: AsyncCleanlabCodex) -> None:
         response = await async_client.health.with_raw_response.db()
 
         assert response.is_closed is True
@@ -136,7 +136,7 @@ class TestAsyncHealth:
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    async def test_streaming_response_db(self, async_client: AsyncCodex) -> None:
+    async def test_streaming_response_db(self, async_client: AsyncCleanlabCodex) -> None:
         async with async_client.health.with_streaming_response.db() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -147,12 +147,12 @@ class TestAsyncHealth:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_weaviate(self, async_client: AsyncCodex) -> None:
+    async def test_method_weaviate(self, async_client: AsyncCleanlabCodex) -> None:
         health = await async_client.health.weaviate()
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    async def test_raw_response_weaviate(self, async_client: AsyncCodex) -> None:
+    async def test_raw_response_weaviate(self, async_client: AsyncCleanlabCodex) -> None:
         response = await async_client.health.with_raw_response.weaviate()
 
         assert response.is_closed is True
@@ -161,7 +161,7 @@ class TestAsyncHealth:
         assert_matches_type(HealthCheckResponse, health, path=["response"])
 
     @parametrize
-    async def test_streaming_response_weaviate(self, async_client: AsyncCodex) -> None:
+    async def test_streaming_response_weaviate(self, async_client: AsyncCleanlabCodex) -> None:
         async with async_client.health.with_streaming_response.weaviate() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
