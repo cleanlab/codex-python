@@ -5,15 +5,15 @@ from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
 from ._client import (
     ENVIRONMENTS,
-    Codex,
     Client,
     Stream,
     Timeout,
     Transport,
-    AsyncCodex,
     AsyncClient,
     AsyncStream,
+    CleanlabCodex,
     RequestOptions,
+    AsyncCleanlabCodex,
 )
 from ._models import BaseModel
 from ._version import __title__, __version__
@@ -21,7 +21,6 @@ from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIR
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
-    CodexError,
     ConflictError,
     NotFoundError,
     APIStatusError,
@@ -29,6 +28,7 @@ from ._exceptions import (
     APITimeoutError,
     BadRequestError,
     APIConnectionError,
+    CleanlabCodexError,
     AuthenticationError,
     InternalServerError,
     PermissionDeniedError,
@@ -48,7 +48,7 @@ __all__ = [
     "NotGiven",
     "NOT_GIVEN",
     "Omit",
-    "CodexError",
+    "CleanlabCodexError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
@@ -68,8 +68,8 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
-    "Codex",
-    "AsyncCodex",
+    "CleanlabCodex",
+    "AsyncCleanlabCodex",
     "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
