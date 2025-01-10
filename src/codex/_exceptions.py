@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class CleanlabCodexError(Exception):
+class CleanlabError(Exception):
     pass
 
 
-class APIError(CleanlabCodexError):
+class APIError(CleanlabError):
     message: str
     request: httpx.Request
 
