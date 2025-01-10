@@ -28,10 +28,6 @@ def pytest_collection_modifyitems(items: list[pytest.Function]) -> None:
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-bearer_token = "My Bearer Token"
-api_key = "My API Key"
-access_key = "My Access Key"
-
 
 @pytest.fixture(scope="session")
 def client(request: FixtureRequest) -> Iterator[Codex]:
@@ -39,13 +35,7 @@ def client(request: FixtureRequest) -> Iterator[Codex]:
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with Codex(
-        base_url=base_url,
-        bearer_token=bearer_token,
-        api_key=api_key,
-        access_key=access_key,
-        _strict_response_validation=strict,
-    ) as client:
+    with Codex(base_url=base_url, _strict_response_validation=strict) as client:
         yield client
 
 
@@ -55,11 +45,5 @@ async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncCodex]:
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncCodex(
-        base_url=base_url,
-        bearer_token=bearer_token,
-        api_key=api_key,
-        access_key=access_key,
-        _strict_response_validation=strict,
-    ) as client:
+    async with AsyncCodex(base_url=base_url, _strict_response_validation=strict) as client:
         yield client
