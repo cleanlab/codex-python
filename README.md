@@ -29,7 +29,10 @@ The full API of this library can be found in [api.md](api.md).
 ```python
 from codex import Codex
 
-client = Codex()
+client = Codex(
+    # or 'production' | 'local'; defaults to "production".
+    environment="staging",
+)
 
 project_return_schema = client.projects.create(
     config={},
@@ -52,7 +55,10 @@ Simply import `AsyncCodex` instead of `Codex` and use `await` with each API call
 import asyncio
 from codex import AsyncCodex
 
-client = AsyncCodex()
+client = AsyncCodex(
+    # or 'production' | 'local'; defaults to "production".
+    environment="staging",
+)
 
 
 async def main() -> None:
