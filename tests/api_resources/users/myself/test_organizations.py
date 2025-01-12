@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from codex import Cleanlab, AsyncCleanlab
+from codex import Codex, AsyncCodex
 from tests.utils import assert_matches_type
 from codex.types.users.myself import UserOrganizationsSchema
 
@@ -18,12 +18,12 @@ class TestOrganizations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_list(self, client: Cleanlab) -> None:
+    def test_method_list(self, client: Codex) -> None:
         organization = client.users.myself.organizations.list()
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: Cleanlab) -> None:
+    def test_raw_response_list(self, client: Codex) -> None:
         response = client.users.myself.organizations.with_raw_response.list()
 
         assert response.is_closed is True
@@ -32,7 +32,7 @@ class TestOrganizations:
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: Cleanlab) -> None:
+    def test_streaming_response_list(self, client: Codex) -> None:
         with client.users.myself.organizations.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -47,12 +47,12 @@ class TestAsyncOrganizations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncCleanlab) -> None:
+    async def test_method_list(self, async_client: AsyncCodex) -> None:
         organization = await async_client.users.myself.organizations.list()
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncCleanlab) -> None:
+    async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.users.myself.organizations.with_raw_response.list()
 
         assert response.is_closed is True
@@ -61,7 +61,7 @@ class TestAsyncOrganizations:
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncCleanlab) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.users.myself.organizations.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

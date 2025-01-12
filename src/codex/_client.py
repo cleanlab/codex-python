@@ -43,8 +43,8 @@ __all__ = [
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "Cleanlab",
-    "AsyncCleanlab",
+    "Codex",
+    "AsyncCodex",
     "Client",
     "AsyncClient",
 ]
@@ -56,13 +56,13 @@ ENVIRONMENTS: Dict[str, str] = {
 }
 
 
-class Cleanlab(SyncAPIClient):
+class Codex(SyncAPIClient):
     health: health.HealthResource
     organizations: organizations.OrganizationsResource
     users: users.UsersResource
     projects: projects.ProjectsResource
-    with_raw_response: CleanlabWithRawResponse
-    with_streaming_response: CleanlabWithStreamedResponse
+    with_raw_response: CodexWithRawResponse
+    with_streaming_response: CodexWithStreamedResponse
 
     # client options
     bearer_token: str | None
@@ -97,7 +97,7 @@ class Cleanlab(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Cleanlab client instance.
+        """Construct a new synchronous Codex client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_token` from `BEARER_TOKEN`
@@ -118,14 +118,14 @@ class Cleanlab(SyncAPIClient):
 
         self._environment = environment
 
-        base_url_env = os.environ.get("CLEANLAB_BASE_URL")
+        base_url_env = os.environ.get("CODEX_BASE_URL")
         if is_given(base_url) and base_url is not None:
             # cast required because mypy doesn't understand the type narrowing
             base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
         elif is_given(environment):
             if base_url_env and base_url is not None:
                 raise ValueError(
-                    "Ambiguous URL; The `CLEANLAB_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                    "Ambiguous URL; The `CODEX_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
                 )
 
             try:
@@ -157,8 +157,8 @@ class Cleanlab(SyncAPIClient):
         self.organizations = organizations.OrganizationsResource(self)
         self.users = users.UsersResource(self)
         self.projects = projects.ProjectsResource(self)
-        self.with_raw_response = CleanlabWithRawResponse(self)
-        self.with_streaming_response = CleanlabWithStreamedResponse(self)
+        self.with_raw_response = CodexWithRawResponse(self)
+        self.with_streaming_response = CodexWithStreamedResponse(self)
 
     @property
     @override
@@ -318,13 +318,13 @@ class Cleanlab(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncCleanlab(AsyncAPIClient):
+class AsyncCodex(AsyncAPIClient):
     health: health.AsyncHealthResource
     organizations: organizations.AsyncOrganizationsResource
     users: users.AsyncUsersResource
     projects: projects.AsyncProjectsResource
-    with_raw_response: AsyncCleanlabWithRawResponse
-    with_streaming_response: AsyncCleanlabWithStreamedResponse
+    with_raw_response: AsyncCodexWithRawResponse
+    with_streaming_response: AsyncCodexWithStreamedResponse
 
     # client options
     bearer_token: str | None
@@ -359,7 +359,7 @@ class AsyncCleanlab(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Cleanlab client instance.
+        """Construct a new async Codex client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_token` from `BEARER_TOKEN`
@@ -380,14 +380,14 @@ class AsyncCleanlab(AsyncAPIClient):
 
         self._environment = environment
 
-        base_url_env = os.environ.get("CLEANLAB_BASE_URL")
+        base_url_env = os.environ.get("CODEX_BASE_URL")
         if is_given(base_url) and base_url is not None:
             # cast required because mypy doesn't understand the type narrowing
             base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
         elif is_given(environment):
             if base_url_env and base_url is not None:
                 raise ValueError(
-                    "Ambiguous URL; The `CLEANLAB_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                    "Ambiguous URL; The `CODEX_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
                 )
 
             try:
@@ -419,8 +419,8 @@ class AsyncCleanlab(AsyncAPIClient):
         self.organizations = organizations.AsyncOrganizationsResource(self)
         self.users = users.AsyncUsersResource(self)
         self.projects = projects.AsyncProjectsResource(self)
-        self.with_raw_response = AsyncCleanlabWithRawResponse(self)
-        self.with_streaming_response = AsyncCleanlabWithStreamedResponse(self)
+        self.with_raw_response = AsyncCodexWithRawResponse(self)
+        self.with_streaming_response = AsyncCodexWithStreamedResponse(self)
 
     @property
     @override
@@ -580,38 +580,38 @@ class AsyncCleanlab(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class CleanlabWithRawResponse:
-    def __init__(self, client: Cleanlab) -> None:
+class CodexWithRawResponse:
+    def __init__(self, client: Codex) -> None:
         self.health = health.HealthResourceWithRawResponse(client.health)
         self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
         self.users = users.UsersResourceWithRawResponse(client.users)
         self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
 
 
-class AsyncCleanlabWithRawResponse:
-    def __init__(self, client: AsyncCleanlab) -> None:
+class AsyncCodexWithRawResponse:
+    def __init__(self, client: AsyncCodex) -> None:
         self.health = health.AsyncHealthResourceWithRawResponse(client.health)
         self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
         self.users = users.AsyncUsersResourceWithRawResponse(client.users)
         self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
 
 
-class CleanlabWithStreamedResponse:
-    def __init__(self, client: Cleanlab) -> None:
+class CodexWithStreamedResponse:
+    def __init__(self, client: Codex) -> None:
         self.health = health.HealthResourceWithStreamingResponse(client.health)
         self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
         self.users = users.UsersResourceWithStreamingResponse(client.users)
         self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
 
 
-class AsyncCleanlabWithStreamedResponse:
-    def __init__(self, client: AsyncCleanlab) -> None:
+class AsyncCodexWithStreamedResponse:
+    def __init__(self, client: AsyncCodex) -> None:
         self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
         self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
         self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
         self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
 
 
-Client = Cleanlab
+Client = Codex
 
-AsyncClient = AsyncCleanlab
+AsyncClient = AsyncCodex
