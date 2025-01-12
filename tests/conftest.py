@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Iterator, AsyncIterator
 import pytest
 from pytest_asyncio import is_async_test
 
-from codex import Cleanlab, AsyncCleanlab
+from codex import Codex, AsyncCodex
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest
@@ -30,20 +30,20 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[Cleanlab]:
+def client(request: FixtureRequest) -> Iterator[Codex]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with Cleanlab(base_url=base_url, _strict_response_validation=strict) as client:
+    with Codex(base_url=base_url, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncCleanlab]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncCodex]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncCleanlab(base_url=base_url, _strict_response_validation=strict) as client:
+    async with AsyncCodex(base_url=base_url, _strict_response_validation=strict) as client:
         yield client
