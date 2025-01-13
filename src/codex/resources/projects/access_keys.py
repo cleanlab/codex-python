@@ -24,6 +24,7 @@ from ..._base_client import make_request_options
 from ...types.projects import access_key_create_params, access_key_update_params
 from ...types.projects.access_key_schema import AccessKeySchema
 from ...types.projects.access_key_list_response import AccessKeyListResponse
+from ...types.projects.access_key_retrieve_project_id_response import AccessKeyRetrieveProjectIDResponse
 
 __all__ = ["AccessKeysResource", "AsyncAccessKeysResource"]
 
@@ -227,6 +228,25 @@ class AccessKeysResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    def retrieve_project_id(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccessKeyRetrieveProjectIDResponse:
+        """Get the project ID from an access key."""
+        return self._get(
+            "/api/projects/id_from_access_key",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=int,
         )
 
     def revoke(
@@ -464,6 +484,25 @@ class AsyncAccessKeysResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def retrieve_project_id(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccessKeyRetrieveProjectIDResponse:
+        """Get the project ID from an access key."""
+        return await self._get(
+            "/api/projects/id_from_access_key",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=int,
+        )
+
     async def revoke(
         self,
         access_key_id: int,
@@ -517,6 +556,9 @@ class AccessKeysResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             access_keys.delete,
         )
+        self.retrieve_project_id = to_raw_response_wrapper(
+            access_keys.retrieve_project_id,
+        )
         self.revoke = to_raw_response_wrapper(
             access_keys.revoke,
         )
@@ -540,6 +582,9 @@ class AsyncAccessKeysResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             access_keys.delete,
+        )
+        self.retrieve_project_id = async_to_raw_response_wrapper(
+            access_keys.retrieve_project_id,
         )
         self.revoke = async_to_raw_response_wrapper(
             access_keys.revoke,
@@ -565,6 +610,9 @@ class AccessKeysResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             access_keys.delete,
         )
+        self.retrieve_project_id = to_streamed_response_wrapper(
+            access_keys.retrieve_project_id,
+        )
         self.revoke = to_streamed_response_wrapper(
             access_keys.revoke,
         )
@@ -588,6 +636,9 @@ class AsyncAccessKeysResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             access_keys.delete,
+        )
+        self.retrieve_project_id = async_to_streamed_response_wrapper(
+            access_keys.retrieve_project_id,
         )
         self.revoke = async_to_streamed_response_wrapper(
             access_keys.revoke,
