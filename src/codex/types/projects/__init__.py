@@ -13,3 +13,6 @@ from .access_key_create_params import AccessKeyCreateParams as AccessKeyCreatePa
 from .access_key_list_response import AccessKeyListResponse as AccessKeyListResponse
 from .access_key_update_params import AccessKeyUpdateParams as AccessKeyUpdateParams
 from .knowledge_add_question_params import KnowledgeAddQuestionParams as KnowledgeAddQuestionParams
+from .access_key_retrieve_project_id_response import (
+    AccessKeyRetrieveProjectIDResponse as AccessKeyRetrieveProjectIDResponse,
+)
