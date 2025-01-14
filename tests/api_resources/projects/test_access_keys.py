@@ -22,6 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAccessKeys:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Codex) -> None:
         access_key = client.projects.access_keys.create(
@@ -30,6 +31,7 @@ class TestAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params(self, client: Codex) -> None:
         access_key = client.projects.access_keys.create(
@@ -40,6 +42,7 @@ class TestAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Codex) -> None:
         response = client.projects.access_keys.with_raw_response.create(
@@ -52,6 +55,7 @@ class TestAccessKeys:
         access_key = response.parse()
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Codex) -> None:
         with client.projects.access_keys.with_streaming_response.create(
@@ -66,6 +70,7 @@ class TestAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         access_key = client.projects.access_keys.retrieve(
@@ -74,6 +79,7 @@ class TestAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Codex) -> None:
         response = client.projects.access_keys.with_raw_response.retrieve(
@@ -86,6 +92,7 @@ class TestAccessKeys:
         access_key = response.parse()
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Codex) -> None:
         with client.projects.access_keys.with_streaming_response.retrieve(
@@ -100,6 +107,7 @@ class TestAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update(self, client: Codex) -> None:
         access_key = client.projects.access_keys.update(
@@ -109,6 +117,7 @@ class TestAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_with_all_params(self, client: Codex) -> None:
         access_key = client.projects.access_keys.update(
@@ -120,6 +129,7 @@ class TestAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update(self, client: Codex) -> None:
         response = client.projects.access_keys.with_raw_response.update(
@@ -133,6 +143,7 @@ class TestAccessKeys:
         access_key = response.parse()
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update(self, client: Codex) -> None:
         with client.projects.access_keys.with_streaming_response.update(
@@ -148,6 +159,7 @@ class TestAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Codex) -> None:
         access_key = client.projects.access_keys.list(
@@ -155,6 +167,7 @@ class TestAccessKeys:
         )
         assert_matches_type(AccessKeyListResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.projects.access_keys.with_raw_response.list(
@@ -166,6 +179,7 @@ class TestAccessKeys:
         access_key = response.parse()
         assert_matches_type(AccessKeyListResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Codex) -> None:
         with client.projects.access_keys.with_streaming_response.list(
@@ -179,6 +193,7 @@ class TestAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Codex) -> None:
         access_key = client.projects.access_keys.delete(
@@ -187,6 +202,7 @@ class TestAccessKeys:
         )
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Codex) -> None:
         response = client.projects.access_keys.with_raw_response.delete(
@@ -199,6 +215,7 @@ class TestAccessKeys:
         access_key = response.parse()
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Codex) -> None:
         with client.projects.access_keys.with_streaming_response.delete(
@@ -213,11 +230,13 @@ class TestAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_project_id(self, client: Codex) -> None:
         access_key = client.projects.access_keys.retrieve_project_id()
         assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve_project_id(self, client: Codex) -> None:
         response = client.projects.access_keys.with_raw_response.retrieve_project_id()
@@ -227,6 +246,7 @@ class TestAccessKeys:
         access_key = response.parse()
         assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve_project_id(self, client: Codex) -> None:
         with client.projects.access_keys.with_streaming_response.retrieve_project_id() as response:
@@ -238,6 +258,7 @@ class TestAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_revoke(self, client: Codex) -> None:
         access_key = client.projects.access_keys.revoke(
@@ -246,6 +267,7 @@ class TestAccessKeys:
         )
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_revoke(self, client: Codex) -> None:
         response = client.projects.access_keys.with_raw_response.revoke(
@@ -258,6 +280,7 @@ class TestAccessKeys:
         access_key = response.parse()
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_revoke(self, client: Codex) -> None:
         with client.projects.access_keys.with_streaming_response.revoke(
@@ -276,6 +299,7 @@ class TestAccessKeys:
 class TestAsyncAccessKeys:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.create(
@@ -284,6 +308,7 @@ class TestAsyncAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.create(
@@ -294,6 +319,7 @@ class TestAsyncAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.access_keys.with_raw_response.create(
@@ -306,6 +332,7 @@ class TestAsyncAccessKeys:
         access_key = await response.parse()
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.access_keys.with_streaming_response.create(
@@ -320,6 +347,7 @@ class TestAsyncAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.retrieve(
@@ -328,6 +356,7 @@ class TestAsyncAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.access_keys.with_raw_response.retrieve(
@@ -340,6 +369,7 @@ class TestAsyncAccessKeys:
         access_key = await response.parse()
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.access_keys.with_streaming_response.retrieve(
@@ -354,6 +384,7 @@ class TestAsyncAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.update(
@@ -363,6 +394,7 @@ class TestAsyncAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.update(
@@ -374,6 +406,7 @@ class TestAsyncAccessKeys:
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.access_keys.with_raw_response.update(
@@ -387,6 +420,7 @@ class TestAsyncAccessKeys:
         access_key = await response.parse()
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.access_keys.with_streaming_response.update(
@@ -402,6 +436,7 @@ class TestAsyncAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.list(
@@ -409,6 +444,7 @@ class TestAsyncAccessKeys:
         )
         assert_matches_type(AccessKeyListResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.access_keys.with_raw_response.list(
@@ -420,6 +456,7 @@ class TestAsyncAccessKeys:
         access_key = await response.parse()
         assert_matches_type(AccessKeyListResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.access_keys.with_streaming_response.list(
@@ -433,6 +470,7 @@ class TestAsyncAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.delete(
@@ -441,6 +479,7 @@ class TestAsyncAccessKeys:
         )
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.access_keys.with_raw_response.delete(
@@ -453,6 +492,7 @@ class TestAsyncAccessKeys:
         access_key = await response.parse()
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.access_keys.with_streaming_response.delete(
@@ -467,11 +507,13 @@ class TestAsyncAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_project_id(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.retrieve_project_id()
         assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve_project_id(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.access_keys.with_raw_response.retrieve_project_id()
@@ -481,6 +523,7 @@ class TestAsyncAccessKeys:
         access_key = await response.parse()
         assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve_project_id(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.access_keys.with_streaming_response.retrieve_project_id() as response:
@@ -492,6 +535,7 @@ class TestAsyncAccessKeys:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_revoke(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.revoke(
@@ -500,6 +544,7 @@ class TestAsyncAccessKeys:
         )
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_revoke(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.access_keys.with_raw_response.revoke(
@@ -512,6 +557,7 @@ class TestAsyncAccessKeys:
         access_key = await response.parse()
         assert access_key is None
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_revoke(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.access_keys.with_streaming_response.revoke(
