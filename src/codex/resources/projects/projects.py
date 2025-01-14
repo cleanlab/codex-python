@@ -13,14 +13,6 @@ from ..._utils import (
     async_maybe_transform,
 )
 from ..._compat import cached_property
-from .knowledge import (
-    KnowledgeResource,
-    AsyncKnowledgeResource,
-    KnowledgeResourceWithRawResponse,
-    AsyncKnowledgeResourceWithRawResponse,
-    KnowledgeResourceWithStreamingResponse,
-    AsyncKnowledgeResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -47,10 +39,6 @@ class ProjectsResource(SyncAPIResource):
     @cached_property
     def access_keys(self) -> AccessKeysResource:
         return AccessKeysResource(self._client)
-
-    @cached_property
-    def knowledge(self) -> KnowledgeResource:
-        return KnowledgeResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ProjectsResourceWithRawResponse:
@@ -290,10 +278,6 @@ class AsyncProjectsResource(AsyncAPIResource):
     @cached_property
     def access_keys(self) -> AsyncAccessKeysResource:
         return AsyncAccessKeysResource(self._client)
-
-    @cached_property
-    def knowledge(self) -> AsyncKnowledgeResource:
-        return AsyncKnowledgeResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncProjectsResourceWithRawResponse:
@@ -558,10 +542,6 @@ class ProjectsResourceWithRawResponse:
     def access_keys(self) -> AccessKeysResourceWithRawResponse:
         return AccessKeysResourceWithRawResponse(self._projects.access_keys)
 
-    @cached_property
-    def knowledge(self) -> KnowledgeResourceWithRawResponse:
-        return KnowledgeResourceWithRawResponse(self._projects.knowledge)
-
 
 class AsyncProjectsResourceWithRawResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
@@ -589,10 +569,6 @@ class AsyncProjectsResourceWithRawResponse:
     @cached_property
     def access_keys(self) -> AsyncAccessKeysResourceWithRawResponse:
         return AsyncAccessKeysResourceWithRawResponse(self._projects.access_keys)
-
-    @cached_property
-    def knowledge(self) -> AsyncKnowledgeResourceWithRawResponse:
-        return AsyncKnowledgeResourceWithRawResponse(self._projects.knowledge)
 
 
 class ProjectsResourceWithStreamingResponse:
@@ -622,10 +598,6 @@ class ProjectsResourceWithStreamingResponse:
     def access_keys(self) -> AccessKeysResourceWithStreamingResponse:
         return AccessKeysResourceWithStreamingResponse(self._projects.access_keys)
 
-    @cached_property
-    def knowledge(self) -> KnowledgeResourceWithStreamingResponse:
-        return KnowledgeResourceWithStreamingResponse(self._projects.knowledge)
-
 
 class AsyncProjectsResourceWithStreamingResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
@@ -653,7 +625,3 @@ class AsyncProjectsResourceWithStreamingResponse:
     @cached_property
     def access_keys(self) -> AsyncAccessKeysResourceWithStreamingResponse:
         return AsyncAccessKeysResourceWithStreamingResponse(self._projects.access_keys)
-
-    @cached_property
-    def knowledge(self) -> AsyncKnowledgeResourceWithStreamingResponse:
-        return AsyncKnowledgeResourceWithStreamingResponse(self._projects.knowledge)

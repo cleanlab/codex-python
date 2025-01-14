@@ -8,14 +8,6 @@ from .projects import (
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
 )
-from .knowledge import (
-    KnowledgeResource,
-    AsyncKnowledgeResource,
-    KnowledgeResourceWithRawResponse,
-    AsyncKnowledgeResourceWithRawResponse,
-    KnowledgeResourceWithStreamingResponse,
-    AsyncKnowledgeResourceWithStreamingResponse,
-)
 from .access_keys import (
     AccessKeysResource,
     AsyncAccessKeysResource,
@@ -32,12 +24,6 @@ __all__ = [
     "AsyncAccessKeysResourceWithRawResponse",
     "AccessKeysResourceWithStreamingResponse",
     "AsyncAccessKeysResourceWithStreamingResponse",
-    "KnowledgeResource",
-    "AsyncKnowledgeResource",
-    "KnowledgeResourceWithRawResponse",
-    "AsyncKnowledgeResourceWithRawResponse",
-    "KnowledgeResourceWithStreamingResponse",
-    "AsyncKnowledgeResourceWithStreamingResponse",
     "ProjectsResource",
     "AsyncProjectsResource",
     "ProjectsResourceWithRawResponse",
