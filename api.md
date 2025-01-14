@@ -111,10 +111,20 @@ Methods:
 - <code title="get /api/projects/id_from_access_key">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">retrieve_project_id</a>() -> <a href="./src/codex/types/projects/access_key_retrieve_project_id_response.py">AccessKeyRetrieveProjectIDResponse</a></code>
 - <code title="post /api/projects/{project_id}/access_keys/{access_key_id}/revoke">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">revoke</a>(access_key_id, \*, project_id) -> None</code>
 
-## Knowledge
+## Entries
 
 Types:
 
 ```python
-from codex.types.projects import Entry
+from codex.types.projects import Entry, EntryListResponse
 ```
+
+Methods:
+
+- <code title="post /api/projects/{project_id}/entries/">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/entry_create_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
+- <code title="get /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">retrieve</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
+- <code title="put /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">update</a>(entry_id, \*, project_id, \*\*<a href="src/codex/types/projects/entry_update_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
+- <code title="get /api/projects/{project_id}/entries/">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/entry_list_params.py">params</a>) -> <a href="./src/codex/types/projects/entry_list_response.py">EntryListResponse</a></code>
+- <code title="delete /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">delete</a>(entry_id, \*, project_id) -> None</code>
+- <code title="post /api/projects/{project_id}/entries/add_question">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">add_question</a>(project_id, \*\*<a href="src/codex/types/projects/entry_add_question_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
+- <code title="post /api/projects/{project_id}/entries/query">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">query</a>(project_id, \*\*<a href="src/codex/types/projects/entry_query_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Optional[Entry]</a></code>
