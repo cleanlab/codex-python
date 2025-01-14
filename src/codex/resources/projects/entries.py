@@ -3,18 +3,10 @@
 from __future__ import annotations
 
 from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
-from ...types import project_list_params, project_create_params, project_update_params
-from .entries import (
-    EntriesResource,
-    AsyncEntriesResource,
-    EntriesResourceWithRawResponse,
-    AsyncEntriesResourceWithRawResponse,
-    EntriesResourceWithStreamingResponse,
-    AsyncEntriesResourceWithStreamingResponse,
-)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -28,65 +20,55 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .access_keys import (
-    AccessKeysResource,
-    AsyncAccessKeysResource,
-    AccessKeysResourceWithRawResponse,
-    AsyncAccessKeysResourceWithRawResponse,
-    AccessKeysResourceWithStreamingResponse,
-    AsyncAccessKeysResourceWithStreamingResponse,
-)
 from ..._base_client import make_request_options
-from ...types.project_list_response import ProjectListResponse
-from ...types.project_return_schema import ProjectReturnSchema
+from ...types.projects import (
+    entry_list_params,
+    entry_query_params,
+    entry_create_params,
+    entry_update_params,
+    entry_add_question_params,
+)
+from ...types.projects.entry import Entry
+from ...types.projects.entry_list_response import EntryListResponse
 
-__all__ = ["ProjectsResource", "AsyncProjectsResource"]
+__all__ = ["EntriesResource", "AsyncEntriesResource"]
 
 
-class ProjectsResource(SyncAPIResource):
+class EntriesResource(SyncAPIResource):
     @cached_property
-    def access_keys(self) -> AccessKeysResource:
-        return AccessKeysResource(self._client)
-
-    @cached_property
-    def entries(self) -> EntriesResource:
-        return EntriesResource(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> ProjectsResourceWithRawResponse:
+    def with_raw_response(self) -> EntriesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/cleanlab/codex-python#accessing-raw-response-data-eg-headers
         """
-        return ProjectsResourceWithRawResponse(self)
+        return EntriesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ProjectsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> EntriesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/cleanlab/codex-python#with_streaming_response
         """
-        return ProjectsResourceWithStreamingResponse(self)
+        return EntriesResourceWithStreamingResponse(self)
 
     def create(
         self,
+        project_id: int,
         *,
-        config: project_create_params.Config,
-        name: str,
-        organization_id: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
+        question: str,
+        answer: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> Entry:
         """
-        Create a new project.
+        Create a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -98,35 +80,34 @@ class ProjectsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/projects/",
+            f"/api/projects/{project_id}/entries/",
             body=maybe_transform(
                 {
-                    "config": config,
-                    "name": name,
-                    "organization_id": organization_id,
-                    "description": description,
+                    "question": question,
+                    "answer": answer,
                 },
-                project_create_params.ProjectCreateParams,
+                entry_create_params.EntryCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=Entry,
         )
 
     def retrieve(
         self,
-        project_id: int,
+        entry_id: str,
         *,
+        project_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> Entry:
         """
-        Get a single project.
+        Get a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -137,30 +118,32 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return self._get(
-            f"/api/projects/{project_id}",
+            f"/api/projects/{project_id}/entries/{entry_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=Entry,
         )
 
     def update(
         self,
-        project_id: int,
+        entry_id: str,
         *,
-        config: project_update_params.Config,
-        name: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
+        project_id: int,
+        answer: Optional[str] | NotGiven = NOT_GIVEN,
+        question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> Entry:
         """
-        Update a project.
+        Update a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -171,35 +154,42 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return self._put(
-            f"/api/projects/{project_id}",
+            f"/api/projects/{project_id}/entries/{entry_id}",
             body=maybe_transform(
                 {
-                    "config": config,
-                    "name": name,
-                    "description": description,
+                    "answer": answer,
+                    "question": question,
                 },
-                project_update_params.ProjectUpdateParams,
+                entry_update_params.EntryUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=Entry,
         )
 
     def list(
         self,
+        project_id: int,
         *,
-        organization_id: str,
+        answered_only: bool | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        sort: Literal["created_at", "answered_at"] | NotGiven = NOT_GIVEN,
+        unanswered_only: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectListResponse:
+    ) -> EntryListResponse:
         """
-        List projects for organization.
+        List knowledge entries for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -211,21 +201,32 @@ class ProjectsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/api/projects/",
+            f"/api/projects/{project_id}/entries/",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"organization_id": organization_id}, project_list_params.ProjectListParams),
+                query=maybe_transform(
+                    {
+                        "answered_only": answered_only,
+                        "limit": limit,
+                        "offset": offset,
+                        "order": order,
+                        "sort": sort,
+                        "unanswered_only": unanswered_only,
+                    },
+                    entry_list_params.EntryListParams,
+                ),
             ),
-            cast_to=ProjectListResponse,
+            cast_to=EntryListResponse,
         )
 
     def delete(
         self,
-        project_id: int,
+        entry_id: str,
         *,
+        project_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -234,7 +235,7 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Delete a project.
+        Delete a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -245,28 +246,34 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/projects/{project_id}",
+            f"/api/projects/{project_id}/entries/{entry_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
 
-    def export(
+    def add_question(
         self,
         project_id: int,
         *,
+        question: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> Entry:
         """
-        Export all data for a project as a JSON file.
+        Add a question to a project.
+
+        Returns: 201 Created if a new question was added 200 OK if the question already
+        existed
 
         Args:
           extra_headers: Send extra headers
@@ -277,59 +284,89 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
-            f"/api/projects/{project_id}/export",
+        return self._post(
+            f"/api/projects/{project_id}/entries/add_question",
+            body=maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=Entry,
         )
 
-
-class AsyncProjectsResource(AsyncAPIResource):
-    @cached_property
-    def access_keys(self) -> AsyncAccessKeysResource:
-        return AsyncAccessKeysResource(self._client)
-
-    @cached_property
-    def entries(self) -> AsyncEntriesResource:
-        return AsyncEntriesResource(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> AsyncProjectsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return the
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cleanlab/codex-python#accessing-raw-response-data-eg-headers
-        """
-        return AsyncProjectsResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncProjectsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cleanlab/codex-python#with_streaming_response
-        """
-        return AsyncProjectsResourceWithStreamingResponse(self)
-
-    async def create(
+    def query(
         self,
+        project_id: int,
         *,
-        config: project_create_params.Config,
-        name: str,
-        organization_id: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
+        question: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> Optional[Entry]:
         """
-        Create a new project.
+        Query knowledge for a project.
+
+        Returns the matching entry if found and answered, otherwise returns None. This
+        allows the client to distinguish between: (1) no matching question found
+        (returns None), and (2) matching question found but not yet answered (returns
+        Entry with answer=None).
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            f"/api/projects/{project_id}/entries/query",
+            body=maybe_transform({"question": question}, entry_query_params.EntryQueryParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entry,
+        )
+
+
+class AsyncEntriesResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncEntriesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/cleanlab/codex-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncEntriesResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncEntriesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/cleanlab/codex-python#with_streaming_response
+        """
+        return AsyncEntriesResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        project_id: int,
+        *,
+        question: str,
+        answer: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Entry:
+        """
+        Create a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -341,35 +378,34 @@ class AsyncProjectsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/projects/",
+            f"/api/projects/{project_id}/entries/",
             body=await async_maybe_transform(
                 {
-                    "config": config,
-                    "name": name,
-                    "organization_id": organization_id,
-                    "description": description,
+                    "question": question,
+                    "answer": answer,
                 },
-                project_create_params.ProjectCreateParams,
+                entry_create_params.EntryCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=Entry,
         )
 
     async def retrieve(
         self,
-        project_id: int,
+        entry_id: str,
         *,
+        project_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> Entry:
         """
-        Get a single project.
+        Get a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -380,30 +416,32 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return await self._get(
-            f"/api/projects/{project_id}",
+            f"/api/projects/{project_id}/entries/{entry_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=Entry,
         )
 
     async def update(
         self,
-        project_id: int,
+        entry_id: str,
         *,
-        config: project_update_params.Config,
-        name: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
+        project_id: int,
+        answer: Optional[str] | NotGiven = NOT_GIVEN,
+        question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> Entry:
         """
-        Update a project.
+        Update a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -414,35 +452,42 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return await self._put(
-            f"/api/projects/{project_id}",
+            f"/api/projects/{project_id}/entries/{entry_id}",
             body=await async_maybe_transform(
                 {
-                    "config": config,
-                    "name": name,
-                    "description": description,
+                    "answer": answer,
+                    "question": question,
                 },
-                project_update_params.ProjectUpdateParams,
+                entry_update_params.EntryUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=Entry,
         )
 
     async def list(
         self,
+        project_id: int,
         *,
-        organization_id: str,
+        answered_only: bool | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        sort: Literal["created_at", "answered_at"] | NotGiven = NOT_GIVEN,
+        unanswered_only: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectListResponse:
+    ) -> EntryListResponse:
         """
-        List projects for organization.
+        List knowledge entries for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -454,23 +499,32 @@ class AsyncProjectsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/api/projects/",
+            f"/api/projects/{project_id}/entries/",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, project_list_params.ProjectListParams
+                    {
+                        "answered_only": answered_only,
+                        "limit": limit,
+                        "offset": offset,
+                        "order": order,
+                        "sort": sort,
+                        "unanswered_only": unanswered_only,
+                    },
+                    entry_list_params.EntryListParams,
                 ),
             ),
-            cast_to=ProjectListResponse,
+            cast_to=EntryListResponse,
         )
 
     async def delete(
         self,
-        project_id: int,
+        entry_id: str,
         *,
+        project_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -479,7 +533,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Delete a project.
+        Delete a knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -490,28 +544,34 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/projects/{project_id}",
+            f"/api/projects/{project_id}/entries/{entry_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
 
-    async def export(
+    async def add_question(
         self,
         project_id: int,
         *,
+        question: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> Entry:
         """
-        Export all data for a project as a JSON file.
+        Add a question to a project.
+
+        Returns: 201 Created if a new question was added 200 OK if the question already
+        existed
 
         Args:
           extra_headers: Send extra headers
@@ -522,138 +582,157 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
-            f"/api/projects/{project_id}/export",
+        return await self._post(
+            f"/api/projects/{project_id}/entries/add_question",
+            body=await async_maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=Entry,
+        )
+
+    async def query(
+        self,
+        project_id: int,
+        *,
+        question: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Optional[Entry]:
+        """
+        Query knowledge for a project.
+
+        Returns the matching entry if found and answered, otherwise returns None. This
+        allows the client to distinguish between: (1) no matching question found
+        (returns None), and (2) matching question found but not yet answered (returns
+        Entry with answer=None).
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            f"/api/projects/{project_id}/entries/query",
+            body=await async_maybe_transform({"question": question}, entry_query_params.EntryQueryParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entry,
         )
 
 
-class ProjectsResourceWithRawResponse:
-    def __init__(self, projects: ProjectsResource) -> None:
-        self._projects = projects
+class EntriesResourceWithRawResponse:
+    def __init__(self, entries: EntriesResource) -> None:
+        self._entries = entries
 
         self.create = to_raw_response_wrapper(
-            projects.create,
+            entries.create,
         )
         self.retrieve = to_raw_response_wrapper(
-            projects.retrieve,
+            entries.retrieve,
         )
         self.update = to_raw_response_wrapper(
-            projects.update,
+            entries.update,
         )
         self.list = to_raw_response_wrapper(
-            projects.list,
+            entries.list,
         )
         self.delete = to_raw_response_wrapper(
-            projects.delete,
+            entries.delete,
         )
-        self.export = to_raw_response_wrapper(
-            projects.export,
+        self.add_question = to_raw_response_wrapper(
+            entries.add_question,
+        )
+        self.query = to_raw_response_wrapper(
+            entries.query,
         )
 
-    @cached_property
-    def access_keys(self) -> AccessKeysResourceWithRawResponse:
-        return AccessKeysResourceWithRawResponse(self._projects.access_keys)
 
-    @cached_property
-    def entries(self) -> EntriesResourceWithRawResponse:
-        return EntriesResourceWithRawResponse(self._projects.entries)
-
-
-class AsyncProjectsResourceWithRawResponse:
-    def __init__(self, projects: AsyncProjectsResource) -> None:
-        self._projects = projects
+class AsyncEntriesResourceWithRawResponse:
+    def __init__(self, entries: AsyncEntriesResource) -> None:
+        self._entries = entries
 
         self.create = async_to_raw_response_wrapper(
-            projects.create,
+            entries.create,
         )
         self.retrieve = async_to_raw_response_wrapper(
-            projects.retrieve,
+            entries.retrieve,
         )
         self.update = async_to_raw_response_wrapper(
-            projects.update,
+            entries.update,
         )
         self.list = async_to_raw_response_wrapper(
-            projects.list,
+            entries.list,
         )
         self.delete = async_to_raw_response_wrapper(
-            projects.delete,
+            entries.delete,
         )
-        self.export = async_to_raw_response_wrapper(
-            projects.export,
+        self.add_question = async_to_raw_response_wrapper(
+            entries.add_question,
+        )
+        self.query = async_to_raw_response_wrapper(
+            entries.query,
         )
 
-    @cached_property
-    def access_keys(self) -> AsyncAccessKeysResourceWithRawResponse:
-        return AsyncAccessKeysResourceWithRawResponse(self._projects.access_keys)
 
-    @cached_property
-    def entries(self) -> AsyncEntriesResourceWithRawResponse:
-        return AsyncEntriesResourceWithRawResponse(self._projects.entries)
-
-
-class ProjectsResourceWithStreamingResponse:
-    def __init__(self, projects: ProjectsResource) -> None:
-        self._projects = projects
+class EntriesResourceWithStreamingResponse:
+    def __init__(self, entries: EntriesResource) -> None:
+        self._entries = entries
 
         self.create = to_streamed_response_wrapper(
-            projects.create,
+            entries.create,
         )
         self.retrieve = to_streamed_response_wrapper(
-            projects.retrieve,
+            entries.retrieve,
         )
         self.update = to_streamed_response_wrapper(
-            projects.update,
+            entries.update,
         )
         self.list = to_streamed_response_wrapper(
-            projects.list,
+            entries.list,
         )
         self.delete = to_streamed_response_wrapper(
-            projects.delete,
+            entries.delete,
         )
-        self.export = to_streamed_response_wrapper(
-            projects.export,
+        self.add_question = to_streamed_response_wrapper(
+            entries.add_question,
+        )
+        self.query = to_streamed_response_wrapper(
+            entries.query,
         )
 
-    @cached_property
-    def access_keys(self) -> AccessKeysResourceWithStreamingResponse:
-        return AccessKeysResourceWithStreamingResponse(self._projects.access_keys)
 
-    @cached_property
-    def entries(self) -> EntriesResourceWithStreamingResponse:
-        return EntriesResourceWithStreamingResponse(self._projects.entries)
-
-
-class AsyncProjectsResourceWithStreamingResponse:
-    def __init__(self, projects: AsyncProjectsResource) -> None:
-        self._projects = projects
+class AsyncEntriesResourceWithStreamingResponse:
+    def __init__(self, entries: AsyncEntriesResource) -> None:
+        self._entries = entries
 
         self.create = async_to_streamed_response_wrapper(
-            projects.create,
+            entries.create,
         )
         self.retrieve = async_to_streamed_response_wrapper(
-            projects.retrieve,
+            entries.retrieve,
         )
         self.update = async_to_streamed_response_wrapper(
-            projects.update,
+            entries.update,
         )
         self.list = async_to_streamed_response_wrapper(
-            projects.list,
+            entries.list,
         )
         self.delete = async_to_streamed_response_wrapper(
-            projects.delete,
+            entries.delete,
         )
-        self.export = async_to_streamed_response_wrapper(
-            projects.export,
+        self.add_question = async_to_streamed_response_wrapper(
+            entries.add_question,
         )
-
-    @cached_property
-    def access_keys(self) -> AsyncAccessKeysResourceWithStreamingResponse:
-        return AsyncAccessKeysResourceWithStreamingResponse(self._projects.access_keys)
-
-    @cached_property
-    def entries(self) -> AsyncEntriesResourceWithStreamingResponse:
-        return AsyncEntriesResourceWithStreamingResponse(self._projects.entries)
+        self.query = async_to_streamed_response_wrapper(
+            entries.query,
+        )
