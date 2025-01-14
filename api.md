@@ -116,15 +116,5 @@ Methods:
 Types:
 
 ```python
-from codex.types.projects import Entry, ListKnowledgeResponse
+from codex.types.projects import Entry
 ```
-
-Methods:
-
-- <code title="post /api/projects/{project_id}/knowledge/">client.projects.knowledge.<a href="./src/codex/resources/projects/knowledge.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/knowledge_create_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="get /api/projects/{project_id}/knowledge/{entry_id}">client.projects.knowledge.<a href="./src/codex/resources/projects/knowledge.py">retrieve</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="put /api/projects/{project_id}/knowledge/{entry_id}">client.projects.knowledge.<a href="./src/codex/resources/projects/knowledge.py">update</a>(entry_id, \*, project_id, \*\*<a href="src/codex/types/projects/knowledge_update_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="get /api/projects/{project_id}/knowledge/">client.projects.knowledge.<a href="./src/codex/resources/projects/knowledge.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/knowledge_list_params.py">params</a>) -> <a href="./src/codex/types/projects/list_knowledge_response.py">ListKnowledgeResponse</a></code>
-- <code title="delete /api/projects/{project_id}/knowledge/{entry_id}">client.projects.knowledge.<a href="./src/codex/resources/projects/knowledge.py">delete</a>(entry_id, \*, project_id) -> None</code>
-- <code title="post /api/projects/{project_id}/knowledge/add_question">client.projects.knowledge.<a href="./src/codex/resources/projects/knowledge.py">add_question</a>(project_id, \*\*<a href="src/codex/types/projects/knowledge_add_question_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="post /api/projects/{project_id}/knowledge/query">client.projects.knowledge.<a href="./src/codex/resources/projects/knowledge.py">query</a>(project_id, \*\*<a href="src/codex/types/projects/knowledge_query_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Optional[Entry]</a></code>
