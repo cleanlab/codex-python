@@ -20,7 +20,7 @@ or products provided by Codex please follow the respective company's security re
 
 ### Codex Terms and Policies
 
-Please contact support@cleanlab.ai for any questions or concerns regarding security of our services.
+Please contact team@cleanlab.ai for any questions or concerns regarding security of our services.
 
 ---
 
