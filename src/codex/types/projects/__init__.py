@@ -7,7 +7,6 @@ from .access_key_schema import AccessKeySchema as AccessKeySchema
 from .entry_list_params import EntryListParams as EntryListParams
 from .entry_query_params import EntryQueryParams as EntryQueryParams
 from .entry_create_params import EntryCreateParams as EntryCreateParams
-from .entry_list_response import EntryListResponse as EntryListResponse
 from .entry_update_params import EntryUpdateParams as EntryUpdateParams
 from .access_key_create_params import AccessKeyCreateParams as AccessKeyCreateParams
 from .access_key_list_response import AccessKeyListResponse as AccessKeyListResponse
