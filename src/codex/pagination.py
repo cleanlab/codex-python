@@ -112,15 +112,6 @@ class SyncOffsetPageEntries(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
         return None
 
-    @classmethod
-    def build(cls: Type[_BaseModelT], *, response: Response, data: object) -> _BaseModelT:  # noqa: ARG003
-        return cls.construct(
-            None,
-            **{
-                **(cast(Mapping[str, Any], data) if is_mapping(data) else {"entries": data}),
-            },
-        )
-
 
 class AsyncOffsetPageEntries(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     entries: List[_T]
@@ -150,12 +141,3 @@ class AsyncOffsetPageEntries(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
             return PageInfo(params={"offset": current_count})
 
         return None
-
-    @classmethod
-    def build(cls: Type[_BaseModelT], *, response: Response, data: object) -> _BaseModelT:  # noqa: ARG003
-        return cls.construct(
-            None,
-            **{
-                **(cast(Mapping[str, Any], data) if is_mapping(data) else {"entries": data}),
-            },
-        )

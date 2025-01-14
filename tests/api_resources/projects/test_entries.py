@@ -9,9 +9,9 @@ import pytest
 
 from codex import Codex, AsyncCodex
 from tests.utils import assert_matches_type
+from codex.pagination import SyncOffsetPageEntries, AsyncOffsetPageEntries
 from codex.types.projects import (
     Entry,
-    EntryListResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -176,7 +176,7 @@ class TestEntries:
         entry = client.projects.entries.list(
             project_id=0,
         )
-        assert_matches_type(EntryListResponse, entry, path=["response"])
+        assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -190,7 +190,7 @@ class TestEntries:
             sort="created_at",
             unanswered_only=True,
         )
-        assert_matches_type(EntryListResponse, entry, path=["response"])
+        assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -202,7 +202,7 @@ class TestEntries:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entry = response.parse()
-        assert_matches_type(EntryListResponse, entry, path=["response"])
+        assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -214,7 +214,7 @@ class TestEntries:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entry = response.parse()
-            assert_matches_type(EntryListResponse, entry, path=["response"])
+            assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -498,7 +498,7 @@ class TestAsyncEntries:
         entry = await async_client.projects.entries.list(
             project_id=0,
         )
-        assert_matches_type(EntryListResponse, entry, path=["response"])
+        assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -512,7 +512,7 @@ class TestAsyncEntries:
             sort="created_at",
             unanswered_only=True,
         )
-        assert_matches_type(EntryListResponse, entry, path=["response"])
+        assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -524,7 +524,7 @@ class TestAsyncEntries:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entry = await response.parse()
-        assert_matches_type(EntryListResponse, entry, path=["response"])
+        assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -536,7 +536,7 @@ class TestAsyncEntries:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entry = await response.parse()
-            assert_matches_type(EntryListResponse, entry, path=["response"])
+            assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
