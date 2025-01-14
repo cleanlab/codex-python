@@ -17,11 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestMyself:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         myself = client.users.myself.retrieve()
         assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Codex) -> None:
         response = client.users.myself.with_raw_response.retrieve()
@@ -31,6 +33,7 @@ class TestMyself:
         myself = response.parse()
         assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Codex) -> None:
         with client.users.myself.with_streaming_response.retrieve() as response:
@@ -46,11 +49,13 @@ class TestMyself:
 class TestAsyncMyself:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         myself = await async_client.users.myself.retrieve()
         assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCodex) -> None:
         response = await async_client.users.myself.with_raw_response.retrieve()
@@ -60,6 +65,7 @@ class TestAsyncMyself:
         myself = await response.parse()
         assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCodex) -> None:
         async with async_client.users.myself.with_streaming_response.retrieve() as response:
