@@ -5,7 +5,7 @@ description = "The official Python library for the Codex API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Codex", email = "team@cleanlab.ai" },
+{ name = "Cleanlab", email = "team@cleanlab.ai" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
