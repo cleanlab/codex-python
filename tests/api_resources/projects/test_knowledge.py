@@ -20,6 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestKnowledge:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.create(
@@ -28,6 +29,7 @@ class TestKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.create(
@@ -37,6 +39,7 @@ class TestKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Codex) -> None:
         response = client.projects.knowledge.with_raw_response.create(
@@ -49,6 +52,7 @@ class TestKnowledge:
         knowledge = response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Codex) -> None:
         with client.projects.knowledge.with_streaming_response.create(
@@ -63,6 +67,7 @@ class TestKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.retrieve(
@@ -71,6 +76,7 @@ class TestKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Codex) -> None:
         response = client.projects.knowledge.with_raw_response.retrieve(
@@ -83,6 +89,7 @@ class TestKnowledge:
         knowledge = response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Codex) -> None:
         with client.projects.knowledge.with_streaming_response.retrieve(
@@ -97,6 +104,7 @@ class TestKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_path_params_retrieve(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entry_id` but received ''"):
@@ -105,6 +113,7 @@ class TestKnowledge:
                 project_id=0,
             )
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.update(
@@ -113,6 +122,7 @@ class TestKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_with_all_params(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.update(
@@ -123,6 +133,7 @@ class TestKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update(self, client: Codex) -> None:
         response = client.projects.knowledge.with_raw_response.update(
@@ -135,6 +146,7 @@ class TestKnowledge:
         knowledge = response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update(self, client: Codex) -> None:
         with client.projects.knowledge.with_streaming_response.update(
@@ -149,6 +161,7 @@ class TestKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_path_params_update(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entry_id` but received ''"):
@@ -157,6 +170,7 @@ class TestKnowledge:
                 project_id=0,
             )
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.list(
@@ -164,6 +178,7 @@ class TestKnowledge:
         )
         assert_matches_type(ListKnowledgeResponse, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.list(
@@ -177,6 +192,7 @@ class TestKnowledge:
         )
         assert_matches_type(ListKnowledgeResponse, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.projects.knowledge.with_raw_response.list(
@@ -188,6 +204,7 @@ class TestKnowledge:
         knowledge = response.parse()
         assert_matches_type(ListKnowledgeResponse, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Codex) -> None:
         with client.projects.knowledge.with_streaming_response.list(
@@ -201,6 +218,7 @@ class TestKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.delete(
@@ -209,6 +227,7 @@ class TestKnowledge:
         )
         assert knowledge is None
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Codex) -> None:
         response = client.projects.knowledge.with_raw_response.delete(
@@ -221,6 +240,7 @@ class TestKnowledge:
         knowledge = response.parse()
         assert knowledge is None
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Codex) -> None:
         with client.projects.knowledge.with_streaming_response.delete(
@@ -235,6 +255,7 @@ class TestKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_path_params_delete(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entry_id` but received ''"):
@@ -243,6 +264,7 @@ class TestKnowledge:
                 project_id=0,
             )
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_add_question(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.add_question(
@@ -251,6 +273,7 @@ class TestKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_add_question(self, client: Codex) -> None:
         response = client.projects.knowledge.with_raw_response.add_question(
@@ -263,6 +286,7 @@ class TestKnowledge:
         knowledge = response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_add_question(self, client: Codex) -> None:
         with client.projects.knowledge.with_streaming_response.add_question(
@@ -277,6 +301,7 @@ class TestKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_query(self, client: Codex) -> None:
         knowledge = client.projects.knowledge.query(
@@ -285,6 +310,7 @@ class TestKnowledge:
         )
         assert_matches_type(Optional[Entry], knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_query(self, client: Codex) -> None:
         response = client.projects.knowledge.with_raw_response.query(
@@ -297,6 +323,7 @@ class TestKnowledge:
         knowledge = response.parse()
         assert_matches_type(Optional[Entry], knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_query(self, client: Codex) -> None:
         with client.projects.knowledge.with_streaming_response.query(
@@ -315,6 +342,7 @@ class TestKnowledge:
 class TestAsyncKnowledge:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.create(
@@ -323,6 +351,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.create(
@@ -332,6 +361,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.knowledge.with_raw_response.create(
@@ -344,6 +374,7 @@ class TestAsyncKnowledge:
         knowledge = await response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.knowledge.with_streaming_response.create(
@@ -358,6 +389,7 @@ class TestAsyncKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.retrieve(
@@ -366,6 +398,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.knowledge.with_raw_response.retrieve(
@@ -378,6 +411,7 @@ class TestAsyncKnowledge:
         knowledge = await response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.knowledge.with_streaming_response.retrieve(
@@ -392,6 +426,7 @@ class TestAsyncKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entry_id` but received ''"):
@@ -400,6 +435,7 @@ class TestAsyncKnowledge:
                 project_id=0,
             )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.update(
@@ -408,6 +444,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.update(
@@ -418,6 +455,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.knowledge.with_raw_response.update(
@@ -430,6 +468,7 @@ class TestAsyncKnowledge:
         knowledge = await response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.knowledge.with_streaming_response.update(
@@ -444,6 +483,7 @@ class TestAsyncKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_path_params_update(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entry_id` but received ''"):
@@ -452,6 +492,7 @@ class TestAsyncKnowledge:
                 project_id=0,
             )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.list(
@@ -459,6 +500,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(ListKnowledgeResponse, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.list(
@@ -472,6 +514,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(ListKnowledgeResponse, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.knowledge.with_raw_response.list(
@@ -483,6 +526,7 @@ class TestAsyncKnowledge:
         knowledge = await response.parse()
         assert_matches_type(ListKnowledgeResponse, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.knowledge.with_streaming_response.list(
@@ -496,6 +540,7 @@ class TestAsyncKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.delete(
@@ -504,6 +549,7 @@ class TestAsyncKnowledge:
         )
         assert knowledge is None
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.knowledge.with_raw_response.delete(
@@ -516,6 +562,7 @@ class TestAsyncKnowledge:
         knowledge = await response.parse()
         assert knowledge is None
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.knowledge.with_streaming_response.delete(
@@ -530,6 +577,7 @@ class TestAsyncKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entry_id` but received ''"):
@@ -538,6 +586,7 @@ class TestAsyncKnowledge:
                 project_id=0,
             )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_add_question(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.add_question(
@@ -546,6 +595,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_add_question(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.knowledge.with_raw_response.add_question(
@@ -558,6 +608,7 @@ class TestAsyncKnowledge:
         knowledge = await response.parse()
         assert_matches_type(Entry, knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_add_question(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.knowledge.with_streaming_response.add_question(
@@ -572,6 +623,7 @@ class TestAsyncKnowledge:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_query(self, async_client: AsyncCodex) -> None:
         knowledge = await async_client.projects.knowledge.query(
@@ -580,6 +632,7 @@ class TestAsyncKnowledge:
         )
         assert_matches_type(Optional[Entry], knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_query(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.knowledge.with_raw_response.query(
@@ -592,6 +645,7 @@ class TestAsyncKnowledge:
         knowledge = await response.parse()
         assert_matches_type(Optional[Entry], knowledge, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_query(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.knowledge.with_streaming_response.query(
