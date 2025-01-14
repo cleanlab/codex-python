@@ -20,7 +20,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncOffsetPageEntries, AsyncOffsetPageEntries
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.projects import (
     entry_list_params,
     entry_query_params,
@@ -29,7 +30,6 @@ from ...types.projects import (
     entry_add_question_params,
 )
 from ...types.projects.entry import Entry
-from ...types.projects.entry_list_response import EntryListResponse
 
 __all__ = ["EntriesResource", "AsyncEntriesResource"]
 
@@ -187,7 +187,7 @@ class EntriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EntryListResponse:
+    ) -> SyncOffsetPageEntries[Entry]:
         """
         List knowledge entries for a project.
 
@@ -200,8 +200,9 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._get_api_list(
             f"/api/projects/{project_id}/entries/",
+            page=SyncOffsetPageEntries[Entry],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -219,7 +220,7 @@ class EntriesResource(SyncAPIResource):
                     entry_list_params.EntryListParams,
                 ),
             ),
-            cast_to=EntryListResponse,
+            model=Entry,
         )
 
     def delete(
@@ -469,7 +470,7 @@ class AsyncEntriesResource(AsyncAPIResource):
             cast_to=Entry,
         )
 
-    async def list(
+    def list(
         self,
         project_id: int,
         *,
@@ -485,7 +486,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EntryListResponse:
+    ) -> AsyncPaginator[Entry, AsyncOffsetPageEntries[Entry]]:
         """
         List knowledge entries for a project.
 
@@ -498,14 +499,15 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return self._get_api_list(
             f"/api/projects/{project_id}/entries/",
+            page=AsyncOffsetPageEntries[Entry],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "answered_only": answered_only,
                         "limit": limit,
@@ -517,7 +519,7 @@ class AsyncEntriesResource(AsyncAPIResource):
                     entry_list_params.EntryListParams,
                 ),
             ),
-            cast_to=EntryListResponse,
+            model=Entry,
         )
 
     async def delete(
