@@ -10,7 +10,7 @@ __all__ = ["AccessKeySchema"]
 
 
 class AccessKeySchema(BaseModel):
-    id: int
+    id: str
 
     token: str
 
@@ -20,7 +20,7 @@ class AccessKeySchema(BaseModel):
 
     name: str
 
-    project_id: int
+    project_id: str
 
     status: Literal["active", "expired", "revoked"]
 

@@ -98,7 +98,7 @@ client = Codex()
 all_entries = []
 # Automatically fetches more pages as needed.
 for entry in client.projects.entries.list(
-    project_id=0,
+    project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 ):
     # Do something with entry here
     all_entries.append(entry)
@@ -118,7 +118,7 @@ async def main() -> None:
     all_entries = []
     # Iterate through items across all pages, issuing requests as needed.
     async for entry in client.projects.entries.list(
-        project_id=0,
+        project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
     ):
         all_entries.append(entry)
     print(all_entries)
@@ -131,7 +131,7 @@ Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get
 
 ```python
 first_page = await client.projects.entries.list(
-    project_id=0,
+    project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 )
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
@@ -145,7 +145,7 @@ Or just work directly with the returned data:
 
 ```python
 first_page = await client.projects.entries.list(
-    project_id=0,
+    project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 )
 for entry in first_page.entries:
     print(entry.id)

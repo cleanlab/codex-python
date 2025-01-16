@@ -4,4 +4,4 @@ from typing_extensions import TypeAlias
 
 __all__ = ["AccessKeyRetrieveProjectIDResponse"]
 
-AccessKeyRetrieveProjectIDResponse: TypeAlias = int
+AccessKeyRetrieveProjectIDResponse: TypeAlias = str
