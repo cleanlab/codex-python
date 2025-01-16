@@ -9,7 +9,7 @@ __all__ = ["EntryUpdateParams"]
 
 
 class EntryUpdateParams(TypedDict, total=False):
-    project_id: Required[int]
+    project_id: Required[str]
 
     answer: Optional[str]
 

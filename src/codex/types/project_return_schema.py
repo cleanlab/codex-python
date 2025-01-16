@@ -13,7 +13,7 @@ class Config(BaseModel):
 
 
 class ProjectReturnSchema(BaseModel):
-    id: int
+    id: str
 
     config: Config
 
