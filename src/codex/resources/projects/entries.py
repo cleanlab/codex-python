@@ -56,7 +56,7 @@ class EntriesResource(SyncAPIResource):
 
     def create(
         self,
-        project_id: int,
+        project_id: str,
         *,
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
@@ -79,6 +79,8 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._post(
             f"/api/projects/{project_id}/entries/",
             body=maybe_transform(
@@ -98,7 +100,7 @@ class EntriesResource(SyncAPIResource):
         self,
         entry_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -118,6 +120,8 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         if not entry_id:
             raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return self._get(
@@ -132,7 +136,7 @@ class EntriesResource(SyncAPIResource):
         self,
         entry_id: str,
         *,
-        project_id: int,
+        project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -154,6 +158,8 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         if not entry_id:
             raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return self._put(
@@ -173,7 +179,7 @@ class EntriesResource(SyncAPIResource):
 
     def list(
         self,
-        project_id: int,
+        project_id: str,
         *,
         answered_only: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
@@ -200,6 +206,8 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._get_api_list(
             f"/api/projects/{project_id}/entries/",
             page=SyncOffsetPageEntries[Entry],
@@ -227,7 +235,7 @@ class EntriesResource(SyncAPIResource):
         self,
         entry_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -247,6 +255,8 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         if not entry_id:
             raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -260,7 +270,7 @@ class EntriesResource(SyncAPIResource):
 
     def add_question(
         self,
-        project_id: int,
+        project_id: str,
         *,
         question: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -285,6 +295,8 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._post(
             f"/api/projects/{project_id}/entries/add_question",
             body=maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
@@ -296,7 +308,7 @@ class EntriesResource(SyncAPIResource):
 
     def query(
         self,
-        project_id: int,
+        project_id: str,
         *,
         question: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -323,6 +335,8 @@ class EntriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._post(
             f"/api/projects/{project_id}/entries/query",
             body=maybe_transform({"question": question}, entry_query_params.EntryQueryParams),
@@ -355,7 +369,7 @@ class AsyncEntriesResource(AsyncAPIResource):
 
     async def create(
         self,
-        project_id: int,
+        project_id: str,
         *,
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
@@ -378,6 +392,8 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._post(
             f"/api/projects/{project_id}/entries/",
             body=await async_maybe_transform(
@@ -397,7 +413,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         self,
         entry_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -417,6 +433,8 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         if not entry_id:
             raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return await self._get(
@@ -431,7 +449,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         self,
         entry_id: str,
         *,
-        project_id: int,
+        project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -453,6 +471,8 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         if not entry_id:
             raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         return await self._put(
@@ -472,7 +492,7 @@ class AsyncEntriesResource(AsyncAPIResource):
 
     def list(
         self,
-        project_id: int,
+        project_id: str,
         *,
         answered_only: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
@@ -499,6 +519,8 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._get_api_list(
             f"/api/projects/{project_id}/entries/",
             page=AsyncOffsetPageEntries[Entry],
@@ -526,7 +548,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         self,
         entry_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -546,6 +568,8 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         if not entry_id:
             raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -559,7 +583,7 @@ class AsyncEntriesResource(AsyncAPIResource):
 
     async def add_question(
         self,
-        project_id: int,
+        project_id: str,
         *,
         question: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -584,6 +608,8 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._post(
             f"/api/projects/{project_id}/entries/add_question",
             body=await async_maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
@@ -595,7 +621,7 @@ class AsyncEntriesResource(AsyncAPIResource):
 
     async def query(
         self,
-        project_id: int,
+        project_id: str,
         *,
         question: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -622,6 +648,8 @@ class AsyncEntriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._post(
             f"/api/projects/{project_id}/entries/query",
             body=await async_maybe_transform({"question": question}, entry_query_params.EntryQueryParams),

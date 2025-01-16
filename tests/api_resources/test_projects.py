@@ -75,7 +75,7 @@ class TestProjects:
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         project = client.projects.retrieve(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
@@ -83,7 +83,7 @@ class TestProjects:
     @parametrize
     def test_raw_response_retrieve(self, client: Codex) -> None:
         response = client.projects.with_raw_response.retrieve(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -95,7 +95,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_retrieve(self, client: Codex) -> None:
         with client.projects.with_streaming_response.retrieve(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -107,9 +107,17 @@ class TestProjects:
 
     @pytest.mark.skip()
     @parametrize
+    def test_path_params_retrieve(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_update(self, client: Codex) -> None:
         project = client.projects.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={},
             name="name",
         )
@@ -119,7 +127,7 @@ class TestProjects:
     @parametrize
     def test_method_update_with_all_params(self, client: Codex) -> None:
         project = client.projects.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={"max_distance": 0},
             name="name",
             description="description",
@@ -130,7 +138,7 @@ class TestProjects:
     @parametrize
     def test_raw_response_update(self, client: Codex) -> None:
         response = client.projects.with_raw_response.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={},
             name="name",
         )
@@ -144,7 +152,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_update(self, client: Codex) -> None:
         with client.projects.with_streaming_response.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={},
             name="name",
         ) as response:
@@ -155,6 +163,16 @@ class TestProjects:
             assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_update(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.update(
+                project_id="",
+                config={},
+                name="name",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -194,7 +212,7 @@ class TestProjects:
     @parametrize
     def test_method_delete(self, client: Codex) -> None:
         project = client.projects.delete(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert project is None
 
@@ -202,7 +220,7 @@ class TestProjects:
     @parametrize
     def test_raw_response_delete(self, client: Codex) -> None:
         response = client.projects.with_raw_response.delete(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -214,7 +232,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_delete(self, client: Codex) -> None:
         with client.projects.with_streaming_response.delete(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -226,9 +244,17 @@ class TestProjects:
 
     @pytest.mark.skip()
     @parametrize
+    def test_path_params_delete(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.delete(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_export(self, client: Codex) -> None:
         project = client.projects.export(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(object, project, path=["response"])
 
@@ -236,7 +262,7 @@ class TestProjects:
     @parametrize
     def test_raw_response_export(self, client: Codex) -> None:
         response = client.projects.with_raw_response.export(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -248,7 +274,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_export(self, client: Codex) -> None:
         with client.projects.with_streaming_response.export(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -257,6 +283,14 @@ class TestProjects:
             assert_matches_type(object, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_export(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.export(
+                "",
+            )
 
 
 class TestAsyncProjects:
@@ -317,7 +351,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.retrieve(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
@@ -325,7 +359,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.retrieve(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -337,7 +371,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.retrieve(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -349,9 +383,17 @@ class TestAsyncProjects:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_method_update(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={},
             name="name",
         )
@@ -361,7 +403,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={"max_distance": 0},
             name="name",
             description="description",
@@ -372,7 +414,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={},
             name="name",
         )
@@ -386,7 +428,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.update(
-            project_id=0,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={},
             name="name",
         ) as response:
@@ -397,6 +439,16 @@ class TestAsyncProjects:
             assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_update(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.update(
+                project_id="",
+                config={},
+                name="name",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -436,7 +488,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_delete(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.delete(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert project is None
 
@@ -444,7 +496,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.delete(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -456,7 +508,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.delete(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -468,9 +520,17 @@ class TestAsyncProjects:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_path_params_delete(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.delete(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_method_export(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.export(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(object, project, path=["response"])
 
@@ -478,7 +538,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_export(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.export(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -490,7 +550,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_export(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.export(
-            0,
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -499,3 +559,11 @@ class TestAsyncProjects:
             assert_matches_type(object, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_export(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.export(
+                "",
+            )

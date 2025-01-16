@@ -12,7 +12,7 @@ __all__ = ["AccessKeyUpdateParams"]
 
 
 class AccessKeyUpdateParams(TypedDict, total=False):
-    project_id: Required[int]
+    project_id: Required[str]
 
     name: Required[str]
 

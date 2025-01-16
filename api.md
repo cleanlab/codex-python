@@ -108,7 +108,7 @@ Methods:
 - <code title="put /api/projects/{project_id}/access_keys/{access_key_id}">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">update</a>(access_key_id, \*, project_id, \*\*<a href="src/codex/types/projects/access_key_update_params.py">params</a>) -> <a href="./src/codex/types/projects/access_key_schema.py">AccessKeySchema</a></code>
 - <code title="get /api/projects/{project_id}/access_keys/">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">list</a>(project_id) -> <a href="./src/codex/types/projects/access_key_list_response.py">AccessKeyListResponse</a></code>
 - <code title="delete /api/projects/{project_id}/access_keys/{access_key_id}">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">delete</a>(access_key_id, \*, project_id) -> None</code>
-- <code title="get /api/projects/id_from_access_key">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">retrieve_project_id</a>() -> <a href="./src/codex/types/projects/access_key_retrieve_project_id_response.py">AccessKeyRetrieveProjectIDResponse</a></code>
+- <code title="get /api/projects/id_from_access_key">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">retrieve_project_id</a>() -> str</code>
 - <code title="post /api/projects/{project_id}/access_keys/{access_key_id}/revoke">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">revoke</a>(access_key_id, \*, project_id) -> None</code>
 
 ## Entries

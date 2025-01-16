@@ -24,7 +24,6 @@ from ..._base_client import make_request_options
 from ...types.projects import access_key_create_params, access_key_update_params
 from ...types.projects.access_key_schema import AccessKeySchema
 from ...types.projects.access_key_list_response import AccessKeyListResponse
-from ...types.projects.access_key_retrieve_project_id_response import AccessKeyRetrieveProjectIDResponse
 
 __all__ = ["AccessKeysResource", "AsyncAccessKeysResource"]
 
@@ -51,7 +50,7 @@ class AccessKeysResource(SyncAPIResource):
 
     def create(
         self,
-        project_id: int,
+        project_id: str,
         *,
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
@@ -75,6 +74,8 @@ class AccessKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._post(
             f"/api/projects/{project_id}/access_keys/",
             body=maybe_transform(
@@ -93,9 +94,9 @@ class AccessKeysResource(SyncAPIResource):
 
     def retrieve(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -115,6 +116,10 @@ class AccessKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         return self._get(
             f"/api/projects/{project_id}/access_keys/{access_key_id}",
             options=make_request_options(
@@ -125,9 +130,9 @@ class AccessKeysResource(SyncAPIResource):
 
     def update(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
@@ -150,6 +155,10 @@ class AccessKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         return self._put(
             f"/api/projects/{project_id}/access_keys/{access_key_id}",
             body=maybe_transform(
@@ -168,7 +177,7 @@ class AccessKeysResource(SyncAPIResource):
 
     def list(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -189,6 +198,8 @@ class AccessKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._get(
             f"/api/projects/{project_id}/access_keys/",
             options=make_request_options(
@@ -199,9 +210,9 @@ class AccessKeysResource(SyncAPIResource):
 
     def delete(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -221,6 +232,10 @@ class AccessKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/api/projects/{project_id}/access_keys/{access_key_id}",
@@ -239,21 +254,21 @@ class AccessKeysResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccessKeyRetrieveProjectIDResponse:
+    ) -> str:
         """Get the project ID from an access key."""
         return self._get(
             "/api/projects/id_from_access_key",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=int,
+            cast_to=str,
         )
 
     def revoke(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -273,6 +288,10 @@ class AccessKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/api/projects/{project_id}/access_keys/{access_key_id}/revoke",
@@ -305,7 +324,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
     async def create(
         self,
-        project_id: int,
+        project_id: str,
         *,
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
@@ -329,6 +348,8 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._post(
             f"/api/projects/{project_id}/access_keys/",
             body=await async_maybe_transform(
@@ -347,9 +368,9 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -369,6 +390,10 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         return await self._get(
             f"/api/projects/{project_id}/access_keys/{access_key_id}",
             options=make_request_options(
@@ -379,9 +404,9 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
     async def update(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
@@ -404,6 +429,10 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         return await self._put(
             f"/api/projects/{project_id}/access_keys/{access_key_id}",
             body=await async_maybe_transform(
@@ -422,7 +451,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
     async def list(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -443,6 +472,8 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._get(
             f"/api/projects/{project_id}/access_keys/",
             options=make_request_options(
@@ -453,9 +484,9 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
     async def delete(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -475,6 +506,10 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/api/projects/{project_id}/access_keys/{access_key_id}",
@@ -493,21 +528,21 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccessKeyRetrieveProjectIDResponse:
+    ) -> str:
         """Get the project ID from an access key."""
         return await self._get(
             "/api/projects/id_from_access_key",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=int,
+            cast_to=str,
         )
 
     async def revoke(
         self,
-        access_key_id: int,
+        access_key_id: str,
         *,
-        project_id: int,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -527,6 +562,10 @@ class AsyncAccessKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not access_key_id:
+            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/api/projects/{project_id}/access_keys/{access_key_id}/revoke",

@@ -116,7 +116,7 @@ class ProjectsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -137,6 +137,8 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
@@ -147,7 +149,7 @@ class ProjectsResource(SyncAPIResource):
 
     def update(
         self,
-        project_id: int,
+        project_id: str,
         *,
         config: project_update_params.Config,
         name: str,
@@ -171,6 +173,8 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._put(
             f"/api/projects/{project_id}",
             body=maybe_transform(
@@ -224,7 +228,7 @@ class ProjectsResource(SyncAPIResource):
 
     def delete(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -245,6 +249,8 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/api/projects/{project_id}",
@@ -256,7 +262,7 @@ class ProjectsResource(SyncAPIResource):
 
     def export(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -277,6 +283,8 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._get(
             f"/api/projects/{project_id}/export",
             options=make_request_options(
@@ -359,7 +367,7 @@ class AsyncProjectsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -380,6 +388,8 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
@@ -390,7 +400,7 @@ class AsyncProjectsResource(AsyncAPIResource):
 
     async def update(
         self,
-        project_id: int,
+        project_id: str,
         *,
         config: project_update_params.Config,
         name: str,
@@ -414,6 +424,8 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._put(
             f"/api/projects/{project_id}",
             body=await async_maybe_transform(
@@ -469,7 +481,7 @@ class AsyncProjectsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -490,6 +502,8 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/api/projects/{project_id}",
@@ -501,7 +515,7 @@ class AsyncProjectsResource(AsyncAPIResource):
 
     async def export(
         self,
-        project_id: int,
+        project_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -522,6 +536,8 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._get(
             f"/api/projects/{project_id}/export",
             options=make_request_options(
