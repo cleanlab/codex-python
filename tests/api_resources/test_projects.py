@@ -184,6 +184,20 @@ class TestProjects:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_list_with_all_params(self, client: Codex) -> None:
+        project = client.projects.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            include_entry_counts=True,
+            limit=0,
+            offset=0,
+            order="asc",
+            query="query",
+            sort="created_at",
+        )
+        assert_matches_type(ProjectListResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.projects.with_raw_response.list(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -455,6 +469,20 @@ class TestAsyncProjects:
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.list(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(ProjectListResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            include_entry_counts=True,
+            limit=0,
+            offset=0,
+            order="asc",
+            query="query",
+            sort="created_at",
         )
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
