@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -195,6 +196,12 @@ class ProjectsResource(SyncAPIResource):
         self,
         *,
         organization_id: str,
+        include_entry_counts: bool | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        query: Optional[str] | NotGiven = NOT_GIVEN,
+        sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -221,7 +228,18 @@ class ProjectsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"organization_id": organization_id}, project_list_params.ProjectListParams),
+                query=maybe_transform(
+                    {
+                        "organization_id": organization_id,
+                        "include_entry_counts": include_entry_counts,
+                        "limit": limit,
+                        "offset": offset,
+                        "order": order,
+                        "query": query,
+                        "sort": sort,
+                    },
+                    project_list_params.ProjectListParams,
+                ),
             ),
             cast_to=ProjectListResponse,
         )
@@ -446,6 +464,12 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         *,
         organization_id: str,
+        include_entry_counts: bool | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
+        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        query: Optional[str] | NotGiven = NOT_GIVEN,
+        sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -473,7 +497,16 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, project_list_params.ProjectListParams
+                    {
+                        "organization_id": organization_id,
+                        "include_entry_counts": include_entry_counts,
+                        "limit": limit,
+                        "offset": offset,
+                        "order": order,
+                        "query": query,
+                        "sort": sort,
+                    },
+                    project_list_params.ProjectListParams,
                 ),
             ),
             cast_to=ProjectListResponse,
