@@ -9,11 +9,11 @@ __all__ = ["Entry"]
 
 
 class Entry(BaseModel):
-    id: str
-
     created_at: datetime
 
     question: str
+
+    id: Optional[str] = None
 
     answer: Optional[str] = None
 
