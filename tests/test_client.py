@@ -522,7 +522,7 @@ class TestCodex:
                 Codex(_strict_response_validation=True, environment="production")
 
             client = Codex(base_url=None, _strict_response_validation=True, environment="production")
-            assert str(client.base_url).startswith("https://api-alpha-o3gxj3oajfu.cleanlab.ai")
+            assert str(client.base_url).startswith("https://api-codex-o3gxj3oajfu.cleanlab.ai")
 
     @pytest.mark.parametrize(
         "client",
@@ -1263,7 +1263,7 @@ class TestAsyncCodex:
                 AsyncCodex(_strict_response_validation=True, environment="production")
 
             client = AsyncCodex(base_url=None, _strict_response_validation=True, environment="production")
-            assert str(client.base_url).startswith("https://api-alpha-o3gxj3oajfu.cleanlab.ai")
+            assert str(client.base_url).startswith("https://api-codex-o3gxj3oajfu.cleanlab.ai")
 
     @pytest.mark.parametrize(
         "client",
