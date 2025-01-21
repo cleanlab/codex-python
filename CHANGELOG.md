@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2025-01-21)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* **api:** update api base url ([#28](https://github.com/cleanlab/codex-python/issues/28)) ([89c6e8b](https://github.com/cleanlab/codex-python/commit/89c6e8bff457c9269dfa76060b6fe8c757a58c4a))
+
+
+### Bug Fixes
+
+* **tests:** make test_get_platform less flaky ([#26](https://github.com/cleanlab/codex-python/issues/26)) ([d192517](https://github.com/cleanlab/codex-python/commit/d1925178d12c441e58cd36c210158ad9d07ee4dd))
+
+
+### Chores
+
+* **internal:** avoid pytest-asyncio deprecation warning ([#27](https://github.com/cleanlab/codex-python/issues/27)) ([1ab1a4e](https://github.com/cleanlab/codex-python/commit/1ab1a4ebd7b1bdf27847ce74a6c9aad630c0261c))
+
+
+### Documentation
+
+* **raw responses:** fix duplicate `the` ([#24](https://github.com/cleanlab/codex-python/issues/24)) ([ddeaa6d](https://github.com/cleanlab/codex-python/commit/ddeaa6db67dbf992ff0630d5b7c03848db41d751))
+
 ## 0.1.0-alpha.3 (2025-01-17)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
