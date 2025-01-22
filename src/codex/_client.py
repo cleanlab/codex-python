@@ -50,7 +50,7 @@ __all__ = [
 ]
 
 ENVIRONMENTS: Dict[str, str] = {
-    "production": "https://api-codex-o3gxj3oajfu.cleanlab.ai",
+    "production": "https://api-codex.cleanlab.ai",
     "staging": "https://api-codex-staging-o3gxj3oajfu.cleanlab.ai",
     "local": "http://localhost:8080",
 }
