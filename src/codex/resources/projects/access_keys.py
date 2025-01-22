@@ -24,6 +24,7 @@ from ..._base_client import make_request_options
 from ...types.projects import access_key_create_params, access_key_update_params
 from ...types.projects.access_key_schema import AccessKeySchema
 from ...types.projects.access_key_list_response import AccessKeyListResponse
+from ...types.projects.access_key_retrieve_project_id_response import AccessKeyRetrieveProjectIDResponse
 
 __all__ = ["AccessKeysResource", "AsyncAccessKeysResource"]
 
@@ -254,14 +255,14 @@ class AccessKeysResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> AccessKeyRetrieveProjectIDResponse:
         """Get the project ID from an access key."""
         return self._get(
             "/api/projects/id_from_access_key",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=AccessKeyRetrieveProjectIDResponse,
         )
 
     def revoke(
@@ -528,14 +529,14 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> AccessKeyRetrieveProjectIDResponse:
         """Get the project ID from an access key."""
         return await self._get(
             "/api/projects/id_from_access_key",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=AccessKeyRetrieveProjectIDResponse,
         )
 
     async def revoke(
