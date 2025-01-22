@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-01-22)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** api update ([#30](https://github.com/cleanlab/codex-python/issues/30)) ([13e6f7c](https://github.com/cleanlab/codex-python/commit/13e6f7c566ecdf91ae576f6bdba03b883d43ee21))
+* **api:** api update ([#33](https://github.com/cleanlab/codex-python/issues/33)) ([038e1d0](https://github.com/cleanlab/codex-python/commit/038e1d0f548c90530efcdcc40b84728640d86cc1))
+* **api:** update prod api url ([#32](https://github.com/cleanlab/codex-python/issues/32)) ([58ef0f2](https://github.com/cleanlab/codex-python/commit/58ef0f2fd8243f7bf8a1d11962b254e2624dba1f))
+
 ## 0.1.0-alpha.4 (2025-01-21)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
