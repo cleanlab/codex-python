@@ -13,6 +13,7 @@ from codex._utils import parse_datetime
 from codex.types.projects import (
     AccessKeySchema,
     AccessKeyListResponse,
+    AccessKeyRetrieveProjectIDResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -297,7 +298,7 @@ class TestAccessKeys:
     @parametrize
     def test_method_retrieve_project_id(self, client: Codex) -> None:
         access_key = client.projects.access_keys.retrieve_project_id()
-        assert_matches_type(str, access_key, path=["response"])
+        assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -307,7 +308,7 @@ class TestAccessKeys:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         access_key = response.parse()
-        assert_matches_type(str, access_key, path=["response"])
+        assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -317,7 +318,7 @@ class TestAccessKeys:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             access_key = response.parse()
-            assert_matches_type(str, access_key, path=["response"])
+            assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -653,7 +654,7 @@ class TestAsyncAccessKeys:
     @parametrize
     async def test_method_retrieve_project_id(self, async_client: AsyncCodex) -> None:
         access_key = await async_client.projects.access_keys.retrieve_project_id()
-        assert_matches_type(str, access_key, path=["response"])
+        assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -663,7 +664,7 @@ class TestAsyncAccessKeys:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         access_key = await response.parse()
-        assert_matches_type(str, access_key, path=["response"])
+        assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -673,7 +674,7 @@ class TestAsyncAccessKeys:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             access_key = await response.parse()
-            assert_matches_type(str, access_key, path=["response"])
+            assert_matches_type(AccessKeyRetrieveProjectIDResponse, access_key, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
