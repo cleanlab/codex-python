@@ -100,20 +100,20 @@ class Codex(SyncAPIClient):
         """Construct a new synchronous Codex client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `bearer_token` from `BEARER_TOKEN`
-        - `api_key` from `AUTHENTICATED_API_KEY`
-        - `access_key` from `PUBLIC_ACCESS_KEY`
+        - `bearer_token` from `CODEX_BEARER_TOKEN`
+        - `api_key` from `CODEX_API_KEY`
+        - `access_key` from `CODEX_ACCESS_KEY`
         """
         if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
+            bearer_token = os.environ.get("CODEX_BEARER_TOKEN")
         self.bearer_token = bearer_token
 
         if api_key is None:
-            api_key = os.environ.get("AUTHENTICATED_API_KEY")
+            api_key = os.environ.get("CODEX_API_KEY")
         self.api_key = api_key
 
         if access_key is None:
-            access_key = os.environ.get("PUBLIC_ACCESS_KEY")
+            access_key = os.environ.get("CODEX_ACCESS_KEY")
         self.access_key = access_key
 
         self._environment = environment
@@ -362,20 +362,20 @@ class AsyncCodex(AsyncAPIClient):
         """Construct a new async Codex client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `bearer_token` from `BEARER_TOKEN`
-        - `api_key` from `AUTHENTICATED_API_KEY`
-        - `access_key` from `PUBLIC_ACCESS_KEY`
+        - `bearer_token` from `CODEX_BEARER_TOKEN`
+        - `api_key` from `CODEX_API_KEY`
+        - `access_key` from `CODEX_ACCESS_KEY`
         """
         if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
+            bearer_token = os.environ.get("CODEX_BEARER_TOKEN")
         self.bearer_token = bearer_token
 
         if api_key is None:
-            api_key = os.environ.get("AUTHENTICATED_API_KEY")
+            api_key = os.environ.get("CODEX_API_KEY")
         self.api_key = api_key
 
         if access_key is None:
-            access_key = os.environ.get("PUBLIC_ACCESS_KEY")
+            access_key = os.environ.get("CODEX_ACCESS_KEY")
         self.access_key = access_key
 
         self._environment = environment
