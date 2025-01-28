@@ -2,12 +2,12 @@
 
 from typing import Optional
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["UserSchemaPublic"]
+__all__ = ["User"]
 
 
-class UserSchemaPublic(BaseModel):
+class User(BaseModel):
     id: str
 
     api_key: str
