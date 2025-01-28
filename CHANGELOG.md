@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.8 (2025-01-28)
+
+Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
+
+### Features
+
+* **api:** add new endpoints ([#43](https://github.com/cleanlab/codex-python/issues/43)) ([73832e2](https://github.com/cleanlab/codex-python/commit/73832e2a7f7d66c0226c273202c375249bd56d1d))
+
 ## 0.1.0-alpha.7 (2025-01-27)
 
 Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
