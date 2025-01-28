@@ -13,6 +13,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ....types.user import User
 from ...._base_client import make_request_options
 from ....types.users.user_schema import UserSchema
 
@@ -38,6 +39,25 @@ class APIKeyResource(SyncAPIResource):
         For more information, see https://www.github.com/cleanlab/codex-python#with_streaming_response
         """
         return APIKeyResourceWithStreamingResponse(self)
+
+    def retrieve(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> User:
+        """Get user when authenticated with API key."""
+        return self._get(
+            "/api/users/myself/api-key",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=User,
+        )
 
     def refresh(
         self,
@@ -79,6 +99,25 @@ class AsyncAPIKeyResource(AsyncAPIResource):
         """
         return AsyncAPIKeyResourceWithStreamingResponse(self)
 
+    async def retrieve(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> User:
+        """Get user when authenticated with API key."""
+        return await self._get(
+            "/api/users/myself/api-key",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=User,
+        )
+
     async def refresh(
         self,
         *,
@@ -103,6 +142,9 @@ class APIKeyResourceWithRawResponse:
     def __init__(self, api_key: APIKeyResource) -> None:
         self._api_key = api_key
 
+        self.retrieve = to_raw_response_wrapper(
+            api_key.retrieve,
+        )
         self.refresh = to_raw_response_wrapper(
             api_key.refresh,
         )
@@ -112,6 +154,9 @@ class AsyncAPIKeyResourceWithRawResponse:
     def __init__(self, api_key: AsyncAPIKeyResource) -> None:
         self._api_key = api_key
 
+        self.retrieve = async_to_raw_response_wrapper(
+            api_key.retrieve,
+        )
         self.refresh = async_to_raw_response_wrapper(
             api_key.refresh,
         )
@@ -121,6 +166,9 @@ class APIKeyResourceWithStreamingResponse:
     def __init__(self, api_key: APIKeyResource) -> None:
         self._api_key = api_key
 
+        self.retrieve = to_streamed_response_wrapper(
+            api_key.retrieve,
+        )
         self.refresh = to_streamed_response_wrapper(
             api_key.refresh,
         )
@@ -130,6 +178,9 @@ class AsyncAPIKeyResourceWithStreamingResponse:
     def __init__(self, api_key: AsyncAPIKeyResource) -> None:
         self._api_key = api_key
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            api_key.retrieve,
+        )
         self.refresh = async_to_streamed_response_wrapper(
             api_key.refresh,
         )

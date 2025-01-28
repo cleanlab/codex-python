@@ -37,10 +37,56 @@ from codex.types.organizations import (
 
 Methods:
 
-- <code title="get /api/organizations/{organization_id}/billing/invoices">client.organizations.billing.<a href="./src/codex/resources/organizations/billing.py">invoices</a>(organization_id) -> <a href="./src/codex/types/organizations/organization_billing_invoices_schema.py">OrganizationBillingInvoicesSchema</a></code>
-- <code title="get /api/organizations/{organization_id}/billing/usage">client.organizations.billing.<a href="./src/codex/resources/organizations/billing.py">usage</a>(organization_id) -> <a href="./src/codex/types/organizations/organization_billing_usage_schema.py">OrganizationBillingUsageSchema</a></code>
+- <code title="get /api/organizations/{organization_id}/billing/invoices">client.organizations.billing.<a href="./src/codex/resources/organizations/billing/billing.py">invoices</a>(organization_id) -> <a href="./src/codex/types/organizations/organization_billing_invoices_schema.py">OrganizationBillingInvoicesSchema</a></code>
+- <code title="get /api/organizations/{organization_id}/billing/usage">client.organizations.billing.<a href="./src/codex/resources/organizations/billing/billing.py">usage</a>(organization_id) -> <a href="./src/codex/types/organizations/organization_billing_usage_schema.py">OrganizationBillingUsageSchema</a></code>
+
+### CardDetails
+
+Types:
+
+```python
+from codex.types.organizations.billing import OrganizationBillingCardDetails
+```
+
+Methods:
+
+- <code title="get /api/organizations/{organization_id}/billing/card-details">client.organizations.billing.card_details.<a href="./src/codex/resources/organizations/billing/card_details.py">retrieve</a>(organization_id) -> <a href="./src/codex/types/organizations/billing/organization_billing_card_details.py">Optional[OrganizationBillingCardDetails]</a></code>
+
+### SetupIntent
+
+Types:
+
+```python
+from codex.types.organizations.billing import OrganizationBillingSetupIntent
+```
+
+Methods:
+
+- <code title="post /api/organizations/{organization_id}/billing/setup-intent">client.organizations.billing.setup_intent.<a href="./src/codex/resources/organizations/billing/setup_intent.py">create</a>(organization_id) -> <a href="./src/codex/types/organizations/billing/organization_billing_setup_intent.py">OrganizationBillingSetupIntent</a></code>
+
+### PlanDetails
+
+Types:
+
+```python
+from codex.types.organizations.billing import OrganizationBillingPlanDetails
+```
+
+Methods:
+
+- <code title="get /api/organizations/{organization_id}/billing/plan-details">client.organizations.billing.plan_details.<a href="./src/codex/resources/organizations/billing/plan_details.py">retrieve</a>(organization_id) -> <a href="./src/codex/types/organizations/billing/organization_billing_plan_details.py">OrganizationBillingPlanDetails</a></code>
 
 # Users
+
+Types:
+
+```python
+from codex.types import User
+```
+
+Methods:
+
+- <code title="patch /api/users/activate_account">client.users.<a href="./src/codex/resources/users/users.py">activate_account</a>(\*\*<a href="src/codex/types/user_activate_account_params.py">params</a>) -> <a href="./src/codex/types/user.py">User</a></code>
 
 ## Myself
 
@@ -52,12 +98,13 @@ from codex.types.users import UserSchema, UserSchemaPublic
 
 Methods:
 
-- <code title="get /api/users/myself">client.users.myself.<a href="./src/codex/resources/users/myself/myself.py">retrieve</a>() -> <a href="./src/codex/types/users/user_schema_public.py">UserSchemaPublic</a></code>
+- <code title="get /api/users/myself">client.users.myself.<a href="./src/codex/resources/users/myself/myself.py">retrieve</a>() -> <a href="./src/codex/types/user.py">User</a></code>
 
 ### APIKey
 
 Methods:
 
+- <code title="get /api/users/myself/api-key">client.users.myself.api_key.<a href="./src/codex/resources/users/myself/api_key.py">retrieve</a>() -> <a href="./src/codex/types/user.py">User</a></code>
 - <code title="post /api/users/myself/api-key/refresh">client.users.myself.api_key.<a href="./src/codex/resources/users/myself/api_key.py">refresh</a>() -> <a href="./src/codex/types/users/user_schema.py">UserSchema</a></code>
 
 ### Organizations
