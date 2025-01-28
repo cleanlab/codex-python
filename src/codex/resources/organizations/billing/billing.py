@@ -4,23 +4,59 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
-from ...types.organizations.organization_billing_usage_schema import OrganizationBillingUsageSchema
-from ...types.organizations.organization_billing_invoices_schema import OrganizationBillingInvoicesSchema
+from .card_details import (
+    CardDetailsResource,
+    AsyncCardDetailsResource,
+    CardDetailsResourceWithRawResponse,
+    AsyncCardDetailsResourceWithRawResponse,
+    CardDetailsResourceWithStreamingResponse,
+    AsyncCardDetailsResourceWithStreamingResponse,
+)
+from .plan_details import (
+    PlanDetailsResource,
+    AsyncPlanDetailsResource,
+    PlanDetailsResourceWithRawResponse,
+    AsyncPlanDetailsResourceWithRawResponse,
+    PlanDetailsResourceWithStreamingResponse,
+    AsyncPlanDetailsResourceWithStreamingResponse,
+)
+from .setup_intent import (
+    SetupIntentResource,
+    AsyncSetupIntentResource,
+    SetupIntentResourceWithRawResponse,
+    AsyncSetupIntentResourceWithRawResponse,
+    SetupIntentResourceWithStreamingResponse,
+    AsyncSetupIntentResourceWithStreamingResponse,
+)
+from ...._base_client import make_request_options
+from ....types.organizations.organization_billing_usage_schema import OrganizationBillingUsageSchema
+from ....types.organizations.organization_billing_invoices_schema import OrganizationBillingInvoicesSchema
 
 __all__ = ["BillingResource", "AsyncBillingResource"]
 
 
 class BillingResource(SyncAPIResource):
+    @cached_property
+    def card_details(self) -> CardDetailsResource:
+        return CardDetailsResource(self._client)
+
+    @cached_property
+    def setup_intent(self) -> SetupIntentResource:
+        return SetupIntentResource(self._client)
+
+    @cached_property
+    def plan_details(self) -> PlanDetailsResource:
+        return PlanDetailsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> BillingResourceWithRawResponse:
         """
@@ -108,6 +144,18 @@ class BillingResource(SyncAPIResource):
 
 
 class AsyncBillingResource(AsyncAPIResource):
+    @cached_property
+    def card_details(self) -> AsyncCardDetailsResource:
+        return AsyncCardDetailsResource(self._client)
+
+    @cached_property
+    def setup_intent(self) -> AsyncSetupIntentResource:
+        return AsyncSetupIntentResource(self._client)
+
+    @cached_property
+    def plan_details(self) -> AsyncPlanDetailsResource:
+        return AsyncPlanDetailsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncBillingResourceWithRawResponse:
         """
@@ -205,6 +253,18 @@ class BillingResourceWithRawResponse:
             billing.usage,
         )
 
+    @cached_property
+    def card_details(self) -> CardDetailsResourceWithRawResponse:
+        return CardDetailsResourceWithRawResponse(self._billing.card_details)
+
+    @cached_property
+    def setup_intent(self) -> SetupIntentResourceWithRawResponse:
+        return SetupIntentResourceWithRawResponse(self._billing.setup_intent)
+
+    @cached_property
+    def plan_details(self) -> PlanDetailsResourceWithRawResponse:
+        return PlanDetailsResourceWithRawResponse(self._billing.plan_details)
+
 
 class AsyncBillingResourceWithRawResponse:
     def __init__(self, billing: AsyncBillingResource) -> None:
@@ -216,6 +276,18 @@ class AsyncBillingResourceWithRawResponse:
         self.usage = async_to_raw_response_wrapper(
             billing.usage,
         )
+
+    @cached_property
+    def card_details(self) -> AsyncCardDetailsResourceWithRawResponse:
+        return AsyncCardDetailsResourceWithRawResponse(self._billing.card_details)
+
+    @cached_property
+    def setup_intent(self) -> AsyncSetupIntentResourceWithRawResponse:
+        return AsyncSetupIntentResourceWithRawResponse(self._billing.setup_intent)
+
+    @cached_property
+    def plan_details(self) -> AsyncPlanDetailsResourceWithRawResponse:
+        return AsyncPlanDetailsResourceWithRawResponse(self._billing.plan_details)
 
 
 class BillingResourceWithStreamingResponse:
@@ -229,6 +301,18 @@ class BillingResourceWithStreamingResponse:
             billing.usage,
         )
 
+    @cached_property
+    def card_details(self) -> CardDetailsResourceWithStreamingResponse:
+        return CardDetailsResourceWithStreamingResponse(self._billing.card_details)
+
+    @cached_property
+    def setup_intent(self) -> SetupIntentResourceWithStreamingResponse:
+        return SetupIntentResourceWithStreamingResponse(self._billing.setup_intent)
+
+    @cached_property
+    def plan_details(self) -> PlanDetailsResourceWithStreamingResponse:
+        return PlanDetailsResourceWithStreamingResponse(self._billing.plan_details)
+
 
 class AsyncBillingResourceWithStreamingResponse:
     def __init__(self, billing: AsyncBillingResource) -> None:
@@ -240,3 +324,15 @@ class AsyncBillingResourceWithStreamingResponse:
         self.usage = async_to_streamed_response_wrapper(
             billing.usage,
         )
+
+    @cached_property
+    def card_details(self) -> AsyncCardDetailsResourceWithStreamingResponse:
+        return AsyncCardDetailsResourceWithStreamingResponse(self._billing.card_details)
+
+    @cached_property
+    def setup_intent(self) -> AsyncSetupIntentResourceWithStreamingResponse:
+        return AsyncSetupIntentResourceWithStreamingResponse(self._billing.setup_intent)
+
+    @cached_property
+    def plan_details(self) -> AsyncPlanDetailsResourceWithStreamingResponse:
+        return AsyncPlanDetailsResourceWithStreamingResponse(self._billing.plan_details)

@@ -2,54 +2,44 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
-from .billing.billing import (
-    BillingResource,
-    AsyncBillingResource,
-    BillingResourceWithRawResponse,
-    AsyncBillingResourceWithRawResponse,
-    BillingResourceWithStreamingResponse,
-    AsyncBillingResourceWithStreamingResponse,
-)
-from ...types.organization_schema_public import OrganizationSchemaPublic
+from ...._base_client import make_request_options
+from ....types.organizations.billing.organization_billing_card_details import OrganizationBillingCardDetails
 
-__all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
+__all__ = ["CardDetailsResource", "AsyncCardDetailsResource"]
 
 
-class OrganizationsResource(SyncAPIResource):
+class CardDetailsResource(SyncAPIResource):
     @cached_property
-    def billing(self) -> BillingResource:
-        return BillingResource(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> OrganizationsResourceWithRawResponse:
+    def with_raw_response(self) -> CardDetailsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/cleanlab/codex-python#accessing-raw-response-data-eg-headers
         """
-        return OrganizationsResourceWithRawResponse(self)
+        return CardDetailsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OrganizationsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> CardDetailsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/cleanlab/codex-python#with_streaming_response
         """
-        return OrganizationsResourceWithStreamingResponse(self)
+        return CardDetailsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -61,9 +51,9 @@ class OrganizationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationSchemaPublic:
+    ) -> Optional[OrganizationBillingCardDetails]:
         """
-        Get a single organization.
+        Get card details for an organization.
 
         Args:
           extra_headers: Send extra headers
@@ -77,37 +67,33 @@ class OrganizationsResource(SyncAPIResource):
         if not organization_id:
             raise ValueError(f"Expected a non-empty value for `organization_id` but received {organization_id!r}")
         return self._get(
-            f"/api/organizations/{organization_id}",
+            f"/api/organizations/{organization_id}/billing/card-details",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrganizationSchemaPublic,
+            cast_to=OrganizationBillingCardDetails,
         )
 
 
-class AsyncOrganizationsResource(AsyncAPIResource):
+class AsyncCardDetailsResource(AsyncAPIResource):
     @cached_property
-    def billing(self) -> AsyncBillingResource:
-        return AsyncBillingResource(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> AsyncOrganizationsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncCardDetailsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/cleanlab/codex-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncOrganizationsResourceWithRawResponse(self)
+        return AsyncCardDetailsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOrganizationsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncCardDetailsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/cleanlab/codex-python#with_streaming_response
         """
-        return AsyncOrganizationsResourceWithStreamingResponse(self)
+        return AsyncCardDetailsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -119,9 +105,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationSchemaPublic:
+    ) -> Optional[OrganizationBillingCardDetails]:
         """
-        Get a single organization.
+        Get card details for an organization.
 
         Args:
           extra_headers: Send extra headers
@@ -135,61 +121,45 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         if not organization_id:
             raise ValueError(f"Expected a non-empty value for `organization_id` but received {organization_id!r}")
         return await self._get(
-            f"/api/organizations/{organization_id}",
+            f"/api/organizations/{organization_id}/billing/card-details",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrganizationSchemaPublic,
+            cast_to=OrganizationBillingCardDetails,
         )
 
 
-class OrganizationsResourceWithRawResponse:
-    def __init__(self, organizations: OrganizationsResource) -> None:
-        self._organizations = organizations
+class CardDetailsResourceWithRawResponse:
+    def __init__(self, card_details: CardDetailsResource) -> None:
+        self._card_details = card_details
 
         self.retrieve = to_raw_response_wrapper(
-            organizations.retrieve,
+            card_details.retrieve,
         )
 
-    @cached_property
-    def billing(self) -> BillingResourceWithRawResponse:
-        return BillingResourceWithRawResponse(self._organizations.billing)
 
-
-class AsyncOrganizationsResourceWithRawResponse:
-    def __init__(self, organizations: AsyncOrganizationsResource) -> None:
-        self._organizations = organizations
+class AsyncCardDetailsResourceWithRawResponse:
+    def __init__(self, card_details: AsyncCardDetailsResource) -> None:
+        self._card_details = card_details
 
         self.retrieve = async_to_raw_response_wrapper(
-            organizations.retrieve,
+            card_details.retrieve,
         )
 
-    @cached_property
-    def billing(self) -> AsyncBillingResourceWithRawResponse:
-        return AsyncBillingResourceWithRawResponse(self._organizations.billing)
 
-
-class OrganizationsResourceWithStreamingResponse:
-    def __init__(self, organizations: OrganizationsResource) -> None:
-        self._organizations = organizations
+class CardDetailsResourceWithStreamingResponse:
+    def __init__(self, card_details: CardDetailsResource) -> None:
+        self._card_details = card_details
 
         self.retrieve = to_streamed_response_wrapper(
-            organizations.retrieve,
+            card_details.retrieve,
         )
 
-    @cached_property
-    def billing(self) -> BillingResourceWithStreamingResponse:
-        return BillingResourceWithStreamingResponse(self._organizations.billing)
 
-
-class AsyncOrganizationsResourceWithStreamingResponse:
-    def __init__(self, organizations: AsyncOrganizationsResource) -> None:
-        self._organizations = organizations
+class AsyncCardDetailsResourceWithStreamingResponse:
+    def __init__(self, card_details: AsyncCardDetailsResource) -> None:
+        self._card_details = card_details
 
         self.retrieve = async_to_streamed_response_wrapper(
-            organizations.retrieve,
+            card_details.retrieve,
         )
-
-    @cached_property
-    def billing(self) -> AsyncBillingResourceWithStreamingResponse:
-        return AsyncBillingResourceWithStreamingResponse(self._organizations.billing)
