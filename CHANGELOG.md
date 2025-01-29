@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-alpha.9 (2025-01-29)
+
+Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
+
+### Features
+
+* **api:** add back env var auth ([#49](https://github.com/cleanlab/codex-python/issues/49)) ([5513eb6](https://github.com/cleanlab/codex-python/commit/5513eb6f61e4b5c7c9da0c5662f08978a231d354))
+* **api:** remove bearer auth ([#46](https://github.com/cleanlab/codex-python/issues/46)) ([b3c11da](https://github.com/cleanlab/codex-python/commit/b3c11da891f4b648e334b591a468d2e3eadda6c1))
+* **api:** remove env var auth ([#48](https://github.com/cleanlab/codex-python/issues/48)) ([624e4cd](https://github.com/cleanlab/codex-python/commit/624e4cd7f2739e146ba97a3e07e26311ed01ce46))
+* **api:** remove env var auth ([#50](https://github.com/cleanlab/codex-python/issues/50)) ([6cb50e1](https://github.com/cleanlab/codex-python/commit/6cb50e15363c386d103d49840134ed309042ef03))
+
 ## 0.1.0-alpha.8 (2025-01-28)
 
 Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
