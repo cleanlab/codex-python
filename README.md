@@ -39,6 +39,11 @@ project_return_schema = client.projects.create(
 print(project_return_schema.id)
 ```
 
+While you can provide an `api_key` keyword argument,
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
+to add `CODEX_API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
+
 ## Async usage
 
 Simply import `AsyncCodex` instead of `Codex` and use `await` with each API call:
