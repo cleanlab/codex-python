@@ -95,18 +95,9 @@ class Codex(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Codex client instance.
-
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `CODEX_API_KEY`
-        - `access_key` from `CODEX_ACCESS_KEY`
-        """
-        if api_key is None:
-            api_key = os.environ.get("CODEX_API_KEY")
+        """Construct a new synchronous Codex client instance."""
         self.api_key = api_key
 
-        if access_key is None:
-            access_key = os.environ.get("CODEX_ACCESS_KEY")
         self.access_key = access_key
 
         self._environment = environment
@@ -334,18 +325,9 @@ class AsyncCodex(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Codex client instance.
-
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `CODEX_API_KEY`
-        - `access_key` from `CODEX_ACCESS_KEY`
-        """
-        if api_key is None:
-            api_key = os.environ.get("CODEX_API_KEY")
+        """Construct a new async Codex client instance."""
         self.api_key = api_key
 
-        if access_key is None:
-            access_key = os.environ.get("CODEX_ACCESS_KEY")
         self.access_key = access_key
 
         self._environment = environment
