@@ -1,8 +1,8 @@
-# Codex Python API library
+# Codex SDK API library
 
 [![PyPI version](https://img.shields.io/pypi/v/codex-sdk.svg)](https://pypi.org/project/codex-sdk/)
 
-The Codex Python library provides convenient access to the Codex REST API from any Python 3.8+
+The Codex SDK library provides convenient access to the Codex REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
