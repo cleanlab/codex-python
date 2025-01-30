@@ -144,6 +144,7 @@ class TestEntries:
             entry_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             answer="answer",
+            frequency_count=0,
             question="question",
         )
         assert_matches_type(Entry, entry, path=["response"])
@@ -519,6 +520,7 @@ class TestAsyncEntries:
             entry_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             answer="answer",
+            frequency_count=0,
             question="question",
         )
         assert_matches_type(Entry, entry, path=["response"])

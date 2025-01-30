@@ -138,6 +138,7 @@ class EntriesResource(SyncAPIResource):
         *,
         project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        frequency_count: Optional[int] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -167,6 +168,7 @@ class EntriesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "answer": answer,
+                    "frequency_count": frequency_count,
                     "question": question,
                 },
                 entry_update_params.EntryUpdateParams,
@@ -318,8 +320,10 @@ class EntriesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Optional[Entry]:
-        """
-        Query knowledge for a project.
+        """Query knowledge for a project.
+
+        Also increments the frequency_count for the
+        matching entry if found.
 
         Returns the matching entry if found and answered, otherwise returns None. This
         allows the client to distinguish between: (1) no matching question found
@@ -451,6 +455,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         *,
         project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        frequency_count: Optional[int] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -480,6 +485,7 @@ class AsyncEntriesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "answer": answer,
+                    "frequency_count": frequency_count,
                     "question": question,
                 },
                 entry_update_params.EntryUpdateParams,
@@ -631,8 +637,10 @@ class AsyncEntriesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Optional[Entry]:
-        """
-        Query knowledge for a project.
+        """Query knowledge for a project.
+
+        Also increments the frequency_count for the
+        matching entry if found.
 
         Returns the matching entry if found and answered, otherwise returns None. This
         allows the client to distinguish between: (1) no matching question found
