@@ -13,4 +13,6 @@ class EntryUpdateParams(TypedDict, total=False):
 
     answer: Optional[str]
 
+    frequency_count: Optional[int]
+
     question: Optional[str]

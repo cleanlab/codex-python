@@ -18,3 +18,5 @@ class Entry(BaseModel):
     answer: Optional[str] = None
 
     answered_at: Optional[datetime] = None
+
+    frequency_count: Optional[int] = None
