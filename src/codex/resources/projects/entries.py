@@ -70,6 +70,8 @@ class EntriesResource(SyncAPIResource):
         """
         Create a knowledge entry for a project.
 
+        Raises: HTTPException: If an existing entry is found with the same question.
+
         Args:
           extra_headers: Send extra headers
 
@@ -386,6 +388,8 @@ class AsyncEntriesResource(AsyncAPIResource):
     ) -> Entry:
         """
         Create a knowledge entry for a project.
+
+        Raises: HTTPException: If an existing entry is found with the same question.
 
         Args:
           extra_headers: Send extra headers
