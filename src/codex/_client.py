@@ -325,7 +325,7 @@ class AsyncCodex(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Codex client instance."""
+        """Construct a new async AsyncCodex client instance."""
         self.api_key = api_key
 
         self.access_key = access_key
