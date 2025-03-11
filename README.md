@@ -145,6 +145,23 @@ for entry in first_page.entries:
 # Remove `await` for non-async usage.
 ```
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from codex import Codex
+
+client = Codex()
+
+project_return_schema = client.projects.create(
+    config={"max_distance": 0},
+    name="name",
+    organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+)
+print(project_return_schema.config)
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `codex.APIConnectionError` is raised.
