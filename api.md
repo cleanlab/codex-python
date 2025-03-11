@@ -119,6 +119,18 @@ Methods:
 
 - <code title="get /api/users/myself/organizations">client.users.myself.organizations.<a href="./src/codex/resources/users/myself/organizations.py">list</a>() -> <a href="./src/codex/types/users/myself/user_organizations_schema.py">UserOrganizationsSchema</a></code>
 
+## Verification
+
+Types:
+
+```python
+from codex.types.users import VerificationResendResponse
+```
+
+Methods:
+
+- <code title="post /api/users/verification/resend">client.users.verification.<a href="./src/codex/resources/users/verification.py">resend</a>() -> <a href="./src/codex/types/users/verification_resend_response.py">VerificationResendResponse</a></code>
+
 # Projects
 
 Types:
@@ -175,3 +187,16 @@ Methods:
 - <code title="delete /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">delete</a>(entry_id, \*, project_id) -> None</code>
 - <code title="post /api/projects/{project_id}/entries/add_question">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">add_question</a>(project_id, \*\*<a href="src/codex/types/projects/entry_add_question_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
 - <code title="post /api/projects/{project_id}/entries/query">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">query</a>(project_id, \*\*<a href="src/codex/types/projects/entry_query_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Optional[Entry]</a></code>
+
+# Tlm
+
+Types:
+
+```python
+from codex.types import TlmPromptResponse, TlmScoreResponse
+```
+
+Methods:
+
+- <code title="post /api/tlm/prompt">client.tlm.<a href="./src/codex/resources/tlm.py">prompt</a>(\*\*<a href="src/codex/types/tlm_prompt_params.py">params</a>) -> <a href="./src/codex/types/tlm_prompt_response.py">TlmPromptResponse</a></code>
+- <code title="post /api/tlm/score">client.tlm.<a href="./src/codex/resources/tlm.py">score</a>(\*\*<a href="src/codex/types/tlm_score_params.py">params</a>) -> <a href="./src/codex/types/tlm_score_response.py">TlmScoreResponse</a></code>
