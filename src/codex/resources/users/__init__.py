@@ -16,6 +16,14 @@ from .myself import (
     MyselfResourceWithStreamingResponse,
     AsyncMyselfResourceWithStreamingResponse,
 )
+from .verification import (
+    VerificationResource,
+    AsyncVerificationResource,
+    VerificationResourceWithRawResponse,
+    AsyncVerificationResourceWithRawResponse,
+    VerificationResourceWithStreamingResponse,
+    AsyncVerificationResourceWithStreamingResponse,
+)
 
 __all__ = [
     "MyselfResource",
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncMyselfResourceWithRawResponse",
     "MyselfResourceWithStreamingResponse",
     "AsyncMyselfResourceWithStreamingResponse",
+    "VerificationResource",
+    "AsyncVerificationResource",
+    "VerificationResourceWithRawResponse",
+    "AsyncVerificationResourceWithRawResponse",
+    "VerificationResourceWithStreamingResponse",
+    "AsyncVerificationResourceWithStreamingResponse",
     "UsersResource",
     "AsyncUsersResource",
     "UsersResourceWithRawResponse",

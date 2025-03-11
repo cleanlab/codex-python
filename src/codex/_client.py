@@ -25,7 +25,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import health
+from .resources import tlm, health
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
@@ -61,6 +61,7 @@ class Codex(SyncAPIClient):
     organizations: organizations.OrganizationsResource
     users: users.UsersResource
     projects: projects.ProjectsResource
+    tlm: tlm.TlmResource
     with_raw_response: CodexWithRawResponse
     with_streaming_response: CodexWithStreamedResponse
 
@@ -141,6 +142,7 @@ class Codex(SyncAPIClient):
         self.organizations = organizations.OrganizationsResource(self)
         self.users = users.UsersResource(self)
         self.projects = projects.ProjectsResource(self)
+        self.tlm = tlm.TlmResource(self)
         self.with_raw_response = CodexWithRawResponse(self)
         self.with_streaming_response = CodexWithStreamedResponse(self)
 
@@ -291,6 +293,7 @@ class AsyncCodex(AsyncAPIClient):
     organizations: organizations.AsyncOrganizationsResource
     users: users.AsyncUsersResource
     projects: projects.AsyncProjectsResource
+    tlm: tlm.AsyncTlmResource
     with_raw_response: AsyncCodexWithRawResponse
     with_streaming_response: AsyncCodexWithStreamedResponse
 
@@ -371,6 +374,7 @@ class AsyncCodex(AsyncAPIClient):
         self.organizations = organizations.AsyncOrganizationsResource(self)
         self.users = users.AsyncUsersResource(self)
         self.projects = projects.AsyncProjectsResource(self)
+        self.tlm = tlm.AsyncTlmResource(self)
         self.with_raw_response = AsyncCodexWithRawResponse(self)
         self.with_streaming_response = AsyncCodexWithStreamedResponse(self)
 
@@ -522,6 +526,7 @@ class CodexWithRawResponse:
         self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
         self.users = users.UsersResourceWithRawResponse(client.users)
         self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
+        self.tlm = tlm.TlmResourceWithRawResponse(client.tlm)
 
 
 class AsyncCodexWithRawResponse:
@@ -530,6 +535,7 @@ class AsyncCodexWithRawResponse:
         self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
         self.users = users.AsyncUsersResourceWithRawResponse(client.users)
         self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
+        self.tlm = tlm.AsyncTlmResourceWithRawResponse(client.tlm)
 
 
 class CodexWithStreamedResponse:
@@ -538,6 +544,7 @@ class CodexWithStreamedResponse:
         self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
         self.users = users.UsersResourceWithStreamingResponse(client.users)
         self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
+        self.tlm = tlm.TlmResourceWithStreamingResponse(client.tlm)
 
 
 class AsyncCodexWithStreamedResponse:
@@ -546,6 +553,7 @@ class AsyncCodexWithStreamedResponse:
         self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
         self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
         self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
+        self.tlm = tlm.AsyncTlmResourceWithStreamingResponse(client.tlm)
 
 
 Client = Codex
