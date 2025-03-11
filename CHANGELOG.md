@@ -1,5 +1,43 @@
 # Changelog
 
+## 0.1.0-alpha.12 (2025-03-11)
+
+Full Changelog: [v0.1.0-alpha.11...v0.1.0-alpha.12](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.11...v0.1.0-alpha.12)
+
+### Features
+
+* **api:** add tlm routes ([#79](https://github.com/cleanlab/codex-python/issues/79)) ([783282d](https://github.com/cleanlab/codex-python/commit/783282da5cef0d7fbbadbeb826153622ec9a37d1))
+* **api:** api update ([#60](https://github.com/cleanlab/codex-python/issues/60)) ([f28da42](https://github.com/cleanlab/codex-python/commit/f28da423ea6350df2422a6b3c984044686cb4674))
+* **api:** api update ([#67](https://github.com/cleanlab/codex-python/issues/67)) ([5697955](https://github.com/cleanlab/codex-python/commit/569795521774bd2ac303dcaf8058e791f1af501c))
+* **client:** allow passing `NotGiven` for body ([#70](https://github.com/cleanlab/codex-python/issues/70)) ([f022d08](https://github.com/cleanlab/codex-python/commit/f022d082ad3e07ba3600c0d9e8becefad96ca175))
+* **client:** send `X-Stainless-Read-Timeout` header ([#63](https://github.com/cleanlab/codex-python/issues/63)) ([5904ed6](https://github.com/cleanlab/codex-python/commit/5904ed630f3dce437f3eb0f248d6a96b7c237e19))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#69](https://github.com/cleanlab/codex-python/issues/69)) ([dc7519f](https://github.com/cleanlab/codex-python/commit/dc7519f876a99cdb58f4b634de45989e44c53c88))
+* **client:** mark some request bodies as optional ([f022d08](https://github.com/cleanlab/codex-python/commit/f022d082ad3e07ba3600c0d9e8becefad96ca175))
+
+
+### Chores
+
+* **docs:** update client docstring ([#75](https://github.com/cleanlab/codex-python/issues/75)) ([5b371a6](https://github.com/cleanlab/codex-python/commit/5b371a629dbd7763e00d8fd4315c4e437b4f0145))
+* **internal:** bummp ruff dependency ([#62](https://github.com/cleanlab/codex-python/issues/62)) ([123ccca](https://github.com/cleanlab/codex-python/commit/123ccca213572048ca6678900414e746516a9de1))
+* **internal:** change default timeout to an int ([#61](https://github.com/cleanlab/codex-python/issues/61)) ([66fc9b7](https://github.com/cleanlab/codex-python/commit/66fc9b758ba38b160b7d6b17b94f294f248e0ecd))
+* **internal:** fix devcontainers setup ([#71](https://github.com/cleanlab/codex-python/issues/71)) ([9ec8473](https://github.com/cleanlab/codex-python/commit/9ec847324c47ab63d9cf39d50f392367585065cf))
+* **internal:** fix type traversing dictionary params ([#64](https://github.com/cleanlab/codex-python/issues/64)) ([648fc48](https://github.com/cleanlab/codex-python/commit/648fc489ce7f9827bfc2354e93d470b6e4b7e1bf))
+* **internal:** minor type handling changes ([#65](https://github.com/cleanlab/codex-python/issues/65)) ([27aa5db](https://github.com/cleanlab/codex-python/commit/27aa5db50e0aa13eb2c4d88196a4ac70681ae808))
+* **internal:** properly set __pydantic_private__ ([#72](https://github.com/cleanlab/codex-python/issues/72)) ([9765c39](https://github.com/cleanlab/codex-python/commit/9765c3979b7856713e75175a76d342f6be956dea))
+* **internal:** remove unused http client options forwarding ([#76](https://github.com/cleanlab/codex-python/issues/76)) ([c5ed0fd](https://github.com/cleanlab/codex-python/commit/c5ed0fdc13238df5ecf8cbfd17e15974c6d1b24b))
+* **internal:** update client tests ([#68](https://github.com/cleanlab/codex-python/issues/68)) ([9297d25](https://github.com/cleanlab/codex-python/commit/9297d25f8f6e59af3fa610539d9736f5f0af2fe2))
+* **internal:** version bump ([#58](https://github.com/cleanlab/codex-python/issues/58)) ([d032df2](https://github.com/cleanlab/codex-python/commit/d032df2296313bf0d2b2712672756ed185afb0e0))
+
+
+### Documentation
+
+* revise readme docs about nested params ([#77](https://github.com/cleanlab/codex-python/issues/77)) ([649ec25](https://github.com/cleanlab/codex-python/commit/649ec251abd53beb368cb68d134a54b35338d327))
+* update URLs from stainlessapi.com to stainless.com ([#73](https://github.com/cleanlab/codex-python/issues/73)) ([8f500b4](https://github.com/cleanlab/codex-python/commit/8f500b4c0af5c050350107ca7e567a289c7cf8f9))
+
 ## 0.1.0-alpha.11 (2025-01-30)
 
 Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
