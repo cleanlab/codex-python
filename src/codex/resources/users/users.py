@@ -22,6 +22,14 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ...types.user import User
+from .verification import (
+    VerificationResource,
+    AsyncVerificationResource,
+    VerificationResourceWithRawResponse,
+    AsyncVerificationResourceWithRawResponse,
+    VerificationResourceWithStreamingResponse,
+    AsyncVerificationResourceWithStreamingResponse,
+)
 from .myself.myself import (
     MyselfResource,
     AsyncMyselfResource,
@@ -39,6 +47,10 @@ class UsersResource(SyncAPIResource):
     @cached_property
     def myself(self) -> MyselfResource:
         return MyselfResource(self._client)
+
+    @cached_property
+    def verification(self) -> VerificationResource:
+        return VerificationResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> UsersResourceWithRawResponse:
@@ -113,6 +125,10 @@ class AsyncUsersResource(AsyncAPIResource):
     @cached_property
     def myself(self) -> AsyncMyselfResource:
         return AsyncMyselfResource(self._client)
+
+    @cached_property
+    def verification(self) -> AsyncVerificationResource:
+        return AsyncVerificationResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncUsersResourceWithRawResponse:
@@ -195,6 +211,10 @@ class UsersResourceWithRawResponse:
     def myself(self) -> MyselfResourceWithRawResponse:
         return MyselfResourceWithRawResponse(self._users.myself)
 
+    @cached_property
+    def verification(self) -> VerificationResourceWithRawResponse:
+        return VerificationResourceWithRawResponse(self._users.verification)
+
 
 class AsyncUsersResourceWithRawResponse:
     def __init__(self, users: AsyncUsersResource) -> None:
@@ -207,6 +227,10 @@ class AsyncUsersResourceWithRawResponse:
     @cached_property
     def myself(self) -> AsyncMyselfResourceWithRawResponse:
         return AsyncMyselfResourceWithRawResponse(self._users.myself)
+
+    @cached_property
+    def verification(self) -> AsyncVerificationResourceWithRawResponse:
+        return AsyncVerificationResourceWithRawResponse(self._users.verification)
 
 
 class UsersResourceWithStreamingResponse:
@@ -221,6 +245,10 @@ class UsersResourceWithStreamingResponse:
     def myself(self) -> MyselfResourceWithStreamingResponse:
         return MyselfResourceWithStreamingResponse(self._users.myself)
 
+    @cached_property
+    def verification(self) -> VerificationResourceWithStreamingResponse:
+        return VerificationResourceWithStreamingResponse(self._users.verification)
+
 
 class AsyncUsersResourceWithStreamingResponse:
     def __init__(self, users: AsyncUsersResource) -> None:
@@ -233,3 +261,7 @@ class AsyncUsersResourceWithStreamingResponse:
     @cached_property
     def myself(self) -> AsyncMyselfResourceWithStreamingResponse:
         return AsyncMyselfResourceWithStreamingResponse(self._users.myself)
+
+    @cached_property
+    def verification(self) -> AsyncVerificationResourceWithStreamingResponse:
+        return AsyncVerificationResourceWithStreamingResponse(self._users.verification)
