@@ -12,3 +12,5 @@ class EntryCreateParams(TypedDict, total=False):
     question: Required[str]
 
     answer: Optional[str]
+
+    draft_answer: Optional[str]
