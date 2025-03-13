@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -60,6 +60,7 @@ class EntriesResource(SyncAPIResource):
         *,
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -89,6 +90,7 @@ class EntriesResource(SyncAPIResource):
                 {
                     "question": question,
                     "answer": answer,
+                    "draft_answer": draft_answer,
                 },
                 entry_create_params.EntryCreateParams,
             ),
@@ -140,6 +142,7 @@ class EntriesResource(SyncAPIResource):
         *,
         project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
         frequency_count: Optional[int] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -170,6 +173,7 @@ class EntriesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "answer": answer,
+                    "draft_answer": draft_answer,
                     "frequency_count": frequency_count,
                     "question": question,
                 },
@@ -190,6 +194,7 @@ class EntriesResource(SyncAPIResource):
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         sort: Literal["created_at", "answered_at"] | NotGiven = NOT_GIVEN,
+        states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
         unanswered_only: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -227,6 +232,7 @@ class EntriesResource(SyncAPIResource):
                         "offset": offset,
                         "order": order,
                         "sort": sort,
+                        "states": states,
                         "unanswered_only": unanswered_only,
                     },
                     entry_list_params.EntryListParams,
@@ -379,6 +385,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         *,
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -408,6 +415,7 @@ class AsyncEntriesResource(AsyncAPIResource):
                 {
                     "question": question,
                     "answer": answer,
+                    "draft_answer": draft_answer,
                 },
                 entry_create_params.EntryCreateParams,
             ),
@@ -459,6 +467,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         *,
         project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
         frequency_count: Optional[int] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -489,6 +498,7 @@ class AsyncEntriesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "answer": answer,
+                    "draft_answer": draft_answer,
                     "frequency_count": frequency_count,
                     "question": question,
                 },
@@ -509,6 +519,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         sort: Literal["created_at", "answered_at"] | NotGiven = NOT_GIVEN,
+        states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
         unanswered_only: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -546,6 +557,7 @@ class AsyncEntriesResource(AsyncAPIResource):
                         "offset": offset,
                         "order": order,
                         "sort": sort,
+                        "states": states,
                         "unanswered_only": unanswered_only,
                     },
                     entry_list_params.EntryListParams,

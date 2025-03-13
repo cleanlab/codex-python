@@ -36,6 +36,7 @@ class TestEntries:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
             answer="answer",
+            draft_answer="draft_answer",
         )
         assert_matches_type(Entry, entry, path=["response"])
 
@@ -144,6 +145,7 @@ class TestEntries:
             entry_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             answer="answer",
+            draft_answer="draft_answer",
             frequency_count=0,
             question="question",
         )
@@ -210,6 +212,7 @@ class TestEntries:
             offset=0,
             order="asc",
             sort="created_at",
+            states=["unanswered"],
             unanswered_only=True,
         )
         assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
@@ -412,6 +415,7 @@ class TestAsyncEntries:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
             answer="answer",
+            draft_answer="draft_answer",
         )
         assert_matches_type(Entry, entry, path=["response"])
 
@@ -520,6 +524,7 @@ class TestAsyncEntries:
             entry_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             answer="answer",
+            draft_answer="draft_answer",
             frequency_count=0,
             question="question",
         )
@@ -586,6 +591,7 @@ class TestAsyncEntries:
             offset=0,
             order="asc",
             sort="created_at",
+            states=["unanswered"],
             unanswered_only=True,
         )
         assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
