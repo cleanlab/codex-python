@@ -39,6 +39,10 @@ class TestAccessKeys:
             name="name",
             description="description",
             expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 
@@ -395,6 +399,10 @@ class TestAsyncAccessKeys:
             name="name",
             description="description",
             expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
         )
         assert_matches_type(AccessKeySchema, access_key, path=["response"])
 

@@ -37,6 +37,10 @@ class TestEntries:
             question="question",
             answer="answer",
             draft_answer="draft_answer",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
         )
         assert_matches_type(Entry, entry, path=["response"])
 
@@ -314,6 +318,19 @@ class TestEntries:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_add_question_with_all_params(self, client: Codex) -> None:
+        entry = client.projects.entries.add_question(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            question="question",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
+        )
+        assert_matches_type(Entry, entry, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_add_question(self, client: Codex) -> None:
         response = client.projects.entries.with_raw_response.add_question(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -355,6 +372,19 @@ class TestEntries:
         entry = client.projects.entries.query(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
+        )
+        assert_matches_type(Optional[Entry], entry, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_query_with_all_params(self, client: Codex) -> None:
+        entry = client.projects.entries.query(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            question="question",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
         )
         assert_matches_type(Optional[Entry], entry, path=["response"])
 
@@ -416,6 +446,10 @@ class TestAsyncEntries:
             question="question",
             answer="answer",
             draft_answer="draft_answer",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
         )
         assert_matches_type(Entry, entry, path=["response"])
 
@@ -693,6 +727,19 @@ class TestAsyncEntries:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_add_question_with_all_params(self, async_client: AsyncCodex) -> None:
+        entry = await async_client.projects.entries.add_question(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            question="question",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
+        )
+        assert_matches_type(Entry, entry, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_add_question(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.entries.with_raw_response.add_question(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -734,6 +781,19 @@ class TestAsyncEntries:
         entry = await async_client.projects.entries.query(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
+        )
+        assert_matches_type(Optional[Entry], entry, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_query_with_all_params(self, async_client: AsyncCodex) -> None:
+        entry = await async_client.projects.entries.query(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            question="question",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
         )
         assert_matches_type(Optional[Entry], entry, path=["response"])
 
