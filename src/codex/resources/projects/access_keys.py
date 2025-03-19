@@ -10,6 +10,7 @@ import httpx
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -56,6 +57,10 @@ class AccessKeysResource(SyncAPIResource):
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,6 +82,17 @@ class AccessKeysResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             f"/api/projects/{project_id}/access_keys/",
             body=maybe_transform(
@@ -330,6 +346,10 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -351,6 +371,17 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             f"/api/projects/{project_id}/access_keys/",
             body=await async_maybe_transform(

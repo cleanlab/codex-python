@@ -17,3 +17,11 @@ class AccessKeyCreateParams(TypedDict, total=False):
     description: Optional[str]
 
     expires_at: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+
+    x_client_library_version: Annotated[str, PropertyInfo(alias="x-client-library-version")]
+
+    x_integration_type: Annotated[str, PropertyInfo(alias="x-integration-type")]
+
+    x_source: Annotated[str, PropertyInfo(alias="x-source")]
+
+    x_stainless_package_version: Annotated[str, PropertyInfo(alias="x-stainless-package-version")]
