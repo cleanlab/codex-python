@@ -10,6 +10,7 @@ import httpx
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -61,6 +62,10 @@ class EntriesResource(SyncAPIResource):
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -84,6 +89,17 @@ class EntriesResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             f"/api/projects/{project_id}/entries/",
             body=maybe_transform(
@@ -283,6 +299,10 @@ class EntriesResource(SyncAPIResource):
         project_id: str,
         *,
         question: str,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -307,6 +327,17 @@ class EntriesResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             f"/api/projects/{project_id}/entries/add_question",
             body=maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
@@ -321,6 +352,10 @@ class EntriesResource(SyncAPIResource):
         project_id: str,
         *,
         question: str,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -349,6 +384,17 @@ class EntriesResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             f"/api/projects/{project_id}/entries/query",
             body=maybe_transform({"question": question}, entry_query_params.EntryQueryParams),
@@ -386,6 +432,10 @@ class AsyncEntriesResource(AsyncAPIResource):
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -409,6 +459,17 @@ class AsyncEntriesResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             f"/api/projects/{project_id}/entries/",
             body=await async_maybe_transform(
@@ -608,6 +669,10 @@ class AsyncEntriesResource(AsyncAPIResource):
         project_id: str,
         *,
         question: str,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -632,6 +697,17 @@ class AsyncEntriesResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             f"/api/projects/{project_id}/entries/add_question",
             body=await async_maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
@@ -646,6 +722,10 @@ class AsyncEntriesResource(AsyncAPIResource):
         project_id: str,
         *,
         question: str,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -674,6 +754,17 @@ class AsyncEntriesResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             f"/api/projects/{project_id}/entries/query",
             body=await async_maybe_transform({"question": question}, entry_query_params.EntryQueryParams),
