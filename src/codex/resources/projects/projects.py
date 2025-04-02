@@ -21,6 +21,14 @@ from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
+from .clusters import (
+    ClustersResource,
+    AsyncClustersResource,
+    ClustersResourceWithRawResponse,
+    AsyncClustersResourceWithRawResponse,
+    ClustersResourceWithStreamingResponse,
+    AsyncClustersResourceWithStreamingResponse,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -52,6 +60,10 @@ class ProjectsResource(SyncAPIResource):
     @cached_property
     def entries(self) -> EntriesResource:
         return EntriesResource(self._client)
+
+    @cached_property
+    def clusters(self) -> ClustersResource:
+        return ClustersResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ProjectsResourceWithRawResponse:
@@ -320,6 +332,10 @@ class AsyncProjectsResource(AsyncAPIResource):
     @cached_property
     def entries(self) -> AsyncEntriesResource:
         return AsyncEntriesResource(self._client)
+
+    @cached_property
+    def clusters(self) -> AsyncClustersResource:
+        return AsyncClustersResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncProjectsResourceWithRawResponse:
@@ -611,6 +627,10 @@ class ProjectsResourceWithRawResponse:
     def entries(self) -> EntriesResourceWithRawResponse:
         return EntriesResourceWithRawResponse(self._projects.entries)
 
+    @cached_property
+    def clusters(self) -> ClustersResourceWithRawResponse:
+        return ClustersResourceWithRawResponse(self._projects.clusters)
+
 
 class AsyncProjectsResourceWithRawResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
@@ -642,6 +662,10 @@ class AsyncProjectsResourceWithRawResponse:
     @cached_property
     def entries(self) -> AsyncEntriesResourceWithRawResponse:
         return AsyncEntriesResourceWithRawResponse(self._projects.entries)
+
+    @cached_property
+    def clusters(self) -> AsyncClustersResourceWithRawResponse:
+        return AsyncClustersResourceWithRawResponse(self._projects.clusters)
 
 
 class ProjectsResourceWithStreamingResponse:
@@ -675,6 +699,10 @@ class ProjectsResourceWithStreamingResponse:
     def entries(self) -> EntriesResourceWithStreamingResponse:
         return EntriesResourceWithStreamingResponse(self._projects.entries)
 
+    @cached_property
+    def clusters(self) -> ClustersResourceWithStreamingResponse:
+        return ClustersResourceWithStreamingResponse(self._projects.clusters)
+
 
 class AsyncProjectsResourceWithStreamingResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
@@ -706,3 +734,7 @@ class AsyncProjectsResourceWithStreamingResponse:
     @cached_property
     def entries(self) -> AsyncEntriesResourceWithStreamingResponse:
         return AsyncEntriesResourceWithStreamingResponse(self._projects.entries)
+
+    @cached_property
+    def clusters(self) -> AsyncClustersResourceWithStreamingResponse:
+        return AsyncClustersResourceWithStreamingResponse(self._projects.clusters)

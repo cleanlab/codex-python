@@ -87,14 +87,14 @@ from codex import Codex
 
 client = Codex()
 
-all_entries = []
+all_clusters = []
 # Automatically fetches more pages as needed.
-for entry in client.projects.entries.list(
+for cluster in client.projects.clusters.list(
     project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 ):
-    # Do something with entry here
-    all_entries.append(entry)
-print(all_entries)
+    # Do something with cluster here
+    all_clusters.append(cluster)
+print(all_clusters)
 ```
 
 Or, asynchronously:
@@ -107,13 +107,13 @@ client = AsyncCodex()
 
 
 async def main() -> None:
-    all_entries = []
+    all_clusters = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for entry in client.projects.entries.list(
+    async for cluster in client.projects.clusters.list(
         project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
     ):
-        all_entries.append(entry)
-    print(all_entries)
+        all_clusters.append(cluster)
+    print(all_clusters)
 
 
 asyncio.run(main())
@@ -122,13 +122,13 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.projects.entries.list(
+first_page = await client.projects.clusters.list(
     project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 )
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.entries)}")
+    print(f"number of items we just fetched: {len(next_page.clusters)}")
 
 # Remove `await` for non-async usage.
 ```
@@ -136,11 +136,11 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.projects.entries.list(
+first_page = await client.projects.clusters.list(
     project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 )
-for entry in first_page.entries:
-    print(entry.id)
+for cluster in first_page.clusters:
+    print(cluster.id)
 
 # Remove `await` for non-async usage.
 ```

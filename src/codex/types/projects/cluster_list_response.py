@@ -6,11 +6,13 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["Entry"]
+__all__ = ["ClusterListResponse"]
 
 
-class Entry(BaseModel):
+class ClusterListResponse(BaseModel):
     id: str
+
+    cluster_frequency_count: int
 
     created_at: datetime
 
@@ -27,3 +29,8 @@ class Entry(BaseModel):
     draft_answer: Optional[str] = None
 
     draft_answer_last_edited: Optional[datetime] = None
+
+    frequency_count: Optional[int] = None
+    """number of times the entry matched for a /query request"""
+
+    representative_entry_id: Optional[str] = None
