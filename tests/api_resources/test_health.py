@@ -73,34 +73,6 @@ class TestHealth:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_weaviate(self, client: Codex) -> None:
-        health = client.health.weaviate()
-        assert_matches_type(HealthCheckResponse, health, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_weaviate(self, client: Codex) -> None:
-        response = client.health.with_raw_response.weaviate()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        health = response.parse()
-        assert_matches_type(HealthCheckResponse, health, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_weaviate(self, client: Codex) -> None:
-        with client.health.with_streaming_response.weaviate() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            health = response.parse()
-            assert_matches_type(HealthCheckResponse, health, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
 
 class TestAsyncHealth:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -153,34 +125,6 @@ class TestAsyncHealth:
     @parametrize
     async def test_streaming_response_db(self, async_client: AsyncCodex) -> None:
         async with async_client.health.with_streaming_response.db() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            health = await response.parse()
-            assert_matches_type(HealthCheckResponse, health, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_weaviate(self, async_client: AsyncCodex) -> None:
-        health = await async_client.health.weaviate()
-        assert_matches_type(HealthCheckResponse, health, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_weaviate(self, async_client: AsyncCodex) -> None:
-        response = await async_client.health.with_raw_response.weaviate()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        health = await response.parse()
-        assert_matches_type(HealthCheckResponse, health, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_weaviate(self, async_client: AsyncCodex) -> None:
-        async with async_client.health.with_streaming_response.weaviate() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

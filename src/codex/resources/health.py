@@ -77,25 +77,6 @@ class HealthResource(SyncAPIResource):
             cast_to=HealthCheckResponse,
         )
 
-    def weaviate(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> HealthCheckResponse:
-        """Check the weaviate connection."""
-        return self._get(
-            "/api/health/weaviate",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=HealthCheckResponse,
-        )
-
 
 class AsyncHealthResource(AsyncAPIResource):
     @cached_property
@@ -155,25 +136,6 @@ class AsyncHealthResource(AsyncAPIResource):
             cast_to=HealthCheckResponse,
         )
 
-    async def weaviate(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> HealthCheckResponse:
-        """Check the weaviate connection."""
-        return await self._get(
-            "/api/health/weaviate",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=HealthCheckResponse,
-        )
-
 
 class HealthResourceWithRawResponse:
     def __init__(self, health: HealthResource) -> None:
@@ -184,9 +146,6 @@ class HealthResourceWithRawResponse:
         )
         self.db = to_raw_response_wrapper(
             health.db,
-        )
-        self.weaviate = to_raw_response_wrapper(
-            health.weaviate,
         )
 
 
@@ -200,9 +159,6 @@ class AsyncHealthResourceWithRawResponse:
         self.db = async_to_raw_response_wrapper(
             health.db,
         )
-        self.weaviate = async_to_raw_response_wrapper(
-            health.weaviate,
-        )
 
 
 class HealthResourceWithStreamingResponse:
@@ -215,9 +171,6 @@ class HealthResourceWithStreamingResponse:
         self.db = to_streamed_response_wrapper(
             health.db,
         )
-        self.weaviate = to_streamed_response_wrapper(
-            health.weaviate,
-        )
 
 
 class AsyncHealthResourceWithStreamingResponse:
@@ -229,7 +182,4 @@ class AsyncHealthResourceWithStreamingResponse:
         )
         self.db = async_to_streamed_response_wrapper(
             health.db,
-        )
-        self.weaviate = async_to_streamed_response_wrapper(
-            health.weaviate,
         )

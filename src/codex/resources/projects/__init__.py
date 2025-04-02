@@ -8,6 +8,14 @@ from .entries import (
     EntriesResourceWithStreamingResponse,
     AsyncEntriesResourceWithStreamingResponse,
 )
+from .clusters import (
+    ClustersResource,
+    AsyncClustersResource,
+    ClustersResourceWithRawResponse,
+    AsyncClustersResourceWithRawResponse,
+    ClustersResourceWithStreamingResponse,
+    AsyncClustersResourceWithStreamingResponse,
+)
 from .projects import (
     ProjectsResource,
     AsyncProjectsResource,
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncEntriesResourceWithRawResponse",
     "EntriesResourceWithStreamingResponse",
     "AsyncEntriesResourceWithStreamingResponse",
+    "ClustersResource",
+    "AsyncClustersResource",
+    "ClustersResourceWithRawResponse",
+    "AsyncClustersResourceWithRawResponse",
+    "ClustersResourceWithStreamingResponse",
+    "AsyncClustersResourceWithStreamingResponse",
     "ProjectsResource",
     "AsyncProjectsResource",
     "ProjectsResourceWithRawResponse",
