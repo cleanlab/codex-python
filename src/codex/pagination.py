@@ -12,6 +12,8 @@ from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 __all__ = [
     "SyncMyOffsetPageTopLevelArray",
     "AsyncMyOffsetPageTopLevelArray",
+    "SyncOffsetPageClusters",
+    "AsyncOffsetPageClusters",
     "SyncOffsetPageEntries",
     "AsyncOffsetPageEntries",
 ]
@@ -81,6 +83,66 @@ class AsyncMyOffsetPageTopLevelArray(BaseAsyncPage[_T], BasePage[_T], Generic[_T
                 **(cast(Mapping[str, Any], data) if is_mapping(data) else {"items": data}),
             },
         )
+
+
+class SyncOffsetPageClusters(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    clusters: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        clusters = self.clusters
+        if not clusters:
+            return []
+        return clusters
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class AsyncOffsetPageClusters(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    clusters: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        clusters = self.clusters
+        if not clusters:
+            return []
+        return clusters
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
 
 
 class SyncOffsetPageEntries(BaseSyncPage[_T], BasePage[_T], Generic[_T]):

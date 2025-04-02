@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
-from typing_extensions import Literal
+from typing import Optional
 
 import httpx
 
@@ -21,16 +20,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncOffsetPageEntries, AsyncOffsetPageEntries
-from ..._base_client import AsyncPaginator, make_request_options
-from ...types.projects import (
-    entry_list_params,
-    entry_query_params,
-    entry_create_params,
-    entry_update_params,
-    entry_add_question_params,
-)
+from ..._base_client import make_request_options
+from ...types.projects import entry_query_params, entry_create_params, entry_update_params
 from ...types.projects.entry import Entry
+from ...types.projects.entry_query_response import EntryQueryResponse
 
 __all__ = ["EntriesResource", "AsyncEntriesResource"]
 
@@ -74,9 +67,7 @@ class EntriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entry:
         """
-        Create a knowledge entry for a project.
-
-        Raises: HTTPException: If an existing entry is found with the same question.
+        Create a new knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -159,7 +150,6 @@ class EntriesResource(SyncAPIResource):
         project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
-        frequency_count: Optional[int] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -190,7 +180,6 @@ class EntriesResource(SyncAPIResource):
                 {
                     "answer": answer,
                     "draft_answer": draft_answer,
-                    "frequency_count": frequency_count,
                     "question": question,
                 },
                 entry_update_params.EntryUpdateParams,
@@ -199,62 +188,6 @@ class EntriesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Entry,
-        )
-
-    def list(
-        self,
-        project_id: str,
-        *,
-        answered_only: bool | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Literal["created_at", "answered_at"] | NotGiven = NOT_GIVEN,
-        states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
-        unanswered_only: bool | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncOffsetPageEntries[Entry]:
-        """
-        List knowledge entries for a project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not project_id:
-            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return self._get_api_list(
-            f"/api/projects/{project_id}/entries/",
-            page=SyncOffsetPageEntries[Entry],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "answered_only": answered_only,
-                        "limit": limit,
-                        "offset": offset,
-                        "order": order,
-                        "sort": sort,
-                        "states": states,
-                        "unanswered_only": unanswered_only,
-                    },
-                    entry_list_params.EntryListParams,
-                ),
-            ),
-            model=Entry,
         )
 
     def delete(
@@ -294,59 +227,6 @@ class EntriesResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
-    def add_question(
-        self,
-        project_id: str,
-        *,
-        question: str,
-        x_client_library_version: str | NotGiven = NOT_GIVEN,
-        x_integration_type: str | NotGiven = NOT_GIVEN,
-        x_source: str | NotGiven = NOT_GIVEN,
-        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Entry:
-        """
-        Add a question to a project.
-
-        Returns: 201 Created if a new question was added 200 OK if the question already
-        existed
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not project_id:
-            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "x-client-library-version": x_client_library_version,
-                    "x-integration-type": x_integration_type,
-                    "x-source": x_source,
-                    "x-stainless-package-version": x_stainless_package_version,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._post(
-            f"/api/projects/{project_id}/entries/add_question",
-            body=maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Entry,
-        )
-
     def query(
         self,
         project_id: str,
@@ -362,16 +242,9 @@ class EntriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[Entry]:
-        """Query knowledge for a project.
-
-        Also increments the frequency_count for the
-        matching entry if found.
-
-        Returns the matching entry if found and answered, otherwise returns None. This
-        allows the client to distinguish between: (1) no matching question found
-        (returns None), and (2) matching question found but not yet answered (returns
-        Entry with answer=None).
+    ) -> EntryQueryResponse:
+        """
+        Query Entries Route
 
         Args:
           extra_headers: Send extra headers
@@ -401,7 +274,7 @@ class EntriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entry,
+            cast_to=EntryQueryResponse,
         )
 
 
@@ -444,9 +317,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Entry:
         """
-        Create a knowledge entry for a project.
-
-        Raises: HTTPException: If an existing entry is found with the same question.
+        Create a new knowledge entry for a project.
 
         Args:
           extra_headers: Send extra headers
@@ -529,7 +400,6 @@ class AsyncEntriesResource(AsyncAPIResource):
         project_id: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
-        frequency_count: Optional[int] | NotGiven = NOT_GIVEN,
         question: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -560,7 +430,6 @@ class AsyncEntriesResource(AsyncAPIResource):
                 {
                     "answer": answer,
                     "draft_answer": draft_answer,
-                    "frequency_count": frequency_count,
                     "question": question,
                 },
                 entry_update_params.EntryUpdateParams,
@@ -569,62 +438,6 @@ class AsyncEntriesResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Entry,
-        )
-
-    def list(
-        self,
-        project_id: str,
-        *,
-        answered_only: bool | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Literal["created_at", "answered_at"] | NotGiven = NOT_GIVEN,
-        states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
-        unanswered_only: bool | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Entry, AsyncOffsetPageEntries[Entry]]:
-        """
-        List knowledge entries for a project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not project_id:
-            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return self._get_api_list(
-            f"/api/projects/{project_id}/entries/",
-            page=AsyncOffsetPageEntries[Entry],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "answered_only": answered_only,
-                        "limit": limit,
-                        "offset": offset,
-                        "order": order,
-                        "sort": sort,
-                        "states": states,
-                        "unanswered_only": unanswered_only,
-                    },
-                    entry_list_params.EntryListParams,
-                ),
-            ),
-            model=Entry,
         )
 
     async def delete(
@@ -664,59 +477,6 @@ class AsyncEntriesResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    async def add_question(
-        self,
-        project_id: str,
-        *,
-        question: str,
-        x_client_library_version: str | NotGiven = NOT_GIVEN,
-        x_integration_type: str | NotGiven = NOT_GIVEN,
-        x_source: str | NotGiven = NOT_GIVEN,
-        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Entry:
-        """
-        Add a question to a project.
-
-        Returns: 201 Created if a new question was added 200 OK if the question already
-        existed
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not project_id:
-            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "x-client-library-version": x_client_library_version,
-                    "x-integration-type": x_integration_type,
-                    "x-source": x_source,
-                    "x-stainless-package-version": x_stainless_package_version,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._post(
-            f"/api/projects/{project_id}/entries/add_question",
-            body=await async_maybe_transform({"question": question}, entry_add_question_params.EntryAddQuestionParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Entry,
-        )
-
     async def query(
         self,
         project_id: str,
@@ -732,16 +492,9 @@ class AsyncEntriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[Entry]:
-        """Query knowledge for a project.
-
-        Also increments the frequency_count for the
-        matching entry if found.
-
-        Returns the matching entry if found and answered, otherwise returns None. This
-        allows the client to distinguish between: (1) no matching question found
-        (returns None), and (2) matching question found but not yet answered (returns
-        Entry with answer=None).
+    ) -> EntryQueryResponse:
+        """
+        Query Entries Route
 
         Args:
           extra_headers: Send extra headers
@@ -771,7 +524,7 @@ class AsyncEntriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Entry,
+            cast_to=EntryQueryResponse,
         )
 
 
@@ -788,14 +541,8 @@ class EntriesResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             entries.update,
         )
-        self.list = to_raw_response_wrapper(
-            entries.list,
-        )
         self.delete = to_raw_response_wrapper(
             entries.delete,
-        )
-        self.add_question = to_raw_response_wrapper(
-            entries.add_question,
         )
         self.query = to_raw_response_wrapper(
             entries.query,
@@ -815,14 +562,8 @@ class AsyncEntriesResourceWithRawResponse:
         self.update = async_to_raw_response_wrapper(
             entries.update,
         )
-        self.list = async_to_raw_response_wrapper(
-            entries.list,
-        )
         self.delete = async_to_raw_response_wrapper(
             entries.delete,
-        )
-        self.add_question = async_to_raw_response_wrapper(
-            entries.add_question,
         )
         self.query = async_to_raw_response_wrapper(
             entries.query,
@@ -842,14 +583,8 @@ class EntriesResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             entries.update,
         )
-        self.list = to_streamed_response_wrapper(
-            entries.list,
-        )
         self.delete = to_streamed_response_wrapper(
             entries.delete,
-        )
-        self.add_question = to_streamed_response_wrapper(
-            entries.add_question,
         )
         self.query = to_streamed_response_wrapper(
             entries.query,
@@ -869,14 +604,8 @@ class AsyncEntriesResourceWithStreamingResponse:
         self.update = async_to_streamed_response_wrapper(
             entries.update,
         )
-        self.list = async_to_streamed_response_wrapper(
-            entries.list,
-        )
         self.delete = async_to_streamed_response_wrapper(
             entries.delete,
-        )
-        self.add_question = async_to_streamed_response_wrapper(
-            entries.add_question,
         )
         self.query = async_to_streamed_response_wrapper(
             entries.query,

@@ -3,16 +3,13 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Optional, cast
+from typing import Any, cast
 
 import pytest
 
 from codex import Codex, AsyncCodex
 from tests.utils import assert_matches_type
-from codex.pagination import SyncOffsetPageEntries, AsyncOffsetPageEntries
-from codex.types.projects import (
-    Entry,
-)
+from codex.types.projects import Entry, EntryQueryResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -150,7 +147,6 @@ class TestEntries:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             answer="answer",
             draft_answer="draft_answer",
-            frequency_count=0,
             question="question",
         )
         assert_matches_type(Entry, entry, path=["response"])
@@ -196,63 +192,6 @@ class TestEntries:
             client.projects.entries.with_raw_response.update(
                 entry_id="",
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_list(self, client: Codex) -> None:
-        entry = client.projects.entries.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_list_with_all_params(self, client: Codex) -> None:
-        entry = client.projects.entries.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            answered_only=True,
-            limit=1,
-            offset=0,
-            order="asc",
-            sort="created_at",
-            states=["unanswered"],
-            unanswered_only=True,
-        )
-        assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_list(self, client: Codex) -> None:
-        response = client.projects.entries.with_raw_response.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        entry = response.parse()
-        assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_list(self, client: Codex) -> None:
-        with client.projects.entries.with_streaming_response.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            entry = response.parse()
-            assert_matches_type(SyncOffsetPageEntries[Entry], entry, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_list(self, client: Codex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.entries.with_raw_response.list(
-                project_id="",
             )
 
     @pytest.mark.skip()
@@ -309,71 +248,12 @@ class TestEntries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_add_question(self, client: Codex) -> None:
-        entry = client.projects.entries.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
-        assert_matches_type(Entry, entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_add_question_with_all_params(self, client: Codex) -> None:
-        entry = client.projects.entries.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-            x_client_library_version="x-client-library-version",
-            x_integration_type="x-integration-type",
-            x_source="x-source",
-            x_stainless_package_version="x-stainless-package-version",
-        )
-        assert_matches_type(Entry, entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_add_question(self, client: Codex) -> None:
-        response = client.projects.entries.with_raw_response.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        entry = response.parse()
-        assert_matches_type(Entry, entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_add_question(self, client: Codex) -> None:
-        with client.projects.entries.with_streaming_response.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            entry = response.parse()
-            assert_matches_type(Entry, entry, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_add_question(self, client: Codex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.entries.with_raw_response.add_question(
-                project_id="",
-                question="question",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_query(self, client: Codex) -> None:
         entry = client.projects.entries.query(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
         )
-        assert_matches_type(Optional[Entry], entry, path=["response"])
+        assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -386,7 +266,7 @@ class TestEntries:
             x_source="x-source",
             x_stainless_package_version="x-stainless-package-version",
         )
-        assert_matches_type(Optional[Entry], entry, path=["response"])
+        assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -399,7 +279,7 @@ class TestEntries:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entry = response.parse()
-        assert_matches_type(Optional[Entry], entry, path=["response"])
+        assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -412,7 +292,7 @@ class TestEntries:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entry = response.parse()
-            assert_matches_type(Optional[Entry], entry, path=["response"])
+            assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -559,7 +439,6 @@ class TestAsyncEntries:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             answer="answer",
             draft_answer="draft_answer",
-            frequency_count=0,
             question="question",
         )
         assert_matches_type(Entry, entry, path=["response"])
@@ -605,63 +484,6 @@ class TestAsyncEntries:
             await async_client.projects.entries.with_raw_response.update(
                 entry_id="",
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_list(self, async_client: AsyncCodex) -> None:
-        entry = await async_client.projects.entries.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
-        entry = await async_client.projects.entries.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            answered_only=True,
-            limit=1,
-            offset=0,
-            order="asc",
-            sort="created_at",
-            states=["unanswered"],
-            unanswered_only=True,
-        )
-        assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
-        response = await async_client.projects.entries.with_raw_response.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        entry = await response.parse()
-        assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
-        async with async_client.projects.entries.with_streaming_response.list(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            entry = await response.parse()
-            assert_matches_type(AsyncOffsetPageEntries[Entry], entry, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_list(self, async_client: AsyncCodex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.entries.with_raw_response.list(
-                project_id="",
             )
 
     @pytest.mark.skip()
@@ -718,71 +540,12 @@ class TestAsyncEntries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_add_question(self, async_client: AsyncCodex) -> None:
-        entry = await async_client.projects.entries.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
-        assert_matches_type(Entry, entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_add_question_with_all_params(self, async_client: AsyncCodex) -> None:
-        entry = await async_client.projects.entries.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-            x_client_library_version="x-client-library-version",
-            x_integration_type="x-integration-type",
-            x_source="x-source",
-            x_stainless_package_version="x-stainless-package-version",
-        )
-        assert_matches_type(Entry, entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_add_question(self, async_client: AsyncCodex) -> None:
-        response = await async_client.projects.entries.with_raw_response.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        entry = await response.parse()
-        assert_matches_type(Entry, entry, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_add_question(self, async_client: AsyncCodex) -> None:
-        async with async_client.projects.entries.with_streaming_response.add_question(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            entry = await response.parse()
-            assert_matches_type(Entry, entry, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_add_question(self, async_client: AsyncCodex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.entries.with_raw_response.add_question(
-                project_id="",
-                question="question",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_method_query(self, async_client: AsyncCodex) -> None:
         entry = await async_client.projects.entries.query(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
         )
-        assert_matches_type(Optional[Entry], entry, path=["response"])
+        assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -795,7 +558,7 @@ class TestAsyncEntries:
             x_source="x-source",
             x_stainless_package_version="x-stainless-package-version",
         )
-        assert_matches_type(Optional[Entry], entry, path=["response"])
+        assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -808,7 +571,7 @@ class TestAsyncEntries:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entry = await response.parse()
-        assert_matches_type(Optional[Entry], entry, path=["response"])
+        assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -821,7 +584,7 @@ class TestAsyncEntries:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entry = await response.parse()
-            assert_matches_type(Optional[Entry], entry, path=["response"])
+            assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
