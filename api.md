@@ -10,7 +10,6 @@ Methods:
 
 - <code title="get /api/health/">client.health.<a href="./src/codex/resources/health.py">check</a>() -> <a href="./src/codex/types/health_check_response.py">HealthCheckResponse</a></code>
 - <code title="get /api/health/db">client.health.<a href="./src/codex/resources/health.py">db</a>() -> <a href="./src/codex/types/health_check_response.py">HealthCheckResponse</a></code>
-- <code title="get /api/health/weaviate">client.health.<a href="./src/codex/resources/health.py">weaviate</a>() -> <a href="./src/codex/types/health_check_response.py">HealthCheckResponse</a></code>
 
 # Organizations
 
@@ -175,7 +174,7 @@ Methods:
 Types:
 
 ```python
-from codex.types.projects import Entry
+from codex.types.projects import Entry, EntryQueryResponse
 ```
 
 Methods:
@@ -183,10 +182,21 @@ Methods:
 - <code title="post /api/projects/{project_id}/entries/">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/entry_create_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
 - <code title="get /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">retrieve</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
 - <code title="put /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">update</a>(entry_id, \*, project_id, \*\*<a href="src/codex/types/projects/entry_update_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="get /api/projects/{project_id}/entries/">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/entry_list_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">SyncOffsetPageEntries[Entry]</a></code>
 - <code title="delete /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">delete</a>(entry_id, \*, project_id) -> None</code>
-- <code title="post /api/projects/{project_id}/entries/add_question">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">add_question</a>(project_id, \*\*<a href="src/codex/types/projects/entry_add_question_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="post /api/projects/{project_id}/entries/query">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">query</a>(project_id, \*\*<a href="src/codex/types/projects/entry_query_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Optional[Entry]</a></code>
+- <code title="post /api/projects/{project_id}/entries/query">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">query</a>(project_id, \*\*<a href="src/codex/types/projects/entry_query_params.py">params</a>) -> <a href="./src/codex/types/projects/entry_query_response.py">EntryQueryResponse</a></code>
+
+## Clusters
+
+Types:
+
+```python
+from codex.types.projects import ClusterListResponse, ClusterListVariantsResponse
+```
+
+Methods:
+
+- <code title="get /api/projects/{project_id}/entries/clusters">client.projects.clusters.<a href="./src/codex/resources/projects/clusters.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/cluster_list_params.py">params</a>) -> <a href="./src/codex/types/projects/cluster_list_response.py">SyncOffsetPageClusters[ClusterListResponse]</a></code>
+- <code title="get /api/projects/{project_id}/entries/clusters/{representative_entry_id}">client.projects.clusters.<a href="./src/codex/resources/projects/clusters.py">list_variants</a>(representative_entry_id, \*, project_id) -> <a href="./src/codex/types/projects/cluster_list_variants_response.py">ClusterListVariantsResponse</a></code>
 
 # Tlm
 
