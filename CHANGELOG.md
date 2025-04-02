@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.1.0-alpha.13 (2025-04-02)
+
+Full Changelog: [v0.1.0-alpha.12...v0.1.0-alpha.13](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.12...v0.1.0-alpha.13)
+
+### Features
+
+* **api:** api update ([#83](https://github.com/cleanlab/codex-python/issues/83)) ([b41e3bf](https://github.com/cleanlab/codex-python/commit/b41e3bf21e10b11b6d64e15f320cf3d8aa66bfb8))
+* **api:** api update ([#90](https://github.com/cleanlab/codex-python/issues/90)) ([52933f2](https://github.com/cleanlab/codex-python/commit/52933f2bc708e1f2b5f2e144071a9ee41b27251c))
+* **api:** updates from question grouping ([#93](https://github.com/cleanlab/codex-python/issues/93)) ([14da023](https://github.com/cleanlab/codex-python/commit/14da02311e598a1d5f4e41a100160b81befd4f61))
+
+
+### Bug Fixes
+
+* **ci:** ensure pip is always available ([#88](https://github.com/cleanlab/codex-python/issues/88)) ([86a40cc](https://github.com/cleanlab/codex-python/commit/86a40ccd3892d23bb12f78bf5ff13eaa23d8eb2d))
+* **ci:** remove publishing patch ([#89](https://github.com/cleanlab/codex-python/issues/89)) ([674c661](https://github.com/cleanlab/codex-python/commit/674c6613c7709c93cca936f086d5348041252972))
+* **types:** handle more discriminated union shapes ([#87](https://github.com/cleanlab/codex-python/issues/87)) ([ea6a942](https://github.com/cleanlab/codex-python/commit/ea6a9422c2a1ff25f14ade1a790ffd943dadbd81))
+
+
+### Chores
+
+* fix typos ([#91](https://github.com/cleanlab/codex-python/issues/91)) ([6b97689](https://github.com/cleanlab/codex-python/commit/6b97689646d7b3611ace81c630fafa1962b5c94d))
+* **internal:** bump rye to 0.44.0 ([#86](https://github.com/cleanlab/codex-python/issues/86)) ([e026b73](https://github.com/cleanlab/codex-python/commit/e026b73fb62aa19689890f14b7dcf355910029a8))
+* **internal:** codegen related update ([#85](https://github.com/cleanlab/codex-python/issues/85)) ([7e1eaca](https://github.com/cleanlab/codex-python/commit/7e1eaca4c5f2c779b264c34883688b52e1a8602e))
+* **internal:** remove extra empty newlines ([#84](https://github.com/cleanlab/codex-python/issues/84)) ([e4b2929](https://github.com/cleanlab/codex-python/commit/e4b2929d58b466199bb02e24b8e0a7c9c63f1b3a))
+* **internal:** version bump ([#81](https://github.com/cleanlab/codex-python/issues/81)) ([7ee4e09](https://github.com/cleanlab/codex-python/commit/7ee4e09545e52eaa3d10522709e833b38221ecad))
+
 ## 0.1.0-alpha.12 (2025-03-11)
 
 Full Changelog: [v0.1.0-alpha.11...v0.1.0-alpha.12](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.11...v0.1.0-alpha.12)
