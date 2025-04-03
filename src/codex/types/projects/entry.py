@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -23,6 +23,8 @@ class Entry(BaseModel):
     answer: Optional[str] = None
 
     answered_at: Optional[datetime] = None
+
+    client_query_metadata: Optional[List[object]] = None
 
     draft_answer: Optional[str] = None
 
