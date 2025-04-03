@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 
 import httpx
 
@@ -54,6 +54,7 @@ class EntriesResource(SyncAPIResource):
         *,
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        client_query_metadata: Iterable[object] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
@@ -97,6 +98,7 @@ class EntriesResource(SyncAPIResource):
                 {
                     "question": question,
                     "answer": answer,
+                    "client_query_metadata": client_query_metadata,
                     "draft_answer": draft_answer,
                 },
                 entry_create_params.EntryCreateParams,
@@ -232,6 +234,7 @@ class EntriesResource(SyncAPIResource):
         project_id: str,
         *,
         question: str,
+        client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -270,7 +273,13 @@ class EntriesResource(SyncAPIResource):
         }
         return self._post(
             f"/api/projects/{project_id}/entries/query",
-            body=maybe_transform({"question": question}, entry_query_params.EntryQueryParams),
+            body=maybe_transform(
+                {
+                    "question": question,
+                    "client_metadata": client_metadata,
+                },
+                entry_query_params.EntryQueryParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -304,6 +313,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         *,
         question: str,
         answer: Optional[str] | NotGiven = NOT_GIVEN,
+        client_query_metadata: Iterable[object] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
@@ -347,6 +357,7 @@ class AsyncEntriesResource(AsyncAPIResource):
                 {
                     "question": question,
                     "answer": answer,
+                    "client_query_metadata": client_query_metadata,
                     "draft_answer": draft_answer,
                 },
                 entry_create_params.EntryCreateParams,
@@ -482,6 +493,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         project_id: str,
         *,
         question: str,
+        client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -520,7 +532,13 @@ class AsyncEntriesResource(AsyncAPIResource):
         }
         return await self._post(
             f"/api/projects/{project_id}/entries/query",
-            body=await async_maybe_transform({"question": question}, entry_query_params.EntryQueryParams),
+            body=await async_maybe_transform(
+                {
+                    "question": question,
+                    "client_metadata": client_metadata,
+                },
+                entry_query_params.EntryQueryParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
