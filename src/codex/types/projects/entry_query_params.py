@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -11,6 +12,8 @@ __all__ = ["EntryQueryParams"]
 
 class EntryQueryParams(TypedDict, total=False):
     question: Required[str]
+
+    client_metadata: Optional[object]
 
     x_client_library_version: Annotated[str, PropertyInfo(alias="x-client-library-version")]
 
