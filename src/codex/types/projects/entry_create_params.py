@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -14,6 +14,8 @@ class EntryCreateParams(TypedDict, total=False):
     question: Required[str]
 
     answer: Optional[str]
+
+    client_query_metadata: Iterable[object]
 
     draft_answer: Optional[str]
 
