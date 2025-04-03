@@ -1,11 +1,11 @@
 [project]
 name = "codex-sdk"
-version = "0.1.0-alpha.13"
-description = "The official Python library for the Codex API"
+version = "0.1.0-alpha.14"
+description = "Internal SDK used within cleanlab-codex package. Refer to https://pypi.org/project/cleanlab-codex/ instead."
 dynamic = ["readme"]
 license = "MIT"
 authors = [
-{ name = "Codex", email = "team@cleanlab.ai" },
+{ name = "Cleanlab", email = "team@cleanlab.ai" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
