@@ -9,7 +9,19 @@ __all__ = ["ProjectListResponse", "Project", "ProjectConfig"]
 
 
 class ProjectConfig(BaseModel):
+    clustering_use_llm_matching: Optional[bool] = None
+
+    llm_matching_model: Optional[str] = None
+
+    llm_matching_quality_preset: Optional[str] = None
+
+    lower_llm_match_distance_threshold: Optional[float] = None
+
     max_distance: Optional[float] = None
+
+    query_use_llm_matching: Optional[bool] = None
+
+    upper_llm_match_distance_threshold: Optional[float] = None
 
 
 class Project(BaseModel):

@@ -155,7 +155,15 @@ from codex import Codex
 client = Codex()
 
 project_return_schema = client.projects.create(
-    config={"max_distance": 0},
+    config={
+        "clustering_use_llm_matching": True,
+        "llm_matching_model": "llm_matching_model",
+        "llm_matching_quality_preset": "llm_matching_quality_preset",
+        "lower_llm_match_distance_threshold": 0,
+        "max_distance": 0,
+        "query_use_llm_matching": True,
+        "upper_llm_match_distance_threshold": 0,
+    },
     name="name",
     organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 )
