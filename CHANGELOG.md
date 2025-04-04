@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.15 (2025-04-04)
+
+Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
+
+### Features
+
+* **api:** api update ([#102](https://github.com/cleanlab/codex-python/issues/102)) ([5675c9e](https://github.com/cleanlab/codex-python/commit/5675c9efbda688fa1799f1e48f64c20143fcf410))
+
+
+### Chores
+
+* **internal:** remove trailing character ([#103](https://github.com/cleanlab/codex-python/issues/103)) ([45f7fde](https://github.com/cleanlab/codex-python/commit/45f7fde22223d99bec5ab8142b59f5124b275c28))
+* **internal:** version bump ([#99](https://github.com/cleanlab/codex-python/issues/99)) ([4bc12e4](https://github.com/cleanlab/codex-python/commit/4bc12e4d6bd408e6256f2e6e5539fd8feb29fab2))
+
 ## 0.1.0-alpha.14 (2025-04-03)
 
 Full Changelog: [v0.1.0-alpha.13...v0.1.0-alpha.14](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.13...v0.1.0-alpha.14)

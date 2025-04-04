@@ -29,3 +29,6 @@ class Entry(BaseModel):
     draft_answer: Optional[str] = None
 
     draft_answer_last_edited: Optional[datetime] = None
+
+    frequency_count: Optional[int] = None
+    """number of times the entry matched for a /query request"""

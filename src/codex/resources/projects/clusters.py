@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -53,7 +53,7 @@ class ClustersResource(SyncAPIResource):
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Literal["created_at", "answered_at", "cluster_frequency_count"] | NotGiven = NOT_GIVEN,
+        sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count"]] | NotGiven = NOT_GIVEN,
         states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -164,7 +164,7 @@ class AsyncClustersResource(AsyncAPIResource):
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Literal["created_at", "answered_at", "cluster_frequency_count"] | NotGiven = NOT_GIVEN,
+        sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count"]] | NotGiven = NOT_GIVEN,
         states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
