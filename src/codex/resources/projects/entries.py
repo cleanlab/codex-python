@@ -234,6 +234,7 @@ class EntriesResource(SyncAPIResource):
         project_id: str,
         *,
         question: str,
+        use_llm_matching: bool | NotGiven = NOT_GIVEN,
         client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
@@ -281,7 +282,11 @@ class EntriesResource(SyncAPIResource):
                 entry_query_params.EntryQueryParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"use_llm_matching": use_llm_matching}, entry_query_params.EntryQueryParams),
             ),
             cast_to=EntryQueryResponse,
         )
@@ -493,6 +498,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         project_id: str,
         *,
         question: str,
+        use_llm_matching: bool | NotGiven = NOT_GIVEN,
         client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
@@ -540,7 +546,13 @@ class AsyncEntriesResource(AsyncAPIResource):
                 entry_query_params.EntryQueryParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"use_llm_matching": use_llm_matching}, entry_query_params.EntryQueryParams
+                ),
             ),
             cast_to=EntryQueryResponse,
         )
