@@ -135,13 +135,18 @@ Methods:
 Types:
 
 ```python
-from codex.types import ProjectReturnSchema, ProjectListResponse, ProjectExportResponse
+from codex.types import (
+    ProjectReturnSchema,
+    ProjectRetrieveResponse,
+    ProjectListResponse,
+    ProjectExportResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /api/projects/">client.projects.<a href="./src/codex/resources/projects/projects.py">create</a>(\*\*<a href="src/codex/types/project_create_params.py">params</a>) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
-- <code title="get /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">retrieve</a>(project_id) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
+- <code title="get /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">retrieve</a>(project_id) -> <a href="./src/codex/types/project_retrieve_response.py">ProjectRetrieveResponse</a></code>
 - <code title="put /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">update</a>(project_id, \*\*<a href="src/codex/types/project_update_params.py">params</a>) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
 - <code title="get /api/projects/">client.projects.<a href="./src/codex/resources/projects/projects.py">list</a>(\*\*<a href="src/codex/types/project_list_params.py">params</a>) -> <a href="./src/codex/types/project_list_response.py">ProjectListResponse</a></code>
 - <code title="delete /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">delete</a>(project_id) -> None</code>

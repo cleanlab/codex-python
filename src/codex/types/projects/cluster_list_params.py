@@ -15,6 +15,6 @@ class ClusterListParams(TypedDict, total=False):
 
     order: Literal["asc", "desc"]
 
-    sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count"]]
+    sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count", "custom_rank"]]
 
     states: List[Literal["unanswered", "draft", "published", "published_with_draft"]]
