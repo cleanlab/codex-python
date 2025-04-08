@@ -11,6 +11,7 @@ from codex import Codex, AsyncCodex
 from codex.types import (
     ProjectListResponse,
     ProjectReturnSchema,
+    ProjectRetrieveResponse,
 )
 from tests.utils import assert_matches_type
 
@@ -85,7 +86,7 @@ class TestProjects:
         project = client.projects.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ProjectReturnSchema, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -97,7 +98,7 @@ class TestProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = response.parse()
-        assert_matches_type(ProjectReturnSchema, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -109,7 +110,7 @@ class TestProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = response.parse()
-            assert_matches_type(ProjectReturnSchema, project, path=["response"])
+            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -391,7 +392,7 @@ class TestAsyncProjects:
         project = await async_client.projects.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(ProjectReturnSchema, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -403,7 +404,7 @@ class TestAsyncProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = await response.parse()
-        assert_matches_type(ProjectReturnSchema, project, path=["response"])
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -415,7 +416,7 @@ class TestAsyncProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = await response.parse()
-            assert_matches_type(ProjectReturnSchema, project, path=["response"])
+            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
