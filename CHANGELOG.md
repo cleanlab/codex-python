@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.1.0-alpha.15 (2025-04-15)
+
+Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
+
+### Features
+
+* **api:** api update ([a25d003](https://github.com/cleanlab/codex-python/commit/a25d0033bafc06b6c6ad35597278067c02794071))
+* **api:** api update ([#102](https://github.com/cleanlab/codex-python/issues/102)) ([5675c9e](https://github.com/cleanlab/codex-python/commit/5675c9efbda688fa1799f1e48f64c20143fcf410))
+* **api:** api update ([#104](https://github.com/cleanlab/codex-python/issues/104)) ([404e013](https://github.com/cleanlab/codex-python/commit/404e013054df741a1d3c77597f35030cba080b82))
+* **api:** api update ([#107](https://github.com/cleanlab/codex-python/issues/107)) ([9a3564e](https://github.com/cleanlab/codex-python/commit/9a3564e4e18decc1a7238a986f6a5b23db845f35))
+
+
+### Bug Fixes
+
+* **client:** send all configured auth headers ([#106](https://github.com/cleanlab/codex-python/issues/106)) ([772695b](https://github.com/cleanlab/codex-python/commit/772695b60b05439999d9f8bd81ec772908c664d3))
+* **perf:** optimize some hot paths ([fb1f7c1](https://github.com/cleanlab/codex-python/commit/fb1f7c1783af5dd17ef959733b670604ac6b877b))
+* **perf:** skip traversing types for NotGiven values ([38418ad](https://github.com/cleanlab/codex-python/commit/38418ad25f1ce660c9ee1cfabf0fc48e965c02f9))
+
+
+### Chores
+
+* **client:** minor internal fixes ([228700d](https://github.com/cleanlab/codex-python/commit/228700d4e54104c50f0c8eac09bb490a2e0b4fe8))
+* **internal:** expand CI branch coverage ([8ce4af4](https://github.com/cleanlab/codex-python/commit/8ce4af445131dae911282d7330cd31d3124212ca))
+* **internal:** reduce CI branch coverage ([0aee51f](https://github.com/cleanlab/codex-python/commit/0aee51f42c7400fea6538a505ab0368f9397681a))
+* **internal:** remove trailing character ([#103](https://github.com/cleanlab/codex-python/issues/103)) ([45f7fde](https://github.com/cleanlab/codex-python/commit/45f7fde22223d99bec5ab8142b59f5124b275c28))
+* **internal:** slight transform perf improvement ([#108](https://github.com/cleanlab/codex-python/issues/108)) ([552640f](https://github.com/cleanlab/codex-python/commit/552640f0d27993032b3b6b0a9861c3dbaf09d852))
+* **internal:** update pyright settings ([fc0f5bc](https://github.com/cleanlab/codex-python/commit/fc0f5bcf5e4f92ed59aa3498a4fb52713fe0c7c7))
+* **internal:** version bump ([#99](https://github.com/cleanlab/codex-python/issues/99)) ([4bc12e4](https://github.com/cleanlab/codex-python/commit/4bc12e4d6bd408e6256f2e6e5539fd8feb29fab2))
+
 ## 0.1.0-alpha.14 (2025-04-03)
 
 Full Changelog: [v0.1.0-alpha.13...v0.1.0-alpha.14](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.13...v0.1.0-alpha.14)
