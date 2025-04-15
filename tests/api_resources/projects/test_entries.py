@@ -262,6 +262,7 @@ class TestEntries:
         entry = client.projects.entries.query(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
+            use_llm_matching=True,
             client_metadata={},
             x_client_library_version="x-client-library-version",
             x_integration_type="x-integration-type",
@@ -556,6 +557,7 @@ class TestAsyncEntries:
         entry = await async_client.projects.entries.query(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             question="question",
+            use_llm_matching=True,
             client_metadata={},
             x_client_library_version="x-client-library-version",
             x_integration_type="x-integration-type",

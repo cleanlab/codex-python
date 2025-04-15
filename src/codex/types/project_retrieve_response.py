@@ -1,14 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["ProjectListResponse", "Project", "ProjectConfig"]
+__all__ = ["ProjectRetrieveResponse", "Config"]
 
 
-class ProjectConfig(BaseModel):
+class Config(BaseModel):
     clustering_use_llm_matching: Optional[bool] = None
 
     llm_matching_model: Optional[str] = None
@@ -24,10 +24,10 @@ class ProjectConfig(BaseModel):
     upper_llm_match_distance_threshold: Optional[float] = None
 
 
-class Project(BaseModel):
+class ProjectRetrieveResponse(BaseModel):
     id: str
 
-    config: ProjectConfig
+    config: Config
 
     created_at: datetime
 
@@ -39,12 +39,6 @@ class Project(BaseModel):
 
     updated_at: datetime
 
+    custom_rank_enabled: Optional[bool] = None
+
     description: Optional[str] = None
-
-    unanswered_entries_count: Optional[int] = None
-
-
-class ProjectListResponse(BaseModel):
-    projects: List[Project]
-
-    total_count: int

@@ -6,13 +6,121 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["Entry"]
+__all__ = [
+    "Entry",
+    "ManagedMetadata",
+    "ManagedMetadataContextSufficiency",
+    "ManagedMetadataQueryEaseCustomized",
+    "ManagedMetadataResponseHelpfulness",
+    "ManagedMetadataTrustworthiness",
+]
+
+
+class ManagedMetadataContextSufficiency(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
+class ManagedMetadataQueryEaseCustomized(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
+class ManagedMetadataResponseHelpfulness(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
+class ManagedMetadataTrustworthiness(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
+class ManagedMetadata(BaseModel):
+    latest_context: Optional[str] = None
+    """The most recent context string."""
+
+    latest_entry_point: Optional[str] = None
+    """The most recent entry point string."""
+
+    latest_llm_response: Optional[str] = None
+    """The most recent LLM response string."""
+
+    latest_location: Optional[str] = None
+    """The most recent location string."""
+
+    context_sufficiency: Optional[ManagedMetadataContextSufficiency] = None
+    """Holds a list of scores and computes aggregate statistics."""
+
+    contexts: Optional[List[str]] = None
+
+    entry_points: Optional[List[str]] = None
+
+    llm_responses: Optional[List[str]] = None
+
+    locations: Optional[List[str]] = None
+
+    query_ease_customized: Optional[ManagedMetadataQueryEaseCustomized] = None
+    """Holds a list of scores and computes aggregate statistics."""
+
+    response_helpfulness: Optional[ManagedMetadataResponseHelpfulness] = None
+    """Holds a list of scores and computes aggregate statistics."""
+
+    trustworthiness: Optional[ManagedMetadataTrustworthiness] = None
+    """Holds a list of scores and computes aggregate statistics."""
 
 
 class Entry(BaseModel):
     id: str
 
     created_at: datetime
+
+    managed_metadata: ManagedMetadata
+    """Extract system-defined, managed metadata from client_query_metadata."""
 
     project_id: str
 
@@ -29,3 +137,6 @@ class Entry(BaseModel):
     draft_answer: Optional[str] = None
 
     draft_answer_last_edited: Optional[datetime] = None
+
+    frequency_count: Optional[int] = None
+    """number of times the entry matched for a /query request"""

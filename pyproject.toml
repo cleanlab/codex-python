@@ -1,6 +1,6 @@
 [project]
 name = "codex-sdk"
-version = "0.1.0-alpha.14"
+version = "0.1.0-alpha.15"
 description = "Internal SDK used within cleanlab-codex package. Refer to https://pypi.org/project/cleanlab-codex/ instead."
 dynamic = ["readme"]
 license = "MIT"
@@ -147,6 +147,7 @@ exclude = [
 ]
 
 reportImplicitOverride = true
+reportOverlappingOverload = false
 
 reportImportCycles = false
 reportPrivateUsage = false

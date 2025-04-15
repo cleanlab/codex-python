@@ -13,6 +13,8 @@ __all__ = ["EntryQueryParams"]
 class EntryQueryParams(TypedDict, total=False):
     question: Required[str]
 
+    use_llm_matching: bool
+
     client_metadata: Optional[object]
 
     x_client_library_version: Annotated[str, PropertyInfo(alias="x-client-library-version")]

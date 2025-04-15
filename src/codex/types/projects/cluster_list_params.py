@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 from typing_extensions import Literal, TypedDict
 
 __all__ = ["ClusterListParams"]
@@ -15,6 +15,6 @@ class ClusterListParams(TypedDict, total=False):
 
     order: Literal["asc", "desc"]
 
-    sort: Literal["created_at", "answered_at", "cluster_frequency_count"]
+    sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count", "custom_rank"]]
 
     states: List[Literal["unanswered", "draft", "published", "published_with_draft"]]

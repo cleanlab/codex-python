@@ -48,6 +48,7 @@ from .access_keys import (
 from ..._base_client import make_request_options
 from ...types.project_list_response import ProjectListResponse
 from ...types.project_return_schema import ProjectReturnSchema
+from ...types.project_retrieve_response import ProjectRetrieveResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -137,7 +138,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> ProjectRetrieveResponse:
         """
         Get a single project.
 
@@ -157,7 +158,7 @@ class ProjectsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=ProjectRetrieveResponse,
         )
 
     def update(
@@ -409,7 +410,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectReturnSchema:
+    ) -> ProjectRetrieveResponse:
         """
         Get a single project.
 
@@ -429,7 +430,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectReturnSchema,
+            cast_to=ProjectRetrieveResponse,
         )
 
     async def update(
