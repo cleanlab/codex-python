@@ -19,4 +19,16 @@ class ProjectCreateParams(TypedDict, total=False):
 
 
 class Config(TypedDict, total=False):
+    clustering_use_llm_matching: bool
+
+    llm_matching_model: str
+
+    llm_matching_quality_preset: str
+
+    lower_llm_match_distance_threshold: float
+
     max_distance: float
+
+    query_use_llm_matching: bool
+
+    upper_llm_match_distance_threshold: float

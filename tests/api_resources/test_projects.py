@@ -34,7 +34,15 @@ class TestProjects:
     @parametrize
     def test_method_create_with_all_params(self, client: Codex) -> None:
         project = client.projects.create(
-            config={"max_distance": 0},
+            config={
+                "clustering_use_llm_matching": True,
+                "llm_matching_model": "llm_matching_model",
+                "llm_matching_quality_preset": "llm_matching_quality_preset",
+                "lower_llm_match_distance_threshold": 0,
+                "max_distance": 0,
+                "query_use_llm_matching": True,
+                "upper_llm_match_distance_threshold": 0,
+            },
             name="name",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
@@ -128,7 +136,15 @@ class TestProjects:
     def test_method_update_with_all_params(self, client: Codex) -> None:
         project = client.projects.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={"max_distance": 0},
+            config={
+                "clustering_use_llm_matching": True,
+                "llm_matching_model": "llm_matching_model",
+                "llm_matching_quality_preset": "llm_matching_quality_preset",
+                "lower_llm_match_distance_threshold": 0,
+                "max_distance": 0,
+                "query_use_llm_matching": True,
+                "upper_llm_match_distance_threshold": 0,
+            },
             name="name",
             description="description",
         )
@@ -324,7 +340,15 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.create(
-            config={"max_distance": 0},
+            config={
+                "clustering_use_llm_matching": True,
+                "llm_matching_model": "llm_matching_model",
+                "llm_matching_quality_preset": "llm_matching_quality_preset",
+                "lower_llm_match_distance_threshold": 0,
+                "max_distance": 0,
+                "query_use_llm_matching": True,
+                "upper_llm_match_distance_threshold": 0,
+            },
             name="name",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
@@ -418,7 +442,15 @@ class TestAsyncProjects:
     async def test_method_update_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={"max_distance": 0},
+            config={
+                "clustering_use_llm_matching": True,
+                "llm_matching_model": "llm_matching_model",
+                "llm_matching_quality_preset": "llm_matching_quality_preset",
+                "lower_llm_match_distance_threshold": 0,
+                "max_distance": 0,
+                "query_use_llm_matching": True,
+                "upper_llm_match_distance_threshold": 0,
+            },
             name="name",
             description="description",
         )
