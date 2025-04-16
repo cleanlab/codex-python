@@ -140,6 +140,10 @@ class ClusterListResponse(BaseModel):
 
     draft_answer_last_edited: Optional[datetime] = None
 
+    eval_issue_type: Optional[str] = None
+
+    eval_score: Optional[float] = None
+
     frequency_count: Optional[int] = None
     """number of times the entry matched for a /query request"""
 

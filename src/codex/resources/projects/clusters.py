@@ -50,10 +50,11 @@ class ClustersResource(SyncAPIResource):
         self,
         project_id: str,
         *,
+        eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful"]] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count", "custom_rank"]]
+        sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count", "custom_rank", "eval_score"]]
         | NotGiven = NOT_GIVEN,
         states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -87,6 +88,7 @@ class ClustersResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "eval_issue_types": eval_issue_types,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -162,10 +164,11 @@ class AsyncClustersResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
+        eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful"]] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count", "custom_rank"]]
+        sort: Optional[Literal["created_at", "answered_at", "cluster_frequency_count", "custom_rank", "eval_score"]]
         | NotGiven = NOT_GIVEN,
         states: List[Literal["unanswered", "draft", "published", "published_with_draft"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -199,6 +202,7 @@ class AsyncClustersResource(AsyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "eval_issue_types": eval_issue_types,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
