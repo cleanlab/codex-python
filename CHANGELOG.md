@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.17 (2025-04-18)
+
+Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)
+
+### Chores
+
+* **internal:** version bump ([88821c7](https://github.com/cleanlab/codex-python/commit/88821c710de290b37a6dbc9a81ef0a1cc396db62))
+
 ## 0.1.0-alpha.16 (2025-04-18)
 
 Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
