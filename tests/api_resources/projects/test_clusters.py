@@ -31,6 +31,7 @@ class TestClusters:
     def test_method_list_with_all_params(self, client: Codex) -> None:
         cluster = client.projects.clusters.list(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            eval_issue_types=["hallucination"],
             limit=1,
             offset=0,
             order="asc",
@@ -144,6 +145,7 @@ class TestAsyncClusters:
     async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
         cluster = await async_client.projects.clusters.list(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            eval_issue_types=["hallucination"],
             limit=1,
             offset=0,
             order="asc",

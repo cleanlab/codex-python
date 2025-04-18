@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.16 (2025-04-18)
+
+Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
+
+### Features
+
+* **api:** api update ([f5c1cee](https://github.com/cleanlab/codex-python/commit/f5c1cee46c42ab67bc09befff130fe88b35f06ac))
+
+
+### Chores
+
+* **internal:** base client updates ([e7d165b](https://github.com/cleanlab/codex-python/commit/e7d165b98c7536415b74fe92c558a50ee8c5861d))
+* **internal:** bump pyright version ([5eac17b](https://github.com/cleanlab/codex-python/commit/5eac17b4e3ef210077d2bed75a7d7b4954d73086))
+* **internal:** version bump ([9326b60](https://github.com/cleanlab/codex-python/commit/9326b60bf403d4a5c981b613e715ea80ef29ad8e))
+
 ## 0.1.0-alpha.15 (2025-04-15)
 
 Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
