@@ -9,7 +9,7 @@ __all__ = ["ClusterListParams"]
 
 
 class ClusterListParams(TypedDict, total=False):
-    eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful"]]
+    eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query"]]
 
     limit: int
 
