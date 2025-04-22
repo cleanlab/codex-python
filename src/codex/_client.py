@@ -13,6 +13,7 @@ from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
     Omit,
+    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -152,12 +153,47 @@ class Codex(SyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        return {**self._authenticated_api_key, **self._public_access_key}
+
+    @property
+    def _authenticated_api_key(self) -> dict[str, str]:
+        api_key = self.api_key
+        if api_key is None:
+            return {}
+        return {"X-API-Key": api_key}
+
+    @property
+    def _public_access_key(self) -> dict[str, str]:
+        access_key = self.access_key
+        if access_key is None:
+            return {}
+        return {"X-Access-Key": access_key}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
             **self._custom_headers,
         }
+
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        if self.access_key and headers.get("X-Access-Key"):
+            return
+        if isinstance(custom_headers.get("X-Access-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected either api_key or access_key to be set. Or for one of the `X-API-Key` or `X-Access-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,
@@ -345,12 +381,47 @@ class AsyncCodex(AsyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        return {**self._authenticated_api_key, **self._public_access_key}
+
+    @property
+    def _authenticated_api_key(self) -> dict[str, str]:
+        api_key = self.api_key
+        if api_key is None:
+            return {}
+        return {"X-API-Key": api_key}
+
+    @property
+    def _public_access_key(self) -> dict[str, str]:
+        access_key = self.access_key
+        if access_key is None:
+            return {}
+        return {"X-Access-Key": access_key}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
             **self._custom_headers,
         }
+
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        if self.access_key and headers.get("X-Access-Key"):
+            return
+        if isinstance(custom_headers.get("X-Access-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected either api_key or access_key to be set. Or for one of the `X-API-Key` or `X-Access-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,

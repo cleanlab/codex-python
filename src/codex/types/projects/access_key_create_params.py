@@ -18,8 +18,6 @@ class AccessKeyCreateParams(TypedDict, total=False):
 
     expires_at: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
 
-    x_access_key: Annotated[str, PropertyInfo(alias="x-access-key")]
-
     x_client_library_version: Annotated[str, PropertyInfo(alias="x-client-library-version")]
 
     x_integration_type: Annotated[str, PropertyInfo(alias="x-integration-type")]
