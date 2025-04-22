@@ -3,14 +3,12 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["ProjectListParams"]
 
 
 class ProjectListParams(TypedDict, total=False):
-    organization_id: Required[str]
-
     include_entry_counts: bool
 
     limit: int
@@ -18,6 +16,8 @@ class ProjectListParams(TypedDict, total=False):
     offset: int
 
     order: Literal["asc", "desc"]
+
+    organization_id: str
 
     query: Optional[str]
 

@@ -115,7 +115,7 @@ class ClustersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ClusterListVariantsResponse:
         """
-        Get Cluster Variants Route
+        Get Cluster Variants
 
         Args:
           extra_headers: Send extra headers
@@ -230,7 +230,7 @@ class AsyncClustersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ClusterListVariantsResponse:
         """
-        Get Cluster Variants Route
+        Get Cluster Variants
 
         Args:
           extra_headers: Send extra headers

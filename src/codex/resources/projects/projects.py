@@ -208,11 +208,11 @@ class ProjectsResource(SyncAPIResource):
     def list(
         self,
         *,
-        organization_id: str,
         include_entry_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         query: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -243,11 +243,11 @@ class ProjectsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "organization_id": organization_id,
                         "include_entry_counts": include_entry_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
+                        "organization_id": organization_id,
                         "query": query,
                         "sort": sort,
                     },
@@ -513,11 +513,11 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        organization_id: str,
         include_entry_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         query: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -548,11 +548,11 @@ class AsyncProjectsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "organization_id": organization_id,
                         "include_entry_counts": include_entry_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
+                        "organization_id": organization_id,
                         "query": query,
                         "sort": sort,
                     },

@@ -57,6 +57,7 @@ class EntriesResource(SyncAPIResource):
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         client_query_metadata: Iterable[object] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
+        x_access_key: str | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -85,6 +86,7 @@ class EntriesResource(SyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
+                    "x-access-key": x_access_key,
                     "x-client-library-version": x_client_library_version,
                     "x-integration-type": x_integration_type,
                     "x-source": x_source,
@@ -323,6 +325,7 @@ class EntriesResource(SyncAPIResource):
         question: str,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
         client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
+        x_access_key: str | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -335,7 +338,7 @@ class EntriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EntryQueryResponse:
         """
-        Query Entries Route
+        Query Entries
 
         Args:
           extra_headers: Send extra headers
@@ -351,6 +354,7 @@ class EntriesResource(SyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
+                    "x-access-key": x_access_key,
                     "x-client-library-version": x_client_library_version,
                     "x-integration-type": x_integration_type,
                     "x-source": x_source,
@@ -446,6 +450,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         answer: Optional[str] | NotGiven = NOT_GIVEN,
         client_query_metadata: Iterable[object] | NotGiven = NOT_GIVEN,
         draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
+        x_access_key: str | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -474,6 +479,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
+                    "x-access-key": x_access_key,
                     "x-client-library-version": x_client_library_version,
                     "x-integration-type": x_integration_type,
                     "x-source": x_source,
@@ -712,6 +718,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         question: str,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
         client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
+        x_access_key: str | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -724,7 +731,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EntryQueryResponse:
         """
-        Query Entries Route
+        Query Entries
 
         Args:
           extra_headers: Send extra headers
@@ -740,6 +747,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
+                    "x-access-key": x_access_key,
                     "x-client-library-version": x_client_library_version,
                     "x-integration-type": x_integration_type,
                     "x-source": x_source,
