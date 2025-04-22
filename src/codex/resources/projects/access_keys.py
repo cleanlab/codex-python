@@ -57,7 +57,6 @@ class AccessKeysResource(SyncAPIResource):
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        x_access_key: str | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -86,7 +85,6 @@ class AccessKeysResource(SyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "x-access-key": x_access_key,
                     "x-client-library-version": x_client_library_version,
                     "x-integration-type": x_integration_type,
                     "x-source": x_source,
@@ -348,7 +346,6 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         name: str,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        x_access_key: str | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -377,7 +374,6 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "x-access-key": x_access_key,
                     "x-client-library-version": x_client_library_version,
                     "x-integration-type": x_integration_type,
                     "x-source": x_source,
