@@ -83,15 +83,9 @@ Methods:
 
 # Users
 
-Types:
-
-```python
-from codex.types import User
-```
-
 Methods:
 
-- <code title="patch /api/users/activate_account">client.users.<a href="./src/codex/resources/users/users.py">activate_account</a>(\*\*<a href="src/codex/types/user_activate_account_params.py">params</a>) -> <a href="./src/codex/types/user.py">User</a></code>
+- <code title="patch /api/users/activate_account">client.users.<a href="./src/codex/resources/users/users.py">activate_account</a>(\*\*<a href="src/codex/types/user_activate_account_params.py">params</a>) -> <a href="./src/codex/types/users/user_schema_public.py">UserSchemaPublic</a></code>
 
 ## Myself
 
@@ -103,13 +97,13 @@ from codex.types.users import UserSchema, UserSchemaPublic
 
 Methods:
 
-- <code title="get /api/users/myself">client.users.myself.<a href="./src/codex/resources/users/myself/myself.py">retrieve</a>() -> <a href="./src/codex/types/user.py">User</a></code>
+- <code title="get /api/users/myself">client.users.myself.<a href="./src/codex/resources/users/myself/myself.py">retrieve</a>() -> <a href="./src/codex/types/users/user_schema_public.py">UserSchemaPublic</a></code>
 
 ### APIKey
 
 Methods:
 
-- <code title="get /api/users/myself/api-key">client.users.myself.api_key.<a href="./src/codex/resources/users/myself/api_key.py">retrieve</a>() -> <a href="./src/codex/types/user.py">User</a></code>
+- <code title="get /api/users/myself/api-key">client.users.myself.api_key.<a href="./src/codex/resources/users/myself/api_key.py">retrieve</a>() -> <a href="./src/codex/types/users/user_schema_public.py">UserSchemaPublic</a></code>
 - <code title="post /api/users/myself/api-key/refresh">client.users.myself.api_key.<a href="./src/codex/resources/users/myself/api_key.py">refresh</a>() -> <a href="./src/codex/types/users/user_schema.py">UserSchema</a></code>
 
 ### Organizations

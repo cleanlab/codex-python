@@ -8,9 +8,9 @@ from typing import Any, cast
 import pytest
 
 from codex import Codex, AsyncCodex
-from codex.types import User
 from tests.utils import assert_matches_type
 from codex._utils import parse_datetime
+from codex.types.users import UserSchemaPublic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -25,7 +25,7 @@ class TestUsers:
             first_name="first_name",
             last_name="last_name",
         )
-        assert_matches_type(User, user, path=["response"])
+        assert_matches_type(UserSchemaPublic, user, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -39,7 +39,7 @@ class TestUsers:
             phone_number="phone_number",
             user_provided_company_name="user_provided_company_name",
         )
-        assert_matches_type(User, user, path=["response"])
+        assert_matches_type(UserSchemaPublic, user, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -52,7 +52,7 @@ class TestUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = response.parse()
-        assert_matches_type(User, user, path=["response"])
+        assert_matches_type(UserSchemaPublic, user, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -65,7 +65,7 @@ class TestUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = response.parse()
-            assert_matches_type(User, user, path=["response"])
+            assert_matches_type(UserSchemaPublic, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -80,7 +80,7 @@ class TestAsyncUsers:
             first_name="first_name",
             last_name="last_name",
         )
-        assert_matches_type(User, user, path=["response"])
+        assert_matches_type(UserSchemaPublic, user, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -94,7 +94,7 @@ class TestAsyncUsers:
             phone_number="phone_number",
             user_provided_company_name="user_provided_company_name",
         )
-        assert_matches_type(User, user, path=["response"])
+        assert_matches_type(UserSchemaPublic, user, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -107,7 +107,7 @@ class TestAsyncUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = await response.parse()
-        assert_matches_type(User, user, path=["response"])
+        assert_matches_type(UserSchemaPublic, user, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -120,6 +120,6 @@ class TestAsyncUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = await response.parse()
-            assert_matches_type(User, user, path=["response"])
+            assert_matches_type(UserSchemaPublic, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
