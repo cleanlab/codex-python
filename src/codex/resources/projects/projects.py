@@ -324,6 +324,39 @@ class ProjectsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    def increment_queries(
+        self,
+        project_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Increment the queries metric for a project.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return self._post(
+            f"/api/projects/{project_id}/increment_queries",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
 
 class AsyncProjectsResource(AsyncAPIResource):
     @cached_property
@@ -596,6 +629,39 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def increment_queries(
+        self,
+        project_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Increment the queries metric for a project.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return await self._post(
+            f"/api/projects/{project_id}/increment_queries",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
 
 class ProjectsResourceWithRawResponse:
     def __init__(self, projects: ProjectsResource) -> None:
@@ -618,6 +684,9 @@ class ProjectsResourceWithRawResponse:
         )
         self.export = to_raw_response_wrapper(
             projects.export,
+        )
+        self.increment_queries = to_raw_response_wrapper(
+            projects.increment_queries,
         )
 
     @cached_property
@@ -655,6 +724,9 @@ class AsyncProjectsResourceWithRawResponse:
         self.export = async_to_raw_response_wrapper(
             projects.export,
         )
+        self.increment_queries = async_to_raw_response_wrapper(
+            projects.increment_queries,
+        )
 
     @cached_property
     def access_keys(self) -> AsyncAccessKeysResourceWithRawResponse:
@@ -691,6 +763,9 @@ class ProjectsResourceWithStreamingResponse:
         self.export = to_streamed_response_wrapper(
             projects.export,
         )
+        self.increment_queries = to_streamed_response_wrapper(
+            projects.increment_queries,
+        )
 
     @cached_property
     def access_keys(self) -> AccessKeysResourceWithStreamingResponse:
@@ -726,6 +801,9 @@ class AsyncProjectsResourceWithStreamingResponse:
         )
         self.export = async_to_streamed_response_wrapper(
             projects.export,
+        )
+        self.increment_queries = async_to_streamed_response_wrapper(
+            projects.increment_queries,
         )
 
     @cached_property

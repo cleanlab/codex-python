@@ -16,3 +16,7 @@ from .project_update_params import ProjectUpdateParams as ProjectUpdateParams
 from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetrieveResponse
 from .organization_schema_public import OrganizationSchemaPublic as OrganizationSchemaPublic
 from .user_activate_account_params import UserActivateAccountParams as UserActivateAccountParams
+from .organization_list_members_response import OrganizationListMembersResponse as OrganizationListMembersResponse
+from .organization_retrieve_permissions_response import (
+    OrganizationRetrievePermissionsResponse as OrganizationRetrievePermissionsResponse,
+)

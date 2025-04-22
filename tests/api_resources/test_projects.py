@@ -323,6 +323,48 @@ class TestProjects:
                 "",
             )
 
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_increment_queries(self, client: Codex) -> None:
+        project = client.projects.increment_queries(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(object, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_increment_queries(self, client: Codex) -> None:
+        response = client.projects.with_raw_response.increment_queries(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(object, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_increment_queries(self, client: Codex) -> None:
+        with client.projects.with_streaming_response.increment_queries(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(object, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_increment_queries(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.increment_queries(
+                "",
+            )
+
 
 class TestAsyncProjects:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -626,5 +668,47 @@ class TestAsyncProjects:
     async def test_path_params_export(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.with_raw_response.export(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_increment_queries(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.increment_queries(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(object, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_increment_queries(self, async_client: AsyncCodex) -> None:
+        response = await async_client.projects.with_raw_response.increment_queries(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(object, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_increment_queries(self, async_client: AsyncCodex) -> None:
+        async with async_client.projects.with_streaming_response.increment_queries(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(object, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_increment_queries(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.increment_queries(
                 "",
             )
