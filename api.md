@@ -16,12 +16,18 @@ Methods:
 Types:
 
 ```python
-from codex.types import OrganizationSchemaPublic
+from codex.types import (
+    OrganizationSchemaPublic,
+    OrganizationListMembersResponse,
+    OrganizationRetrievePermissionsResponse,
+)
 ```
 
 Methods:
 
 - <code title="get /api/organizations/{organization_id}">client.organizations.<a href="./src/codex/resources/organizations/organizations.py">retrieve</a>(organization_id) -> <a href="./src/codex/types/organization_schema_public.py">OrganizationSchemaPublic</a></code>
+- <code title="get /api/organizations/{organization_id}/members">client.organizations.<a href="./src/codex/resources/organizations/organizations.py">list_members</a>(organization_id) -> <a href="./src/codex/types/organization_list_members_response.py">OrganizationListMembersResponse</a></code>
+- <code title="get /api/organizations/{organization_id}/permissions">client.organizations.<a href="./src/codex/resources/organizations/organizations.py">retrieve_permissions</a>(organization_id) -> <a href="./src/codex/types/organization_retrieve_permissions_response.py">OrganizationRetrievePermissionsResponse</a></code>
 
 ## Billing
 
@@ -140,6 +146,7 @@ from codex.types import (
     ProjectRetrieveResponse,
     ProjectListResponse,
     ProjectExportResponse,
+    ProjectIncrementQueriesResponse,
 )
 ```
 
@@ -151,6 +158,7 @@ Methods:
 - <code title="get /api/projects/">client.projects.<a href="./src/codex/resources/projects/projects.py">list</a>(\*\*<a href="src/codex/types/project_list_params.py">params</a>) -> <a href="./src/codex/types/project_list_response.py">ProjectListResponse</a></code>
 - <code title="delete /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">delete</a>(project_id) -> None</code>
 - <code title="get /api/projects/{project_id}/export">client.projects.<a href="./src/codex/resources/projects/projects.py">export</a>(project_id) -> <a href="./src/codex/types/project_export_response.py">object</a></code>
+- <code title="post /api/projects/{project_id}/increment_queries">client.projects.<a href="./src/codex/resources/projects/projects.py">increment_queries</a>(project_id) -> <a href="./src/codex/types/project_increment_queries_response.py">object</a></code>
 
 ## AccessKeys
 
@@ -179,7 +187,7 @@ Methods:
 Types:
 
 ```python
-from codex.types.projects import Entry, EntryQueryResponse
+from codex.types.projects import Entry, EntryNotifySmeResponse, EntryQueryResponse
 ```
 
 Methods:
@@ -188,7 +196,10 @@ Methods:
 - <code title="get /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">retrieve</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
 - <code title="put /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">update</a>(entry_id, \*, project_id, \*\*<a href="src/codex/types/projects/entry_update_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
 - <code title="delete /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">delete</a>(entry_id, \*, project_id) -> None</code>
+- <code title="post /api/projects/{project_id}/entries/{entry_id}/notifications">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">notify_sme</a>(entry_id, \*, project_id, \*\*<a href="src/codex/types/projects/entry_notify_sme_params.py">params</a>) -> <a href="./src/codex/types/projects/entry_notify_sme_response.py">EntryNotifySmeResponse</a></code>
+- <code title="put /api/projects/{project_id}/entries/{entry_id}/publish_draft_answer">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">publish_draft_answer</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
 - <code title="post /api/projects/{project_id}/entries/query">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">query</a>(project_id, \*\*<a href="src/codex/types/projects/entry_query_params.py">params</a>) -> <a href="./src/codex/types/projects/entry_query_response.py">EntryQueryResponse</a></code>
+- <code title="put /api/projects/{project_id}/entries/{entry_id}/unpublish_answer">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">unpublish_answer</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
 
 ## Clusters
 
