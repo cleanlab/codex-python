@@ -8,8 +8,8 @@ from typing import Any, cast
 import pytest
 
 from codex import Codex, AsyncCodex
-from codex.types import User
 from tests.utils import assert_matches_type
+from codex.types.users import UserSchemaPublic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,7 +21,7 @@ class TestMyself:
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         myself = client.users.myself.retrieve()
-        assert_matches_type(User, myself, path=["response"])
+        assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -31,7 +31,7 @@ class TestMyself:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         myself = response.parse()
-        assert_matches_type(User, myself, path=["response"])
+        assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -41,7 +41,7 @@ class TestMyself:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             myself = response.parse()
-            assert_matches_type(User, myself, path=["response"])
+            assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -53,7 +53,7 @@ class TestAsyncMyself:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         myself = await async_client.users.myself.retrieve()
-        assert_matches_type(User, myself, path=["response"])
+        assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -63,7 +63,7 @@ class TestAsyncMyself:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         myself = await response.parse()
-        assert_matches_type(User, myself, path=["response"])
+        assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -73,6 +73,6 @@ class TestAsyncMyself:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             myself = await response.parse()
-            assert_matches_type(User, myself, path=["response"])
+            assert_matches_type(UserSchemaPublic, myself, path=["response"])
 
         assert cast(Any, response.is_closed) is True

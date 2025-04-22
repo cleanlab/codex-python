@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from .user import User as User
 from .tlm_score_params import TlmScoreParams as TlmScoreParams
 from .tlm_prompt_params import TlmPromptParams as TlmPromptParams
 from .tlm_score_response import TlmScoreResponse as TlmScoreResponse
