@@ -19,6 +19,8 @@ class EntryCreateParams(TypedDict, total=False):
 
     draft_answer: Optional[str]
 
+    x_access_key: Annotated[str, PropertyInfo(alias="x-access-key")]
+
     x_client_library_version: Annotated[str, PropertyInfo(alias="x-client-library-version")]
 
     x_integration_type: Annotated[str, PropertyInfo(alias="x-integration-type")]
