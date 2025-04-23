@@ -7,7 +7,12 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...types import project_list_params, project_create_params, project_update_params
+from ...types import (
+    project_list_params,
+    project_create_params,
+    project_update_params,
+    project_retrieve_analytics_params,
+)
 from .entries import (
     EntriesResource,
     AsyncEntriesResource,
@@ -17,10 +22,7 @@ from .entries import (
     AsyncEntriesResourceWithStreamingResponse,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._utils import maybe_transform, async_maybe_transform
 from .clusters import (
     ClustersResource,
     AsyncClustersResource,
@@ -49,6 +51,7 @@ from ..._base_client import make_request_options
 from ...types.project_list_response import ProjectListResponse
 from ...types.project_return_schema import ProjectReturnSchema
 from ...types.project_retrieve_response import ProjectRetrieveResponse
+from ...types.project_retrieve_analytics_response import ProjectRetrieveAnalyticsResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -208,11 +211,11 @@ class ProjectsResource(SyncAPIResource):
     def list(
         self,
         *,
-        organization_id: str,
         include_entry_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         query: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -243,11 +246,11 @@ class ProjectsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "organization_id": organization_id,
                         "include_entry_counts": include_entry_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
+                        "organization_id": organization_id,
                         "query": query,
                         "sort": sort,
                     },
@@ -322,6 +325,92 @@ class ProjectsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
+        )
+
+    def increment_queries(
+        self,
+        project_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Increment the queries metric for a project.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return self._post(
+            f"/api/projects/{project_id}/increment_queries",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    def retrieve_analytics(
+        self,
+        project_id: str,
+        *,
+        end: int | NotGiven = NOT_GIVEN,
+        sme_limit: int | NotGiven = NOT_GIVEN,
+        start: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectRetrieveAnalyticsResponse:
+        """
+        Get Project Analytics Route
+
+        Args:
+          end: End timestamp in seconds since epoch
+
+          sme_limit: Limit the number of top SME contributors to return.
+
+          start: Start timestamp in seconds since epoch
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return self._get(
+            f"/api/projects/{project_id}/analytics/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "end": end,
+                        "sme_limit": sme_limit,
+                        "start": start,
+                    },
+                    project_retrieve_analytics_params.ProjectRetrieveAnalyticsParams,
+                ),
+            ),
+            cast_to=ProjectRetrieveAnalyticsResponse,
         )
 
 
@@ -480,11 +569,11 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        organization_id: str,
         include_entry_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         query: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -515,11 +604,11 @@ class AsyncProjectsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "organization_id": organization_id,
                         "include_entry_counts": include_entry_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
+                        "organization_id": organization_id,
                         "query": query,
                         "sort": sort,
                     },
@@ -596,6 +685,92 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def increment_queries(
+        self,
+        project_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Increment the queries metric for a project.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return await self._post(
+            f"/api/projects/{project_id}/increment_queries",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    async def retrieve_analytics(
+        self,
+        project_id: str,
+        *,
+        end: int | NotGiven = NOT_GIVEN,
+        sme_limit: int | NotGiven = NOT_GIVEN,
+        start: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectRetrieveAnalyticsResponse:
+        """
+        Get Project Analytics Route
+
+        Args:
+          end: End timestamp in seconds since epoch
+
+          sme_limit: Limit the number of top SME contributors to return.
+
+          start: Start timestamp in seconds since epoch
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return await self._get(
+            f"/api/projects/{project_id}/analytics/",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "end": end,
+                        "sme_limit": sme_limit,
+                        "start": start,
+                    },
+                    project_retrieve_analytics_params.ProjectRetrieveAnalyticsParams,
+                ),
+            ),
+            cast_to=ProjectRetrieveAnalyticsResponse,
+        )
+
 
 class ProjectsResourceWithRawResponse:
     def __init__(self, projects: ProjectsResource) -> None:
@@ -618,6 +793,12 @@ class ProjectsResourceWithRawResponse:
         )
         self.export = to_raw_response_wrapper(
             projects.export,
+        )
+        self.increment_queries = to_raw_response_wrapper(
+            projects.increment_queries,
+        )
+        self.retrieve_analytics = to_raw_response_wrapper(
+            projects.retrieve_analytics,
         )
 
     @cached_property
@@ -655,6 +836,12 @@ class AsyncProjectsResourceWithRawResponse:
         self.export = async_to_raw_response_wrapper(
             projects.export,
         )
+        self.increment_queries = async_to_raw_response_wrapper(
+            projects.increment_queries,
+        )
+        self.retrieve_analytics = async_to_raw_response_wrapper(
+            projects.retrieve_analytics,
+        )
 
     @cached_property
     def access_keys(self) -> AsyncAccessKeysResourceWithRawResponse:
@@ -691,6 +878,12 @@ class ProjectsResourceWithStreamingResponse:
         self.export = to_streamed_response_wrapper(
             projects.export,
         )
+        self.increment_queries = to_streamed_response_wrapper(
+            projects.increment_queries,
+        )
+        self.retrieve_analytics = to_streamed_response_wrapper(
+            projects.retrieve_analytics,
+        )
 
     @cached_property
     def access_keys(self) -> AccessKeysResourceWithStreamingResponse:
@@ -726,6 +919,12 @@ class AsyncProjectsResourceWithStreamingResponse:
         )
         self.export = async_to_streamed_response_wrapper(
             projects.export,
+        )
+        self.increment_queries = async_to_streamed_response_wrapper(
+            projects.increment_queries,
+        )
+        self.retrieve_analytics = async_to_streamed_response_wrapper(
+            projects.retrieve_analytics,
         )
 
     @cached_property

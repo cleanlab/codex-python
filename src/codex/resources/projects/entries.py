@@ -7,11 +7,7 @@ from typing import Iterable, Optional
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ..._utils import (
-    maybe_transform,
-    strip_not_given,
-    async_maybe_transform,
-)
+from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -21,9 +17,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.projects import entry_query_params, entry_create_params, entry_update_params
+from ...types.projects import entry_query_params, entry_create_params, entry_update_params, entry_notify_sme_params
 from ...types.projects.entry import Entry
 from ...types.projects.entry_query_response import EntryQueryResponse
+from ...types.projects.entry_notify_sme_response import EntryNotifySmeResponse
 
 __all__ = ["EntriesResource", "AsyncEntriesResource"]
 
@@ -229,6 +226,92 @@ class EntriesResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def notify_sme(
+        self,
+        entry_id: str,
+        *,
+        project_id: str,
+        email: str,
+        view_context: entry_notify_sme_params.ViewContext,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EntryNotifySmeResponse:
+        """
+        Notify a subject matter expert to review and answer a specific entry.
+
+        Returns: SMENotificationResponse with status and notification details
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
+        return self._post(
+            f"/api/projects/{project_id}/entries/{entry_id}/notifications",
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "view_context": view_context,
+                },
+                entry_notify_sme_params.EntryNotifySmeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EntryNotifySmeResponse,
+        )
+
+    def publish_draft_answer(
+        self,
+        entry_id: str,
+        *,
+        project_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Entry:
+        """Promote a draft answer to a published answer for a knowledge entry.
+
+        This always
+        results in the entry's draft answer being removed. If the entry already has a
+        published answer, it will be overwritten and permanently lost.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
+        return self._put(
+            f"/api/projects/{project_id}/entries/{entry_id}/publish_draft_answer",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entry,
+        )
+
     def query(
         self,
         project_id: str,
@@ -289,6 +372,45 @@ class EntriesResource(SyncAPIResource):
                 query=maybe_transform({"use_llm_matching": use_llm_matching}, entry_query_params.EntryQueryParams),
             ),
             cast_to=EntryQueryResponse,
+        )
+
+    def unpublish_answer(
+        self,
+        entry_id: str,
+        *,
+        project_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Entry:
+        """Unpublish an answer for a knowledge entry.
+
+        This always results in the entry's
+        answer being removed. If the entry does not already have a draft answer, the
+        current answer will be retained as the draft answer.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
+        return self._put(
+            f"/api/projects/{project_id}/entries/{entry_id}/unpublish_answer",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entry,
         )
 
 
@@ -493,6 +615,92 @@ class AsyncEntriesResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def notify_sme(
+        self,
+        entry_id: str,
+        *,
+        project_id: str,
+        email: str,
+        view_context: entry_notify_sme_params.ViewContext,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EntryNotifySmeResponse:
+        """
+        Notify a subject matter expert to review and answer a specific entry.
+
+        Returns: SMENotificationResponse with status and notification details
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
+        return await self._post(
+            f"/api/projects/{project_id}/entries/{entry_id}/notifications",
+            body=await async_maybe_transform(
+                {
+                    "email": email,
+                    "view_context": view_context,
+                },
+                entry_notify_sme_params.EntryNotifySmeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EntryNotifySmeResponse,
+        )
+
+    async def publish_draft_answer(
+        self,
+        entry_id: str,
+        *,
+        project_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Entry:
+        """Promote a draft answer to a published answer for a knowledge entry.
+
+        This always
+        results in the entry's draft answer being removed. If the entry already has a
+        published answer, it will be overwritten and permanently lost.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
+        return await self._put(
+            f"/api/projects/{project_id}/entries/{entry_id}/publish_draft_answer",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entry,
+        )
+
     async def query(
         self,
         project_id: str,
@@ -557,6 +765,45 @@ class AsyncEntriesResource(AsyncAPIResource):
             cast_to=EntryQueryResponse,
         )
 
+    async def unpublish_answer(
+        self,
+        entry_id: str,
+        *,
+        project_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Entry:
+        """Unpublish an answer for a knowledge entry.
+
+        This always results in the entry's
+        answer being removed. If the entry does not already have a draft answer, the
+        current answer will be retained as the draft answer.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not entry_id:
+            raise ValueError(f"Expected a non-empty value for `entry_id` but received {entry_id!r}")
+        return await self._put(
+            f"/api/projects/{project_id}/entries/{entry_id}/unpublish_answer",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Entry,
+        )
+
 
 class EntriesResourceWithRawResponse:
     def __init__(self, entries: EntriesResource) -> None:
@@ -574,8 +821,17 @@ class EntriesResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             entries.delete,
         )
+        self.notify_sme = to_raw_response_wrapper(
+            entries.notify_sme,
+        )
+        self.publish_draft_answer = to_raw_response_wrapper(
+            entries.publish_draft_answer,
+        )
         self.query = to_raw_response_wrapper(
             entries.query,
+        )
+        self.unpublish_answer = to_raw_response_wrapper(
+            entries.unpublish_answer,
         )
 
 
@@ -595,8 +851,17 @@ class AsyncEntriesResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             entries.delete,
         )
+        self.notify_sme = async_to_raw_response_wrapper(
+            entries.notify_sme,
+        )
+        self.publish_draft_answer = async_to_raw_response_wrapper(
+            entries.publish_draft_answer,
+        )
         self.query = async_to_raw_response_wrapper(
             entries.query,
+        )
+        self.unpublish_answer = async_to_raw_response_wrapper(
+            entries.unpublish_answer,
         )
 
 
@@ -616,8 +881,17 @@ class EntriesResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             entries.delete,
         )
+        self.notify_sme = to_streamed_response_wrapper(
+            entries.notify_sme,
+        )
+        self.publish_draft_answer = to_streamed_response_wrapper(
+            entries.publish_draft_answer,
+        )
         self.query = to_streamed_response_wrapper(
             entries.query,
+        )
+        self.unpublish_answer = to_streamed_response_wrapper(
+            entries.unpublish_answer,
         )
 
 
@@ -637,6 +911,15 @@ class AsyncEntriesResourceWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             entries.delete,
         )
+        self.notify_sme = async_to_streamed_response_wrapper(
+            entries.notify_sme,
+        )
+        self.publish_draft_answer = async_to_streamed_response_wrapper(
+            entries.publish_draft_answer,
+        )
         self.query = async_to_streamed_response_wrapper(
             entries.query,
+        )
+        self.unpublish_answer = async_to_streamed_response_wrapper(
+            entries.unpublish_answer,
         )

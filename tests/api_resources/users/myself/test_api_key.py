@@ -8,9 +8,8 @@ from typing import Any, cast
 import pytest
 
 from codex import Codex, AsyncCodex
-from codex.types import User
 from tests.utils import assert_matches_type
-from codex.types.users import UserSchema
+from codex.types.users import UserSchema, UserSchemaPublic
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +21,7 @@ class TestAPIKey:
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         api_key = client.users.myself.api_key.retrieve()
-        assert_matches_type(User, api_key, path=["response"])
+        assert_matches_type(UserSchemaPublic, api_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -32,7 +31,7 @@ class TestAPIKey:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         api_key = response.parse()
-        assert_matches_type(User, api_key, path=["response"])
+        assert_matches_type(UserSchemaPublic, api_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -42,7 +41,7 @@ class TestAPIKey:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             api_key = response.parse()
-            assert_matches_type(User, api_key, path=["response"])
+            assert_matches_type(UserSchemaPublic, api_key, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -82,7 +81,7 @@ class TestAsyncAPIKey:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         api_key = await async_client.users.myself.api_key.retrieve()
-        assert_matches_type(User, api_key, path=["response"])
+        assert_matches_type(UserSchemaPublic, api_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -92,7 +91,7 @@ class TestAsyncAPIKey:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         api_key = await response.parse()
-        assert_matches_type(User, api_key, path=["response"])
+        assert_matches_type(UserSchemaPublic, api_key, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -102,7 +101,7 @@ class TestAsyncAPIKey:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             api_key = await response.parse()
-            assert_matches_type(User, api_key, path=["response"])
+            assert_matches_type(UserSchemaPublic, api_key, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

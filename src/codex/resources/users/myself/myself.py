@@ -21,7 +21,6 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.user import User
 from .organizations import (
     OrganizationsResource,
     AsyncOrganizationsResource,
@@ -31,6 +30,7 @@ from .organizations import (
     AsyncOrganizationsResourceWithStreamingResponse,
 )
 from ...._base_client import make_request_options
+from ....types.users.user_schema_public import UserSchemaPublic
 
 __all__ = ["MyselfResource", "AsyncMyselfResource"]
 
@@ -72,14 +72,14 @@ class MyselfResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> User:
+    ) -> UserSchemaPublic:
         """Get user info for frontend."""
         return self._get(
             "/api/users/myself",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=User,
+            cast_to=UserSchemaPublic,
         )
 
 
@@ -120,14 +120,14 @@ class AsyncMyselfResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> User:
+    ) -> UserSchemaPublic:
         """Get user info for frontend."""
         return await self._get(
             "/api/users/myself",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=User,
+            cast_to=UserSchemaPublic,
         )
 
 

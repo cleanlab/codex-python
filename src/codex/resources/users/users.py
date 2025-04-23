@@ -9,10 +9,7 @@ import httpx
 
 from ...types import user_activate_account_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -21,7 +18,6 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.user import User
 from .verification import (
     VerificationResource,
     AsyncVerificationResource,
@@ -39,6 +35,7 @@ from .myself.myself import (
     AsyncMyselfResourceWithStreamingResponse,
 )
 from ..._base_client import make_request_options
+from ...types.users.user_schema_public import UserSchemaPublic
 
 __all__ = ["UsersResource", "AsyncUsersResource"]
 
@@ -87,7 +84,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> User:
+    ) -> UserSchemaPublic:
         """
         Activate an authenticated user's account
 
@@ -117,7 +114,7 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=User,
+            cast_to=UserSchemaPublic,
         )
 
 
@@ -165,7 +162,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> User:
+    ) -> UserSchemaPublic:
         """
         Activate an authenticated user's account
 
@@ -195,7 +192,7 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=User,
+            cast_to=UserSchemaPublic,
         )
 
 

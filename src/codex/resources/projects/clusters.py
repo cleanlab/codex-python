@@ -50,7 +50,8 @@ class ClustersResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful"]] | NotGiven = NOT_GIVEN,
+        eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query"]]
+        | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -164,7 +165,8 @@ class AsyncClustersResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful"]] | NotGiven = NOT_GIVEN,
+        eval_issue_types: List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query"]]
+        | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
