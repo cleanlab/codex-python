@@ -9,6 +9,7 @@ __all__ = [
     "AnswersPublished",
     "AnswersPublishedAnswersByAuthor",
     "BadResponses",
+    "BadResponsesResponsesByType",
     "Queries",
 ]
 
@@ -25,8 +26,14 @@ class AnswersPublished(BaseModel):
     answers_by_author: List[AnswersPublishedAnswersByAuthor]
 
 
+class BadResponsesResponsesByType(BaseModel):
+    num_prevented: int
+
+    total: int
+
+
 class BadResponses(BaseModel):
-    responses_by_type: Dict[str, int]
+    responses_by_type: Dict[str, BadResponsesResponsesByType]
 
     total: int
 
