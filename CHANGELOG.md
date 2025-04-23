@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.1.0-alpha.17 (2025-04-23)
+
+Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)
+
+### Features
+
+* **api:** add proj analytics endpoint ([ae79a63](https://github.com/cleanlab/codex-python/commit/ae79a63eb48beb6c4c72fd99e39c8de37915e028))
+* **api:** add project increment_queries and other recent endpoints ([5bf31f7](https://github.com/cleanlab/codex-python/commit/5bf31f74b6008c9bda7b4ec290b1216a51ef9d1f))
+* **api:** add project increment_queries and other recent endpoints ([e81cc3d](https://github.com/cleanlab/codex-python/commit/e81cc3d451c7c8d163c0b80d983140506a0adb66))
+* **api:** add project increment_queries and other recent endpoints ([b038fbe](https://github.com/cleanlab/codex-python/commit/b038fbe3e90f3096b0913256db9e31ca52cd4001))
+* **api:** api update ([ed0b337](https://github.com/cleanlab/codex-python/commit/ed0b337167c713bebd54c21fe587ee05c57a90d4))
+* **api:** api update ([3f85757](https://github.com/cleanlab/codex-python/commit/3f857575176d200a639880dfa7e60e3a9949750c))
+* **api:** api update ([4f39e46](https://github.com/cleanlab/codex-python/commit/4f39e46167b88a0c7198bdd8ad7d31bf118d485c))
+
+
+### Bug Fixes
+
+* **pydantic v1:** more robust ModelField.annotation check ([2db34b6](https://github.com/cleanlab/codex-python/commit/2db34b6bcbd0b62c6474146d50c259244f13f84f))
+
+
+### Chores
+
+* **ci:** add timeout thresholds for CI jobs ([bcc2ed0](https://github.com/cleanlab/codex-python/commit/bcc2ed013f1e88ac4f97bdb0dc7e47364276e182))
+* **internal:** fix list file params ([2e9cf89](https://github.com/cleanlab/codex-python/commit/2e9cf89c75d12ed44ace20998aa7245a8b241922))
+* **internal:** import reformatting ([bcf89d2](https://github.com/cleanlab/codex-python/commit/bcf89d29f760b4eb2e9b7534034adfc28582ea03))
+* **internal:** refactor retries to not use recursion ([2f3a24a](https://github.com/cleanlab/codex-python/commit/2f3a24a40294e21f2e3d9e9464796750ff25b51e))
+* **internal:** update models test ([444cd03](https://github.com/cleanlab/codex-python/commit/444cd038fc03a545fc2da0a6e5ab14ea84102408))
+* **internal:** version bump ([03cd933](https://github.com/cleanlab/codex-python/commit/03cd93334de3db9beea06ae0f62bcb0ab61466a4))
+* **internal:** version bump ([88821c7](https://github.com/cleanlab/codex-python/commit/88821c710de290b37a6dbc9a81ef0a1cc396db62))
+
 ## 0.1.0-alpha.16 (2025-04-18)
 
 Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
