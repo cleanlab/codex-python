@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.18 (2025-04-24)
+
+Full Changelog: [v0.1.0-alpha.17...v0.1.0-alpha.18](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.17...v0.1.0-alpha.18)
+
+### Features
+
+* **api:** api update ([78f5727](https://github.com/cleanlab/codex-python/commit/78f5727b34cd29fcae1fb3c84f78f202fb68cd8a))
+* **api:** api update ([1472e6f](https://github.com/cleanlab/codex-python/commit/1472e6f83fe738c01e33e34d9eb6c7ec906d4ecc))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([60ee0e2](https://github.com/cleanlab/codex-python/commit/60ee0e200415cc8c7d7a3ef21812ec0fd02c6821))
+* **ci:** only use depot for staging repos ([3f37e38](https://github.com/cleanlab/codex-python/commit/3f37e38210905a7bccc49779dfe2fef065b49ccd))
+* **internal:** codegen related update ([a19531f](https://github.com/cleanlab/codex-python/commit/a19531fbd2d2c81db2ff7accdd4599ecc82995ce))
+* **internal:** minor formatting changes ([379fc4f](https://github.com/cleanlab/codex-python/commit/379fc4f90da430329961e70bdbcf06e09330585d))
+* **internal:** version bump ([376681a](https://github.com/cleanlab/codex-python/commit/376681a8589de089ec2db967f23ee19a68f997e5))
+
 ## 0.1.0-alpha.17 (2025-04-23)
 
 Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)
