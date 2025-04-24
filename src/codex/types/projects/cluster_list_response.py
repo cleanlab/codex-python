@@ -9,14 +9,48 @@ from ..._models import BaseModel
 __all__ = [
     "ClusterListResponse",
     "ManagedMetadata",
+    "ManagedMetadataContentStructureScores",
     "ManagedMetadataContextSufficiency",
+    "ManagedMetadataHTMLFormatScores",
     "ManagedMetadataQueryEaseCustomized",
     "ManagedMetadataResponseHelpfulness",
     "ManagedMetadataTrustworthiness",
 ]
 
 
+class ManagedMetadataContentStructureScores(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
 class ManagedMetadataContextSufficiency(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
+class ManagedMetadataHTMLFormatScores(BaseModel):
     average: Optional[float] = None
     """The average of all scores."""
 
@@ -93,12 +127,18 @@ class ManagedMetadata(BaseModel):
     latest_location: Optional[str] = None
     """The most recent location string."""
 
+    content_structure_scores: Optional[ManagedMetadataContentStructureScores] = None
+    """Holds a list of scores and computes aggregate statistics."""
+
     context_sufficiency: Optional[ManagedMetadataContextSufficiency] = None
     """Holds a list of scores and computes aggregate statistics."""
 
     contexts: Optional[List[str]] = None
 
     entry_points: Optional[List[str]] = None
+
+    html_format_scores: Optional[ManagedMetadataHTMLFormatScores] = None
+    """Holds a list of scores and computes aggregate statistics."""
 
     llm_responses: Optional[List[str]] = None
 
@@ -136,6 +176,8 @@ class ClusterListResponse(BaseModel):
 
     client_query_metadata: Optional[List[object]] = None
 
+    content_structure_score: Optional[float] = None
+
     draft_answer: Optional[str] = None
 
     draft_answer_last_edited: Optional[datetime] = None
@@ -146,5 +188,7 @@ class ClusterListResponse(BaseModel):
 
     frequency_count: Optional[int] = None
     """number of times the entry matched for a /query request"""
+
+    html_format_score: Optional[float] = None
 
     representative_entry_id: Optional[str] = None

@@ -365,7 +365,6 @@ class ProjectsResource(SyncAPIResource):
         project_id: str,
         *,
         end: int | NotGiven = NOT_GIVEN,
-        sme_limit: int | NotGiven = NOT_GIVEN,
         start: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -379,8 +378,6 @@ class ProjectsResource(SyncAPIResource):
 
         Args:
           end: End timestamp in seconds since epoch
-
-          sme_limit: Limit the number of top SME contributors to return.
 
           start: Start timestamp in seconds since epoch
 
@@ -404,7 +401,6 @@ class ProjectsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "end": end,
-                        "sme_limit": sme_limit,
                         "start": start,
                     },
                     project_retrieve_analytics_params.ProjectRetrieveAnalyticsParams,
@@ -723,7 +719,6 @@ class AsyncProjectsResource(AsyncAPIResource):
         project_id: str,
         *,
         end: int | NotGiven = NOT_GIVEN,
-        sme_limit: int | NotGiven = NOT_GIVEN,
         start: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -737,8 +732,6 @@ class AsyncProjectsResource(AsyncAPIResource):
 
         Args:
           end: End timestamp in seconds since epoch
-
-          sme_limit: Limit the number of top SME contributors to return.
 
           start: Start timestamp in seconds since epoch
 
@@ -762,7 +755,6 @@ class AsyncProjectsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "end": end,
-                        "sme_limit": sme_limit,
                         "start": start,
                     },
                     project_retrieve_analytics_params.ProjectRetrieveAnalyticsParams,

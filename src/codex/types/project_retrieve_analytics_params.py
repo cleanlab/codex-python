@@ -11,8 +11,5 @@ class ProjectRetrieveAnalyticsParams(TypedDict, total=False):
     end: int
     """End timestamp in seconds since epoch"""
 
-    sme_limit: int
-    """Limit the number of top SME contributors to return."""
-
     start: int
     """Start timestamp in seconds since epoch"""

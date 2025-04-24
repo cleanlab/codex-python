@@ -374,7 +374,6 @@ class TestProjects:
         project = client.projects.retrieve_analytics(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=0,
-            sme_limit=1,
             start=0,
         )
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
@@ -769,7 +768,6 @@ class TestAsyncProjects:
         project = await async_client.projects.retrieve_analytics(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end=0,
-            sme_limit=1,
             start=0,
         )
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
