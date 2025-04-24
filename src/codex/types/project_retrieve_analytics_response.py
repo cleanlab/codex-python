@@ -17,6 +17,8 @@ __all__ = [
 class AnswersPublishedAnswersByAuthor(BaseModel):
     answers_published: int
 
+    email: str
+
     name: str
 
     user_id: str

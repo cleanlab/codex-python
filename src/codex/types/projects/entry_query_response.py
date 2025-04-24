@@ -8,14 +8,48 @@ __all__ = [
     "EntryQueryResponse",
     "Entry",
     "EntryManagedMetadata",
+    "EntryManagedMetadataContentStructureScores",
     "EntryManagedMetadataContextSufficiency",
+    "EntryManagedMetadataHTMLFormatScores",
     "EntryManagedMetadataQueryEaseCustomized",
     "EntryManagedMetadataResponseHelpfulness",
     "EntryManagedMetadataTrustworthiness",
 ]
 
 
+class EntryManagedMetadataContentStructureScores(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
 class EntryManagedMetadataContextSufficiency(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
+class EntryManagedMetadataHTMLFormatScores(BaseModel):
     average: Optional[float] = None
     """The average of all scores."""
 
@@ -92,12 +126,18 @@ class EntryManagedMetadata(BaseModel):
     latest_location: Optional[str] = None
     """The most recent location string."""
 
+    content_structure_scores: Optional[EntryManagedMetadataContentStructureScores] = None
+    """Holds a list of scores and computes aggregate statistics."""
+
     context_sufficiency: Optional[EntryManagedMetadataContextSufficiency] = None
     """Holds a list of scores and computes aggregate statistics."""
 
     contexts: Optional[List[str]] = None
 
     entry_points: Optional[List[str]] = None
+
+    html_format_scores: Optional[EntryManagedMetadataHTMLFormatScores] = None
+    """Holds a list of scores and computes aggregate statistics."""
 
     llm_responses: Optional[List[str]] = None
 
