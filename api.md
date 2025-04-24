@@ -153,7 +153,7 @@ Methods:
 - <code title="get /api/projects/">client.projects.<a href="./src/codex/resources/projects/projects.py">list</a>(\*\*<a href="src/codex/types/project_list_params.py">params</a>) -> <a href="./src/codex/types/project_list_response.py">ProjectListResponse</a></code>
 - <code title="delete /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">delete</a>(project_id) -> None</code>
 - <code title="get /api/projects/{project_id}/export">client.projects.<a href="./src/codex/resources/projects/projects.py">export</a>(project_id) -> <a href="./src/codex/types/project_export_response.py">object</a></code>
-- <code title="post /api/projects/{project_id}/increment_queries">client.projects.<a href="./src/codex/resources/projects/projects.py">increment_queries</a>(project_id) -> <a href="./src/codex/types/project_increment_queries_response.py">object</a></code>
+- <code title="post /api/projects/{project_id}/increment_queries">client.projects.<a href="./src/codex/resources/projects/projects.py">increment_queries</a>(project_id, \*\*<a href="src/codex/types/project_increment_queries_params.py">params</a>) -> <a href="./src/codex/types/project_increment_queries_response.py">object</a></code>
 - <code title="get /api/projects/{project_id}/analytics/">client.projects.<a href="./src/codex/resources/projects/projects.py">retrieve_analytics</a>(project_id, \*\*<a href="src/codex/types/project_retrieve_analytics_params.py">params</a>) -> <a href="./src/codex/types/project_retrieve_analytics_response.py">ProjectRetrieveAnalyticsResponse</a></code>
 
 ## AccessKeys

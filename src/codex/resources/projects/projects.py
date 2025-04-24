@@ -11,6 +11,7 @@ from ...types import (
     project_list_params,
     project_create_params,
     project_update_params,
+    project_increment_queries_params,
     project_retrieve_analytics_params,
 )
 from .entries import (
@@ -331,6 +332,7 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
+        count: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -355,7 +357,11 @@ class ProjectsResource(SyncAPIResource):
         return self._post(
             f"/api/projects/{project_id}/increment_queries",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"count": count}, project_increment_queries_params.ProjectIncrementQueriesParams),
             ),
             cast_to=object,
         )
@@ -685,6 +691,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
+        count: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -709,7 +716,13 @@ class AsyncProjectsResource(AsyncAPIResource):
         return await self._post(
             f"/api/projects/{project_id}/increment_queries",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"count": count}, project_increment_queries_params.ProjectIncrementQueriesParams
+                ),
             ),
             cast_to=object,
         )
