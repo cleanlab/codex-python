@@ -14,7 +14,7 @@ class UserSchemaPublic(BaseModel):
 
     email: str
 
-    email_verified: Optional[bool] = None
+    email_verified: bool
 
     first_name: Optional[str] = None
 
