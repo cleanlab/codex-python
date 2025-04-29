@@ -319,6 +319,7 @@ class EntriesResource(SyncAPIResource):
         question: str,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
         client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
+        query_metadata: Optional[entry_query_params.QueryMetadata] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -334,6 +335,10 @@ class EntriesResource(SyncAPIResource):
         Query Entries Route
 
         Args:
+          client_metadata: Deprecated: Use query_metadata instead
+
+          query_metadata: Optional logging data that can be provided by the client.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -361,6 +366,7 @@ class EntriesResource(SyncAPIResource):
                 {
                     "question": question,
                     "client_metadata": client_metadata,
+                    "query_metadata": query_metadata,
                 },
                 entry_query_params.EntryQueryParams,
             ),
@@ -708,6 +714,7 @@ class AsyncEntriesResource(AsyncAPIResource):
         question: str,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
         client_metadata: Optional[object] | NotGiven = NOT_GIVEN,
+        query_metadata: Optional[entry_query_params.QueryMetadata] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -723,6 +730,10 @@ class AsyncEntriesResource(AsyncAPIResource):
         Query Entries Route
 
         Args:
+          client_metadata: Deprecated: Use query_metadata instead
+
+          query_metadata: Optional logging data that can be provided by the client.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -750,6 +761,7 @@ class AsyncEntriesResource(AsyncAPIResource):
                 {
                     "question": question,
                     "client_metadata": client_metadata,
+                    "query_metadata": query_metadata,
                 },
                 entry_query_params.EntryQueryParams,
             ),
