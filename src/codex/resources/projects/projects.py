@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -11,6 +11,8 @@ from ...types import (
     project_list_params,
     project_create_params,
     project_update_params,
+    project_validate_params,
+    project_increment_queries_params,
     project_retrieve_analytics_params,
 )
 from .entries import (
@@ -22,7 +24,7 @@ from .entries import (
     AsyncEntriesResourceWithStreamingResponse,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
 from .clusters import (
     ClustersResource,
     AsyncClustersResource,
@@ -51,6 +53,7 @@ from ..._base_client import make_request_options
 from ...types.project_list_response import ProjectListResponse
 from ...types.project_return_schema import ProjectReturnSchema
 from ...types.project_retrieve_response import ProjectRetrieveResponse
+from ...types.project_validate_response import ProjectValidateResponse
 from ...types.project_retrieve_analytics_response import ProjectRetrieveAnalyticsResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
@@ -331,6 +334,7 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
+        count: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -355,7 +359,11 @@ class ProjectsResource(SyncAPIResource):
         return self._post(
             f"/api/projects/{project_id}/increment_queries",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"count": count}, project_increment_queries_params.ProjectIncrementQueriesParams),
             ),
             cast_to=object,
         )
@@ -407,6 +415,186 @@ class ProjectsResource(SyncAPIResource):
                 ),
             ),
             cast_to=ProjectRetrieveAnalyticsResponse,
+        )
+
+    def validate(
+        self,
+        project_id: str,
+        *,
+        context: str,
+        prompt: str,
+        query: str,
+        response: str,
+        use_llm_matching: bool | NotGiven = NOT_GIVEN,
+        bad_response_thresholds: project_validate_params.BadResponseThresholds | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
+        eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
+        options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
+        quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
+        task: Optional[str] | NotGiven = NOT_GIVEN,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectValidateResponse:
+        """
+        Evaluate whether a response, given the provided query and context, is
+        potentially bad. If the response is flagged as bad, a lookup is performed to
+        find an alternate expert answer. If there is no expert answer available, this
+        query will be recorded in the project for SMEs to answer.
+
+        Args:
+          custom_metadata: Arbitrary metadata supplied by the user/system
+
+          eval_scores: Evaluation scores to use for flagging a response as bad. If not provided, TLM
+              will be used to generate scores.
+
+          options: Typed dict of advanced configuration options for the Trustworthy Language Model.
+              Many of these configurations are determined by the quality preset selected
+              (learn about quality presets in the TLM [initialization method](./#class-tlm)).
+              Specifying TLMOptions values directly overrides any default values set from the
+              quality preset.
+
+              For all options described below, higher settings will lead to longer runtimes
+              and may consume more tokens internally. You may not be able to run long prompts
+              (or prompts with long responses) in your account, unless your token/rate limits
+              are increased. If you hit token limit issues, try lower/less expensive
+              TLMOptions to be able to run longer prompts/responses, or contact Cleanlab to
+              increase your limits.
+
+              The default values corresponding to each quality preset are:
+
+              - **best:** `num_candidate_responses` = 6, `num_consistency_samples` = 8,
+                `use_self_reflection` = True. This preset improves LLM responses.
+              - **high:** `num_candidate_responses` = 4, `num_consistency_samples` = 8,
+                `use_self_reflection` = True. This preset improves LLM responses.
+              - **medium:** `num_candidate_responses` = 1, `num_consistency_samples` = 8,
+                `use_self_reflection` = True.
+              - **low:** `num_candidate_responses` = 1, `num_consistency_samples` = 4,
+                `use_self_reflection` = True.
+              - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
+                `use_self_reflection` = False. When using `get_trustworthiness_score()` on
+                "base" preset, a cheaper self-reflection will be used to compute the
+                trustworthiness score.
+
+              By default, the TLM uses the "medium" quality preset. The default base LLM
+              `model` used is "gpt-4o-mini", and `max_tokens` is 512 for all quality presets.
+              You can set custom values for these arguments regardless of the quality preset
+              specified.
+
+              Args: model ({"gpt-4o-mini", "gpt-4o", "gpt-4.1", "gpt-4.1-mini",
+              "gpt-4.1-nano", "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "gpt-4",
+              "gpt-4.5-preview", "gpt-3.5-turbo-16k", "claude-3.7-sonnet",
+              "claude-3.5-sonnet-v2", "claude-3.5-sonnet", "claude-3.5-haiku",
+              "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"}, default =
+              "gpt-4o-mini"): Underlying base LLM to use (better models yield better results,
+              faster models yield faster/cheaper results). - Models still in beta: "o3", "o1",
+              "o4-mini", "o3-mini", "o1-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
+              "gpt-4.5-preview", "claude-3.7-sonnet", "claude-3.5-sonnet-v2",
+              "claude-3.5-haiku", "nova-micro", "nova-lite", "nova-pro". - Recommended models
+              for accuracy: "gpt-4.1", "o4-mini", "o3", "claude-3.7-sonnet",
+              "claude-3.5-sonnet-v2". - Recommended models for low latency/costs:
+              "gpt-4.1-nano", "nova-micro".
+
+                  max_tokens (int, default = 512): the maximum number of tokens that can be generated in the TLM response (and in internal trustworthiness scoring).
+                  Higher values here may produce better (more reliable) TLM responses and trustworthiness scores, but at higher runtimes/costs.
+                  If you experience token/rate limit errors while using TLM, try lowering this number.
+                  For OpenAI models, this parameter must be between 64 and 4096. For Claude models, this parameter must be between 64 and 512.
+
+                  num_candidate_responses (int, default = 1): how many alternative candidate responses are internally generated in `TLM.prompt()`.
+                  `TLM.prompt()` scores the trustworthiness of each candidate response, and then returns the most trustworthy one.
+                  This parameter must be between 1 and 20. It has no effect on `TLM.score()`.
+                  Higher values here can produce more accurate responses from `TLM.prompt()`, but at higher runtimes/costs.
+                  When it is 1, `TLM.prompt()` simply returns a standard LLM response and does not attempt to auto-improve it.
+
+                  num_consistency_samples (int, default = 8): the amount of internal sampling to measure LLM response consistency, a factor affecting trustworthiness scoring.
+                  Must be between 0 and 20. Higher values produce more reliable TLM trustworthiness scores, but at higher runtimes/costs.
+                  Measuring consistency helps quantify the epistemic uncertainty associated with
+                  strange prompts or prompts that are too vague/open-ended to receive a clearly defined 'good' response.
+                  TLM measures consistency via the degree of contradiction between sampled responses that the model considers plausible.
+
+                  use_self_reflection (bool, default = `True`): whether the LLM is asked to reflect on the given response and directly evaluate correctness/confidence.
+                  Setting this False disables reflection and will reduce runtimes/costs, but potentially also the reliability of trustworthiness scores.
+                  Reflection helps quantify aleatoric uncertainty associated with challenging prompts
+                  and catches responses that are noticeably incorrect/bad upon further analysis.
+
+                  similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
+                  trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
+                  Supported similarity measures include: "semantic" (based on natural language inference),
+                  "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
+                  "code" (based on model-based analysis designed to compare code), "discrepancy" (based on model-based analysis of possible discrepancies),
+                  and "string" (based on character/word overlap). Set this to "string" for minimal runtimes/costs.
+
+                  reasoning_effort ({"none", "low", "medium", "high"}, default = "high"): how much internal LLM calls are allowed to reason (number of thinking tokens)
+                  when generating alternative possible responses and reflecting on responses during trustworthiness scoring.
+                  Higher reasoning efforts may yield more reliable TLM trustworthiness scores. Reduce this value to reduce runtimes/costs.
+
+                  log (list[str], default = []): optionally specify additional logs or metadata that TLM should return.
+                  For instance, include "explanation" here to get explanations of why a response is scored with low trustworthiness.
+
+                  custom_eval_criteria (list[dict[str, Any]], default = []): optionally specify custom evalution criteria beyond the built-in trustworthiness scoring.
+                  The expected input format is a list of dictionaries, where each dictionary has the following keys:
+                  - name: Name of the evaluation criteria.
+                  - criteria: Instructions specifying the evaluation criteria.
+
+          quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            f"/api/projects/{project_id}/validate",
+            body=maybe_transform(
+                {
+                    "context": context,
+                    "prompt": prompt,
+                    "query": query,
+                    "response": response,
+                    "bad_response_thresholds": bad_response_thresholds,
+                    "constrain_outputs": constrain_outputs,
+                    "custom_metadata": custom_metadata,
+                    "eval_scores": eval_scores,
+                    "options": options,
+                    "quality_preset": quality_preset,
+                    "task": task,
+                },
+                project_validate_params.ProjectValidateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"use_llm_matching": use_llm_matching}, project_validate_params.ProjectValidateParams
+                ),
+            ),
+            cast_to=ProjectValidateResponse,
         )
 
 
@@ -685,6 +873,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
+        count: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -709,7 +898,13 @@ class AsyncProjectsResource(AsyncAPIResource):
         return await self._post(
             f"/api/projects/{project_id}/increment_queries",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"count": count}, project_increment_queries_params.ProjectIncrementQueriesParams
+                ),
             ),
             cast_to=object,
         )
@@ -763,6 +958,186 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=ProjectRetrieveAnalyticsResponse,
         )
 
+    async def validate(
+        self,
+        project_id: str,
+        *,
+        context: str,
+        prompt: str,
+        query: str,
+        response: str,
+        use_llm_matching: bool | NotGiven = NOT_GIVEN,
+        bad_response_thresholds: project_validate_params.BadResponseThresholds | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
+        eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
+        options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
+        quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
+        task: Optional[str] | NotGiven = NOT_GIVEN,
+        x_client_library_version: str | NotGiven = NOT_GIVEN,
+        x_integration_type: str | NotGiven = NOT_GIVEN,
+        x_source: str | NotGiven = NOT_GIVEN,
+        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectValidateResponse:
+        """
+        Evaluate whether a response, given the provided query and context, is
+        potentially bad. If the response is flagged as bad, a lookup is performed to
+        find an alternate expert answer. If there is no expert answer available, this
+        query will be recorded in the project for SMEs to answer.
+
+        Args:
+          custom_metadata: Arbitrary metadata supplied by the user/system
+
+          eval_scores: Evaluation scores to use for flagging a response as bad. If not provided, TLM
+              will be used to generate scores.
+
+          options: Typed dict of advanced configuration options for the Trustworthy Language Model.
+              Many of these configurations are determined by the quality preset selected
+              (learn about quality presets in the TLM [initialization method](./#class-tlm)).
+              Specifying TLMOptions values directly overrides any default values set from the
+              quality preset.
+
+              For all options described below, higher settings will lead to longer runtimes
+              and may consume more tokens internally. You may not be able to run long prompts
+              (or prompts with long responses) in your account, unless your token/rate limits
+              are increased. If you hit token limit issues, try lower/less expensive
+              TLMOptions to be able to run longer prompts/responses, or contact Cleanlab to
+              increase your limits.
+
+              The default values corresponding to each quality preset are:
+
+              - **best:** `num_candidate_responses` = 6, `num_consistency_samples` = 8,
+                `use_self_reflection` = True. This preset improves LLM responses.
+              - **high:** `num_candidate_responses` = 4, `num_consistency_samples` = 8,
+                `use_self_reflection` = True. This preset improves LLM responses.
+              - **medium:** `num_candidate_responses` = 1, `num_consistency_samples` = 8,
+                `use_self_reflection` = True.
+              - **low:** `num_candidate_responses` = 1, `num_consistency_samples` = 4,
+                `use_self_reflection` = True.
+              - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
+                `use_self_reflection` = False. When using `get_trustworthiness_score()` on
+                "base" preset, a cheaper self-reflection will be used to compute the
+                trustworthiness score.
+
+              By default, the TLM uses the "medium" quality preset. The default base LLM
+              `model` used is "gpt-4o-mini", and `max_tokens` is 512 for all quality presets.
+              You can set custom values for these arguments regardless of the quality preset
+              specified.
+
+              Args: model ({"gpt-4o-mini", "gpt-4o", "gpt-4.1", "gpt-4.1-mini",
+              "gpt-4.1-nano", "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "gpt-4",
+              "gpt-4.5-preview", "gpt-3.5-turbo-16k", "claude-3.7-sonnet",
+              "claude-3.5-sonnet-v2", "claude-3.5-sonnet", "claude-3.5-haiku",
+              "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"}, default =
+              "gpt-4o-mini"): Underlying base LLM to use (better models yield better results,
+              faster models yield faster/cheaper results). - Models still in beta: "o3", "o1",
+              "o4-mini", "o3-mini", "o1-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
+              "gpt-4.5-preview", "claude-3.7-sonnet", "claude-3.5-sonnet-v2",
+              "claude-3.5-haiku", "nova-micro", "nova-lite", "nova-pro". - Recommended models
+              for accuracy: "gpt-4.1", "o4-mini", "o3", "claude-3.7-sonnet",
+              "claude-3.5-sonnet-v2". - Recommended models for low latency/costs:
+              "gpt-4.1-nano", "nova-micro".
+
+                  max_tokens (int, default = 512): the maximum number of tokens that can be generated in the TLM response (and in internal trustworthiness scoring).
+                  Higher values here may produce better (more reliable) TLM responses and trustworthiness scores, but at higher runtimes/costs.
+                  If you experience token/rate limit errors while using TLM, try lowering this number.
+                  For OpenAI models, this parameter must be between 64 and 4096. For Claude models, this parameter must be between 64 and 512.
+
+                  num_candidate_responses (int, default = 1): how many alternative candidate responses are internally generated in `TLM.prompt()`.
+                  `TLM.prompt()` scores the trustworthiness of each candidate response, and then returns the most trustworthy one.
+                  This parameter must be between 1 and 20. It has no effect on `TLM.score()`.
+                  Higher values here can produce more accurate responses from `TLM.prompt()`, but at higher runtimes/costs.
+                  When it is 1, `TLM.prompt()` simply returns a standard LLM response and does not attempt to auto-improve it.
+
+                  num_consistency_samples (int, default = 8): the amount of internal sampling to measure LLM response consistency, a factor affecting trustworthiness scoring.
+                  Must be between 0 and 20. Higher values produce more reliable TLM trustworthiness scores, but at higher runtimes/costs.
+                  Measuring consistency helps quantify the epistemic uncertainty associated with
+                  strange prompts or prompts that are too vague/open-ended to receive a clearly defined 'good' response.
+                  TLM measures consistency via the degree of contradiction between sampled responses that the model considers plausible.
+
+                  use_self_reflection (bool, default = `True`): whether the LLM is asked to reflect on the given response and directly evaluate correctness/confidence.
+                  Setting this False disables reflection and will reduce runtimes/costs, but potentially also the reliability of trustworthiness scores.
+                  Reflection helps quantify aleatoric uncertainty associated with challenging prompts
+                  and catches responses that are noticeably incorrect/bad upon further analysis.
+
+                  similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
+                  trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
+                  Supported similarity measures include: "semantic" (based on natural language inference),
+                  "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
+                  "code" (based on model-based analysis designed to compare code), "discrepancy" (based on model-based analysis of possible discrepancies),
+                  and "string" (based on character/word overlap). Set this to "string" for minimal runtimes/costs.
+
+                  reasoning_effort ({"none", "low", "medium", "high"}, default = "high"): how much internal LLM calls are allowed to reason (number of thinking tokens)
+                  when generating alternative possible responses and reflecting on responses during trustworthiness scoring.
+                  Higher reasoning efforts may yield more reliable TLM trustworthiness scores. Reduce this value to reduce runtimes/costs.
+
+                  log (list[str], default = []): optionally specify additional logs or metadata that TLM should return.
+                  For instance, include "explanation" here to get explanations of why a response is scored with low trustworthiness.
+
+                  custom_eval_criteria (list[dict[str, Any]], default = []): optionally specify custom evalution criteria beyond the built-in trustworthiness scoring.
+                  The expected input format is a list of dictionaries, where each dictionary has the following keys:
+                  - name: Name of the evaluation criteria.
+                  - criteria: Instructions specifying the evaluation criteria.
+
+          quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "x-client-library-version": x_client_library_version,
+                    "x-integration-type": x_integration_type,
+                    "x-source": x_source,
+                    "x-stainless-package-version": x_stainless_package_version,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            f"/api/projects/{project_id}/validate",
+            body=await async_maybe_transform(
+                {
+                    "context": context,
+                    "prompt": prompt,
+                    "query": query,
+                    "response": response,
+                    "bad_response_thresholds": bad_response_thresholds,
+                    "constrain_outputs": constrain_outputs,
+                    "custom_metadata": custom_metadata,
+                    "eval_scores": eval_scores,
+                    "options": options,
+                    "quality_preset": quality_preset,
+                    "task": task,
+                },
+                project_validate_params.ProjectValidateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"use_llm_matching": use_llm_matching}, project_validate_params.ProjectValidateParams
+                ),
+            ),
+            cast_to=ProjectValidateResponse,
+        )
+
 
 class ProjectsResourceWithRawResponse:
     def __init__(self, projects: ProjectsResource) -> None:
@@ -791,6 +1166,9 @@ class ProjectsResourceWithRawResponse:
         )
         self.retrieve_analytics = to_raw_response_wrapper(
             projects.retrieve_analytics,
+        )
+        self.validate = to_raw_response_wrapper(
+            projects.validate,
         )
 
     @cached_property
@@ -834,6 +1212,9 @@ class AsyncProjectsResourceWithRawResponse:
         self.retrieve_analytics = async_to_raw_response_wrapper(
             projects.retrieve_analytics,
         )
+        self.validate = async_to_raw_response_wrapper(
+            projects.validate,
+        )
 
     @cached_property
     def access_keys(self) -> AsyncAccessKeysResourceWithRawResponse:
@@ -876,6 +1257,9 @@ class ProjectsResourceWithStreamingResponse:
         self.retrieve_analytics = to_streamed_response_wrapper(
             projects.retrieve_analytics,
         )
+        self.validate = to_streamed_response_wrapper(
+            projects.validate,
+        )
 
     @cached_property
     def access_keys(self) -> AccessKeysResourceWithStreamingResponse:
@@ -917,6 +1301,9 @@ class AsyncProjectsResourceWithStreamingResponse:
         )
         self.retrieve_analytics = async_to_streamed_response_wrapper(
             projects.retrieve_analytics,
+        )
+        self.validate = async_to_streamed_response_wrapper(
+            projects.validate,
         )
 
     @cached_property

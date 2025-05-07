@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-alpha.19 (2025-05-07)
+
+Full Changelog: [v0.1.0-alpha.18...v0.1.0-alpha.19](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.18...v0.1.0-alpha.19)
+
+### Features
+
+* **api:** add validate endpoint ([099ac1b](https://github.com/cleanlab/codex-python/commit/099ac1b68ffc0cbfc5ce4bd23fd5f9899e0b64f9))
+* **api:** api update ([8e01ccd](https://github.com/cleanlab/codex-python/commit/8e01ccdc8e341d010e8989f30f4fd887effa1871))
+* **api:** api update ([61fdb7a](https://github.com/cleanlab/codex-python/commit/61fdb7aaaa6c2533ebcfdfe3c0aff31474e75d51))
+* **api:** api update ([a52c74a](https://github.com/cleanlab/codex-python/commit/a52c74a22fb720f10265021d057f34874f73846b))
+* **api:** api update ([6947764](https://github.com/cleanlab/codex-python/commit/69477646d7c8eff2bae01199949e4037771ba460))
+
 ## 0.1.0-alpha.18 (2025-04-24)
 
 Full Changelog: [v0.1.0-alpha.17...v0.1.0-alpha.18](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.17...v0.1.0-alpha.18)

@@ -2,16 +2,37 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing import Dict, List, Iterable, Optional
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
-__all__ = ["TlmPromptParams", "Options"]
+from .._utils import PropertyInfo
+
+__all__ = ["ProjectValidateParams", "BadResponseThresholds", "Options"]
 
 
-class TlmPromptParams(TypedDict, total=False):
+class ProjectValidateParams(TypedDict, total=False):
+    context: Required[str]
+
     prompt: Required[str]
 
+    query: Required[str]
+
+    response: Required[str]
+
+    use_llm_matching: bool
+
+    bad_response_thresholds: BadResponseThresholds
+
     constrain_outputs: Optional[List[str]]
+
+    custom_metadata: Optional[object]
+    """Arbitrary metadata supplied by the user/system"""
+
+    eval_scores: Optional[Dict[str, float]]
+    """Evaluation scores to use for flagging a response as bad.
+
+    If not provided, TLM will be used to generate scores.
+    """
 
     options: Optional[Options]
     """
@@ -108,6 +129,24 @@ class TlmPromptParams(TypedDict, total=False):
     """The quality preset to use for the TLM or Trustworthy RAG API."""
 
     task: Optional[str]
+
+    x_client_library_version: Annotated[str, PropertyInfo(alias="x-client-library-version")]
+
+    x_integration_type: Annotated[str, PropertyInfo(alias="x-integration-type")]
+
+    x_source: Annotated[str, PropertyInfo(alias="x-source")]
+
+    x_stainless_package_version: Annotated[str, PropertyInfo(alias="x-stainless-package-version")]
+
+
+class BadResponseThresholds(TypedDict, total=False):
+    context_sufficiency: Optional[float]
+
+    query_ease: Optional[float]
+
+    response_helpfulness: Optional[float]
+
+    trustworthiness: Optional[float]
 
 
 class Options(TypedDict, total=False):

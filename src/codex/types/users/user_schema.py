@@ -23,6 +23,8 @@ class UserSchema(BaseModel):
 
     email: str
 
+    email_verified: bool
+
     updated_at: datetime
 
     user_provided_company_name: Optional[str] = None

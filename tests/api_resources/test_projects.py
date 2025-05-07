@@ -12,6 +12,7 @@ from codex.types import (
     ProjectListResponse,
     ProjectReturnSchema,
     ProjectRetrieveResponse,
+    ProjectValidateResponse,
     ProjectRetrieveAnalyticsResponse,
 )
 from tests.utils import assert_matches_type
@@ -322,7 +323,16 @@ class TestProjects:
     @parametrize
     def test_method_increment_queries(self, client: Codex) -> None:
         project = client.projects.increment_queries(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(object, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_increment_queries_with_all_params(self, client: Codex) -> None:
+        project = client.projects.increment_queries(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            count=0,
         )
         assert_matches_type(object, project, path=["response"])
 
@@ -330,7 +340,7 @@ class TestProjects:
     @parametrize
     def test_raw_response_increment_queries(self, client: Codex) -> None:
         response = client.projects.with_raw_response.increment_queries(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -342,7 +352,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_increment_queries(self, client: Codex) -> None:
         with client.projects.with_streaming_response.increment_queries(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -357,7 +367,7 @@ class TestProjects:
     def test_path_params_increment_queries(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.with_raw_response.increment_queries(
-                "",
+                project_id="",
             )
 
     @pytest.mark.skip()
@@ -410,6 +420,103 @@ class TestProjects:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.with_raw_response.retrieve_analytics(
                 project_id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_validate(self, client: Codex) -> None:
+        project = client.projects.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+        )
+        assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_validate_with_all_params(self, client: Codex) -> None:
+        project = client.projects.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+            use_llm_matching=True,
+            bad_response_thresholds={
+                "context_sufficiency": 0,
+                "query_ease": 0,
+                "response_helpfulness": 0,
+                "trustworthiness": 0,
+            },
+            constrain_outputs=["string"],
+            custom_metadata={},
+            eval_scores={"foo": 0},
+            options={
+                "custom_eval_criteria": [{}],
+                "log": ["string"],
+                "max_tokens": 0,
+                "model": "model",
+                "num_candidate_responses": 0,
+                "num_consistency_samples": 0,
+                "reasoning_effort": "reasoning_effort",
+                "similarity_measure": "similarity_measure",
+                "use_self_reflection": True,
+            },
+            quality_preset="best",
+            task="task",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
+        )
+        assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_validate(self, client: Codex) -> None:
+        response = client.projects.with_raw_response.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_validate(self, client: Codex) -> None:
+        with client.projects.with_streaming_response.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_validate(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.validate(
+                project_id="",
+                context="context",
+                prompt="prompt",
+                query="query",
+                response="response",
             )
 
 
@@ -716,7 +823,16 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_increment_queries(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.increment_queries(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(object, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_increment_queries_with_all_params(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.increment_queries(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            count=0,
         )
         assert_matches_type(object, project, path=["response"])
 
@@ -724,7 +840,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_increment_queries(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.increment_queries(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -736,7 +852,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_increment_queries(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.increment_queries(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -751,7 +867,7 @@ class TestAsyncProjects:
     async def test_path_params_increment_queries(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.with_raw_response.increment_queries(
-                "",
+                project_id="",
             )
 
     @pytest.mark.skip()
@@ -804,4 +920,101 @@ class TestAsyncProjects:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.with_raw_response.retrieve_analytics(
                 project_id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_validate(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+        )
+        assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_validate_with_all_params(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+            use_llm_matching=True,
+            bad_response_thresholds={
+                "context_sufficiency": 0,
+                "query_ease": 0,
+                "response_helpfulness": 0,
+                "trustworthiness": 0,
+            },
+            constrain_outputs=["string"],
+            custom_metadata={},
+            eval_scores={"foo": 0},
+            options={
+                "custom_eval_criteria": [{}],
+                "log": ["string"],
+                "max_tokens": 0,
+                "model": "model",
+                "num_candidate_responses": 0,
+                "num_consistency_samples": 0,
+                "reasoning_effort": "reasoning_effort",
+                "similarity_measure": "similarity_measure",
+                "use_self_reflection": True,
+            },
+            quality_preset="best",
+            task="task",
+            x_client_library_version="x-client-library-version",
+            x_integration_type="x-integration-type",
+            x_source="x-source",
+            x_stainless_package_version="x-stainless-package-version",
+        )
+        assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_validate(self, async_client: AsyncCodex) -> None:
+        response = await async_client.projects.with_raw_response.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_validate(self, async_client: AsyncCodex) -> None:
+        async with async_client.projects.with_streaming_response.validate(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            prompt="prompt",
+            query="query",
+            response="response",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(ProjectValidateResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_validate(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.validate(
+                project_id="",
+                context="context",
+                prompt="prompt",
+                query="query",
+                response="response",
             )
