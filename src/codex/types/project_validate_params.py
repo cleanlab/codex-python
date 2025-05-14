@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["ProjectValidateParams", "BadResponseThresholds", "Options"]
+__all__ = ["ProjectValidateParams", "Options"]
 
 
 class ProjectValidateParams(TypedDict, total=False):
@@ -21,15 +21,19 @@ class ProjectValidateParams(TypedDict, total=False):
 
     use_llm_matching: bool
 
-    bad_response_thresholds: BadResponseThresholds
-
     constrain_outputs: Optional[List[str]]
+
+    custom_eval_thresholds: Optional[Dict[str, float]]
+    """Optional custom thresholds for specific evals.
+
+    Keys should match with the keys in the `eval_scores` dictionary.
+    """
 
     custom_metadata: Optional[object]
     """Arbitrary metadata supplied by the user/system"""
 
     eval_scores: Optional[Dict[str, float]]
-    """Evaluation scores to use for flagging a response as bad.
+    """Scores assessing different aspects of the RAG system.
 
     If not provided, TLM will be used to generate scores.
     """
@@ -137,16 +141,6 @@ class ProjectValidateParams(TypedDict, total=False):
     x_source: Annotated[str, PropertyInfo(alias="x-source")]
 
     x_stainless_package_version: Annotated[str, PropertyInfo(alias="x-stainless-package-version")]
-
-
-class BadResponseThresholds(TypedDict, total=False):
-    context_sufficiency: Optional[float]
-
-    query_ease: Optional[float]
-
-    response_helpfulness: Optional[float]
-
-    trustworthiness: Optional[float]
 
 
 class Options(TypedDict, total=False):

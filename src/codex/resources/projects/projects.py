@@ -426,8 +426,8 @@ class ProjectsResource(SyncAPIResource):
         query: str,
         response: str,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
-        bad_response_thresholds: project_validate_params.BadResponseThresholds | NotGiven = NOT_GIVEN,
         constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
@@ -451,10 +451,13 @@ class ProjectsResource(SyncAPIResource):
         query will be recorded in the project for SMEs to answer.
 
         Args:
+          custom_eval_thresholds: Optional custom thresholds for specific evals. Keys should match with the keys
+              in the `eval_scores` dictionary.
+
           custom_metadata: Arbitrary metadata supplied by the user/system
 
-          eval_scores: Evaluation scores to use for flagging a response as bad. If not provided, TLM
-              will be used to generate scores.
+          eval_scores: Scores assessing different aspects of the RAG system. If not provided, TLM will
+              be used to generate scores.
 
           options: Typed dict of advanced configuration options for the Trustworthy Language Model.
               Many of these configurations are determined by the quality preset selected
@@ -575,8 +578,8 @@ class ProjectsResource(SyncAPIResource):
                     "prompt": prompt,
                     "query": query,
                     "response": response,
-                    "bad_response_thresholds": bad_response_thresholds,
                     "constrain_outputs": constrain_outputs,
+                    "custom_eval_thresholds": custom_eval_thresholds,
                     "custom_metadata": custom_metadata,
                     "eval_scores": eval_scores,
                     "options": options,
@@ -967,8 +970,8 @@ class AsyncProjectsResource(AsyncAPIResource):
         query: str,
         response: str,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
-        bad_response_thresholds: project_validate_params.BadResponseThresholds | NotGiven = NOT_GIVEN,
         constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
@@ -992,10 +995,13 @@ class AsyncProjectsResource(AsyncAPIResource):
         query will be recorded in the project for SMEs to answer.
 
         Args:
+          custom_eval_thresholds: Optional custom thresholds for specific evals. Keys should match with the keys
+              in the `eval_scores` dictionary.
+
           custom_metadata: Arbitrary metadata supplied by the user/system
 
-          eval_scores: Evaluation scores to use for flagging a response as bad. If not provided, TLM
-              will be used to generate scores.
+          eval_scores: Scores assessing different aspects of the RAG system. If not provided, TLM will
+              be used to generate scores.
 
           options: Typed dict of advanced configuration options for the Trustworthy Language Model.
               Many of these configurations are determined by the quality preset selected
@@ -1116,8 +1122,8 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "prompt": prompt,
                     "query": query,
                     "response": response,
-                    "bad_response_thresholds": bad_response_thresholds,
                     "constrain_outputs": constrain_outputs,
+                    "custom_eval_thresholds": custom_eval_thresholds,
                     "custom_metadata": custom_metadata,
                     "eval_scores": eval_scores,
                     "options": options,

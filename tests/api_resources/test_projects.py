@@ -444,13 +444,8 @@ class TestProjects:
             query="query",
             response="response",
             use_llm_matching=True,
-            bad_response_thresholds={
-                "context_sufficiency": 0,
-                "query_ease": 0,
-                "response_helpfulness": 0,
-                "trustworthiness": 0,
-            },
             constrain_outputs=["string"],
+            custom_eval_thresholds={"foo": 0},
             custom_metadata={},
             eval_scores={"foo": 0},
             options={
@@ -944,13 +939,8 @@ class TestAsyncProjects:
             query="query",
             response="response",
             use_llm_matching=True,
-            bad_response_thresholds={
-                "context_sufficiency": 0,
-                "query_ease": 0,
-                "response_helpfulness": 0,
-                "trustworthiness": 0,
-            },
             constrain_outputs=["string"],
+            custom_eval_thresholds={"foo": 0},
             custom_metadata={},
             eval_scores={"foo": 0},
             options={
