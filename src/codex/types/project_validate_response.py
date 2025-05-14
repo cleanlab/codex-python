@@ -8,7 +8,7 @@ __all__ = ["ProjectValidateResponse", "EvalScores"]
 
 
 class EvalScores(BaseModel):
-    is_bad: bool
+    failed: bool
 
     score: Optional[float] = None
 
@@ -18,7 +18,7 @@ class EvalScores(BaseModel):
 class ProjectValidateResponse(BaseModel):
     eval_scores: Dict[str, EvalScores]
     """
-    Evaluation scores for the original response along with a boolean flag, `is_bad`,
+    Evaluation scores for the original response along with a boolean flag, `failed`,
     indicating whether the score is below the threshold.
     """
 
