@@ -18,4 +18,13 @@ class EntryNotifySmeParams(TypedDict, total=False):
 class ViewContext(TypedDict, total=False):
     page: Required[int]
 
-    filter: Literal["unanswered", "answered", "all", "hallucination", "search_failure", "unhelpful", "difficult_query"]
+    filter: Literal[
+        "unanswered",
+        "answered",
+        "all",
+        "hallucination",
+        "search_failure",
+        "unhelpful",
+        "difficult_query",
+        "unsupported",
+    ]
