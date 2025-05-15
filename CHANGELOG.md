@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.1.0-alpha.20 (2025-05-15)
+
+Full Changelog: [v0.1.0-alpha.19...v0.1.0-alpha.20](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.19...v0.1.0-alpha.20)
+
+### Features
+
+* **api:** api update ([2e74162](https://github.com/cleanlab/codex-python/commit/2e741628a380d0fefe117f80bb3796b111575df3))
+* **api:** api update ([9e85827](https://github.com/cleanlab/codex-python/commit/9e85827e0b1a58011a8ead15c695cb175744325a))
+
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([09066c8](https://github.com/cleanlab/codex-python/commit/09066c8bf38b23fd3d902b42c4f4f769161b0e2e))
+
+
+### Chores
+
+* **ci:** upload sdks to package manager ([6594b48](https://github.com/cleanlab/codex-python/commit/6594b48736ea79e7f9457cb3b47abfa17618565b))
+* **internal:** avoid errors for isinstance checks on proxies ([a1d7faf](https://github.com/cleanlab/codex-python/commit/a1d7fafa46e9100a4d29c46b48919025b26a0cfa))
+* **internal:** version bump ([971e28d](https://github.com/cleanlab/codex-python/commit/971e28dd483b3f2d38094f368baebd5eb0906e2c))
+
 ## 0.1.0-alpha.19 (2025-05-07)
 
 Full Changelog: [v0.1.0-alpha.18...v0.1.0-alpha.19](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.18...v0.1.0-alpha.19)
