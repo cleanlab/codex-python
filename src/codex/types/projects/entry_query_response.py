@@ -12,6 +12,7 @@ __all__ = [
     "EntryManagedMetadataContextSufficiency",
     "EntryManagedMetadataHTMLFormatScores",
     "EntryManagedMetadataQueryEaseCustomized",
+    "EntryManagedMetadataResponseGroundedness",
     "EntryManagedMetadataResponseHelpfulness",
     "EntryManagedMetadataTrustworthiness",
 ]
@@ -66,6 +67,22 @@ class EntryManagedMetadataHTMLFormatScores(BaseModel):
 
 
 class EntryManagedMetadataQueryEaseCustomized(BaseModel):
+    average: Optional[float] = None
+    """The average of all scores."""
+
+    latest: Optional[float] = None
+    """The most recent score."""
+
+    max: Optional[float] = None
+    """The maximum score."""
+
+    min: Optional[float] = None
+    """The minimum score."""
+
+    scores: Optional[List[float]] = None
+
+
+class EntryManagedMetadataResponseGroundedness(BaseModel):
     average: Optional[float] = None
     """The average of all scores."""
 
@@ -144,6 +161,9 @@ class EntryManagedMetadata(BaseModel):
     locations: Optional[List[str]] = None
 
     query_ease_customized: Optional[EntryManagedMetadataQueryEaseCustomized] = None
+    """Holds a list of scores and computes aggregate statistics."""
+
+    response_groundedness: Optional[EntryManagedMetadataResponseGroundedness] = None
     """Holds a list of scores and computes aggregate statistics."""
 
     response_helpfulness: Optional[EntryManagedMetadataResponseHelpfulness] = None
