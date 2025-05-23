@@ -157,6 +157,72 @@ client = Codex()
 project_return_schema = client.projects.create(
     config={
         "clustering_use_llm_matching": True,
+        "eval_config": {
+            "custom_evals": {
+                "evals": {
+                    "foo": {
+                        "criteria": "criteria",
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "context_identifier": "context_identifier",
+                        "enabled": True,
+                        "priority": 0,
+                        "query_identifier": "query_identifier",
+                        "response_identifier": "response_identifier",
+                        "should_escalate": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    }
+                }
+            },
+            "default_evals": {
+                "context_sufficiency": {
+                    "eval_key": "eval_key",
+                    "name": "name",
+                    "enabled": True,
+                    "priority": 0,
+                    "should_escalate": True,
+                    "threshold": 0,
+                    "threshold_direction": "above",
+                },
+                "query_ease": {
+                    "eval_key": "eval_key",
+                    "name": "name",
+                    "enabled": True,
+                    "priority": 0,
+                    "should_escalate": True,
+                    "threshold": 0,
+                    "threshold_direction": "above",
+                },
+                "response_groundedness": {
+                    "eval_key": "eval_key",
+                    "name": "name",
+                    "enabled": True,
+                    "priority": 0,
+                    "should_escalate": True,
+                    "threshold": 0,
+                    "threshold_direction": "above",
+                },
+                "response_helpfulness": {
+                    "eval_key": "eval_key",
+                    "name": "name",
+                    "enabled": True,
+                    "priority": 0,
+                    "should_escalate": True,
+                    "threshold": 0,
+                    "threshold_direction": "above",
+                },
+                "trustworthiness": {
+                    "eval_key": "eval_key",
+                    "name": "name",
+                    "enabled": True,
+                    "priority": 0,
+                    "should_escalate": True,
+                    "threshold": 0,
+                    "threshold_direction": "above",
+                },
+            },
+        },
         "llm_matching_model": "llm_matching_model",
         "llm_matching_quality_preset": "llm_matching_quality_preset",
         "lower_llm_match_distance_threshold": 0,
