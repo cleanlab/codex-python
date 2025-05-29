@@ -166,6 +166,7 @@ project_return_schema = client.projects.create(
                         "name": "name",
                         "context_identifier": "context_identifier",
                         "enabled": True,
+                        "is_default": True,
                         "priority": 0,
                         "query_identifier": "query_identifier",
                         "response_identifier": "response_identifier",
