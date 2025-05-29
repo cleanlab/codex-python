@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Iterable, Optional
 
 import httpx
@@ -312,6 +313,7 @@ class EntriesResource(SyncAPIResource):
             cast_to=Entry,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def query(
         self,
         project_id: str,
@@ -707,6 +709,7 @@ class AsyncEntriesResource(AsyncAPIResource):
             cast_to=Entry,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def query(
         self,
         project_id: str,
@@ -839,8 +842,10 @@ class EntriesResourceWithRawResponse:
         self.publish_draft_answer = to_raw_response_wrapper(
             entries.publish_draft_answer,
         )
-        self.query = to_raw_response_wrapper(
-            entries.query,
+        self.query = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                entries.query  # pyright: ignore[reportDeprecated],
+            )
         )
         self.unpublish_answer = to_raw_response_wrapper(
             entries.unpublish_answer,
@@ -869,8 +874,10 @@ class AsyncEntriesResourceWithRawResponse:
         self.publish_draft_answer = async_to_raw_response_wrapper(
             entries.publish_draft_answer,
         )
-        self.query = async_to_raw_response_wrapper(
-            entries.query,
+        self.query = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                entries.query  # pyright: ignore[reportDeprecated],
+            )
         )
         self.unpublish_answer = async_to_raw_response_wrapper(
             entries.unpublish_answer,
@@ -899,8 +906,10 @@ class EntriesResourceWithStreamingResponse:
         self.publish_draft_answer = to_streamed_response_wrapper(
             entries.publish_draft_answer,
         )
-        self.query = to_streamed_response_wrapper(
-            entries.query,
+        self.query = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                entries.query  # pyright: ignore[reportDeprecated],
+            )
         )
         self.unpublish_answer = to_streamed_response_wrapper(
             entries.unpublish_answer,
@@ -929,8 +938,10 @@ class AsyncEntriesResourceWithStreamingResponse:
         self.publish_draft_answer = async_to_streamed_response_wrapper(
             entries.publish_draft_answer,
         )
-        self.query = async_to_streamed_response_wrapper(
-            entries.query,
+        self.query = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                entries.query  # pyright: ignore[reportDeprecated],
+            )
         )
         self.unpublish_answer = async_to_streamed_response_wrapper(
             entries.unpublish_answer,

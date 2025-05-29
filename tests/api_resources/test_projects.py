@@ -17,6 +17,8 @@ from codex.types import (
 )
 from tests.utils import assert_matches_type
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -454,26 +456,31 @@ class TestProjects:
     @pytest.mark.skip()
     @parametrize
     def test_method_increment_queries(self, client: Codex) -> None:
-        project = client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            project = client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_increment_queries_with_all_params(self, client: Codex) -> None:
-        project = client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            count=0,
-        )
+        with pytest.warns(DeprecationWarning):
+            project = client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                count=0,
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_increment_queries(self, client: Codex) -> None:
-        response = client.projects.with_raw_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.projects.with_raw_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -483,24 +490,26 @@ class TestProjects:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_increment_queries(self, client: Codex) -> None:
-        with client.projects.with_streaming_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.projects.with_streaming_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            project = response.parse()
-            assert_matches_type(object, project, path=["response"])
+                project = response.parse()
+                assert_matches_type(object, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_increment_queries(self, client: Codex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.with_raw_response.increment_queries(
-                project_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+                client.projects.with_raw_response.increment_queries(
+                    project_id="",
+                )
 
     @pytest.mark.skip()
     @parametrize
@@ -1081,26 +1090,31 @@ class TestAsyncProjects:
     @pytest.mark.skip()
     @parametrize
     async def test_method_increment_queries(self, async_client: AsyncCodex) -> None:
-        project = await async_client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            project = await async_client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_increment_queries_with_all_params(self, async_client: AsyncCodex) -> None:
-        project = await async_client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            count=0,
-        )
+        with pytest.warns(DeprecationWarning):
+            project = await async_client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                count=0,
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_increment_queries(self, async_client: AsyncCodex) -> None:
-        response = await async_client.projects.with_raw_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.projects.with_raw_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1110,24 +1124,26 @@ class TestAsyncProjects:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_increment_queries(self, async_client: AsyncCodex) -> None:
-        async with async_client.projects.with_streaming_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.projects.with_streaming_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            project = await response.parse()
-            assert_matches_type(object, project, path=["response"])
+                project = await response.parse()
+                assert_matches_type(object, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_increment_queries(self, async_client: AsyncCodex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.with_raw_response.increment_queries(
-                project_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+                await async_client.projects.with_raw_response.increment_queries(
+                    project_id="",
+                )
 
     @pytest.mark.skip()
     @parametrize
