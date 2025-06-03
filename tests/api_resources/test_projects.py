@@ -39,6 +39,72 @@ class TestProjects:
         project = client.projects.create(
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
@@ -141,6 +207,72 @@ class TestProjects:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
@@ -534,6 +666,72 @@ class TestAsyncProjects:
         project = await async_client.projects.create(
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
@@ -636,6 +834,72 @@ class TestAsyncProjects:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
