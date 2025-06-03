@@ -15,6 +15,8 @@ from codex.types.projects import (
     EntryNotifySmeResponse,
 )
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -382,40 +384,45 @@ class TestEntries:
     @pytest.mark.skip()
     @parametrize
     def test_method_query(self, client: Codex) -> None:
-        entry = client.projects.entries.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
+        with pytest.warns(DeprecationWarning):
+            entry = client.projects.entries.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+            )
+
         assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_query_with_all_params(self, client: Codex) -> None:
-        entry = client.projects.entries.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-            use_llm_matching=True,
-            client_metadata={},
-            query_metadata={
-                "context": "string",
-                "custom_metadata": {},
-                "eval_scores": {"foo": 0},
-                "evaluated_response": "evaluated_response",
-            },
-            x_client_library_version="x-client-library-version",
-            x_integration_type="x-integration-type",
-            x_source="x-source",
-            x_stainless_package_version="x-stainless-package-version",
-        )
+        with pytest.warns(DeprecationWarning):
+            entry = client.projects.entries.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+                use_llm_matching=True,
+                client_metadata={},
+                query_metadata={
+                    "context": "string",
+                    "custom_metadata": {},
+                    "eval_scores": {"foo": 0},
+                    "evaluated_response": "evaluated_response",
+                },
+                x_client_library_version="x-client-library-version",
+                x_integration_type="x-integration-type",
+                x_source="x-source",
+                x_stainless_package_version="x-stainless-package-version",
+            )
+
         assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_query(self, client: Codex) -> None:
-        response = client.projects.entries.with_raw_response.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.projects.entries.with_raw_response.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -425,26 +432,28 @@ class TestEntries:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_query(self, client: Codex) -> None:
-        with client.projects.entries.with_streaming_response.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.projects.entries.with_streaming_response.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            entry = response.parse()
-            assert_matches_type(EntryQueryResponse, entry, path=["response"])
+                entry = response.parse()
+                assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_query(self, client: Codex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.entries.with_raw_response.query(
-                project_id="",
-                question="question",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+                client.projects.entries.with_raw_response.query(
+                    project_id="",
+                    question="question",
+                )
 
     @pytest.mark.skip()
     @parametrize
@@ -863,40 +872,45 @@ class TestAsyncEntries:
     @pytest.mark.skip()
     @parametrize
     async def test_method_query(self, async_client: AsyncCodex) -> None:
-        entry = await async_client.projects.entries.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
+        with pytest.warns(DeprecationWarning):
+            entry = await async_client.projects.entries.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+            )
+
         assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_query_with_all_params(self, async_client: AsyncCodex) -> None:
-        entry = await async_client.projects.entries.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-            use_llm_matching=True,
-            client_metadata={},
-            query_metadata={
-                "context": "string",
-                "custom_metadata": {},
-                "eval_scores": {"foo": 0},
-                "evaluated_response": "evaluated_response",
-            },
-            x_client_library_version="x-client-library-version",
-            x_integration_type="x-integration-type",
-            x_source="x-source",
-            x_stainless_package_version="x-stainless-package-version",
-        )
+        with pytest.warns(DeprecationWarning):
+            entry = await async_client.projects.entries.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+                use_llm_matching=True,
+                client_metadata={},
+                query_metadata={
+                    "context": "string",
+                    "custom_metadata": {},
+                    "eval_scores": {"foo": 0},
+                    "evaluated_response": "evaluated_response",
+                },
+                x_client_library_version="x-client-library-version",
+                x_integration_type="x-integration-type",
+                x_source="x-source",
+                x_stainless_package_version="x-stainless-package-version",
+            )
+
         assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_query(self, async_client: AsyncCodex) -> None:
-        response = await async_client.projects.entries.with_raw_response.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.projects.entries.with_raw_response.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -906,26 +920,28 @@ class TestAsyncEntries:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_query(self, async_client: AsyncCodex) -> None:
-        async with async_client.projects.entries.with_streaming_response.query(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.projects.entries.with_streaming_response.query(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                question="question",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            entry = await response.parse()
-            assert_matches_type(EntryQueryResponse, entry, path=["response"])
+                entry = await response.parse()
+                assert_matches_type(EntryQueryResponse, entry, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_query(self, async_client: AsyncCodex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.entries.with_raw_response.query(
-                project_id="",
-                question="question",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+                await async_client.projects.entries.with_raw_response.query(
+                    project_id="",
+                    question="question",
+                )
 
     @pytest.mark.skip()
     @parametrize

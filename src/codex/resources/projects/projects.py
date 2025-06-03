@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Dict, List, Optional
 from typing_extensions import Literal
 
@@ -330,6 +331,7 @@ class ProjectsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def increment_queries(
         self,
         project_id: str,
@@ -872,6 +874,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def increment_queries(
         self,
         project_id: str,
@@ -1167,8 +1170,10 @@ class ProjectsResourceWithRawResponse:
         self.export = to_raw_response_wrapper(
             projects.export,
         )
-        self.increment_queries = to_raw_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
         )
         self.retrieve_analytics = to_raw_response_wrapper(
             projects.retrieve_analytics,
@@ -1212,8 +1217,10 @@ class AsyncProjectsResourceWithRawResponse:
         self.export = async_to_raw_response_wrapper(
             projects.export,
         )
-        self.increment_queries = async_to_raw_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
         )
         self.retrieve_analytics = async_to_raw_response_wrapper(
             projects.retrieve_analytics,
@@ -1257,8 +1264,10 @@ class ProjectsResourceWithStreamingResponse:
         self.export = to_streamed_response_wrapper(
             projects.export,
         )
-        self.increment_queries = to_streamed_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
         )
         self.retrieve_analytics = to_streamed_response_wrapper(
             projects.retrieve_analytics,
@@ -1302,8 +1311,10 @@ class AsyncProjectsResourceWithStreamingResponse:
         self.export = async_to_streamed_response_wrapper(
             projects.export,
         )
-        self.increment_queries = async_to_streamed_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
         )
         self.retrieve_analytics = async_to_streamed_response_wrapper(
             projects.retrieve_analytics,
