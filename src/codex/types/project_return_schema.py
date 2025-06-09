@@ -296,7 +296,7 @@ class Config(BaseModel):
 
     llm_matching_model: Optional[str] = None
 
-    llm_matching_quality_preset: Optional[str] = None
+    llm_matching_quality_preset: Optional[Literal["best", "high", "medium", "low", "base"]] = None
 
     lower_llm_match_distance_threshold: Optional[float] = None
 
