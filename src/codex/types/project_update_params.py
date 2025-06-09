@@ -303,7 +303,7 @@ class Config(TypedDict, total=False):
 
     llm_matching_model: str
 
-    llm_matching_quality_preset: str
+    llm_matching_quality_preset: Literal["best", "high", "medium", "low", "base"]
 
     lower_llm_match_distance_threshold: float
 
