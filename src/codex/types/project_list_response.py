@@ -323,6 +323,8 @@ class Project(BaseModel):
 
     updated_at: datetime
 
+    auto_clustering_enabled: Optional[bool] = None
+
     description: Optional[str] = None
 
     unanswered_entries_count: Optional[int] = None
