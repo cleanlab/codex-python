@@ -117,6 +117,7 @@ class TestProjects:
             },
             name="name",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auto_clustering_enabled=True,
             description="description",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
@@ -285,6 +286,7 @@ class TestProjects:
                 "upper_llm_match_distance_threshold": 0,
             },
             name="name",
+            auto_clustering_enabled=True,
             description="description",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
@@ -753,6 +755,7 @@ class TestAsyncProjects:
             },
             name="name",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auto_clustering_enabled=True,
             description="description",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
@@ -921,6 +924,7 @@ class TestAsyncProjects:
                 "upper_llm_match_distance_threshold": 0,
             },
             name="name",
+            auto_clustering_enabled=True,
             description="description",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])

@@ -25,6 +25,8 @@ class ProjectUpdateParams(TypedDict, total=False):
 
     name: Required[str]
 
+    auto_clustering_enabled: bool
+
     description: Optional[str]
 
 

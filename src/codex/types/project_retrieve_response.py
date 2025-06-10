@@ -322,6 +322,8 @@ class ProjectRetrieveResponse(BaseModel):
 
     updated_at: datetime
 
+    auto_clustering_enabled: Optional[bool] = None
+
     custom_rank_enabled: Optional[bool] = None
 
     description: Optional[str] = None

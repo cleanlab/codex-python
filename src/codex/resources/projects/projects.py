@@ -98,6 +98,7 @@ class ProjectsResource(SyncAPIResource):
         config: project_create_params.Config,
         name: str,
         organization_id: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -125,6 +126,7 @@ class ProjectsResource(SyncAPIResource):
                     "config": config,
                     "name": name,
                     "organization_id": organization_id,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_create_params.ProjectCreateParams,
@@ -174,6 +176,7 @@ class ProjectsResource(SyncAPIResource):
         *,
         config: project_update_params.Config,
         name: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -202,6 +205,7 @@ class ProjectsResource(SyncAPIResource):
                 {
                     "config": config,
                     "name": name,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_update_params.ProjectUpdateParams,
@@ -641,6 +645,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         config: project_create_params.Config,
         name: str,
         organization_id: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -668,6 +673,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "config": config,
                     "name": name,
                     "organization_id": organization_id,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_create_params.ProjectCreateParams,
@@ -717,6 +723,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         *,
         config: project_update_params.Config,
         name: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -745,6 +752,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 {
                     "config": config,
                     "name": name,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_update_params.ProjectUpdateParams,

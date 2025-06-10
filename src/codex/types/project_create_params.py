@@ -27,6 +27,8 @@ class ProjectCreateParams(TypedDict, total=False):
 
     organization_id: Required[str]
 
+    auto_clustering_enabled: bool
+
     description: Optional[str]
 
 
