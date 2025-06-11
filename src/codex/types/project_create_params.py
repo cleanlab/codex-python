@@ -55,6 +55,9 @@ class ConfigEvalConfigCustomEvalsEvals(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
+    is_default: bool
+    """Whether the eval is a default, built-in eval or a custom eval"""
+
     priority: Optional[int]
     """
     Priority order for evals (lower number = higher priority) to determine primary

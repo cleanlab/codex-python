@@ -46,6 +46,9 @@ class ConfigEvalConfigCustomEvalsEvals(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    is_default: Optional[bool] = None
+    """Whether the eval is a default, built-in eval or a custom eval"""
+
     priority: Optional[int] = None
     """
     Priority order for evals (lower number = higher priority) to determine primary
