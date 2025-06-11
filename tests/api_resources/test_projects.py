@@ -17,6 +17,8 @@ from codex.types import (
 )
 from tests.utils import assert_matches_type
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -39,6 +41,73 @@ class TestProjects:
         project = client.projects.create(
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "is_default": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
@@ -141,6 +210,73 @@ class TestProjects:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "is_default": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
@@ -204,7 +340,7 @@ class TestProjects:
     def test_method_list_with_all_params(self, client: Codex) -> None:
         project = client.projects.list(
             include_entry_counts=True,
-            limit=0,
+            limit=1,
             offset=0,
             order="asc",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -322,26 +458,31 @@ class TestProjects:
     @pytest.mark.skip()
     @parametrize
     def test_method_increment_queries(self, client: Codex) -> None:
-        project = client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            project = client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_increment_queries_with_all_params(self, client: Codex) -> None:
-        project = client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            count=0,
-        )
+        with pytest.warns(DeprecationWarning):
+            project = client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                count=0,
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_increment_queries(self, client: Codex) -> None:
-        response = client.projects.with_raw_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.projects.with_raw_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -351,24 +492,26 @@ class TestProjects:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_increment_queries(self, client: Codex) -> None:
-        with client.projects.with_streaming_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.projects.with_streaming_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            project = response.parse()
-            assert_matches_type(object, project, path=["response"])
+                project = response.parse()
+                assert_matches_type(object, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     def test_path_params_increment_queries(self, client: Codex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.with_raw_response.increment_queries(
-                project_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+                client.projects.with_raw_response.increment_queries(
+                    project_id="",
+                )
 
     @pytest.mark.skip()
     @parametrize
@@ -534,6 +677,73 @@ class TestAsyncProjects:
         project = await async_client.projects.create(
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "is_default": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
@@ -636,6 +846,73 @@ class TestAsyncProjects:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             config={
                 "clustering_use_llm_matching": True,
+                "eval_config": {
+                    "custom_evals": {
+                        "evals": {
+                            "foo": {
+                                "criteria": "criteria",
+                                "eval_key": "eval_key",
+                                "name": "name",
+                                "context_identifier": "context_identifier",
+                                "enabled": True,
+                                "is_default": True,
+                                "priority": 0,
+                                "query_identifier": "query_identifier",
+                                "response_identifier": "response_identifier",
+                                "should_escalate": True,
+                                "threshold": 0,
+                                "threshold_direction": "above",
+                            }
+                        }
+                    },
+                    "default_evals": {
+                        "context_sufficiency": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "query_ease": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_groundedness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "response_helpfulness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                        "trustworthiness": {
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "enabled": True,
+                            "priority": 0,
+                            "should_escalate": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        },
+                    },
+                },
                 "llm_matching_model": "llm_matching_model",
                 "llm_matching_quality_preset": "llm_matching_quality_preset",
                 "lower_llm_match_distance_threshold": 0,
@@ -699,7 +976,7 @@ class TestAsyncProjects:
     async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.list(
             include_entry_counts=True,
-            limit=0,
+            limit=1,
             offset=0,
             order="asc",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -817,26 +1094,31 @@ class TestAsyncProjects:
     @pytest.mark.skip()
     @parametrize
     async def test_method_increment_queries(self, async_client: AsyncCodex) -> None:
-        project = await async_client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            project = await async_client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_increment_queries_with_all_params(self, async_client: AsyncCodex) -> None:
-        project = await async_client.projects.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            count=0,
-        )
+        with pytest.warns(DeprecationWarning):
+            project = await async_client.projects.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                count=0,
+            )
+
         assert_matches_type(object, project, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_increment_queries(self, async_client: AsyncCodex) -> None:
-        response = await async_client.projects.with_raw_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.projects.with_raw_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -846,24 +1128,26 @@ class TestAsyncProjects:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_increment_queries(self, async_client: AsyncCodex) -> None:
-        async with async_client.projects.with_streaming_response.increment_queries(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.projects.with_streaming_response.increment_queries(
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            project = await response.parse()
-            assert_matches_type(object, project, path=["response"])
+                project = await response.parse()
+                assert_matches_type(object, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
     async def test_path_params_increment_queries(self, async_client: AsyncCodex) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.with_raw_response.increment_queries(
-                project_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+                await async_client.projects.with_raw_response.increment_queries(
+                    project_id="",
+                )
 
     @pytest.mark.skip()
     @parametrize
