@@ -219,7 +219,7 @@ class ProjectsResource(SyncAPIResource):
     def list(
         self,
         *,
-        include_entry_counts: bool | NotGiven = NOT_GIVEN,
+        include_unaddressed_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -254,7 +254,7 @@ class ProjectsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "include_entry_counts": include_entry_counts,
+                        "include_unaddressed_counts": include_unaddressed_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -766,7 +766,7 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        include_entry_counts: bool | NotGiven = NOT_GIVEN,
+        include_unaddressed_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -801,7 +801,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "include_entry_counts": include_entry_counts,
+                        "include_unaddressed_counts": include_unaddressed_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
