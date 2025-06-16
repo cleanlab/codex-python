@@ -341,7 +341,7 @@ class TestProjects:
     @parametrize
     def test_method_list_with_all_params(self, client: Codex) -> None:
         project = client.projects.list(
-            include_entry_counts=True,
+            include_unaddressed_counts=True,
             limit=1,
             offset=0,
             order="asc",
@@ -979,7 +979,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.list(
-            include_entry_counts=True,
+            include_unaddressed_counts=True,
             limit=1,
             offset=0,
             order="asc",
