@@ -327,7 +327,7 @@ class Project(BaseModel):
 
     description: Optional[str] = None
 
-    unanswered_entries_count: Optional[int] = None
+    unaddressed_count: Optional[int] = None
 
 
 class ProjectListResponse(BaseModel):
