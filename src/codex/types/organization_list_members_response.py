@@ -13,5 +13,7 @@ class OrganizationListMembersResponseItem(BaseModel):
 
     name: str
 
+    user_id: str
+
 
 OrganizationListMembersResponse: TypeAlias = List[OrganizationListMembersResponseItem]
