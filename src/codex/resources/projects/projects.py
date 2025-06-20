@@ -8,11 +8,20 @@ from typing_extensions import Literal
 
 import httpx
 
+from .evals import (
+    EvalsResource,
+    AsyncEvalsResource,
+    EvalsResourceWithRawResponse,
+    AsyncEvalsResourceWithRawResponse,
+    EvalsResourceWithStreamingResponse,
+    AsyncEvalsResourceWithStreamingResponse,
+)
 from ...types import (
     project_list_params,
     project_create_params,
     project_update_params,
     project_validate_params,
+    project_invite_sme_params,
     project_increment_queries_params,
     project_retrieve_analytics_params,
 )
@@ -35,6 +44,14 @@ from .clusters import (
     AsyncClustersResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .query_logs import (
+    QueryLogsResource,
+    AsyncQueryLogsResource,
+    QueryLogsResourceWithRawResponse,
+    AsyncQueryLogsResourceWithRawResponse,
+    QueryLogsResourceWithStreamingResponse,
+    AsyncQueryLogsResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -50,11 +67,20 @@ from .access_keys import (
     AccessKeysResourceWithStreamingResponse,
     AsyncAccessKeysResourceWithStreamingResponse,
 )
+from .remediations import (
+    RemediationsResource,
+    AsyncRemediationsResource,
+    RemediationsResourceWithRawResponse,
+    AsyncRemediationsResourceWithRawResponse,
+    RemediationsResourceWithStreamingResponse,
+    AsyncRemediationsResourceWithStreamingResponse,
+)
 from ..._base_client import make_request_options
 from ...types.project_list_response import ProjectListResponse
 from ...types.project_return_schema import ProjectReturnSchema
 from ...types.project_retrieve_response import ProjectRetrieveResponse
 from ...types.project_validate_response import ProjectValidateResponse
+from ...types.project_invite_sme_response import ProjectInviteSmeResponse
 from ...types.project_retrieve_analytics_response import ProjectRetrieveAnalyticsResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
@@ -72,6 +98,18 @@ class ProjectsResource(SyncAPIResource):
     @cached_property
     def clusters(self) -> ClustersResource:
         return ClustersResource(self._client)
+
+    @cached_property
+    def evals(self) -> EvalsResource:
+        return EvalsResource(self._client)
+
+    @cached_property
+    def query_logs(self) -> QueryLogsResource:
+        return QueryLogsResource(self._client)
+
+    @cached_property
+    def remediations(self) -> RemediationsResource:
+        return RemediationsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ProjectsResourceWithRawResponse:
@@ -374,6 +412,52 @@ class ProjectsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    def invite_sme(
+        self,
+        project_id: str,
+        *,
+        email: str,
+        page_type: Literal["query_log", "remediation"],
+        url_query_string: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectInviteSmeResponse:
+        """
+        Invite a subject matter expert to view a specific query log or remediation.
+
+        Returns: SMERemediationNotificationResponse with status and notification details
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return self._post(
+            f"/api/projects/{project_id}/notifications",
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "page_type": page_type,
+                    "url_query_string": url_query_string,
+                },
+                project_invite_sme_params.ProjectInviteSmeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectInviteSmeResponse,
+        )
+
     def retrieve_analytics(
         self,
         project_id: str,
@@ -622,6 +706,18 @@ class AsyncProjectsResource(AsyncAPIResource):
     @cached_property
     def clusters(self) -> AsyncClustersResource:
         return AsyncClustersResource(self._client)
+
+    @cached_property
+    def evals(self) -> AsyncEvalsResource:
+        return AsyncEvalsResource(self._client)
+
+    @cached_property
+    def query_logs(self) -> AsyncQueryLogsResource:
+        return AsyncQueryLogsResource(self._client)
+
+    @cached_property
+    def remediations(self) -> AsyncRemediationsResource:
+        return AsyncRemediationsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncProjectsResourceWithRawResponse:
@@ -926,6 +1022,52 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def invite_sme(
+        self,
+        project_id: str,
+        *,
+        email: str,
+        page_type: Literal["query_log", "remediation"],
+        url_query_string: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectInviteSmeResponse:
+        """
+        Invite a subject matter expert to view a specific query log or remediation.
+
+        Returns: SMERemediationNotificationResponse with status and notification details
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return await self._post(
+            f"/api/projects/{project_id}/notifications",
+            body=await async_maybe_transform(
+                {
+                    "email": email,
+                    "page_type": page_type,
+                    "url_query_string": url_query_string,
+                },
+                project_invite_sme_params.ProjectInviteSmeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectInviteSmeResponse,
+        )
+
     async def retrieve_analytics(
         self,
         project_id: str,
@@ -1189,6 +1331,9 @@ class ProjectsResourceWithRawResponse:
                 projects.increment_queries  # pyright: ignore[reportDeprecated],
             )
         )
+        self.invite_sme = to_raw_response_wrapper(
+            projects.invite_sme,
+        )
         self.retrieve_analytics = to_raw_response_wrapper(
             projects.retrieve_analytics,
         )
@@ -1207,6 +1352,18 @@ class ProjectsResourceWithRawResponse:
     @cached_property
     def clusters(self) -> ClustersResourceWithRawResponse:
         return ClustersResourceWithRawResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> EvalsResourceWithRawResponse:
+        return EvalsResourceWithRawResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> QueryLogsResourceWithRawResponse:
+        return QueryLogsResourceWithRawResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> RemediationsResourceWithRawResponse:
+        return RemediationsResourceWithRawResponse(self._projects.remediations)
 
 
 class AsyncProjectsResourceWithRawResponse:
@@ -1236,6 +1393,9 @@ class AsyncProjectsResourceWithRawResponse:
                 projects.increment_queries  # pyright: ignore[reportDeprecated],
             )
         )
+        self.invite_sme = async_to_raw_response_wrapper(
+            projects.invite_sme,
+        )
         self.retrieve_analytics = async_to_raw_response_wrapper(
             projects.retrieve_analytics,
         )
@@ -1254,6 +1414,18 @@ class AsyncProjectsResourceWithRawResponse:
     @cached_property
     def clusters(self) -> AsyncClustersResourceWithRawResponse:
         return AsyncClustersResourceWithRawResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> AsyncEvalsResourceWithRawResponse:
+        return AsyncEvalsResourceWithRawResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> AsyncQueryLogsResourceWithRawResponse:
+        return AsyncQueryLogsResourceWithRawResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> AsyncRemediationsResourceWithRawResponse:
+        return AsyncRemediationsResourceWithRawResponse(self._projects.remediations)
 
 
 class ProjectsResourceWithStreamingResponse:
@@ -1283,6 +1455,9 @@ class ProjectsResourceWithStreamingResponse:
                 projects.increment_queries  # pyright: ignore[reportDeprecated],
             )
         )
+        self.invite_sme = to_streamed_response_wrapper(
+            projects.invite_sme,
+        )
         self.retrieve_analytics = to_streamed_response_wrapper(
             projects.retrieve_analytics,
         )
@@ -1301,6 +1476,18 @@ class ProjectsResourceWithStreamingResponse:
     @cached_property
     def clusters(self) -> ClustersResourceWithStreamingResponse:
         return ClustersResourceWithStreamingResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> EvalsResourceWithStreamingResponse:
+        return EvalsResourceWithStreamingResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> QueryLogsResourceWithStreamingResponse:
+        return QueryLogsResourceWithStreamingResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> RemediationsResourceWithStreamingResponse:
+        return RemediationsResourceWithStreamingResponse(self._projects.remediations)
 
 
 class AsyncProjectsResourceWithStreamingResponse:
@@ -1330,6 +1517,9 @@ class AsyncProjectsResourceWithStreamingResponse:
                 projects.increment_queries  # pyright: ignore[reportDeprecated],
             )
         )
+        self.invite_sme = async_to_streamed_response_wrapper(
+            projects.invite_sme,
+        )
         self.retrieve_analytics = async_to_streamed_response_wrapper(
             projects.retrieve_analytics,
         )
@@ -1348,3 +1538,15 @@ class AsyncProjectsResourceWithStreamingResponse:
     @cached_property
     def clusters(self) -> AsyncClustersResourceWithStreamingResponse:
         return AsyncClustersResourceWithStreamingResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> AsyncEvalsResourceWithStreamingResponse:
+        return AsyncEvalsResourceWithStreamingResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> AsyncQueryLogsResourceWithStreamingResponse:
+        return AsyncQueryLogsResourceWithStreamingResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> AsyncRemediationsResourceWithStreamingResponse:
+        return AsyncRemediationsResourceWithStreamingResponse(self._projects.remediations)
