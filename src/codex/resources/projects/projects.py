@@ -2,16 +2,26 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+import typing_extensions
+from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
 
+from .evals import (
+    EvalsResource,
+    AsyncEvalsResource,
+    EvalsResourceWithRawResponse,
+    AsyncEvalsResourceWithRawResponse,
+    EvalsResourceWithStreamingResponse,
+    AsyncEvalsResourceWithStreamingResponse,
+)
 from ...types import (
     project_list_params,
     project_create_params,
     project_update_params,
     project_validate_params,
+    project_invite_sme_params,
     project_increment_queries_params,
     project_retrieve_analytics_params,
 )
@@ -34,6 +44,14 @@ from .clusters import (
     AsyncClustersResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .query_logs import (
+    QueryLogsResource,
+    AsyncQueryLogsResource,
+    QueryLogsResourceWithRawResponse,
+    AsyncQueryLogsResourceWithRawResponse,
+    QueryLogsResourceWithStreamingResponse,
+    AsyncQueryLogsResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -49,11 +67,20 @@ from .access_keys import (
     AccessKeysResourceWithStreamingResponse,
     AsyncAccessKeysResourceWithStreamingResponse,
 )
+from .remediations import (
+    RemediationsResource,
+    AsyncRemediationsResource,
+    RemediationsResourceWithRawResponse,
+    AsyncRemediationsResourceWithRawResponse,
+    RemediationsResourceWithStreamingResponse,
+    AsyncRemediationsResourceWithStreamingResponse,
+)
 from ..._base_client import make_request_options
 from ...types.project_list_response import ProjectListResponse
 from ...types.project_return_schema import ProjectReturnSchema
 from ...types.project_retrieve_response import ProjectRetrieveResponse
 from ...types.project_validate_response import ProjectValidateResponse
+from ...types.project_invite_sme_response import ProjectInviteSmeResponse
 from ...types.project_retrieve_analytics_response import ProjectRetrieveAnalyticsResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
@@ -71,6 +98,18 @@ class ProjectsResource(SyncAPIResource):
     @cached_property
     def clusters(self) -> ClustersResource:
         return ClustersResource(self._client)
+
+    @cached_property
+    def evals(self) -> EvalsResource:
+        return EvalsResource(self._client)
+
+    @cached_property
+    def query_logs(self) -> QueryLogsResource:
+        return QueryLogsResource(self._client)
+
+    @cached_property
+    def remediations(self) -> RemediationsResource:
+        return RemediationsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ProjectsResourceWithRawResponse:
@@ -97,6 +136,7 @@ class ProjectsResource(SyncAPIResource):
         config: project_create_params.Config,
         name: str,
         organization_id: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -124,6 +164,7 @@ class ProjectsResource(SyncAPIResource):
                     "config": config,
                     "name": name,
                     "organization_id": organization_id,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_create_params.ProjectCreateParams,
@@ -173,6 +214,7 @@ class ProjectsResource(SyncAPIResource):
         *,
         config: project_update_params.Config,
         name: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -201,6 +243,7 @@ class ProjectsResource(SyncAPIResource):
                 {
                     "config": config,
                     "name": name,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_update_params.ProjectUpdateParams,
@@ -214,7 +257,7 @@ class ProjectsResource(SyncAPIResource):
     def list(
         self,
         *,
-        include_entry_counts: bool | NotGiven = NOT_GIVEN,
+        include_unaddressed_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -249,7 +292,7 @@ class ProjectsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "include_entry_counts": include_entry_counts,
+                        "include_unaddressed_counts": include_unaddressed_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -330,6 +373,7 @@ class ProjectsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def increment_queries(
         self,
         project_id: str,
@@ -366,6 +410,52 @@ class ProjectsResource(SyncAPIResource):
                 query=maybe_transform({"count": count}, project_increment_queries_params.ProjectIncrementQueriesParams),
             ),
             cast_to=object,
+        )
+
+    def invite_sme(
+        self,
+        project_id: str,
+        *,
+        email: str,
+        page_type: Literal["query_log", "remediation"],
+        url_query_string: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectInviteSmeResponse:
+        """
+        Invite a subject matter expert to view a specific query log or remediation.
+
+        Returns: SMERemediationNotificationResponse with status and notification details
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return self._post(
+            f"/api/projects/{project_id}/notifications",
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "page_type": page_type,
+                    "url_query_string": url_query_string,
+                },
+                project_invite_sme_params.ProjectInviteSmeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectInviteSmeResponse,
         )
 
     def retrieve_analytics(
@@ -430,6 +520,7 @@ class ProjectsResource(SyncAPIResource):
         custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
+        messages: Optional[Iterable[project_validate_params.Message]] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
@@ -459,6 +550,10 @@ class ProjectsResource(SyncAPIResource):
           eval_scores: Scores assessing different aspects of the RAG system. If not provided, TLM will
               be used to generate scores.
 
+          messages: Optional message history to provide conversation context for the query. Used to
+              rewrite query into a self-contained version of itself. If not provided, the
+              query will be treated as self-contained.
+
           options: Typed dict of advanced configuration options for the Trustworthy Language Model.
               Many of these configurations are determined by the quality preset selected
               (learn about quality presets in the TLM [initialization method](./#class-tlm)).
@@ -484,27 +579,24 @@ class ProjectsResource(SyncAPIResource):
                 `use_self_reflection` = True.
               - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
                 `use_self_reflection` = False. When using `get_trustworthiness_score()` on
-                "base" preset, a cheaper self-reflection will be used to compute the
-                trustworthiness score.
+                "base" preset, a faster self-reflection is employed.
 
-              By default, the TLM uses the "medium" quality preset. The default base LLM
-              `model` used is "gpt-4o-mini", and `max_tokens` is 512 for all quality presets.
-              You can set custom values for these arguments regardless of the quality preset
-              specified.
+              By default, TLM uses the: "medium" `quality_preset`, "gpt-4.1-mini" base
+              `model`, and `max_tokens` is set to 512. You can set custom values for these
+              arguments regardless of the quality preset specified.
 
-              Args: model ({"gpt-4o-mini", "gpt-4o", "gpt-4.1", "gpt-4.1-mini",
-              "gpt-4.1-nano", "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "gpt-4",
-              "gpt-4.5-preview", "gpt-3.5-turbo-16k", "claude-3.7-sonnet",
-              "claude-3.5-sonnet-v2", "claude-3.5-sonnet", "claude-3.5-haiku",
-              "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"}, default =
-              "gpt-4o-mini"): Underlying base LLM to use (better models yield better results,
-              faster models yield faster/cheaper results). - Models still in beta: "o3", "o1",
-              "o4-mini", "o3-mini", "o1-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
-              "gpt-4.5-preview", "claude-3.7-sonnet", "claude-3.5-sonnet-v2",
-              "claude-3.5-haiku", "nova-micro", "nova-lite", "nova-pro". - Recommended models
-              for accuracy: "gpt-4.1", "o4-mini", "o3", "claude-3.7-sonnet",
-              "claude-3.5-sonnet-v2". - Recommended models for low latency/costs:
-              "gpt-4.1-nano", "nova-micro".
+              Args: model ({"gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "o4-mini", "o3",
+              "gpt-4.5-preview", "gpt-4o-mini", "gpt-4o", "o3-mini", "o1", "o1-mini", "gpt-4",
+              "gpt-3.5-turbo-16k", "claude-opus-4-0", "claude-sonnet-4-0",
+              "claude-3.7-sonnet", "claude-3.5-sonnet-v2", "claude-3.5-sonnet",
+              "claude-3.5-haiku", "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"},
+              default = "gpt-4.1-mini"): Underlying base LLM to use (better models yield
+              better results, faster models yield faster results). - Models still in beta:
+              "o3", "o1", "o4-mini", "o3-mini", "o1-mini", "gpt-4.5-preview",
+              "claude-opus-4-0", "claude-sonnet-4-0", "claude-3.7-sonnet",
+              "claude-3.5-haiku". - Recommended models for accuracy: "gpt-4.1", "o4-mini",
+              "o3", "claude-opus-4-0", "claude-sonnet-4-0". - Recommended models for low
+              latency/costs: "gpt-4.1-nano", "nova-micro".
 
                   max_tokens (int, default = 512): the maximum number of tokens that can be generated in the TLM response (and in internal trustworthiness scoring).
                   Higher values here may produce better (more reliable) TLM responses and trustworthiness scores, but at higher runtimes/costs.
@@ -530,7 +622,7 @@ class ProjectsResource(SyncAPIResource):
 
                   similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
                   trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
-                  Supported similarity measures include: "semantic" (based on natural language inference),
+                  Supported similarity measures include - "semantic" (based on natural language inference),
                   "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
                   "code" (based on model-based analysis designed to compare code), "discrepancy" (based on model-based analysis of possible discrepancies),
                   and "string" (based on character/word overlap). Set this to "string" for minimal runtimes/costs.
@@ -582,6 +674,7 @@ class ProjectsResource(SyncAPIResource):
                     "custom_eval_thresholds": custom_eval_thresholds,
                     "custom_metadata": custom_metadata,
                     "eval_scores": eval_scores,
+                    "messages": messages,
                     "options": options,
                     "quality_preset": quality_preset,
                     "task": task,
@@ -615,6 +708,18 @@ class AsyncProjectsResource(AsyncAPIResource):
         return AsyncClustersResource(self._client)
 
     @cached_property
+    def evals(self) -> AsyncEvalsResource:
+        return AsyncEvalsResource(self._client)
+
+    @cached_property
+    def query_logs(self) -> AsyncQueryLogsResource:
+        return AsyncQueryLogsResource(self._client)
+
+    @cached_property
+    def remediations(self) -> AsyncRemediationsResource:
+        return AsyncRemediationsResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProjectsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -639,6 +744,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         config: project_create_params.Config,
         name: str,
         organization_id: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -666,6 +772,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "config": config,
                     "name": name,
                     "organization_id": organization_id,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_create_params.ProjectCreateParams,
@@ -715,6 +822,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         *,
         config: project_update_params.Config,
         name: str,
+        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -743,6 +851,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 {
                     "config": config,
                     "name": name,
+                    "auto_clustering_enabled": auto_clustering_enabled,
                     "description": description,
                 },
                 project_update_params.ProjectUpdateParams,
@@ -756,7 +865,7 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        include_entry_counts: bool | NotGiven = NOT_GIVEN,
+        include_unaddressed_counts: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -791,7 +900,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "include_entry_counts": include_entry_counts,
+                        "include_unaddressed_counts": include_unaddressed_counts,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -872,6 +981,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def increment_queries(
         self,
         project_id: str,
@@ -910,6 +1020,52 @@ class AsyncProjectsResource(AsyncAPIResource):
                 ),
             ),
             cast_to=object,
+        )
+
+    async def invite_sme(
+        self,
+        project_id: str,
+        *,
+        email: str,
+        page_type: Literal["query_log", "remediation"],
+        url_query_string: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectInviteSmeResponse:
+        """
+        Invite a subject matter expert to view a specific query log or remediation.
+
+        Returns: SMERemediationNotificationResponse with status and notification details
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        return await self._post(
+            f"/api/projects/{project_id}/notifications",
+            body=await async_maybe_transform(
+                {
+                    "email": email,
+                    "page_type": page_type,
+                    "url_query_string": url_query_string,
+                },
+                project_invite_sme_params.ProjectInviteSmeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectInviteSmeResponse,
         )
 
     async def retrieve_analytics(
@@ -974,6 +1130,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
+        messages: Optional[Iterable[project_validate_params.Message]] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
@@ -1003,6 +1160,10 @@ class AsyncProjectsResource(AsyncAPIResource):
           eval_scores: Scores assessing different aspects of the RAG system. If not provided, TLM will
               be used to generate scores.
 
+          messages: Optional message history to provide conversation context for the query. Used to
+              rewrite query into a self-contained version of itself. If not provided, the
+              query will be treated as self-contained.
+
           options: Typed dict of advanced configuration options for the Trustworthy Language Model.
               Many of these configurations are determined by the quality preset selected
               (learn about quality presets in the TLM [initialization method](./#class-tlm)).
@@ -1028,27 +1189,24 @@ class AsyncProjectsResource(AsyncAPIResource):
                 `use_self_reflection` = True.
               - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
                 `use_self_reflection` = False. When using `get_trustworthiness_score()` on
-                "base" preset, a cheaper self-reflection will be used to compute the
-                trustworthiness score.
+                "base" preset, a faster self-reflection is employed.
 
-              By default, the TLM uses the "medium" quality preset. The default base LLM
-              `model` used is "gpt-4o-mini", and `max_tokens` is 512 for all quality presets.
-              You can set custom values for these arguments regardless of the quality preset
-              specified.
+              By default, TLM uses the: "medium" `quality_preset`, "gpt-4.1-mini" base
+              `model`, and `max_tokens` is set to 512. You can set custom values for these
+              arguments regardless of the quality preset specified.
 
-              Args: model ({"gpt-4o-mini", "gpt-4o", "gpt-4.1", "gpt-4.1-mini",
-              "gpt-4.1-nano", "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "gpt-4",
-              "gpt-4.5-preview", "gpt-3.5-turbo-16k", "claude-3.7-sonnet",
-              "claude-3.5-sonnet-v2", "claude-3.5-sonnet", "claude-3.5-haiku",
-              "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"}, default =
-              "gpt-4o-mini"): Underlying base LLM to use (better models yield better results,
-              faster models yield faster/cheaper results). - Models still in beta: "o3", "o1",
-              "o4-mini", "o3-mini", "o1-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
-              "gpt-4.5-preview", "claude-3.7-sonnet", "claude-3.5-sonnet-v2",
-              "claude-3.5-haiku", "nova-micro", "nova-lite", "nova-pro". - Recommended models
-              for accuracy: "gpt-4.1", "o4-mini", "o3", "claude-3.7-sonnet",
-              "claude-3.5-sonnet-v2". - Recommended models for low latency/costs:
-              "gpt-4.1-nano", "nova-micro".
+              Args: model ({"gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "o4-mini", "o3",
+              "gpt-4.5-preview", "gpt-4o-mini", "gpt-4o", "o3-mini", "o1", "o1-mini", "gpt-4",
+              "gpt-3.5-turbo-16k", "claude-opus-4-0", "claude-sonnet-4-0",
+              "claude-3.7-sonnet", "claude-3.5-sonnet-v2", "claude-3.5-sonnet",
+              "claude-3.5-haiku", "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"},
+              default = "gpt-4.1-mini"): Underlying base LLM to use (better models yield
+              better results, faster models yield faster results). - Models still in beta:
+              "o3", "o1", "o4-mini", "o3-mini", "o1-mini", "gpt-4.5-preview",
+              "claude-opus-4-0", "claude-sonnet-4-0", "claude-3.7-sonnet",
+              "claude-3.5-haiku". - Recommended models for accuracy: "gpt-4.1", "o4-mini",
+              "o3", "claude-opus-4-0", "claude-sonnet-4-0". - Recommended models for low
+              latency/costs: "gpt-4.1-nano", "nova-micro".
 
                   max_tokens (int, default = 512): the maximum number of tokens that can be generated in the TLM response (and in internal trustworthiness scoring).
                   Higher values here may produce better (more reliable) TLM responses and trustworthiness scores, but at higher runtimes/costs.
@@ -1074,7 +1232,7 @@ class AsyncProjectsResource(AsyncAPIResource):
 
                   similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
                   trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
-                  Supported similarity measures include: "semantic" (based on natural language inference),
+                  Supported similarity measures include - "semantic" (based on natural language inference),
                   "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
                   "code" (based on model-based analysis designed to compare code), "discrepancy" (based on model-based analysis of possible discrepancies),
                   and "string" (based on character/word overlap). Set this to "string" for minimal runtimes/costs.
@@ -1126,6 +1284,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "custom_eval_thresholds": custom_eval_thresholds,
                     "custom_metadata": custom_metadata,
                     "eval_scores": eval_scores,
+                    "messages": messages,
                     "options": options,
                     "quality_preset": quality_preset,
                     "task": task,
@@ -1167,8 +1326,13 @@ class ProjectsResourceWithRawResponse:
         self.export = to_raw_response_wrapper(
             projects.export,
         )
-        self.increment_queries = to_raw_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.invite_sme = to_raw_response_wrapper(
+            projects.invite_sme,
         )
         self.retrieve_analytics = to_raw_response_wrapper(
             projects.retrieve_analytics,
@@ -1188,6 +1352,18 @@ class ProjectsResourceWithRawResponse:
     @cached_property
     def clusters(self) -> ClustersResourceWithRawResponse:
         return ClustersResourceWithRawResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> EvalsResourceWithRawResponse:
+        return EvalsResourceWithRawResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> QueryLogsResourceWithRawResponse:
+        return QueryLogsResourceWithRawResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> RemediationsResourceWithRawResponse:
+        return RemediationsResourceWithRawResponse(self._projects.remediations)
 
 
 class AsyncProjectsResourceWithRawResponse:
@@ -1212,8 +1388,13 @@ class AsyncProjectsResourceWithRawResponse:
         self.export = async_to_raw_response_wrapper(
             projects.export,
         )
-        self.increment_queries = async_to_raw_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.invite_sme = async_to_raw_response_wrapper(
+            projects.invite_sme,
         )
         self.retrieve_analytics = async_to_raw_response_wrapper(
             projects.retrieve_analytics,
@@ -1233,6 +1414,18 @@ class AsyncProjectsResourceWithRawResponse:
     @cached_property
     def clusters(self) -> AsyncClustersResourceWithRawResponse:
         return AsyncClustersResourceWithRawResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> AsyncEvalsResourceWithRawResponse:
+        return AsyncEvalsResourceWithRawResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> AsyncQueryLogsResourceWithRawResponse:
+        return AsyncQueryLogsResourceWithRawResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> AsyncRemediationsResourceWithRawResponse:
+        return AsyncRemediationsResourceWithRawResponse(self._projects.remediations)
 
 
 class ProjectsResourceWithStreamingResponse:
@@ -1257,8 +1450,13 @@ class ProjectsResourceWithStreamingResponse:
         self.export = to_streamed_response_wrapper(
             projects.export,
         )
-        self.increment_queries = to_streamed_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.invite_sme = to_streamed_response_wrapper(
+            projects.invite_sme,
         )
         self.retrieve_analytics = to_streamed_response_wrapper(
             projects.retrieve_analytics,
@@ -1278,6 +1476,18 @@ class ProjectsResourceWithStreamingResponse:
     @cached_property
     def clusters(self) -> ClustersResourceWithStreamingResponse:
         return ClustersResourceWithStreamingResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> EvalsResourceWithStreamingResponse:
+        return EvalsResourceWithStreamingResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> QueryLogsResourceWithStreamingResponse:
+        return QueryLogsResourceWithStreamingResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> RemediationsResourceWithStreamingResponse:
+        return RemediationsResourceWithStreamingResponse(self._projects.remediations)
 
 
 class AsyncProjectsResourceWithStreamingResponse:
@@ -1302,8 +1512,13 @@ class AsyncProjectsResourceWithStreamingResponse:
         self.export = async_to_streamed_response_wrapper(
             projects.export,
         )
-        self.increment_queries = async_to_streamed_response_wrapper(
-            projects.increment_queries,
+        self.increment_queries = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                projects.increment_queries  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.invite_sme = async_to_streamed_response_wrapper(
+            projects.invite_sme,
         )
         self.retrieve_analytics = async_to_streamed_response_wrapper(
             projects.retrieve_analytics,
@@ -1323,3 +1538,15 @@ class AsyncProjectsResourceWithStreamingResponse:
     @cached_property
     def clusters(self) -> AsyncClustersResourceWithStreamingResponse:
         return AsyncClustersResourceWithStreamingResponse(self._projects.clusters)
+
+    @cached_property
+    def evals(self) -> AsyncEvalsResourceWithStreamingResponse:
+        return AsyncEvalsResourceWithStreamingResponse(self._projects.evals)
+
+    @cached_property
+    def query_logs(self) -> AsyncQueryLogsResourceWithStreamingResponse:
+        return AsyncQueryLogsResourceWithStreamingResponse(self._projects.query_logs)
+
+    @cached_property
+    def remediations(self) -> AsyncRemediationsResourceWithStreamingResponse:
+        return AsyncRemediationsResourceWithStreamingResponse(self._projects.remediations)

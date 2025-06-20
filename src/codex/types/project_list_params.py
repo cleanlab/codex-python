@@ -9,7 +9,7 @@ __all__ = ["ProjectListParams"]
 
 
 class ProjectListParams(TypedDict, total=False):
-    include_entry_counts: bool
+    include_unaddressed_counts: bool
 
     limit: int
 

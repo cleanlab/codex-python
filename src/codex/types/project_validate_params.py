@@ -2,12 +2,40 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Iterable, Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Dict, List, Union, Iterable, Optional
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["ProjectValidateParams", "Options"]
+__all__ = [
+    "ProjectValidateParams",
+    "Message",
+    "MessageChatCompletionDeveloperMessageParam",
+    "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
+    "MessageChatCompletionSystemMessageParam",
+    "MessageChatCompletionSystemMessageParamContentUnionMember1",
+    "MessageChatCompletionUserMessageParam",
+    "MessageChatCompletionUserMessageParamContentUnionMember1",
+    "MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartTextParam",
+    "MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartImageParam",
+    "MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartImageParamImageURL",
+    "MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartInputAudioParam",
+    "MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio",
+    "MessageChatCompletionUserMessageParamContentUnionMember1File",
+    "MessageChatCompletionUserMessageParamContentUnionMember1FileFile",
+    "MessageChatCompletionAssistantMessageParam",
+    "MessageChatCompletionAssistantMessageParamAudio",
+    "MessageChatCompletionAssistantMessageParamContentUnionMember1",
+    "MessageChatCompletionAssistantMessageParamContentUnionMember1ChatCompletionContentPartTextParam",
+    "MessageChatCompletionAssistantMessageParamContentUnionMember1ChatCompletionContentPartRefusalParam",
+    "MessageChatCompletionAssistantMessageParamFunctionCall",
+    "MessageChatCompletionAssistantMessageParamToolCall",
+    "MessageChatCompletionAssistantMessageParamToolCallFunction",
+    "MessageChatCompletionToolMessageParam",
+    "MessageChatCompletionToolMessageParamContentUnionMember1",
+    "MessageChatCompletionFunctionMessageParam",
+    "Options",
+]
 
 
 class ProjectValidateParams(TypedDict, total=False):
@@ -38,6 +66,13 @@ class ProjectValidateParams(TypedDict, total=False):
     If not provided, TLM will be used to generate scores.
     """
 
+    messages: Optional[Iterable[Message]]
+    """Optional message history to provide conversation context for the query.
+
+    Used to rewrite query into a self-contained version of itself. If not provided,
+    the query will be treated as self-contained.
+    """
+
     options: Optional[Options]
     """
     Typed dict of advanced configuration options for the Trustworthy Language Model.
@@ -65,27 +100,24 @@ class ProjectValidateParams(TypedDict, total=False):
       `use_self_reflection` = True.
     - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
       `use_self_reflection` = False. When using `get_trustworthiness_score()` on
-      "base" preset, a cheaper self-reflection will be used to compute the
-      trustworthiness score.
+      "base" preset, a faster self-reflection is employed.
 
-    By default, the TLM uses the "medium" quality preset. The default base LLM
-    `model` used is "gpt-4o-mini", and `max_tokens` is 512 for all quality presets.
-    You can set custom values for these arguments regardless of the quality preset
-    specified.
+    By default, TLM uses the: "medium" `quality_preset`, "gpt-4.1-mini" base
+    `model`, and `max_tokens` is set to 512. You can set custom values for these
+    arguments regardless of the quality preset specified.
 
-    Args: model ({"gpt-4o-mini", "gpt-4o", "gpt-4.1", "gpt-4.1-mini",
-    "gpt-4.1-nano", "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "gpt-4",
-    "gpt-4.5-preview", "gpt-3.5-turbo-16k", "claude-3.7-sonnet",
-    "claude-3.5-sonnet-v2", "claude-3.5-sonnet", "claude-3.5-haiku",
-    "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"}, default =
-    "gpt-4o-mini"): Underlying base LLM to use (better models yield better results,
-    faster models yield faster/cheaper results). - Models still in beta: "o3", "o1",
-    "o4-mini", "o3-mini", "o1-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
-    "gpt-4.5-preview", "claude-3.7-sonnet", "claude-3.5-sonnet-v2",
-    "claude-3.5-haiku", "nova-micro", "nova-lite", "nova-pro". - Recommended models
-    for accuracy: "gpt-4.1", "o4-mini", "o3", "claude-3.7-sonnet",
-    "claude-3.5-sonnet-v2". - Recommended models for low latency/costs:
-    "gpt-4.1-nano", "nova-micro".
+    Args: model ({"gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "o4-mini", "o3",
+    "gpt-4.5-preview", "gpt-4o-mini", "gpt-4o", "o3-mini", "o1", "o1-mini", "gpt-4",
+    "gpt-3.5-turbo-16k", "claude-opus-4-0", "claude-sonnet-4-0",
+    "claude-3.7-sonnet", "claude-3.5-sonnet-v2", "claude-3.5-sonnet",
+    "claude-3.5-haiku", "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"},
+    default = "gpt-4.1-mini"): Underlying base LLM to use (better models yield
+    better results, faster models yield faster results). - Models still in beta:
+    "o3", "o1", "o4-mini", "o3-mini", "o1-mini", "gpt-4.5-preview",
+    "claude-opus-4-0", "claude-sonnet-4-0", "claude-3.7-sonnet",
+    "claude-3.5-haiku". - Recommended models for accuracy: "gpt-4.1", "o4-mini",
+    "o3", "claude-opus-4-0", "claude-sonnet-4-0". - Recommended models for low
+    latency/costs: "gpt-4.1-nano", "nova-micro".
 
         max_tokens (int, default = 512): the maximum number of tokens that can be generated in the TLM response (and in internal trustworthiness scoring).
         Higher values here may produce better (more reliable) TLM responses and trustworthiness scores, but at higher runtimes/costs.
@@ -111,7 +143,7 @@ class ProjectValidateParams(TypedDict, total=False):
 
         similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
         trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
-        Supported similarity measures include: "semantic" (based on natural language inference),
+        Supported similarity measures include - "semantic" (based on natural language inference),
         "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
         "code" (based on model-based analysis designed to compare code), "discrepancy" (based on model-based analysis of possible discrepancies),
         and "string" (based on character/word overlap). Set this to "string" for minimal runtimes/costs.
@@ -141,6 +173,202 @@ class ProjectValidateParams(TypedDict, total=False):
     x_source: Annotated[str, PropertyInfo(alias="x-source")]
 
     x_stainless_package_version: Annotated[str, PropertyInfo(alias="x-stainless-package-version")]
+
+
+class MessageChatCompletionDeveloperMessageParamContentUnionMember1(TypedDict, total=False):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionDeveloperMessageParam(TypedDict, total=False):
+    content: Required[Union[str, Iterable[MessageChatCompletionDeveloperMessageParamContentUnionMember1]]]
+
+    role: Required[Literal["developer"]]
+
+    name: str
+
+
+class MessageChatCompletionSystemMessageParamContentUnionMember1(TypedDict, total=False):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionSystemMessageParam(TypedDict, total=False):
+    content: Required[Union[str, Iterable[MessageChatCompletionSystemMessageParamContentUnionMember1]]]
+
+    role: Required[Literal["system"]]
+
+    name: str
+
+
+class MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartTextParam(
+    TypedDict, total=False
+):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartImageParamImageURL(
+    TypedDict, total=False
+):
+    url: Required[str]
+
+    detail: Literal["auto", "low", "high"]
+
+
+class MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartImageParam(
+    TypedDict, total=False
+):
+    image_url: Required[
+        MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartImageParamImageURL
+    ]
+
+    type: Required[Literal["image_url"]]
+
+
+class MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio(
+    TypedDict, total=False
+):
+    data: Required[str]
+
+    format: Required[Literal["wav", "mp3"]]
+
+
+class MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartInputAudioParam(
+    TypedDict, total=False
+):
+    input_audio: Required[
+        MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio
+    ]
+
+    type: Required[Literal["input_audio"]]
+
+
+class MessageChatCompletionUserMessageParamContentUnionMember1FileFile(TypedDict, total=False):
+    file_data: str
+
+    file_id: str
+
+    filename: str
+
+
+class MessageChatCompletionUserMessageParamContentUnionMember1File(TypedDict, total=False):
+    file: Required[MessageChatCompletionUserMessageParamContentUnionMember1FileFile]
+
+    type: Required[Literal["file"]]
+
+
+MessageChatCompletionUserMessageParamContentUnionMember1: TypeAlias = Union[
+    MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartTextParam,
+    MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartImageParam,
+    MessageChatCompletionUserMessageParamContentUnionMember1ChatCompletionContentPartInputAudioParam,
+    MessageChatCompletionUserMessageParamContentUnionMember1File,
+]
+
+
+class MessageChatCompletionUserMessageParam(TypedDict, total=False):
+    content: Required[Union[str, Iterable[MessageChatCompletionUserMessageParamContentUnionMember1]]]
+
+    role: Required[Literal["user"]]
+
+    name: str
+
+
+class MessageChatCompletionAssistantMessageParamAudio(TypedDict, total=False):
+    id: Required[str]
+
+
+class MessageChatCompletionAssistantMessageParamContentUnionMember1ChatCompletionContentPartTextParam(
+    TypedDict, total=False
+):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionAssistantMessageParamContentUnionMember1ChatCompletionContentPartRefusalParam(
+    TypedDict, total=False
+):
+    refusal: Required[str]
+
+    type: Required[Literal["refusal"]]
+
+
+MessageChatCompletionAssistantMessageParamContentUnionMember1: TypeAlias = Union[
+    MessageChatCompletionAssistantMessageParamContentUnionMember1ChatCompletionContentPartTextParam,
+    MessageChatCompletionAssistantMessageParamContentUnionMember1ChatCompletionContentPartRefusalParam,
+]
+
+
+class MessageChatCompletionAssistantMessageParamFunctionCall(TypedDict, total=False):
+    arguments: Required[str]
+
+    name: Required[str]
+
+
+class MessageChatCompletionAssistantMessageParamToolCallFunction(TypedDict, total=False):
+    arguments: Required[str]
+
+    name: Required[str]
+
+
+class MessageChatCompletionAssistantMessageParamToolCall(TypedDict, total=False):
+    id: Required[str]
+
+    function: Required[MessageChatCompletionAssistantMessageParamToolCallFunction]
+
+    type: Required[Literal["function"]]
+
+
+class MessageChatCompletionAssistantMessageParam(TypedDict, total=False):
+    role: Required[Literal["assistant"]]
+
+    audio: Optional[MessageChatCompletionAssistantMessageParamAudio]
+
+    content: Union[str, Iterable[MessageChatCompletionAssistantMessageParamContentUnionMember1], None]
+
+    function_call: Optional[MessageChatCompletionAssistantMessageParamFunctionCall]
+
+    name: str
+
+    refusal: Optional[str]
+
+    tool_calls: Iterable[MessageChatCompletionAssistantMessageParamToolCall]
+
+
+class MessageChatCompletionToolMessageParamContentUnionMember1(TypedDict, total=False):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionToolMessageParam(TypedDict, total=False):
+    content: Required[Union[str, Iterable[MessageChatCompletionToolMessageParamContentUnionMember1]]]
+
+    role: Required[Literal["tool"]]
+
+    tool_call_id: Required[str]
+
+
+class MessageChatCompletionFunctionMessageParam(TypedDict, total=False):
+    content: Required[Optional[str]]
+
+    name: Required[str]
+
+    role: Required[Literal["function"]]
+
+
+Message: TypeAlias = Union[
+    MessageChatCompletionDeveloperMessageParam,
+    MessageChatCompletionSystemMessageParam,
+    MessageChatCompletionUserMessageParam,
+    MessageChatCompletionAssistantMessageParam,
+    MessageChatCompletionToolMessageParam,
+    MessageChatCompletionFunctionMessageParam,
+]
 
 
 class Options(TypedDict, total=False):
