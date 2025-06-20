@@ -27,6 +27,7 @@ The full API of this library can be found in [api.md](api.md).
 from codex import Codex
 
 client = Codex(
+    auth_token="My Auth Token",
     # or 'production' | 'local'; defaults to "production".
     environment="staging",
 )
@@ -48,6 +49,7 @@ import asyncio
 from codex import AsyncCodex
 
 client = AsyncCodex(
+    auth_token="My Auth Token",
     # or 'production' | 'local'; defaults to "production".
     environment="staging",
 )
