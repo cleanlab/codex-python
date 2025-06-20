@@ -13,6 +13,7 @@ from codex.types import (
     ProjectReturnSchema,
     ProjectRetrieveResponse,
     ProjectValidateResponse,
+    ProjectInviteSmeResponse,
     ProjectRetrieveAnalyticsResponse,
 )
 from tests.utils import assert_matches_type
@@ -514,6 +515,60 @@ class TestProjects:
                 client.projects.with_raw_response.increment_queries(
                     project_id="",
                 )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_invite_sme(self, client: Codex) -> None:
+        project = client.projects.invite_sme(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            email="email",
+            page_type="query_log",
+            url_query_string="url_query_string",
+        )
+        assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_invite_sme(self, client: Codex) -> None:
+        response = client.projects.with_raw_response.invite_sme(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            email="email",
+            page_type="query_log",
+            url_query_string="url_query_string",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_invite_sme(self, client: Codex) -> None:
+        with client.projects.with_streaming_response.invite_sme(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            email="email",
+            page_type="query_log",
+            url_query_string="url_query_string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_invite_sme(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.invite_sme(
+                project_id="",
+                email="email",
+                page_type="query_log",
+                url_query_string="url_query_string",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -1159,6 +1214,60 @@ class TestAsyncProjects:
                 await async_client.projects.with_raw_response.increment_queries(
                     project_id="",
                 )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_invite_sme(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.invite_sme(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            email="email",
+            page_type="query_log",
+            url_query_string="url_query_string",
+        )
+        assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_invite_sme(self, async_client: AsyncCodex) -> None:
+        response = await async_client.projects.with_raw_response.invite_sme(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            email="email",
+            page_type="query_log",
+            url_query_string="url_query_string",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_invite_sme(self, async_client: AsyncCodex) -> None:
+        async with async_client.projects.with_streaming_response.invite_sme(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            email="email",
+            page_type="query_log",
+            url_query_string="url_query_string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_invite_sme(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.invite_sme(
+                project_id="",
+                email="email",
+                page_type="query_log",
+                url_query_string="url_query_string",
+            )
 
     @pytest.mark.skip()
     @parametrize

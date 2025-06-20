@@ -139,6 +139,7 @@ from codex.types import (
     ProjectReturnSchema,
     ProjectRetrieveResponse,
     ProjectListResponse,
+    ProjectInviteSmeResponse,
     ProjectRetrieveAnalyticsResponse,
     ProjectValidateResponse,
 )
@@ -153,6 +154,7 @@ Methods:
 - <code title="delete /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">delete</a>(project_id) -> None</code>
 - <code title="get /api/projects/{project_id}/export">client.projects.<a href="./src/codex/resources/projects/projects.py">export</a>(project_id) -> object</code>
 - <code title="post /api/projects/{project_id}/increment_queries">client.projects.<a href="./src/codex/resources/projects/projects.py">increment_queries</a>(project_id, \*\*<a href="src/codex/types/project_increment_queries_params.py">params</a>) -> object</code>
+- <code title="post /api/projects/{project_id}/notifications">client.projects.<a href="./src/codex/resources/projects/projects.py">invite_sme</a>(project_id, \*\*<a href="src/codex/types/project_invite_sme_params.py">params</a>) -> <a href="./src/codex/types/project_invite_sme_response.py">ProjectInviteSmeResponse</a></code>
 - <code title="get /api/projects/{project_id}/analytics/">client.projects.<a href="./src/codex/resources/projects/projects.py">retrieve_analytics</a>(project_id, \*\*<a href="src/codex/types/project_retrieve_analytics_params.py">params</a>) -> <a href="./src/codex/types/project_retrieve_analytics_response.py">ProjectRetrieveAnalyticsResponse</a></code>
 - <code title="post /api/projects/{project_id}/validate">client.projects.<a href="./src/codex/resources/projects/projects.py">validate</a>(project_id, \*\*<a href="src/codex/types/project_validate_params.py">params</a>) -> <a href="./src/codex/types/project_validate_response.py">ProjectValidateResponse</a></code>
 
@@ -209,6 +211,76 @@ Methods:
 
 - <code title="get /api/projects/{project_id}/entries/clusters">client.projects.clusters.<a href="./src/codex/resources/projects/clusters.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/cluster_list_params.py">params</a>) -> <a href="./src/codex/types/projects/cluster_list_response.py">SyncOffsetPageClusters[ClusterListResponse]</a></code>
 - <code title="get /api/projects/{project_id}/entries/clusters/{representative_entry_id}">client.projects.clusters.<a href="./src/codex/resources/projects/clusters.py">list_variants</a>(representative_entry_id, \*, project_id) -> <a href="./src/codex/types/projects/cluster_list_variants_response.py">ClusterListVariantsResponse</a></code>
+
+## Evals
+
+Types:
+
+```python
+from codex.types.projects import EvalListResponse
+```
+
+Methods:
+
+- <code title="post /api/projects/{project_id}/evals">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/eval_create_params.py">params</a>) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
+- <code title="put /api/projects/{project_id}/evals/{eval_key}">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">update</a>(path_eval_key, \*, project_id, \*\*<a href="src/codex/types/projects/eval_update_params.py">params</a>) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
+- <code title="get /api/projects/{project_id}/evals">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">list</a>(project_id) -> <a href="./src/codex/types/projects/eval_list_response.py">EvalListResponse</a></code>
+- <code title="delete /api/projects/{project_id}/evals/{eval_key}">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">delete</a>(eval_key, \*, project_id) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
+
+## QueryLogs
+
+Types:
+
+```python
+from codex.types.projects import (
+    QueryLogRetrieveResponse,
+    QueryLogListResponse,
+    QueryLogListByGroupResponse,
+    QueryLogListGroupsResponse,
+    QueryLogStartRemediationResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/projects/{project_id}/query_logs/{query_log_id}">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">retrieve</a>(query_log_id, \*, project_id) -> <a href="./src/codex/types/projects/query_log_retrieve_response.py">QueryLogRetrieveResponse</a></code>
+- <code title="get /api/projects/{project_id}/query_logs/">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/query_log_list_params.py">params</a>) -> <a href="./src/codex/types/projects/query_log_list_response.py">QueryLogListResponse</a></code>
+- <code title="get /api/projects/{project_id}/query_logs/logs_by_group">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">list_by_group</a>(project_id, \*\*<a href="src/codex/types/projects/query_log_list_by_group_params.py">params</a>) -> <a href="./src/codex/types/projects/query_log_list_by_group_response.py">QueryLogListByGroupResponse</a></code>
+- <code title="get /api/projects/{project_id}/query_logs/groups">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">list_groups</a>(project_id, \*\*<a href="src/codex/types/projects/query_log_list_groups_params.py">params</a>) -> <a href="./src/codex/types/projects/query_log_list_groups_response.py">QueryLogListGroupsResponse</a></code>
+- <code title="post /api/projects/{project_id}/query_logs/{query_log_id}/start_remediation">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">start_remediation</a>(query_log_id, \*, project_id) -> <a href="./src/codex/types/projects/query_log_start_remediation_response.py">QueryLogStartRemediationResponse</a></code>
+
+## Remediations
+
+Types:
+
+```python
+from codex.types.projects import (
+    RemediationCreateResponse,
+    RemediationRetrieveResponse,
+    RemediationListResponse,
+    RemediationEditAnswerResponse,
+    RemediationEditDraftAnswerResponse,
+    RemediationGetResolvedLogsCountResponse,
+    RemediationListResolvedLogsResponse,
+    RemediationPauseResponse,
+    RemediationPublishResponse,
+    RemediationUnpauseResponse,
+)
+```
+
+Methods:
+
+- <code title="post /api/projects/{project_id}/remediations/">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/remediation_create_params.py">params</a>) -> <a href="./src/codex/types/projects/remediation_create_response.py">RemediationCreateResponse</a></code>
+- <code title="get /api/projects/{project_id}/remediations/{remediation_id}">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">retrieve</a>(remediation_id, \*, project_id) -> <a href="./src/codex/types/projects/remediation_retrieve_response.py">RemediationRetrieveResponse</a></code>
+- <code title="get /api/projects/{project_id}/remediations/">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/remediation_list_params.py">params</a>) -> <a href="./src/codex/types/projects/remediation_list_response.py">RemediationListResponse</a></code>
+- <code title="delete /api/projects/{project_id}/remediations/{remediation_id}">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">delete</a>(remediation_id, \*, project_id) -> None</code>
+- <code title="patch /api/projects/{project_id}/remediations/{remediation_id}/edit_answer">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">edit_answer</a>(remediation_id, \*, project_id, \*\*<a href="src/codex/types/projects/remediation_edit_answer_params.py">params</a>) -> <a href="./src/codex/types/projects/remediation_edit_answer_response.py">RemediationEditAnswerResponse</a></code>
+- <code title="patch /api/projects/{project_id}/remediations/{remediation_id}/edit_draft_answer">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">edit_draft_answer</a>(remediation_id, \*, project_id, \*\*<a href="src/codex/types/projects/remediation_edit_draft_answer_params.py">params</a>) -> <a href="./src/codex/types/projects/remediation_edit_draft_answer_response.py">RemediationEditDraftAnswerResponse</a></code>
+- <code title="get /api/projects/{project_id}/remediations/{remediation_id}/resolved_logs_count">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">get_resolved_logs_count</a>(remediation_id, \*, project_id) -> <a href="./src/codex/types/projects/remediation_get_resolved_logs_count_response.py">RemediationGetResolvedLogsCountResponse</a></code>
+- <code title="get /api/projects/{project_id}/remediations/{remediation_id}/resolved_logs">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">list_resolved_logs</a>(remediation_id, \*, project_id) -> <a href="./src/codex/types/projects/remediation_list_resolved_logs_response.py">RemediationListResolvedLogsResponse</a></code>
+- <code title="patch /api/projects/{project_id}/remediations/{remediation_id}/pause">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">pause</a>(remediation_id, \*, project_id) -> <a href="./src/codex/types/projects/remediation_pause_response.py">RemediationPauseResponse</a></code>
+- <code title="patch /api/projects/{project_id}/remediations/{remediation_id}/publish">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">publish</a>(remediation_id, \*, project_id) -> <a href="./src/codex/types/projects/remediation_publish_response.py">RemediationPublishResponse</a></code>
+- <code title="patch /api/projects/{project_id}/remediations/{remediation_id}/unpause">client.projects.remediations.<a href="./src/codex/resources/projects/remediations.py">unpause</a>(remediation_id, \*, project_id) -> <a href="./src/codex/types/projects/remediation_unpause_response.py">RemediationUnpauseResponse</a></code>
 
 # Tlm
 
