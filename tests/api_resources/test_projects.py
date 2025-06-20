@@ -593,6 +593,13 @@ class TestProjects:
             custom_eval_thresholds={"foo": 0},
             custom_metadata={},
             eval_scores={"foo": 0},
+            messages=[
+                {
+                    "content": "string",
+                    "role": "developer",
+                    "name": "name",
+                }
+            ],
             options={
                 "custom_eval_criteria": [{}],
                 "log": ["string"],
@@ -1231,6 +1238,13 @@ class TestAsyncProjects:
             custom_eval_thresholds={"foo": 0},
             custom_metadata={},
             eval_scores={"foo": 0},
+            messages=[
+                {
+                    "content": "string",
+                    "role": "developer",
+                    "name": "name",
+                }
+            ],
             options={
                 "custom_eval_criteria": [{}],
                 "log": ["string"],
