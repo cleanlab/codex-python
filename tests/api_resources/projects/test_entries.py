@@ -406,6 +406,14 @@ class TestEntries:
                     "custom_metadata": {},
                     "eval_scores": {"foo": 0},
                     "evaluated_response": "evaluated_response",
+                    "messages": [
+                        {
+                            "content": "string",
+                            "role": "developer",
+                            "name": "name",
+                        }
+                    ],
+                    "original_question": "original_question",
                 },
                 x_client_library_version="x-client-library-version",
                 x_integration_type="x-integration-type",
@@ -894,6 +902,14 @@ class TestAsyncEntries:
                     "custom_metadata": {},
                     "eval_scores": {"foo": 0},
                     "evaluated_response": "evaluated_response",
+                    "messages": [
+                        {
+                            "content": "string",
+                            "role": "developer",
+                            "name": "name",
+                        }
+                    ],
+                    "original_question": "original_question",
                 },
                 x_client_library_version="x-client-library-version",
                 x_integration_type="x-integration-type",

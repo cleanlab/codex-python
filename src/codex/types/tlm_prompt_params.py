@@ -40,27 +40,24 @@ class TlmPromptParams(TypedDict, total=False):
       `use_self_reflection` = True.
     - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
       `use_self_reflection` = False. When using `get_trustworthiness_score()` on
-      "base" preset, a cheaper self-reflection will be used to compute the
-      trustworthiness score.
+      "base" preset, a faster self-reflection is employed.
 
-    By default, the TLM uses the "medium" quality preset. The default base LLM
-    `model` used is "gpt-4o-mini", and `max_tokens` is 512 for all quality presets.
-    You can set custom values for these arguments regardless of the quality preset
-    specified.
+    By default, TLM uses the: "medium" `quality_preset`, "gpt-4.1-mini" base
+    `model`, and `max_tokens` is set to 512. You can set custom values for these
+    arguments regardless of the quality preset specified.
 
-    Args: model ({"gpt-4o-mini", "gpt-4o", "gpt-4.1", "gpt-4.1-mini",
-    "gpt-4.1-nano", "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "gpt-4",
-    "gpt-4.5-preview", "gpt-3.5-turbo-16k", "claude-3.7-sonnet",
-    "claude-3.5-sonnet-v2", "claude-3.5-sonnet", "claude-3.5-haiku",
-    "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"}, default =
-    "gpt-4o-mini"): Underlying base LLM to use (better models yield better results,
-    faster models yield faster/cheaper results). - Models still in beta: "o3", "o1",
-    "o4-mini", "o3-mini", "o1-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
-    "gpt-4.5-preview", "claude-3.7-sonnet", "claude-3.5-sonnet-v2",
-    "claude-3.5-haiku", "nova-micro", "nova-lite", "nova-pro". - Recommended models
-    for accuracy: "gpt-4.1", "o4-mini", "o3", "claude-3.7-sonnet",
-    "claude-3.5-sonnet-v2". - Recommended models for low latency/costs:
-    "gpt-4.1-nano", "nova-micro".
+    Args: model ({"gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "o4-mini", "o3",
+    "gpt-4.5-preview", "gpt-4o-mini", "gpt-4o", "o3-mini", "o1", "o1-mini", "gpt-4",
+    "gpt-3.5-turbo-16k", "claude-opus-4-0", "claude-sonnet-4-0",
+    "claude-3.7-sonnet", "claude-3.5-sonnet-v2", "claude-3.5-sonnet",
+    "claude-3.5-haiku", "claude-3-haiku", "nova-micro", "nova-lite", "nova-pro"},
+    default = "gpt-4.1-mini"): Underlying base LLM to use (better models yield
+    better results, faster models yield faster results). - Models still in beta:
+    "o3", "o1", "o4-mini", "o3-mini", "o1-mini", "gpt-4.5-preview",
+    "claude-opus-4-0", "claude-sonnet-4-0", "claude-3.7-sonnet",
+    "claude-3.5-haiku". - Recommended models for accuracy: "gpt-4.1", "o4-mini",
+    "o3", "claude-opus-4-0", "claude-sonnet-4-0". - Recommended models for low
+    latency/costs: "gpt-4.1-nano", "nova-micro".
 
         max_tokens (int, default = 512): the maximum number of tokens that can be generated in the TLM response (and in internal trustworthiness scoring).
         Higher values here may produce better (more reliable) TLM responses and trustworthiness scores, but at higher runtimes/costs.
@@ -86,7 +83,7 @@ class TlmPromptParams(TypedDict, total=False):
 
         similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
         trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
-        Supported similarity measures include: "semantic" (based on natural language inference),
+        Supported similarity measures include - "semantic" (based on natural language inference),
         "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
         "code" (based on model-based analysis designed to compare code), "discrepancy" (based on model-based analysis of possible discrepancies),
         and "string" (based on character/word overlap). Set this to "string" for minimal runtimes/costs.
