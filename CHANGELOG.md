@@ -1,5 +1,51 @@
 # Changelog
 
+## 0.1.0-alpha.21 (2025-06-22)
+
+Full Changelog: [v0.1.0-alpha.20...v0.1.0-alpha.21](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.20...v0.1.0-alpha.21)
+
+### Features
+
+* **api:** add bearer token auth ([ee0e109](https://github.com/cleanlab/codex-python/commit/ee0e109227593a26ff771b265bc838b29c25c66e))
+* **api:** add new endpoints ([7a72928](https://github.com/cleanlab/codex-python/commit/7a729283e11ae9dfb3ea7b337db31f179a5b108c))
+* **api:** api update ([b8729dd](https://github.com/cleanlab/codex-python/commit/b8729ddd238b931c8739b960f0c5f5c185c69119))
+* **api:** api update ([20a7b36](https://github.com/cleanlab/codex-python/commit/20a7b367fab70147c0ce071ad56b9ee02d27df7b))
+* **api:** api update ([425caff](https://github.com/cleanlab/codex-python/commit/425caff55b0a813f637afee7a973b66053bd366f))
+* **api:** api update ([0a636fa](https://github.com/cleanlab/codex-python/commit/0a636fa5930c53671923de2f191a4e5c74328f7f))
+* **api:** api update ([8489bc7](https://github.com/cleanlab/codex-python/commit/8489bc74223f2132cec88583f3fabbf5620dc599))
+* **api:** api update ([ef4acf2](https://github.com/cleanlab/codex-python/commit/ef4acf292c728a838aecd6539d278b8c128be68a))
+* **api:** api update ([3a52931](https://github.com/cleanlab/codex-python/commit/3a5293161e7313d7c18ec61be1b8e7ee56bad8c9))
+* **api:** api update ([7bbf57a](https://github.com/cleanlab/codex-python/commit/7bbf57ae5327ddd85e6729997a4f85b427758258))
+* **api:** api update ([40ae04a](https://github.com/cleanlab/codex-python/commit/40ae04a279ba1e2573d17a17e097f71d1347a3d3))
+* **client:** add follow_redirects request option ([f8a8e15](https://github.com/cleanlab/codex-python/commit/f8a8e15df5a70e7065127943dfae2261724ca3f2))
+
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([9debf1d](https://github.com/cleanlab/codex-python/commit/9debf1d4208f1c65a67211fc4e7adce3193ed291))
+* **docs/api:** remove references to nonexistent types ([7ba3858](https://github.com/cleanlab/codex-python/commit/7ba3858c1c968c093c676478a1c7e5e13b92c12a))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([14a4f3c](https://github.com/cleanlab/codex-python/commit/14a4f3cff659d280f002fa694024e6c9814b3922))
+
+
+### Chores
+
+* **api:** mark some methods as deprecated ([57f522f](https://github.com/cleanlab/codex-python/commit/57f522fbd04637849146636a83976fe696160a97))
+* **ci:** enable for pull requests ([a28cd9c](https://github.com/cleanlab/codex-python/commit/a28cd9c9e47987a1193e345fb48c3dc75512e87a))
+* **ci:** fix installation instructions ([3aa9884](https://github.com/cleanlab/codex-python/commit/3aa98843e0f042734eb5b74ea86c8dcca8636954))
+* **docs:** grammar improvements ([428e500](https://github.com/cleanlab/codex-python/commit/428e5001b6b5576f5383c0f2ffd3ad5fe085128a))
+* **docs:** remove reference to rye shell ([8fcb74d](https://github.com/cleanlab/codex-python/commit/8fcb74d6d5ef8db36a78031c9bf59f0840def1d4))
+* **docs:** remove unnecessary param examples ([2ef6184](https://github.com/cleanlab/codex-python/commit/2ef6184b1f5acfb9e924b6adb0ca6b453507ddd2))
+* **internal:** codegen related update ([18f661d](https://github.com/cleanlab/codex-python/commit/18f661d21b849f15cbe85ce5063ef0dea877d89f))
+* **internal:** update conftest.py ([9bd8925](https://github.com/cleanlab/codex-python/commit/9bd89258f9ce4448e92957c31cc0ff2457f105c9))
+* **readme:** update badges ([0bb6eec](https://github.com/cleanlab/codex-python/commit/0bb6eec41fc0ccb6fcc2d987552dd56a602d6ccb))
+* **tests:** add tests for httpx client instantiation & proxies ([bf46662](https://github.com/cleanlab/codex-python/commit/bf466627bf3e9dc4a8d1f3283f94a75bab241a58))
+* **tests:** run tests in parallel ([0a3aaa1](https://github.com/cleanlab/codex-python/commit/0a3aaa1955e03895d340cfb8b5512bbcc4556d88))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([2836ef3](https://github.com/cleanlab/codex-python/commit/2836ef3a6e7fca6fb2a92d6b13fbe0e38f30f1ad))
+
 ## 0.1.0-alpha.20 (2025-05-15)
 
 Full Changelog: [v0.1.0-alpha.19...v0.1.0-alpha.20](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.19...v0.1.0-alpha.20)
