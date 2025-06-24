@@ -44,6 +44,7 @@ class TestEvals:
             query_identifier="query_identifier",
             response_identifier="response_identifier",
             should_escalate=True,
+            should_guardrail=True,
             threshold=0,
             threshold_direction="above",
         )
@@ -120,6 +121,7 @@ class TestEvals:
             query_identifier="query_identifier",
             response_identifier="response_identifier",
             should_escalate=True,
+            should_guardrail=True,
             threshold=0,
             threshold_direction="above",
         )
@@ -200,6 +202,7 @@ class TestEvals:
             enabled=True,
             priority=0,
             should_escalate=True,
+            should_guardrail=True,
             threshold=0,
             threshold_direction="above",
         )
@@ -378,6 +381,7 @@ class TestAsyncEvals:
             query_identifier="query_identifier",
             response_identifier="response_identifier",
             should_escalate=True,
+            should_guardrail=True,
             threshold=0,
             threshold_direction="above",
         )
@@ -454,6 +458,7 @@ class TestAsyncEvals:
             query_identifier="query_identifier",
             response_identifier="response_identifier",
             should_escalate=True,
+            should_guardrail=True,
             threshold=0,
             threshold_direction="above",
         )
@@ -534,6 +539,7 @@ class TestAsyncEvals:
             enabled=True,
             priority=0,
             should_escalate=True,
+            should_guardrail=True,
             threshold=0,
             threshold_direction="above",
         )
