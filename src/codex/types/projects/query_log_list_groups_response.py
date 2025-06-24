@@ -40,7 +40,8 @@ class QueryLogGroup(BaseModel):
     """
 
     is_bad_response: bool
-    """If an eval with should_escalate=True failed"""
+
+    needs_review: bool
 
     project_id: str
 
@@ -48,7 +49,7 @@ class QueryLogGroup(BaseModel):
 
     remediation_id: str
 
-    status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED"]
+    status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
 
     total_count: int
 
@@ -64,6 +65,9 @@ class QueryLogGroup(BaseModel):
     custom_metadata_keys: Optional[List[str]] = None
     """Keys of the custom metadata"""
 
+    escalated: Optional[bool] = None
+    """If true, the question was escalated to Codex for an SME to review"""
+
     eval_issue_labels: Optional[List[str]] = None
     """Labels derived from evaluation scores"""
 
@@ -75,6 +79,9 @@ class QueryLogGroup(BaseModel):
 
     evaluated_response: Optional[str] = None
     """The response being evaluated from the RAG system (before any remediation)"""
+
+    guardrailed: Optional[bool] = None
+    """If true, the response was guardrailed"""
 
     primary_eval_issue: Optional[str] = None
     """Primary issue identified in evaluation"""
