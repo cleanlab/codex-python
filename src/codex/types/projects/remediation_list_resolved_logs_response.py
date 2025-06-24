@@ -6,7 +6,32 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["RemediationListResolvedLogsResponse", "QueryLog", "QueryLogContext"]
+__all__ = [
+    "RemediationListResolvedLogsResponse",
+    "QueryLog",
+    "QueryLogFormattedEscalationEvalScores",
+    "QueryLogFormattedEvalScores",
+    "QueryLogFormattedGuardrailEvalScores",
+    "QueryLogContext",
+]
+
+
+class QueryLogFormattedEscalationEvalScores(BaseModel):
+    score: float
+
+    status: Literal["pass", "fail"]
+
+
+class QueryLogFormattedEvalScores(BaseModel):
+    score: float
+
+    status: Literal["pass", "fail"]
+
+
+class QueryLogFormattedGuardrailEvalScores(BaseModel):
+    score: float
+
+    status: Literal["pass", "fail"]
 
 
 class QueryLogContext(BaseModel):
@@ -31,13 +56,17 @@ class QueryLog(BaseModel):
 
     created_at: datetime
 
-    formatted_eval_scores: Optional[Dict[str, Dict[str, Union[float, Literal["pass", "fail"]]]]] = None
+    formatted_escalation_eval_scores: Optional[Dict[str, QueryLogFormattedEscalationEvalScores]] = None
+
+    formatted_eval_scores: Optional[Dict[str, QueryLogFormattedEvalScores]] = None
     """Format evaluation scores for frontend display with pass/fail status.
 
     Returns: Dictionary mapping eval keys to their formatted representation: {
     "eval_key": { "score": float, "status": "pass" | "fail" } } Returns None if
     eval_scores is None.
     """
+
+    formatted_guardrail_eval_scores: Optional[Dict[str, QueryLogFormattedGuardrailEvalScores]] = None
 
     is_bad_response: bool
 
@@ -62,6 +91,9 @@ class QueryLog(BaseModel):
     escalated: Optional[bool] = None
     """If true, the question was escalated to Codex for an SME to review"""
 
+    escalation_evals: Optional[List[str]] = None
+    """Evals that should trigger escalation to SME"""
+
     eval_issue_labels: Optional[List[str]] = None
     """Labels derived from evaluation scores"""
 
@@ -73,6 +105,9 @@ class QueryLog(BaseModel):
 
     evaluated_response: Optional[str] = None
     """The response being evaluated from the RAG system (before any remediation)"""
+
+    guardrail_evals: Optional[List[str]] = None
+    """Evals that should trigger guardrail"""
 
     guardrailed: Optional[bool] = None
     """If true, the response was guardrailed"""
