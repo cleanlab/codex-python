@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.22 (2025-06-24)
+
+Full Changelog: [v0.1.0-alpha.21...v0.1.0-alpha.22](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.21...v0.1.0-alpha.22)
+
+### Features
+
+* **api:** api update ([e9ca3b5](https://github.com/cleanlab/codex-python/commit/e9ca3b5ce636b8572f168ed8d2c82d416f22b823))
+* **client:** add support for aiohttp ([f90d62f](https://github.com/cleanlab/codex-python/commit/f90d62f83e7dc80d1a94c090724ca3a7c285e3e2))
+
+
+### Chores
+
+* **tests:** skip some failing tests on the latest python versions ([aea4c5c](https://github.com/cleanlab/codex-python/commit/aea4c5ce68120a12fe8248c4611b5b336f36ab0f))
+
 ## 0.1.0-alpha.21 (2025-06-22)
 
 Full Changelog: [v0.1.0-alpha.20...v0.1.0-alpha.21](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.20...v0.1.0-alpha.21)
