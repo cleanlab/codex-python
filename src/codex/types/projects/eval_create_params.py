@@ -55,9 +55,12 @@ class EvalCreateParams(TypedDict, total=False):
 
     should_escalate: bool
     """
-    If true, failing this eval means the response is considered bad and can trigger
-    escalation to Codex/SME
+    If true, failing this eval means the question should be escalated to Codex for
+    an SME to review
     """
+
+    should_guardrail: bool
+    """If true, failing this eval means the response should be guardrailed"""
 
     threshold: float
     """Threshold value that determines if the evaluation fails"""

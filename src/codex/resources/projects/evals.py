@@ -59,6 +59,7 @@ class EvalsResource(SyncAPIResource):
         query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -95,8 +96,10 @@ class EvalsResource(SyncAPIResource):
           response_identifier: The exact string used in your evaluation criteria to reference the RAG/LLM
               response.
 
-          should_escalate: If true, failing this eval means the response is considered bad and can trigger
-              escalation to Codex/SME
+          should_escalate: If true, failing this eval means the question should be escalated to Codex for
+              an SME to review
+
+          should_guardrail: If true, failing this eval means the response should be guardrailed
 
           threshold: Threshold value that determines if the evaluation fails
 
@@ -126,6 +129,7 @@ class EvalsResource(SyncAPIResource):
                     "query_identifier": query_identifier,
                     "response_identifier": response_identifier,
                     "should_escalate": should_escalate,
+                    "should_guardrail": should_guardrail,
                     "threshold": threshold,
                     "threshold_direction": threshold_direction,
                 },
@@ -153,6 +157,7 @@ class EvalsResource(SyncAPIResource):
         query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -189,8 +194,10 @@ class EvalsResource(SyncAPIResource):
           response_identifier: The exact string used in your evaluation criteria to reference the RAG/LLM
               response.
 
-          should_escalate: If true, failing this eval means the response is considered bad and can trigger
-              escalation to Codex/SME
+          should_escalate: If true, failing this eval means the question should be escalated to Codex for
+              an SME to review
+
+          should_guardrail: If true, failing this eval means the response should be guardrailed
 
           threshold: Threshold value that determines if the evaluation fails
 
@@ -216,6 +223,7 @@ class EvalsResource(SyncAPIResource):
         enabled: bool | NotGiven = NOT_GIVEN,
         priority: Optional[int] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -237,8 +245,10 @@ class EvalsResource(SyncAPIResource):
           priority: Priority order for evals (lower number = higher priority) to determine primary
               eval issue to surface
 
-          should_escalate: If true, failing this eval means the response is considered bad and can trigger
-              escalation to Codex/SME
+          should_escalate: If true, failing this eval means the question should be escalated to Codex for
+              an SME to review
+
+          should_guardrail: If true, failing this eval means the response should be guardrailed
 
           threshold: Threshold value that determines if the evaluation fails
 
@@ -270,6 +280,7 @@ class EvalsResource(SyncAPIResource):
         query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -297,6 +308,7 @@ class EvalsResource(SyncAPIResource):
                     "query_identifier": query_identifier,
                     "response_identifier": response_identifier,
                     "should_escalate": should_escalate,
+                    "should_guardrail": should_guardrail,
                     "threshold": threshold,
                     "threshold_direction": threshold_direction,
                 },
@@ -412,6 +424,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -448,8 +461,10 @@ class AsyncEvalsResource(AsyncAPIResource):
           response_identifier: The exact string used in your evaluation criteria to reference the RAG/LLM
               response.
 
-          should_escalate: If true, failing this eval means the response is considered bad and can trigger
-              escalation to Codex/SME
+          should_escalate: If true, failing this eval means the question should be escalated to Codex for
+              an SME to review
+
+          should_guardrail: If true, failing this eval means the response should be guardrailed
 
           threshold: Threshold value that determines if the evaluation fails
 
@@ -479,6 +494,7 @@ class AsyncEvalsResource(AsyncAPIResource):
                     "query_identifier": query_identifier,
                     "response_identifier": response_identifier,
                     "should_escalate": should_escalate,
+                    "should_guardrail": should_guardrail,
                     "threshold": threshold,
                     "threshold_direction": threshold_direction,
                 },
@@ -506,6 +522,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -542,8 +559,10 @@ class AsyncEvalsResource(AsyncAPIResource):
           response_identifier: The exact string used in your evaluation criteria to reference the RAG/LLM
               response.
 
-          should_escalate: If true, failing this eval means the response is considered bad and can trigger
-              escalation to Codex/SME
+          should_escalate: If true, failing this eval means the question should be escalated to Codex for
+              an SME to review
+
+          should_guardrail: If true, failing this eval means the response should be guardrailed
 
           threshold: Threshold value that determines if the evaluation fails
 
@@ -569,6 +588,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         enabled: bool | NotGiven = NOT_GIVEN,
         priority: Optional[int] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -590,8 +610,10 @@ class AsyncEvalsResource(AsyncAPIResource):
           priority: Priority order for evals (lower number = higher priority) to determine primary
               eval issue to surface
 
-          should_escalate: If true, failing this eval means the response is considered bad and can trigger
-              escalation to Codex/SME
+          should_escalate: If true, failing this eval means the question should be escalated to Codex for
+              an SME to review
+
+          should_guardrail: If true, failing this eval means the response should be guardrailed
 
           threshold: Threshold value that determines if the evaluation fails
 
@@ -623,6 +645,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
         should_escalate: bool | NotGiven = NOT_GIVEN,
+        should_guardrail: bool | NotGiven = NOT_GIVEN,
         threshold: float | NotGiven = NOT_GIVEN,
         threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -650,6 +673,7 @@ class AsyncEvalsResource(AsyncAPIResource):
                     "query_identifier": query_identifier,
                     "response_identifier": response_identifier,
                     "should_escalate": should_escalate,
+                    "should_guardrail": should_guardrail,
                     "threshold": threshold,
                     "threshold_direction": threshold_direction,
                 },

@@ -22,13 +22,15 @@ class Remediation(BaseModel):
 
     last_edited_by: Optional[str] = None
 
+    needs_review: bool
+
     project_id: str
 
     question: str
 
     resolved_logs_count: int
 
-    status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED"]
+    status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
 
     answer: Optional[str] = None
 

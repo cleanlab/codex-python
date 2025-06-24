@@ -69,9 +69,12 @@ class ProjectConfigEvalConfigCustomEvalsEvals(BaseModel):
 
     should_escalate: Optional[bool] = None
     """
-    If true, failing this eval means the response is considered bad and can trigger
-    escalation to Codex/SME
+    If true, failing this eval means the question should be escalated to Codex for
+    an SME to review
     """
+
+    should_guardrail: Optional[bool] = None
+    """If true, failing this eval means the response should be guardrailed"""
 
     threshold: Optional[float] = None
     """Threshold value that determines if the evaluation fails"""
@@ -105,9 +108,12 @@ class ProjectConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
 
     should_escalate: Optional[bool] = None
     """
-    If true, failing this eval means the response is considered bad and can trigger
-    escalation to Codex/SME
+    If true, failing this eval means the question should be escalated to Codex for
+    an SME to review
     """
+
+    should_guardrail: Optional[bool] = None
+    """If true, failing this eval means the response should be guardrailed"""
 
     threshold: Optional[float] = None
     """Threshold value that determines if the evaluation fails"""
@@ -137,9 +143,12 @@ class ProjectConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
 
     should_escalate: Optional[bool] = None
     """
-    If true, failing this eval means the response is considered bad and can trigger
-    escalation to Codex/SME
+    If true, failing this eval means the question should be escalated to Codex for
+    an SME to review
     """
+
+    should_guardrail: Optional[bool] = None
+    """If true, failing this eval means the response should be guardrailed"""
 
     threshold: Optional[float] = None
     """Threshold value that determines if the evaluation fails"""
@@ -169,9 +178,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
 
     should_escalate: Optional[bool] = None
     """
-    If true, failing this eval means the response is considered bad and can trigger
-    escalation to Codex/SME
+    If true, failing this eval means the question should be escalated to Codex for
+    an SME to review
     """
+
+    should_guardrail: Optional[bool] = None
+    """If true, failing this eval means the response should be guardrailed"""
 
     threshold: Optional[float] = None
     """Threshold value that determines if the evaluation fails"""
@@ -201,9 +213,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
 
     should_escalate: Optional[bool] = None
     """
-    If true, failing this eval means the response is considered bad and can trigger
-    escalation to Codex/SME
+    If true, failing this eval means the question should be escalated to Codex for
+    an SME to review
     """
+
+    should_guardrail: Optional[bool] = None
+    """If true, failing this eval means the response should be guardrailed"""
 
     threshold: Optional[float] = None
     """Threshold value that determines if the evaluation fails"""
@@ -233,9 +248,12 @@ class ProjectConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
 
     should_escalate: Optional[bool] = None
     """
-    If true, failing this eval means the response is considered bad and can trigger
-    escalation to Codex/SME
+    If true, failing this eval means the question should be escalated to Codex for
+    an SME to review
     """
+
+    should_guardrail: Optional[bool] = None
+    """If true, failing this eval means the response should be guardrailed"""
 
     threshold: Optional[float] = None
     """Threshold value that determines if the evaluation fails"""

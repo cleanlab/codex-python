@@ -8,14 +8,27 @@ __all__ = ["ProjectValidateResponse", "EvalScores"]
 
 
 class EvalScores(BaseModel):
-    failed: bool
-
     score: Optional[float] = None
+
+    triggered: bool
+
+    triggered_escalation: bool
+
+    triggered_guardrail: bool
+
+    failed: Optional[bool] = None
 
     log: Optional[object] = None
 
 
 class ProjectValidateResponse(BaseModel):
+    escalated_to_sme: bool
+    """
+    True if the question should be escalated to Codex for an SME to review, False
+    otherwise. When True, a lookup is performed, which logs this query in the
+    project for SMEs to answer, if it does not already exist.
+    """
+
     eval_scores: Dict[str, EvalScores]
     """
     Evaluation scores for the original response along with a boolean flag, `failed`,
@@ -33,4 +46,10 @@ class ProjectValidateResponse(BaseModel):
 
     When True, a lookup is performed, which logs this query in the project for SMEs
     to answer, if it does not already exist.
+    """
+
+    should_guardrail: bool
+    """
+    True if the response should be guardrailed by the AI system, False if the
+    response is okay to return to the user.
     """
