@@ -21,13 +21,13 @@ __all__ = [
 
 
 class ProjectUpdateParams(TypedDict, total=False):
-    config: Required[Config]
+    auto_clustering_enabled: Optional[bool]
 
-    name: Required[str]
-
-    auto_clustering_enabled: bool
+    config: Optional[Config]
 
     description: Optional[str]
+
+    name: Optional[str]
 
 
 class ConfigEvalConfigCustomEvalsEvals(TypedDict, total=False):

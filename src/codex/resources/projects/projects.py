@@ -212,10 +212,10 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        config: project_update_params.Config,
-        name: str,
-        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
+        auto_clustering_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
+        config: Optional[project_update_params.Config] | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -241,10 +241,10 @@ class ProjectsResource(SyncAPIResource):
             f"/api/projects/{project_id}",
             body=maybe_transform(
                 {
-                    "config": config,
-                    "name": name,
                     "auto_clustering_enabled": auto_clustering_enabled,
+                    "config": config,
                     "description": description,
+                    "name": name,
                 },
                 project_update_params.ProjectUpdateParams,
             ),
@@ -820,10 +820,10 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        config: project_update_params.Config,
-        name: str,
-        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
+        auto_clustering_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
+        config: Optional[project_update_params.Config] | NotGiven = NOT_GIVEN,
         description: Optional[str] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -849,10 +849,10 @@ class AsyncProjectsResource(AsyncAPIResource):
             f"/api/projects/{project_id}",
             body=await async_maybe_transform(
                 {
-                    "config": config,
-                    "name": name,
                     "auto_clustering_enabled": auto_clustering_enabled,
+                    "config": config,
                     "description": description,
+                    "name": name,
                 },
                 project_update_params.ProjectUpdateParams,
             ),
