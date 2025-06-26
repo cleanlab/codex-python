@@ -206,8 +206,6 @@ class TestProjects:
     def test_method_update(self, client: Codex) -> None:
         project = client.projects.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={},
-            name="name",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
@@ -216,6 +214,7 @@ class TestProjects:
     def test_method_update_with_all_params(self, client: Codex) -> None:
         project = client.projects.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auto_clustering_enabled=True,
             config={
                 "clustering_use_llm_matching": True,
                 "eval_config": {
@@ -298,9 +297,8 @@ class TestProjects:
                 "query_use_llm_matching": True,
                 "upper_llm_match_distance_threshold": 0,
             },
-            name="name",
-            auto_clustering_enabled=True,
             description="description",
+            name="name",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
@@ -309,8 +307,6 @@ class TestProjects:
     def test_raw_response_update(self, client: Codex) -> None:
         response = client.projects.with_raw_response.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={},
-            name="name",
         )
 
         assert response.is_closed is True
@@ -323,8 +319,6 @@ class TestProjects:
     def test_streaming_response_update(self, client: Codex) -> None:
         with client.projects.with_streaming_response.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={},
-            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -340,8 +334,6 @@ class TestProjects:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.with_raw_response.update(
                 project_id="",
-                config={},
-                name="name",
             )
 
     @pytest.mark.skip()
@@ -919,8 +911,6 @@ class TestAsyncProjects:
     async def test_method_update(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={},
-            name="name",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
@@ -929,6 +919,7 @@ class TestAsyncProjects:
     async def test_method_update_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            auto_clustering_enabled=True,
             config={
                 "clustering_use_llm_matching": True,
                 "eval_config": {
@@ -1011,9 +1002,8 @@ class TestAsyncProjects:
                 "query_use_llm_matching": True,
                 "upper_llm_match_distance_threshold": 0,
             },
-            name="name",
-            auto_clustering_enabled=True,
             description="description",
+            name="name",
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
@@ -1022,8 +1012,6 @@ class TestAsyncProjects:
     async def test_raw_response_update(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={},
-            name="name",
         )
 
         assert response.is_closed is True
@@ -1036,8 +1024,6 @@ class TestAsyncProjects:
     async def test_streaming_response_update(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.update(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            config={},
-            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1053,8 +1039,6 @@ class TestAsyncProjects:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.with_raw_response.update(
                 project_id="",
-                config={},
-                name="name",
             )
 
     @pytest.mark.skip()
