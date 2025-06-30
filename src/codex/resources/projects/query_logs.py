@@ -92,9 +92,12 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
         ]
@@ -117,6 +120,12 @@ class QueryLogsResource(SyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          failed_evals: Filter by evals that failed
+
+          guardrailed: Filter by guardrailed status
+
+          passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
@@ -144,9 +153,12 @@ class QueryLogsResource(SyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "failed_evals": failed_evals,
+                        "guardrailed": guardrailed,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
+                        "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
                         "was_cache_hit": was_cache_hit,
@@ -164,9 +176,13 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
         ]
@@ -190,6 +206,14 @@ class QueryLogsResource(SyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          failed_evals: Filter by evals that failed
+
+          guardrailed: Filter by guardrailed status
+
+          needs_review: Filter logs that need review
+
+          passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
@@ -219,9 +243,13 @@ class QueryLogsResource(SyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "failed_evals": failed_evals,
+                        "guardrailed": guardrailed,
                         "limit": limit,
+                        "needs_review": needs_review,
                         "offset": offset,
                         "order": order,
+                        "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "remediation_ids": remediation_ids,
                         "sort": sort,
@@ -240,9 +268,13 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
         ]
@@ -266,6 +298,14 @@ class QueryLogsResource(SyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          failed_evals: Filter by evals that failed
+
+          guardrailed: Filter by guardrailed status
+
+          needs_review: Filter log groups that need review
+
+          passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
@@ -293,9 +333,13 @@ class QueryLogsResource(SyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "failed_evals": failed_evals,
+                        "guardrailed": guardrailed,
                         "limit": limit,
+                        "needs_review": needs_review,
                         "offset": offset,
                         "order": order,
+                        "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
                         "was_cache_hit": was_cache_hit,
@@ -406,9 +450,12 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
         ]
@@ -431,6 +478,12 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          failed_evals: Filter by evals that failed
+
+          guardrailed: Filter by guardrailed status
+
+          passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
@@ -458,9 +511,12 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "failed_evals": failed_evals,
+                        "guardrailed": guardrailed,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
+                        "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
                         "was_cache_hit": was_cache_hit,
@@ -478,9 +534,13 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
         ]
@@ -504,6 +564,14 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          failed_evals: Filter by evals that failed
+
+          guardrailed: Filter by guardrailed status
+
+          needs_review: Filter logs that need review
+
+          passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
@@ -533,9 +601,13 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "failed_evals": failed_evals,
+                        "guardrailed": guardrailed,
                         "limit": limit,
+                        "needs_review": needs_review,
                         "offset": offset,
                         "order": order,
+                        "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "remediation_ids": remediation_ids,
                         "sort": sort,
@@ -554,9 +626,13 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
         ]
@@ -580,6 +656,14 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          failed_evals: Filter by evals that failed
+
+          guardrailed: Filter by guardrailed status
+
+          needs_review: Filter log groups that need review
+
+          passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
@@ -607,9 +691,13 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "failed_evals": failed_evals,
+                        "guardrailed": guardrailed,
                         "limit": limit,
+                        "needs_review": needs_review,
                         "offset": offset,
                         "order": order,
+                        "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
                         "was_cache_hit": was_cache_hit,
