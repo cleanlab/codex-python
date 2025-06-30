@@ -21,11 +21,20 @@ class QueryLogListParams(TypedDict, total=False):
     custom_metadata: Optional[str]
     """Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}"""
 
+    failed_evals: Optional[List[str]]
+    """Filter by evals that failed"""
+
+    guardrailed: Optional[bool]
+    """Filter by guardrailed status"""
+
     limit: int
 
     offset: int
 
     order: Literal["asc", "desc"]
+
+    passed_evals: Optional[List[str]]
+    """Filter by evals that passed"""
 
     primary_eval_issue: Optional[
         List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
