@@ -12,6 +12,7 @@ __all__ = [
     "QueryLogFormattedEscalationEvalScores",
     "QueryLogFormattedEvalScores",
     "QueryLogFormattedGuardrailEvalScores",
+    "QueryLogFormattedNonGuardrailEvalScores",
     "QueryLogContext",
 ]
 
@@ -29,6 +30,12 @@ class QueryLogFormattedEvalScores(BaseModel):
 
 
 class QueryLogFormattedGuardrailEvalScores(BaseModel):
+    score: float
+
+    status: Literal["pass", "fail"]
+
+
+class QueryLogFormattedNonGuardrailEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
@@ -67,6 +74,8 @@ class QueryLog(BaseModel):
     """
 
     formatted_guardrail_eval_scores: Optional[Dict[str, QueryLogFormattedGuardrailEvalScores]] = None
+
+    formatted_non_guardrail_eval_scores: Optional[Dict[str, QueryLogFormattedNonGuardrailEvalScores]] = None
 
     is_bad_response: bool
 
