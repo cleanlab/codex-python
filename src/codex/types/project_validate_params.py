@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import builtins
 from typing import Dict, List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
@@ -10,24 +9,6 @@ from .._utils import PropertyInfo
 
 __all__ = [
     "ProjectValidateParams",
-    "Response",
-    "ResponseChatCompletion",
-    "ResponseChatCompletionChoice",
-    "ResponseChatCompletionChoiceMessage",
-    "ResponseChatCompletionChoiceMessageAnnotation",
-    "ResponseChatCompletionChoiceMessageAnnotationURLCitation",
-    "ResponseChatCompletionChoiceMessageAudio",
-    "ResponseChatCompletionChoiceMessageFunctionCall",
-    "ResponseChatCompletionChoiceMessageToolCall",
-    "ResponseChatCompletionChoiceMessageToolCallFunction",
-    "ResponseChatCompletionChoiceLogprobs",
-    "ResponseChatCompletionChoiceLogprobsContent",
-    "ResponseChatCompletionChoiceLogprobsContentTopLogprob",
-    "ResponseChatCompletionChoiceLogprobsRefusal",
-    "ResponseChatCompletionChoiceLogprobsRefusalTopLogprob",
-    "ResponseChatCompletionUsage",
-    "ResponseChatCompletionUsageCompletionTokensDetails",
-    "ResponseChatCompletionUsagePromptTokensDetails",
     "Message",
     "MessageChatCompletionDeveloperMessageParam",
     "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
@@ -60,9 +41,11 @@ __all__ = [
 class ProjectValidateParams(TypedDict, total=False):
     context: Required[str]
 
+    prompt: Required[str]
+
     query: Required[str]
 
-    response: Required[Response]
+    response: Required[str]
 
     use_llm_matching: bool
 
@@ -83,10 +66,11 @@ class ProjectValidateParams(TypedDict, total=False):
     If not provided, TLM will be used to generate scores.
     """
 
-    messages: Iterable[Message]
-    """Message history to provide conversation context for the query.
+    messages: Optional[Iterable[Message]]
+    """Optional message history to provide conversation context for the query.
 
-    Messages contain up to and including the latest user prompt to the LLM.
+    Used to rewrite query into a self-contained version of itself. If not provided,
+    the query will be treated as self-contained.
     """
 
     options: Optional[Options]
@@ -177,20 +161,8 @@ class ProjectValidateParams(TypedDict, total=False):
         - criteria: Instructions specifying the evaluation criteria.
     """
 
-    prompt: Optional[str]
-    """The prompt to use for the TLM call.
-
-    If not provided, the prompt will be generated from the messages.
-    """
-
     quality_preset: Literal["best", "high", "medium", "low", "base"]
     """The quality preset to use for the TLM or Trustworthy RAG API."""
-
-    rewritten_question: Optional[str]
-    """
-    The re-written query if it was provided by the client to Codex from a user to be
-    used instead of the original query.
-    """
 
     task: Optional[str]
 
@@ -201,243 +173,6 @@ class ProjectValidateParams(TypedDict, total=False):
     x_source: Annotated[str, PropertyInfo(alias="x-source")]
 
     x_stainless_package_version: Annotated[str, PropertyInfo(alias="x-stainless-package-version")]
-
-
-class ResponseChatCompletionChoiceMessageAnnotationURLCitationTyped(TypedDict, total=False):
-    end_index: Required[int]
-
-    start_index: Required[int]
-
-    title: Required[str]
-
-    url: Required[str]
-
-
-ResponseChatCompletionChoiceMessageAnnotationURLCitation: TypeAlias = Union[
-    ResponseChatCompletionChoiceMessageAnnotationURLCitationTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceMessageAnnotationTyped(TypedDict, total=False):
-    type: Required[Literal["url_citation"]]
-
-    url_citation: Required[ResponseChatCompletionChoiceMessageAnnotationURLCitation]
-
-
-ResponseChatCompletionChoiceMessageAnnotation: TypeAlias = Union[
-    ResponseChatCompletionChoiceMessageAnnotationTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceMessageAudioTyped(TypedDict, total=False):
-    id: Required[str]
-
-    data: Required[str]
-
-    expires_at: Required[int]
-
-    transcript: Required[str]
-
-
-ResponseChatCompletionChoiceMessageAudio: TypeAlias = Union[
-    ResponseChatCompletionChoiceMessageAudioTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceMessageFunctionCallTyped(TypedDict, total=False):
-    arguments: Required[str]
-
-    name: Required[str]
-
-
-ResponseChatCompletionChoiceMessageFunctionCall: TypeAlias = Union[
-    ResponseChatCompletionChoiceMessageFunctionCallTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceMessageToolCallFunctionTyped(TypedDict, total=False):
-    arguments: Required[str]
-
-    name: Required[str]
-
-
-ResponseChatCompletionChoiceMessageToolCallFunction: TypeAlias = Union[
-    ResponseChatCompletionChoiceMessageToolCallFunctionTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceMessageToolCallTyped(TypedDict, total=False):
-    id: Required[str]
-
-    function: Required[ResponseChatCompletionChoiceMessageToolCallFunction]
-
-    type: Required[Literal["function"]]
-
-
-ResponseChatCompletionChoiceMessageToolCall: TypeAlias = Union[
-    ResponseChatCompletionChoiceMessageToolCallTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceMessageTyped(TypedDict, total=False):
-    role: Required[Literal["assistant"]]
-
-    annotations: Optional[Iterable[ResponseChatCompletionChoiceMessageAnnotation]]
-
-    audio: Optional[ResponseChatCompletionChoiceMessageAudio]
-
-    content: Optional[str]
-
-    function_call: Optional[ResponseChatCompletionChoiceMessageFunctionCall]
-
-    refusal: Optional[str]
-
-    tool_calls: Optional[Iterable[ResponseChatCompletionChoiceMessageToolCall]]
-
-
-ResponseChatCompletionChoiceMessage: TypeAlias = Union[ResponseChatCompletionChoiceMessageTyped, Dict[str, object]]
-
-
-class ResponseChatCompletionChoiceLogprobsContentTopLogprobTyped(TypedDict, total=False):
-    token: Required[str]
-
-    logprob: Required[float]
-
-    bytes: Optional[Iterable[int]]
-
-
-ResponseChatCompletionChoiceLogprobsContentTopLogprob: TypeAlias = Union[
-    ResponseChatCompletionChoiceLogprobsContentTopLogprobTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceLogprobsContentTyped(TypedDict, total=False):
-    token: Required[str]
-
-    logprob: Required[float]
-
-    top_logprobs: Required[Iterable[ResponseChatCompletionChoiceLogprobsContentTopLogprob]]
-
-    bytes: Optional[Iterable[int]]
-
-
-ResponseChatCompletionChoiceLogprobsContent: TypeAlias = Union[
-    ResponseChatCompletionChoiceLogprobsContentTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceLogprobsRefusalTopLogprobTyped(TypedDict, total=False):
-    token: Required[str]
-
-    logprob: Required[float]
-
-    bytes: Optional[Iterable[int]]
-
-
-ResponseChatCompletionChoiceLogprobsRefusalTopLogprob: TypeAlias = Union[
-    ResponseChatCompletionChoiceLogprobsRefusalTopLogprobTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceLogprobsRefusalTyped(TypedDict, total=False):
-    token: Required[str]
-
-    logprob: Required[float]
-
-    top_logprobs: Required[Iterable[ResponseChatCompletionChoiceLogprobsRefusalTopLogprob]]
-
-    bytes: Optional[Iterable[int]]
-
-
-ResponseChatCompletionChoiceLogprobsRefusal: TypeAlias = Union[
-    ResponseChatCompletionChoiceLogprobsRefusalTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionChoiceLogprobsTyped(TypedDict, total=False):
-    content: Optional[Iterable[ResponseChatCompletionChoiceLogprobsContent]]
-
-    refusal: Optional[Iterable[ResponseChatCompletionChoiceLogprobsRefusal]]
-
-
-ResponseChatCompletionChoiceLogprobs: TypeAlias = Union[ResponseChatCompletionChoiceLogprobsTyped, Dict[str, object]]
-
-
-class ResponseChatCompletionChoiceTyped(TypedDict, total=False):
-    finish_reason: Required[Literal["stop", "length", "tool_calls", "content_filter", "function_call"]]
-
-    index: Required[int]
-
-    message: Required[ResponseChatCompletionChoiceMessage]
-
-    logprobs: Optional[ResponseChatCompletionChoiceLogprobs]
-
-
-ResponseChatCompletionChoice: TypeAlias = Union[ResponseChatCompletionChoiceTyped, Dict[str, object]]
-
-
-class ResponseChatCompletionUsageCompletionTokensDetailsTyped(TypedDict, total=False):
-    accepted_prediction_tokens: Optional[int]
-
-    audio_tokens: Optional[int]
-
-    reasoning_tokens: Optional[int]
-
-    rejected_prediction_tokens: Optional[int]
-
-
-ResponseChatCompletionUsageCompletionTokensDetails: TypeAlias = Union[
-    ResponseChatCompletionUsageCompletionTokensDetailsTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionUsagePromptTokensDetailsTyped(TypedDict, total=False):
-    audio_tokens: Optional[int]
-
-    cached_tokens: Optional[int]
-
-
-ResponseChatCompletionUsagePromptTokensDetails: TypeAlias = Union[
-    ResponseChatCompletionUsagePromptTokensDetailsTyped, Dict[str, object]
-]
-
-
-class ResponseChatCompletionUsageTyped(TypedDict, total=False):
-    completion_tokens: Required[int]
-
-    prompt_tokens: Required[int]
-
-    total_tokens: Required[int]
-
-    completion_tokens_details: Optional[ResponseChatCompletionUsageCompletionTokensDetails]
-
-    prompt_tokens_details: Optional[ResponseChatCompletionUsagePromptTokensDetails]
-
-
-ResponseChatCompletionUsage: TypeAlias = Union[ResponseChatCompletionUsageTyped, Dict[str, object]]
-
-
-class ResponseChatCompletionTyped(TypedDict, total=False):
-    id: Required[str]
-
-    choices: Required[Iterable[ResponseChatCompletionChoice]]
-
-    created: Required[int]
-
-    model: Required[str]
-
-    object: Required[Literal["chat.completion"]]
-
-    service_tier: Optional[Literal["scale", "default"]]
-
-    system_fingerprint: Optional[str]
-
-    usage: Optional[ResponseChatCompletionUsage]
-
-
-ResponseChatCompletion: TypeAlias = Union[ResponseChatCompletionTyped, Dict[str, builtins.object]]
-
-Response: TypeAlias = Union[str, ResponseChatCompletion]
 
 
 class MessageChatCompletionDeveloperMessageParamContentUnionMember1(TypedDict, total=False):

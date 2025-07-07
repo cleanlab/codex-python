@@ -632,8 +632,9 @@ class TestProjects:
         project = client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
@@ -643,8 +644,9 @@ class TestProjects:
         project = client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
             use_llm_matching=True,
             constrain_outputs=["string"],
             custom_eval_thresholds={"foo": 0},
@@ -668,9 +670,7 @@ class TestProjects:
                 "similarity_measure": "similarity_measure",
                 "use_self_reflection": True,
             },
-            prompt="prompt",
             quality_preset="best",
-            rewritten_question="rewritten_question",
             task="task",
             x_client_library_version="x-client-library-version",
             x_integration_type="x-integration-type",
@@ -685,8 +685,9 @@ class TestProjects:
         response = client.projects.with_raw_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
         )
 
         assert response.is_closed is True
@@ -700,8 +701,9 @@ class TestProjects:
         with client.projects.with_streaming_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -718,8 +720,9 @@ class TestProjects:
             client.projects.with_raw_response.validate(
                 project_id="",
                 context="context",
+                prompt="prompt",
                 query="query",
-                response="string",
+                response="response",
             )
 
 
@@ -1334,8 +1337,9 @@ class TestAsyncProjects:
         project = await async_client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
@@ -1345,8 +1349,9 @@ class TestAsyncProjects:
         project = await async_client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
             use_llm_matching=True,
             constrain_outputs=["string"],
             custom_eval_thresholds={"foo": 0},
@@ -1370,9 +1375,7 @@ class TestAsyncProjects:
                 "similarity_measure": "similarity_measure",
                 "use_self_reflection": True,
             },
-            prompt="prompt",
             quality_preset="best",
-            rewritten_question="rewritten_question",
             task="task",
             x_client_library_version="x-client-library-version",
             x_integration_type="x-integration-type",
@@ -1387,8 +1390,9 @@ class TestAsyncProjects:
         response = await async_client.projects.with_raw_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
         )
 
         assert response.is_closed is True
@@ -1402,8 +1406,9 @@ class TestAsyncProjects:
         async with async_client.projects.with_streaming_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
+            prompt="prompt",
             query="query",
-            response="string",
+            response="response",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1420,6 +1425,7 @@ class TestAsyncProjects:
             await async_client.projects.with_raw_response.validate(
                 project_id="",
                 context="context",
+                prompt="prompt",
                 query="query",
-                response="string",
+                response="response",
             )
