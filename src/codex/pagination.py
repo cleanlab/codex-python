@@ -18,6 +18,10 @@ __all__ = [
     "AsyncOffsetPageQueryLogs",
     "SyncOffsetPageRemediations",
     "AsyncOffsetPageRemediations",
+    "SyncOffsetPageQueryLogGroups",
+    "AsyncOffsetPageQueryLogGroups",
+    "SyncOffsetPageQueryLogsByGroup",
+    "AsyncOffsetPageQueryLogsByGroup",
 ]
 
 _BaseModelT = TypeVar("_BaseModelT", bound=BaseModel)
@@ -247,6 +251,126 @@ class AsyncOffsetPageRemediations(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not remediations:
             return []
         return remediations
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class SyncOffsetPageQueryLogGroups(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    query_log_groups: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        query_log_groups = self.query_log_groups
+        if not query_log_groups:
+            return []
+        return query_log_groups
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class AsyncOffsetPageQueryLogGroups(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    query_log_groups: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        query_log_groups = self.query_log_groups
+        if not query_log_groups:
+            return []
+        return query_log_groups
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class SyncOffsetPageQueryLogsByGroup(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    query_logs_by_group: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        query_logs_by_group = self.query_logs_by_group
+        if not query_logs_by_group:
+            return []
+        return query_logs_by_group
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class AsyncOffsetPageQueryLogsByGroup(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    query_logs_by_group: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        query_logs_by_group = self.query_logs_by_group
+        if not query_logs_by_group:
+            return []
+        return query_logs_by_group
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
