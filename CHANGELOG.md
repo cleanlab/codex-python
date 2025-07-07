@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.1.0-alpha.23 (2025-07-07)
+
+Full Changelog: [v0.1.0-alpha.22...v0.1.0-alpha.23](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.22...v0.1.0-alpha.23)
+
+### Features
+
+* **api:** api update ([29f65d7](https://github.com/cleanlab/codex-python/commit/29f65d74a04a8424cc666669167c8ba56a56485b))
+* **api:** api update ([bc15e90](https://github.com/cleanlab/codex-python/commit/bc15e9004a8f3a2b311ceeb851b5f6a666a2698b))
+* **api:** api update ([75b1e81](https://github.com/cleanlab/codex-python/commit/75b1e81e199ff4721ff21b3920bc82a48006df21))
+* **api:** api update ([ab93d9d](https://github.com/cleanlab/codex-python/commit/ab93d9d3990f52924b92518d6249f30783591a42))
+* **api:** api update ([0207b98](https://github.com/cleanlab/codex-python/commit/0207b98b34d0a484c6701d04e32ef56190936201))
+* **api:** api update ([31096f4](https://github.com/cleanlab/codex-python/commit/31096f4820a7bfdd204b0a2d1d84ab1e36e32d0c))
+* **api:** api update ([be06884](https://github.com/cleanlab/codex-python/commit/be06884d321ca5009c9d82346c1b74c7429f82fa))
+* **api:** api update ([41b210d](https://github.com/cleanlab/codex-python/commit/41b210dc69c2b9c45eeab01a0afac6a4563d41f2))
+* **api:** define pagination schemes ([d36c2c7](https://github.com/cleanlab/codex-python/commit/d36c2c7ca7a9155dab71b1c82f2e163488d32086))
+* **api:** more pagination schemes ([d4d82fe](https://github.com/cleanlab/codex-python/commit/d4d82fe33422f460c83778dc0ca767361dce86a5))
+* **api:** remove entries routes ([e80bee9](https://github.com/cleanlab/codex-python/commit/e80bee98b4f91ca7c0c19509d1f6a4f9f6bfd2c7))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([45d3bc0](https://github.com/cleanlab/codex-python/commit/45d3bc05ab56d3e67d036ce84b2c9a1f2d8cfd69))
+* **ci:** release-doctor — report correct token name ([1a5e444](https://github.com/cleanlab/codex-python/commit/1a5e444226c829392181d98bc06f8cfb8bf13bd9))
+
+
+### Chores
+
+* **ci:** change upload type ([023823b](https://github.com/cleanlab/codex-python/commit/023823bace71bdc65ce1ff432373a26731ec43d4))
+* **ci:** only run for pushes and fork pull requests ([6b590bd](https://github.com/cleanlab/codex-python/commit/6b590bd454e939b8453d95c239ee85be1a326909))
+
 ## 0.1.0-alpha.22 (2025-06-24)
 
 Full Changelog: [v0.1.0-alpha.21...v0.1.0-alpha.22](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.21...v0.1.0-alpha.22)
