@@ -488,17 +488,18 @@ class ProjectsResource(SyncAPIResource):
         project_id: str,
         *,
         context: str,
-        prompt: str,
         query: str,
-        response: str,
+        response: project_validate_params.Response,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
         constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
         custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
-        messages: Optional[Iterable[project_validate_params.Message]] | NotGiven = NOT_GIVEN,
+        messages: Iterable[project_validate_params.Message] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
+        prompt: Optional[str] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
+        rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
@@ -526,9 +527,8 @@ class ProjectsResource(SyncAPIResource):
           eval_scores: Scores assessing different aspects of the RAG system. If not provided, TLM will
               be used to generate scores.
 
-          messages: Optional message history to provide conversation context for the query. Used to
-              rewrite query into a self-contained version of itself. If not provided, the
-              query will be treated as self-contained.
+          messages: Message history to provide conversation context for the query. Messages contain
+              up to and including the latest user prompt to the LLM.
 
           options: Typed dict of advanced configuration options for the Trustworthy Language Model.
               Many of these configurations are determined by the quality preset selected
@@ -615,7 +615,13 @@ class ProjectsResource(SyncAPIResource):
                   - name: Name of the evaluation criteria.
                   - criteria: Instructions specifying the evaluation criteria.
 
+          prompt: The prompt to use for the TLM call. If not provided, the prompt will be
+              generated from the messages.
+
           quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
+
+          rewritten_question: The re-written query if it was provided by the client to Codex from a user to be
+              used instead of the original query.
 
           extra_headers: Send extra headers
 
@@ -643,7 +649,6 @@ class ProjectsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "context": context,
-                    "prompt": prompt,
                     "query": query,
                     "response": response,
                     "constrain_outputs": constrain_outputs,
@@ -652,7 +657,9 @@ class ProjectsResource(SyncAPIResource):
                     "eval_scores": eval_scores,
                     "messages": messages,
                     "options": options,
+                    "prompt": prompt,
                     "quality_preset": quality_preset,
+                    "rewritten_question": rewritten_question,
                     "task": task,
                 },
                 project_validate_params.ProjectValidateParams,
@@ -1090,17 +1097,18 @@ class AsyncProjectsResource(AsyncAPIResource):
         project_id: str,
         *,
         context: str,
-        prompt: str,
         query: str,
-        response: str,
+        response: project_validate_params.Response,
         use_llm_matching: bool | NotGiven = NOT_GIVEN,
         constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
         custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
-        messages: Optional[Iterable[project_validate_params.Message]] | NotGiven = NOT_GIVEN,
+        messages: Iterable[project_validate_params.Message] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
+        prompt: Optional[str] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
+        rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
@@ -1128,9 +1136,8 @@ class AsyncProjectsResource(AsyncAPIResource):
           eval_scores: Scores assessing different aspects of the RAG system. If not provided, TLM will
               be used to generate scores.
 
-          messages: Optional message history to provide conversation context for the query. Used to
-              rewrite query into a self-contained version of itself. If not provided, the
-              query will be treated as self-contained.
+          messages: Message history to provide conversation context for the query. Messages contain
+              up to and including the latest user prompt to the LLM.
 
           options: Typed dict of advanced configuration options for the Trustworthy Language Model.
               Many of these configurations are determined by the quality preset selected
@@ -1217,7 +1224,13 @@ class AsyncProjectsResource(AsyncAPIResource):
                   - name: Name of the evaluation criteria.
                   - criteria: Instructions specifying the evaluation criteria.
 
+          prompt: The prompt to use for the TLM call. If not provided, the prompt will be
+              generated from the messages.
+
           quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
+
+          rewritten_question: The re-written query if it was provided by the client to Codex from a user to be
+              used instead of the original query.
 
           extra_headers: Send extra headers
 
@@ -1245,7 +1258,6 @@ class AsyncProjectsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "context": context,
-                    "prompt": prompt,
                     "query": query,
                     "response": response,
                     "constrain_outputs": constrain_outputs,
@@ -1254,7 +1266,9 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "eval_scores": eval_scores,
                     "messages": messages,
                     "options": options,
+                    "prompt": prompt,
                     "quality_preset": quality_preset,
+                    "rewritten_question": rewritten_question,
                     "task": task,
                 },
                 project_validate_params.ProjectValidateParams,
