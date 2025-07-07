@@ -71,11 +71,15 @@ class QueryLogsByGroupQueryLog(BaseModel):
 
     is_bad_response: bool
 
+    needs_review: bool
+
     project_id: str
 
     question: str
 
     remediation_id: str
+
+    remediation_status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
 
     was_cache_hit: Optional[bool] = None
     """If similar query already answered, or None if cache was not checked"""

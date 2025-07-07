@@ -180,38 +180,6 @@ Methods:
 - <code title="get /api/projects/id_from_access_key">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">retrieve_project_id</a>() -> <a href="./src/codex/types/projects/access_key_retrieve_project_id_response.py">AccessKeyRetrieveProjectIDResponse</a></code>
 - <code title="post /api/projects/{project_id}/access_keys/{access_key_id}/revoke">client.projects.access_keys.<a href="./src/codex/resources/projects/access_keys.py">revoke</a>(access_key_id, \*, project_id) -> None</code>
 
-## Entries
-
-Types:
-
-```python
-from codex.types.projects import Entry, EntryNotifySmeResponse, EntryQueryResponse
-```
-
-Methods:
-
-- <code title="post /api/projects/{project_id}/entries/">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/entry_create_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="get /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">retrieve</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="put /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">update</a>(entry_id, \*, project_id, \*\*<a href="src/codex/types/projects/entry_update_params.py">params</a>) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="delete /api/projects/{project_id}/entries/{entry_id}">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">delete</a>(entry_id, \*, project_id) -> None</code>
-- <code title="post /api/projects/{project_id}/entries/{entry_id}/notifications">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">notify_sme</a>(entry_id, \*, project_id, \*\*<a href="src/codex/types/projects/entry_notify_sme_params.py">params</a>) -> <a href="./src/codex/types/projects/entry_notify_sme_response.py">EntryNotifySmeResponse</a></code>
-- <code title="put /api/projects/{project_id}/entries/{entry_id}/publish_draft_answer">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">publish_draft_answer</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-- <code title="post /api/projects/{project_id}/entries/query">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">query</a>(project_id, \*\*<a href="src/codex/types/projects/entry_query_params.py">params</a>) -> <a href="./src/codex/types/projects/entry_query_response.py">EntryQueryResponse</a></code>
-- <code title="put /api/projects/{project_id}/entries/{entry_id}/unpublish_answer">client.projects.entries.<a href="./src/codex/resources/projects/entries.py">unpublish_answer</a>(entry_id, \*, project_id) -> <a href="./src/codex/types/projects/entry.py">Entry</a></code>
-
-## Clusters
-
-Types:
-
-```python
-from codex.types.projects import ClusterListResponse, ClusterListVariantsResponse
-```
-
-Methods:
-
-- <code title="get /api/projects/{project_id}/entries/clusters">client.projects.clusters.<a href="./src/codex/resources/projects/clusters.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/cluster_list_params.py">params</a>) -> <a href="./src/codex/types/projects/cluster_list_response.py">SyncOffsetPageClusters[ClusterListResponse]</a></code>
-- <code title="get /api/projects/{project_id}/entries/clusters/{representative_entry_id}">client.projects.clusters.<a href="./src/codex/resources/projects/clusters.py">list_variants</a>(representative_entry_id, \*, project_id) -> <a href="./src/codex/types/projects/cluster_list_variants_response.py">ClusterListVariantsResponse</a></code>
-
 ## Evals
 
 Types:
