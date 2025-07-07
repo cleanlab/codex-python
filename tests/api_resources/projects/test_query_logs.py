@@ -10,6 +10,7 @@ import pytest
 from codex import Codex, AsyncCodex
 from tests.utils import assert_matches_type
 from codex._utils import parse_datetime
+from codex.pagination import SyncOffsetPageQueryLogs, AsyncOffsetPageQueryLogs
 from codex.types.projects import (
     QueryLogListResponse,
     QueryLogRetrieveResponse,
@@ -82,7 +83,7 @@ class TestQueryLogs:
         query_log = client.projects.query_logs.list(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+        assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -102,7 +103,7 @@ class TestQueryLogs:
             sort="created_at",
             was_cache_hit=True,
         )
-        assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+        assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -114,7 +115,7 @@ class TestQueryLogs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         query_log = response.parse()
-        assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+        assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -126,7 +127,7 @@ class TestQueryLogs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             query_log = response.parse()
-            assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+            assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -381,7 +382,7 @@ class TestAsyncQueryLogs:
         query_log = await async_client.projects.query_logs.list(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+        assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -401,7 +402,7 @@ class TestAsyncQueryLogs:
             sort="created_at",
             was_cache_hit=True,
         )
-        assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+        assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -413,7 +414,7 @@ class TestAsyncQueryLogs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         query_log = await response.parse()
-        assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+        assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -425,7 +426,7 @@ class TestAsyncQueryLogs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             query_log = await response.parse()
-            assert_matches_type(QueryLogListResponse, query_log, path=["response"])
+            assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

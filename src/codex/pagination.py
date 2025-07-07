@@ -14,6 +14,10 @@ __all__ = [
     "AsyncMyOffsetPageTopLevelArray",
     "SyncOffsetPageClusters",
     "AsyncOffsetPageClusters",
+    "SyncOffsetPageQueryLogs",
+    "AsyncOffsetPageQueryLogs",
+    "SyncOffsetPageRemediations",
+    "AsyncOffsetPageRemediations",
 ]
 
 _BaseModelT = TypeVar("_BaseModelT", bound=BaseModel)
@@ -123,6 +127,126 @@ class AsyncOffsetPageClusters(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not clusters:
             return []
         return clusters
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class SyncOffsetPageQueryLogs(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    query_logs: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        query_logs = self.query_logs
+        if not query_logs:
+            return []
+        return query_logs
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class AsyncOffsetPageQueryLogs(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    query_logs: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        query_logs = self.query_logs
+        if not query_logs:
+            return []
+        return query_logs
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class SyncOffsetPageRemediations(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    remediations: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        remediations = self.remediations
+        if not remediations:
+            return []
+        return remediations
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class AsyncOffsetPageRemediations(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    remediations: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        remediations = self.remediations
+        if not remediations:
+            return []
+        return remediations
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
