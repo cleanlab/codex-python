@@ -40,7 +40,7 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     """Filter by evals that passed"""
 
     primary_eval_issue: Optional[
-        List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
+        List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
     ]
     """Filter logs that have ANY of these primary evaluation issues (OR operation)"""
 

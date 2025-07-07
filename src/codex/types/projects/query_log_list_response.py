@@ -14,6 +14,7 @@ __all__ = [
     "QueryLogFormattedGuardrailEvalScores",
     "QueryLogFormattedNonGuardrailEvalScores",
     "QueryLogContext",
+    "QueryLogDeterministicGuardrailsResults",
 ]
 
 
@@ -58,6 +59,14 @@ class QueryLogContext(BaseModel):
     """Title or heading of the document. Useful for display and context."""
 
 
+class QueryLogDeterministicGuardrailsResults(BaseModel):
+    guardrail_name: str
+
+    should_guardrail: bool
+
+    matches: Optional[List[str]] = None
+
+
 class QueryLog(BaseModel):
     id: str
 
@@ -96,6 +105,9 @@ class QueryLog(BaseModel):
 
     custom_metadata_keys: Optional[List[str]] = None
     """Keys of the custom metadata"""
+
+    deterministic_guardrails_results: Optional[Dict[str, QueryLogDeterministicGuardrailsResults]] = None
+    """Results of deterministic guardrails applied to the query"""
 
     escalated: Optional[bool] = None
     """If true, the question was escalated to Codex for an SME to review"""

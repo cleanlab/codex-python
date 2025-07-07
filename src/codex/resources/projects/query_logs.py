@@ -99,7 +99,7 @@ class QueryLogsResource(SyncAPIResource):
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
-            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
+            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score"]] | NotGiven = NOT_GIVEN,
@@ -184,7 +184,7 @@ class QueryLogsResource(SyncAPIResource):
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
-            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
+            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         remediation_ids: List[str] | NotGiven = NOT_GIVEN,
@@ -276,7 +276,7 @@ class QueryLogsResource(SyncAPIResource):
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
-            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
+            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank"]]
@@ -457,7 +457,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
-            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
+            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score"]] | NotGiven = NOT_GIVEN,
@@ -542,7 +542,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
-            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
+            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         remediation_ids: List[str] | NotGiven = NOT_GIVEN,
@@ -634,7 +634,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
-            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "unsupported"]]
+            List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank"]]
