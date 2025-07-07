@@ -18,7 +18,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncOffsetPageQueryLogs, AsyncOffsetPageQueryLogs
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.projects import query_log_list_params, query_log_list_groups_params, query_log_list_by_group_params
 from ...types.projects.query_log_list_response import QueryLogListResponse
 from ...types.projects.query_log_retrieve_response import QueryLogRetrieveResponse
@@ -110,7 +111,7 @@ class QueryLogsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryLogListResponse:
+    ) -> SyncOffsetPageQueryLogs[QueryLogListResponse]:
         """
         List query logs by project ID.
 
@@ -141,8 +142,9 @@ class QueryLogsResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return self._get(
+        return self._get_api_list(
             f"/api/projects/{project_id}/query_logs/",
+            page=SyncOffsetPageQueryLogs[QueryLogListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -166,7 +168,7 @@ class QueryLogsResource(SyncAPIResource):
                     query_log_list_params.QueryLogListParams,
                 ),
             ),
-            cast_to=QueryLogListResponse,
+            model=QueryLogListResponse,
         )
 
     def list_by_group(
@@ -443,7 +445,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             cast_to=QueryLogRetrieveResponse,
         )
 
-    async def list(
+    def list(
         self,
         project_id: str,
         *,
@@ -468,7 +470,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryLogListResponse:
+    ) -> AsyncPaginator[QueryLogListResponse, AsyncOffsetPageQueryLogs[QueryLogListResponse]]:
         """
         List query logs by project ID.
 
@@ -499,14 +501,15 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return await self._get(
+        return self._get_api_list(
             f"/api/projects/{project_id}/query_logs/",
+            page=AsyncOffsetPageQueryLogs[QueryLogListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
@@ -524,7 +527,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                     query_log_list_params.QueryLogListParams,
                 ),
             ),
-            cast_to=QueryLogListResponse,
+            model=QueryLogListResponse,
         )
 
     async def list_by_group(
