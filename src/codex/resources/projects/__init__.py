@@ -8,22 +8,6 @@ from .evals import (
     EvalsResourceWithStreamingResponse,
     AsyncEvalsResourceWithStreamingResponse,
 )
-from .entries import (
-    EntriesResource,
-    AsyncEntriesResource,
-    EntriesResourceWithRawResponse,
-    AsyncEntriesResourceWithRawResponse,
-    EntriesResourceWithStreamingResponse,
-    AsyncEntriesResourceWithStreamingResponse,
-)
-from .clusters import (
-    ClustersResource,
-    AsyncClustersResource,
-    ClustersResourceWithRawResponse,
-    AsyncClustersResourceWithRawResponse,
-    ClustersResourceWithStreamingResponse,
-    AsyncClustersResourceWithStreamingResponse,
-)
 from .projects import (
     ProjectsResource,
     AsyncProjectsResource,
@@ -64,18 +48,6 @@ __all__ = [
     "AsyncAccessKeysResourceWithRawResponse",
     "AccessKeysResourceWithStreamingResponse",
     "AsyncAccessKeysResourceWithStreamingResponse",
-    "EntriesResource",
-    "AsyncEntriesResource",
-    "EntriesResourceWithRawResponse",
-    "AsyncEntriesResourceWithRawResponse",
-    "EntriesResourceWithStreamingResponse",
-    "AsyncEntriesResourceWithStreamingResponse",
-    "ClustersResource",
-    "AsyncClustersResource",
-    "ClustersResourceWithRawResponse",
-    "AsyncClustersResourceWithRawResponse",
-    "ClustersResourceWithStreamingResponse",
-    "AsyncClustersResourceWithStreamingResponse",
     "EvalsResource",
     "AsyncEvalsResource",
     "EvalsResourceWithRawResponse",
