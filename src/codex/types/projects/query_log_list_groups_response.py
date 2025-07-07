@@ -8,41 +8,40 @@ from ..._models import BaseModel
 
 __all__ = [
     "QueryLogListGroupsResponse",
-    "QueryLogGroup",
-    "QueryLogGroupFormattedEscalationEvalScores",
-    "QueryLogGroupFormattedEvalScores",
-    "QueryLogGroupFormattedGuardrailEvalScores",
-    "QueryLogGroupFormattedNonGuardrailEvalScores",
-    "QueryLogGroupContext",
-    "QueryLogGroupDeterministicGuardrailsResults",
+    "FormattedEscalationEvalScores",
+    "FormattedEvalScores",
+    "FormattedGuardrailEvalScores",
+    "FormattedNonGuardrailEvalScores",
+    "Context",
+    "DeterministicGuardrailsResults",
 ]
 
 
-class QueryLogGroupFormattedEscalationEvalScores(BaseModel):
+class FormattedEscalationEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogGroupFormattedEvalScores(BaseModel):
+class FormattedEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogGroupFormattedGuardrailEvalScores(BaseModel):
+class FormattedGuardrailEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogGroupFormattedNonGuardrailEvalScores(BaseModel):
+class FormattedNonGuardrailEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogGroupContext(BaseModel):
+class Context(BaseModel):
     content: str
     """The actual content/text of the document."""
 
@@ -59,7 +58,7 @@ class QueryLogGroupContext(BaseModel):
     """Title or heading of the document. Useful for display and context."""
 
 
-class QueryLogGroupDeterministicGuardrailsResults(BaseModel):
+class DeterministicGuardrailsResults(BaseModel):
     guardrail_name: str
 
     should_guardrail: bool
@@ -67,14 +66,14 @@ class QueryLogGroupDeterministicGuardrailsResults(BaseModel):
     matches: Optional[List[str]] = None
 
 
-class QueryLogGroup(BaseModel):
+class QueryLogListGroupsResponse(BaseModel):
     id: str
 
     created_at: datetime
 
-    formatted_escalation_eval_scores: Optional[Dict[str, QueryLogGroupFormattedEscalationEvalScores]] = None
+    formatted_escalation_eval_scores: Optional[Dict[str, FormattedEscalationEvalScores]] = None
 
-    formatted_eval_scores: Optional[Dict[str, QueryLogGroupFormattedEvalScores]] = None
+    formatted_eval_scores: Optional[Dict[str, FormattedEvalScores]] = None
     """Format evaluation scores for frontend display with pass/fail status.
 
     Returns: Dictionary mapping eval keys to their formatted representation: {
@@ -82,9 +81,9 @@ class QueryLogGroup(BaseModel):
     eval_scores is None.
     """
 
-    formatted_guardrail_eval_scores: Optional[Dict[str, QueryLogGroupFormattedGuardrailEvalScores]] = None
+    formatted_guardrail_eval_scores: Optional[Dict[str, FormattedGuardrailEvalScores]] = None
 
-    formatted_non_guardrail_eval_scores: Optional[Dict[str, QueryLogGroupFormattedNonGuardrailEvalScores]] = None
+    formatted_non_guardrail_eval_scores: Optional[Dict[str, FormattedNonGuardrailEvalScores]] = None
 
     is_bad_response: bool
 
@@ -103,7 +102,7 @@ class QueryLogGroup(BaseModel):
     was_cache_hit: Optional[bool] = None
     """If similar query already answered, or None if cache was not checked"""
 
-    context: Optional[List[QueryLogGroupContext]] = None
+    context: Optional[List[Context]] = None
     """RAG context used for the query"""
 
     custom_metadata: Optional[object] = None
@@ -112,7 +111,7 @@ class QueryLogGroup(BaseModel):
     custom_metadata_keys: Optional[List[str]] = None
     """Keys of the custom metadata"""
 
-    deterministic_guardrails_results: Optional[Dict[str, QueryLogGroupDeterministicGuardrailsResults]] = None
+    deterministic_guardrails_results: Optional[Dict[str, DeterministicGuardrailsResults]] = None
     """Results of deterministic guardrails applied to the query"""
 
     escalated: Optional[bool] = None
@@ -144,11 +143,3 @@ class QueryLogGroup(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-
-class QueryLogListGroupsResponse(BaseModel):
-    custom_metadata_columns: List[str]
-
-    query_log_groups: List[QueryLogGroup]
-
-    total_count: int
