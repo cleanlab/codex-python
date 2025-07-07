@@ -1,15 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["RemediationListResponse", "Remediation"]
+__all__ = ["RemediationListResponse"]
 
 
-class Remediation(BaseModel):
+class RemediationListResponse(BaseModel):
     id: str
 
     answered_at: Optional[datetime] = None
@@ -35,9 +35,3 @@ class Remediation(BaseModel):
     answer: Optional[str] = None
 
     draft_answer: Optional[str] = None
-
-
-class RemediationListResponse(BaseModel):
-    remediations: List[Remediation]
-
-    total_count: int

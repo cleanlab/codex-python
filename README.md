@@ -113,6 +113,75 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Pagination
+
+List methods in the Codex API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from codex import Codex
+
+client = Codex()
+
+all_query_logs = []
+# Automatically fetches more pages as needed.
+for query_log in client.projects.query_logs.list(
+    project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+):
+    # Do something with query_log here
+    all_query_logs.append(query_log)
+print(all_query_logs)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from codex import AsyncCodex
+
+client = AsyncCodex()
+
+
+async def main() -> None:
+    all_query_logs = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for query_log in client.projects.query_logs.list(
+        project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    ):
+        all_query_logs.append(query_log)
+    print(all_query_logs)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.projects.query_logs.list(
+    project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+)
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.query_logs)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.projects.query_logs.list(
+    project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+)
+for query_log in first_page.query_logs:
+    print(query_log.id)
+
+# Remove `await` for non-async usage.
+```
+
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:

@@ -8,41 +8,40 @@ from ..._models import BaseModel
 
 __all__ = [
     "QueryLogListResponse",
-    "QueryLog",
-    "QueryLogFormattedEscalationEvalScores",
-    "QueryLogFormattedEvalScores",
-    "QueryLogFormattedGuardrailEvalScores",
-    "QueryLogFormattedNonGuardrailEvalScores",
-    "QueryLogContext",
-    "QueryLogDeterministicGuardrailsResults",
+    "FormattedEscalationEvalScores",
+    "FormattedEvalScores",
+    "FormattedGuardrailEvalScores",
+    "FormattedNonGuardrailEvalScores",
+    "Context",
+    "DeterministicGuardrailsResults",
 ]
 
 
-class QueryLogFormattedEscalationEvalScores(BaseModel):
+class FormattedEscalationEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogFormattedEvalScores(BaseModel):
+class FormattedEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogFormattedGuardrailEvalScores(BaseModel):
+class FormattedGuardrailEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogFormattedNonGuardrailEvalScores(BaseModel):
+class FormattedNonGuardrailEvalScores(BaseModel):
     score: float
 
     status: Literal["pass", "fail"]
 
 
-class QueryLogContext(BaseModel):
+class Context(BaseModel):
     content: str
     """The actual content/text of the document."""
 
@@ -59,7 +58,7 @@ class QueryLogContext(BaseModel):
     """Title or heading of the document. Useful for display and context."""
 
 
-class QueryLogDeterministicGuardrailsResults(BaseModel):
+class DeterministicGuardrailsResults(BaseModel):
     guardrail_name: str
 
     should_guardrail: bool
@@ -67,14 +66,14 @@ class QueryLogDeterministicGuardrailsResults(BaseModel):
     matches: Optional[List[str]] = None
 
 
-class QueryLog(BaseModel):
+class QueryLogListResponse(BaseModel):
     id: str
 
     created_at: datetime
 
-    formatted_escalation_eval_scores: Optional[Dict[str, QueryLogFormattedEscalationEvalScores]] = None
+    formatted_escalation_eval_scores: Optional[Dict[str, FormattedEscalationEvalScores]] = None
 
-    formatted_eval_scores: Optional[Dict[str, QueryLogFormattedEvalScores]] = None
+    formatted_eval_scores: Optional[Dict[str, FormattedEvalScores]] = None
     """Format evaluation scores for frontend display with pass/fail status.
 
     Returns: Dictionary mapping eval keys to their formatted representation: {
@@ -82,9 +81,9 @@ class QueryLog(BaseModel):
     eval_scores is None.
     """
 
-    formatted_guardrail_eval_scores: Optional[Dict[str, QueryLogFormattedGuardrailEvalScores]] = None
+    formatted_guardrail_eval_scores: Optional[Dict[str, FormattedGuardrailEvalScores]] = None
 
-    formatted_non_guardrail_eval_scores: Optional[Dict[str, QueryLogFormattedNonGuardrailEvalScores]] = None
+    formatted_non_guardrail_eval_scores: Optional[Dict[str, FormattedNonGuardrailEvalScores]] = None
 
     is_bad_response: bool
 
@@ -97,7 +96,7 @@ class QueryLog(BaseModel):
     was_cache_hit: Optional[bool] = None
     """If similar query already answered, or None if cache was not checked"""
 
-    context: Optional[List[QueryLogContext]] = None
+    context: Optional[List[Context]] = None
     """RAG context used for the query"""
 
     custom_metadata: Optional[object] = None
@@ -106,7 +105,7 @@ class QueryLog(BaseModel):
     custom_metadata_keys: Optional[List[str]] = None
     """Keys of the custom metadata"""
 
-    deterministic_guardrails_results: Optional[Dict[str, QueryLogDeterministicGuardrailsResults]] = None
+    deterministic_guardrails_results: Optional[Dict[str, DeterministicGuardrailsResults]] = None
     """Results of deterministic guardrails applied to the query"""
 
     escalated: Optional[bool] = None
@@ -138,11 +137,3 @@ class QueryLog(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-
-class QueryLogListResponse(BaseModel):
-    custom_metadata_columns: List[str]
-
-    query_logs: List[QueryLog]
-
-    total_count: int

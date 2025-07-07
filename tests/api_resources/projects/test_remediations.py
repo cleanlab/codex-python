@@ -10,6 +10,7 @@ import pytest
 from codex import Codex, AsyncCodex
 from tests.utils import assert_matches_type
 from codex._utils import parse_datetime
+from codex.pagination import SyncOffsetPageRemediations, AsyncOffsetPageRemediations
 from codex.types.projects import (
     RemediationListResponse,
     RemediationPauseResponse,
@@ -144,7 +145,7 @@ class TestRemediations:
         remediation = client.projects.remediations.list(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(RemediationListResponse, remediation, path=["response"])
+        assert_matches_type(SyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -162,7 +163,7 @@ class TestRemediations:
             sort="created_at",
             status=["ACTIVE"],
         )
-        assert_matches_type(RemediationListResponse, remediation, path=["response"])
+        assert_matches_type(SyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -174,7 +175,7 @@ class TestRemediations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         remediation = response.parse()
-        assert_matches_type(RemediationListResponse, remediation, path=["response"])
+        assert_matches_type(SyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -186,7 +187,7 @@ class TestRemediations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             remediation = response.parse()
-            assert_matches_type(RemediationListResponse, remediation, path=["response"])
+            assert_matches_type(SyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -745,7 +746,7 @@ class TestAsyncRemediations:
         remediation = await async_client.projects.remediations.list(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(RemediationListResponse, remediation, path=["response"])
+        assert_matches_type(AsyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -763,7 +764,7 @@ class TestAsyncRemediations:
             sort="created_at",
             status=["ACTIVE"],
         )
-        assert_matches_type(RemediationListResponse, remediation, path=["response"])
+        assert_matches_type(AsyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -775,7 +776,7 @@ class TestAsyncRemediations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         remediation = await response.parse()
-        assert_matches_type(RemediationListResponse, remediation, path=["response"])
+        assert_matches_type(AsyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -787,7 +788,7 @@ class TestAsyncRemediations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             remediation = await response.parse()
-            assert_matches_type(RemediationListResponse, remediation, path=["response"])
+            assert_matches_type(AsyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

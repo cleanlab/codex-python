@@ -18,7 +18,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncOffsetPageRemediations, AsyncOffsetPageRemediations
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.projects import (
     remediation_list_params,
     remediation_create_params,
@@ -159,7 +160,7 @@ class RemediationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RemediationListResponse:
+    ) -> SyncOffsetPageRemediations[RemediationListResponse]:
         """
         List remediations by project ID.
 
@@ -186,8 +187,9 @@ class RemediationsResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return self._get(
+        return self._get_api_list(
             f"/api/projects/{project_id}/remediations/",
+            page=SyncOffsetPageRemediations[RemediationListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -209,7 +211,7 @@ class RemediationsResource(SyncAPIResource):
                     remediation_list_params.RemediationListParams,
                 ),
             ),
-            cast_to=RemediationListResponse,
+            model=RemediationListResponse,
         )
 
     def delete(
@@ -608,7 +610,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationRetrieveResponse,
         )
 
-    async def list(
+    def list(
         self,
         project_id: str,
         *,
@@ -628,7 +630,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RemediationListResponse:
+    ) -> AsyncPaginator[RemediationListResponse, AsyncOffsetPageRemediations[RemediationListResponse]]:
         """
         List remediations by project ID.
 
@@ -655,14 +657,15 @@ class AsyncRemediationsResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return await self._get(
+        return self._get_api_list(
             f"/api/projects/{project_id}/remediations/",
+            page=AsyncOffsetPageRemediations[RemediationListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
@@ -678,7 +681,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
                     remediation_list_params.RemediationListParams,
                 ),
             ),
-            cast_to=RemediationListResponse,
+            model=RemediationListResponse,
         )
 
     async def delete(
