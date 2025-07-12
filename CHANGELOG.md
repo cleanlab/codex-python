@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-alpha.24 (2025-07-12)
+
+Full Changelog: [v0.1.0-alpha.23...v0.1.0-alpha.24](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.23...v0.1.0-alpha.24)
+
+### Bug Fixes
+
+* **client:** don't send Content-Type header on GET requests ([4732aae](https://github.com/cleanlab/codex-python/commit/4732aaeb03872abffb4e13df6dd1994711bd4268))
+* **parsing:** correctly handle nested discriminated unions ([b374589](https://github.com/cleanlab/codex-python/commit/b374589baf01ca1236cf0823305e6bca037cf12b))
+
+
+### Chores
+
+* **internal:** bump pinned h11 dep ([7ce51e9](https://github.com/cleanlab/codex-python/commit/7ce51e93023f66f3e343e379fc1930ddba335e9b))
+* **package:** mark python 3.13 as supported ([5cba949](https://github.com/cleanlab/codex-python/commit/5cba94956fff8ca4de99426a20e5c67f0ce6a2ac))
+* **readme:** fix version rendering on pypi ([d05336d](https://github.com/cleanlab/codex-python/commit/d05336d89f5a49b09d7b1f85e7cb3ed74035157a))
+
 ## 0.1.0-alpha.23 (2025-07-07)
 
 Full Changelog: [v0.1.0-alpha.22...v0.1.0-alpha.23](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.22...v0.1.0-alpha.23)
