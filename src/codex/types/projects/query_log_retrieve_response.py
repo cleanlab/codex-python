@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
@@ -14,6 +14,31 @@ __all__ = [
     "FormattedNonGuardrailEvalScores",
     "Context",
     "DeterministicGuardrailsResults",
+    "Message",
+    "MessageChatCompletionDeveloperMessageParam",
+    "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
+    "MessageChatCompletionSystemMessageParam",
+    "MessageChatCompletionSystemMessageParamContentUnionMember1",
+    "MessageChatCompletionUserMessageParamOutput",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1File",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile",
+    "MessageChatCompletionAssistantMessageParamOutput",
+    "MessageChatCompletionAssistantMessageParamOutputAudio",
+    "MessageChatCompletionAssistantMessageParamOutputContentUnionMember1",
+    "MessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam",
+    "MessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartRefusalParam",
+    "MessageChatCompletionAssistantMessageParamOutputFunctionCall",
+    "MessageChatCompletionAssistantMessageParamOutputToolCall",
+    "MessageChatCompletionAssistantMessageParamOutputToolCallFunction",
+    "MessageChatCompletionToolMessageParam",
+    "MessageChatCompletionToolMessageParamContentUnionMember1",
+    "MessageChatCompletionFunctionMessageParam",
 ]
 
 
@@ -66,6 +91,192 @@ class DeterministicGuardrailsResults(BaseModel):
     matches: Optional[List[str]] = None
 
 
+class MessageChatCompletionDeveloperMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionDeveloperMessageParam(BaseModel):
+    content: Union[str, List[MessageChatCompletionDeveloperMessageParamContentUnionMember1]]
+
+    role: Literal["developer"]
+
+    name: Optional[str] = None
+
+
+class MessageChatCompletionSystemMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionSystemMessageParam(BaseModel):
+    content: Union[str, List[MessageChatCompletionSystemMessageParamContentUnionMember1]]
+
+    role: Literal["system"]
+
+    name: Optional[str] = None
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL(
+    BaseModel
+):
+    url: str
+
+    detail: Optional[Literal["auto", "low", "high"]] = None
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam(BaseModel):
+    image_url: MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL
+
+    type: Literal["image_url"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio(
+    BaseModel
+):
+    data: str
+
+    format: Literal["wav", "mp3"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam(BaseModel):
+    input_audio: (
+        MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio
+    )
+
+    type: Literal["input_audio"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile(BaseModel):
+    file_data: Optional[str] = None
+
+    file_id: Optional[str] = None
+
+    filename: Optional[str] = None
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1File(BaseModel):
+    file: MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile
+
+    type: Literal["file"]
+
+
+MessageChatCompletionUserMessageParamOutputContentUnionMember1: TypeAlias = Union[
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam,
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam,
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam,
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1File,
+]
+
+
+class MessageChatCompletionUserMessageParamOutput(BaseModel):
+    content: Union[str, List[MessageChatCompletionUserMessageParamOutputContentUnionMember1]]
+
+    role: Literal["user"]
+
+    name: Optional[str] = None
+
+
+class MessageChatCompletionAssistantMessageParamOutputAudio(BaseModel):
+    id: str
+
+
+class MessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartRefusalParam(
+    BaseModel
+):
+    refusal: str
+
+    type: Literal["refusal"]
+
+
+MessageChatCompletionAssistantMessageParamOutputContentUnionMember1: TypeAlias = Union[
+    MessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam,
+    MessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartRefusalParam,
+]
+
+
+class MessageChatCompletionAssistantMessageParamOutputFunctionCall(BaseModel):
+    arguments: str
+
+    name: str
+
+
+class MessageChatCompletionAssistantMessageParamOutputToolCallFunction(BaseModel):
+    arguments: str
+
+    name: str
+
+
+class MessageChatCompletionAssistantMessageParamOutputToolCall(BaseModel):
+    id: str
+
+    function: MessageChatCompletionAssistantMessageParamOutputToolCallFunction
+
+    type: Literal["function"]
+
+
+class MessageChatCompletionAssistantMessageParamOutput(BaseModel):
+    role: Literal["assistant"]
+
+    audio: Optional[MessageChatCompletionAssistantMessageParamOutputAudio] = None
+
+    content: Union[str, List[MessageChatCompletionAssistantMessageParamOutputContentUnionMember1], None] = None
+
+    function_call: Optional[MessageChatCompletionAssistantMessageParamOutputFunctionCall] = None
+
+    name: Optional[str] = None
+
+    refusal: Optional[str] = None
+
+    tool_calls: Optional[List[MessageChatCompletionAssistantMessageParamOutputToolCall]] = None
+
+
+class MessageChatCompletionToolMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionToolMessageParam(BaseModel):
+    content: Union[str, List[MessageChatCompletionToolMessageParamContentUnionMember1]]
+
+    role: Literal["tool"]
+
+    tool_call_id: str
+
+
+class MessageChatCompletionFunctionMessageParam(BaseModel):
+    content: Optional[str] = None
+
+    name: str
+
+    role: Literal["function"]
+
+
+Message: TypeAlias = Union[
+    MessageChatCompletionDeveloperMessageParam,
+    MessageChatCompletionSystemMessageParam,
+    MessageChatCompletionUserMessageParamOutput,
+    MessageChatCompletionAssistantMessageParamOutput,
+    MessageChatCompletionToolMessageParam,
+    MessageChatCompletionFunctionMessageParam,
+]
+
+
 class QueryLogRetrieveResponse(BaseModel):
     id: str
 
@@ -83,7 +294,11 @@ class QueryLogRetrieveResponse(BaseModel):
 
     formatted_guardrail_eval_scores: Optional[Dict[str, FormattedGuardrailEvalScores]] = None
 
+    formatted_messages: Optional[str] = None
+
     formatted_non_guardrail_eval_scores: Optional[Dict[str, FormattedNonGuardrailEvalScores]] = None
+
+    formatted_original_question: Optional[str] = None
 
     is_bad_response: bool
 
@@ -135,6 +350,20 @@ class QueryLogRetrieveResponse(BaseModel):
 
     guardrailed: Optional[bool] = None
     """If true, the response was guardrailed"""
+
+    messages: Optional[List[Message]] = None
+    """Optional message history to provide conversation context for the query.
+
+    Used to rewrite query into a self-contained version of itself. If not provided,
+    the query will be treated as self-contained.
+    """
+
+    original_question: Optional[str] = None
+    """The original question that was asked before any rewriting or processing.
+
+    For all non-conversational RAG, original_question should be the same as the
+    final question seen in Codex.
+    """
 
     primary_eval_issue: Optional[str] = None
     """Primary issue identified in evaluation"""
