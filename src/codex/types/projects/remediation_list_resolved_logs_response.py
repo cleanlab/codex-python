@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
@@ -15,6 +15,31 @@ __all__ = [
     "QueryLogFormattedNonGuardrailEvalScores",
     "QueryLogContext",
     "QueryLogDeterministicGuardrailsResults",
+    "QueryLogMessage",
+    "QueryLogMessageChatCompletionDeveloperMessageParam",
+    "QueryLogMessageChatCompletionDeveloperMessageParamContentUnionMember1",
+    "QueryLogMessageChatCompletionSystemMessageParam",
+    "QueryLogMessageChatCompletionSystemMessageParamContentUnionMember1",
+    "QueryLogMessageChatCompletionUserMessageParamOutput",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1File",
+    "QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutput",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutputAudio",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartRefusalParam",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutputFunctionCall",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutputToolCall",
+    "QueryLogMessageChatCompletionAssistantMessageParamOutputToolCallFunction",
+    "QueryLogMessageChatCompletionToolMessageParam",
+    "QueryLogMessageChatCompletionToolMessageParamContentUnionMember1",
+    "QueryLogMessageChatCompletionFunctionMessageParam",
 ]
 
 
@@ -67,6 +92,198 @@ class QueryLogDeterministicGuardrailsResults(BaseModel):
     matches: Optional[List[str]] = None
 
 
+class QueryLogMessageChatCompletionDeveloperMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class QueryLogMessageChatCompletionDeveloperMessageParam(BaseModel):
+    content: Union[str, List[QueryLogMessageChatCompletionDeveloperMessageParamContentUnionMember1]]
+
+    role: Literal["developer"]
+
+    name: Optional[str] = None
+
+
+class QueryLogMessageChatCompletionSystemMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class QueryLogMessageChatCompletionSystemMessageParam(BaseModel):
+    content: Union[str, List[QueryLogMessageChatCompletionSystemMessageParamContentUnionMember1]]
+
+    role: Literal["system"]
+
+    name: Optional[str] = None
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam(
+    BaseModel
+):
+    text: str
+
+    type: Literal["text"]
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL(
+    BaseModel
+):
+    url: str
+
+    detail: Optional[Literal["auto", "low", "high"]] = None
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam(
+    BaseModel
+):
+    image_url: QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL
+
+    type: Literal["image_url"]
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio(
+    BaseModel
+):
+    data: str
+
+    format: Literal["wav", "mp3"]
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam(
+    BaseModel
+):
+    input_audio: QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio
+
+    type: Literal["input_audio"]
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile(BaseModel):
+    file_data: Optional[str] = None
+
+    file_id: Optional[str] = None
+
+    filename: Optional[str] = None
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1File(BaseModel):
+    file: QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile
+
+    type: Literal["file"]
+
+
+QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1: TypeAlias = Union[
+    QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam,
+    QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam,
+    QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam,
+    QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1File,
+]
+
+
+class QueryLogMessageChatCompletionUserMessageParamOutput(BaseModel):
+    content: Union[str, List[QueryLogMessageChatCompletionUserMessageParamOutputContentUnionMember1]]
+
+    role: Literal["user"]
+
+    name: Optional[str] = None
+
+
+class QueryLogMessageChatCompletionAssistantMessageParamOutputAudio(BaseModel):
+    id: str
+
+
+class QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam(
+    BaseModel
+):
+    text: str
+
+    type: Literal["text"]
+
+
+class QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartRefusalParam(
+    BaseModel
+):
+    refusal: str
+
+    type: Literal["refusal"]
+
+
+QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1: TypeAlias = Union[
+    QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam,
+    QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1ChatCompletionContentPartRefusalParam,
+]
+
+
+class QueryLogMessageChatCompletionAssistantMessageParamOutputFunctionCall(BaseModel):
+    arguments: str
+
+    name: str
+
+
+class QueryLogMessageChatCompletionAssistantMessageParamOutputToolCallFunction(BaseModel):
+    arguments: str
+
+    name: str
+
+
+class QueryLogMessageChatCompletionAssistantMessageParamOutputToolCall(BaseModel):
+    id: str
+
+    function: QueryLogMessageChatCompletionAssistantMessageParamOutputToolCallFunction
+
+    type: Literal["function"]
+
+
+class QueryLogMessageChatCompletionAssistantMessageParamOutput(BaseModel):
+    role: Literal["assistant"]
+
+    audio: Optional[QueryLogMessageChatCompletionAssistantMessageParamOutputAudio] = None
+
+    content: Union[str, List[QueryLogMessageChatCompletionAssistantMessageParamOutputContentUnionMember1], None] = None
+
+    function_call: Optional[QueryLogMessageChatCompletionAssistantMessageParamOutputFunctionCall] = None
+
+    name: Optional[str] = None
+
+    refusal: Optional[str] = None
+
+    tool_calls: Optional[List[QueryLogMessageChatCompletionAssistantMessageParamOutputToolCall]] = None
+
+
+class QueryLogMessageChatCompletionToolMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class QueryLogMessageChatCompletionToolMessageParam(BaseModel):
+    content: Union[str, List[QueryLogMessageChatCompletionToolMessageParamContentUnionMember1]]
+
+    role: Literal["tool"]
+
+    tool_call_id: str
+
+
+class QueryLogMessageChatCompletionFunctionMessageParam(BaseModel):
+    content: Optional[str] = None
+
+    name: str
+
+    role: Literal["function"]
+
+
+QueryLogMessage: TypeAlias = Union[
+    QueryLogMessageChatCompletionDeveloperMessageParam,
+    QueryLogMessageChatCompletionSystemMessageParam,
+    QueryLogMessageChatCompletionUserMessageParamOutput,
+    QueryLogMessageChatCompletionAssistantMessageParamOutput,
+    QueryLogMessageChatCompletionToolMessageParam,
+    QueryLogMessageChatCompletionFunctionMessageParam,
+]
+
+
 class QueryLog(BaseModel):
     id: str
 
@@ -84,7 +301,11 @@ class QueryLog(BaseModel):
 
     formatted_guardrail_eval_scores: Optional[Dict[str, QueryLogFormattedGuardrailEvalScores]] = None
 
+    formatted_messages: Optional[str] = None
+
     formatted_non_guardrail_eval_scores: Optional[Dict[str, QueryLogFormattedNonGuardrailEvalScores]] = None
+
+    formatted_original_question: Optional[str] = None
 
     is_bad_response: bool
 
@@ -132,6 +353,20 @@ class QueryLog(BaseModel):
 
     guardrailed: Optional[bool] = None
     """If true, the response was guardrailed"""
+
+    messages: Optional[List[QueryLogMessage]] = None
+    """Optional message history to provide conversation context for the query.
+
+    Used to rewrite query into a self-contained version of itself. If not provided,
+    the query will be treated as self-contained.
+    """
+
+    original_question: Optional[str] = None
+    """The original question that was asked before any rewriting or processing.
+
+    For all non-conversational RAG, original_question should be the same as the
+    final question seen in Codex.
+    """
 
     primary_eval_issue: Optional[str] = None
     """Primary issue identified in evaluation"""
