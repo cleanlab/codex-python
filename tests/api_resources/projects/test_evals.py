@@ -259,7 +259,18 @@ class TestEvals:
     @parametrize
     def test_method_list(self, client: Codex) -> None:
         eval = client.projects.evals.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(EvalListResponse, eval, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_with_all_params(self, client: Codex) -> None:
+        eval = client.projects.evals.list(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            guardrails_only=True,
+            limit=1,
+            offset=0,
         )
         assert_matches_type(EvalListResponse, eval, path=["response"])
 
@@ -267,7 +278,7 @@ class TestEvals:
     @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.projects.evals.with_raw_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -279,7 +290,7 @@ class TestEvals:
     @parametrize
     def test_streaming_response_list(self, client: Codex) -> None:
         with client.projects.evals.with_streaming_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -294,7 +305,7 @@ class TestEvals:
     def test_path_params_list(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.evals.with_raw_response.list(
-                "",
+                project_id="",
             )
 
     @pytest.mark.skip()
@@ -596,7 +607,18 @@ class TestAsyncEvals:
     @parametrize
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         eval = await async_client.projects.evals.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(EvalListResponse, eval, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
+        eval = await async_client.projects.evals.list(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            guardrails_only=True,
+            limit=1,
+            offset=0,
         )
         assert_matches_type(EvalListResponse, eval, path=["response"])
 
@@ -604,7 +626,7 @@ class TestAsyncEvals:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.evals.with_raw_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -616,7 +638,7 @@ class TestAsyncEvals:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.evals.with_streaming_response.list(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -631,7 +653,7 @@ class TestAsyncEvals:
     async def test_path_params_list(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.evals.with_raw_response.list(
-                "",
+                project_id="",
             )
 
     @pytest.mark.skip()
