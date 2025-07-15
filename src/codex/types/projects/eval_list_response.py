@@ -1,14 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["EvalListResponse", "EvalListResponseItem"]
+__all__ = ["EvalListResponse", "Eval"]
 
 
-class EvalListResponseItem(BaseModel):
+class Eval(BaseModel):
     criteria: str
     """
     The evaluation criteria text that describes what aspect is being evaluated and
@@ -69,4 +69,7 @@ class EvalListResponseItem(BaseModel):
     """Whether the evaluation fails when score is above or below the threshold"""
 
 
-EvalListResponse: TypeAlias = List[EvalListResponseItem]
+class EvalListResponse(BaseModel):
+    evals: List[Eval]
+
+    total_count: int
