@@ -632,7 +632,7 @@ class TestProjects:
         project = client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
@@ -643,7 +643,7 @@ class TestProjects:
         project = client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
             use_llm_matching=True,
             constrain_outputs=["string"],
@@ -685,7 +685,7 @@ class TestProjects:
         response = client.projects.with_raw_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
 
@@ -700,7 +700,7 @@ class TestProjects:
         with client.projects.with_streaming_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         ) as response:
             assert not response.is_closed
@@ -718,7 +718,7 @@ class TestProjects:
             client.projects.with_raw_response.validate(
                 project_id="",
                 context="context",
-                query="query",
+                query="x",
                 response="string",
             )
 
@@ -1334,7 +1334,7 @@ class TestAsyncProjects:
         project = await async_client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
@@ -1345,7 +1345,7 @@ class TestAsyncProjects:
         project = await async_client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
             use_llm_matching=True,
             constrain_outputs=["string"],
@@ -1387,7 +1387,7 @@ class TestAsyncProjects:
         response = await async_client.projects.with_raw_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
 
@@ -1402,7 +1402,7 @@ class TestAsyncProjects:
         async with async_client.projects.with_streaming_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         ) as response:
             assert not response.is_closed
@@ -1420,6 +1420,6 @@ class TestAsyncProjects:
             await async_client.projects.with_raw_response.validate(
                 project_id="",
                 context="context",
-                query="query",
+                query="x",
                 response="string",
             )

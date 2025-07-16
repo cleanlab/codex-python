@@ -192,7 +192,7 @@ Methods:
 
 - <code title="post /api/projects/{project_id}/evals">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/eval_create_params.py">params</a>) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
 - <code title="put /api/projects/{project_id}/evals/{eval_key}">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">update</a>(path_eval_key, \*, project_id, \*\*<a href="src/codex/types/projects/eval_update_params.py">params</a>) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
-- <code title="get /api/projects/{project_id}/evals">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">list</a>(project_id) -> <a href="./src/codex/types/projects/eval_list_response.py">EvalListResponse</a></code>
+- <code title="get /api/projects/{project_id}/evals">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/eval_list_params.py">params</a>) -> <a href="./src/codex/types/projects/eval_list_response.py">EvalListResponse</a></code>
 - <code title="delete /api/projects/{project_id}/evals/{eval_key}">client.projects.evals.<a href="./src/codex/resources/projects/evals.py">delete</a>(eval_key, \*, project_id) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
 
 ## QueryLogs

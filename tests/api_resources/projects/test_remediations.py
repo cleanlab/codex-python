@@ -35,7 +35,7 @@ class TestRemediations:
     def test_method_create(self, client: Codex) -> None:
         remediation = client.projects.remediations.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
         )
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
@@ -44,7 +44,7 @@ class TestRemediations:
     def test_method_create_with_all_params(self, client: Codex) -> None:
         remediation = client.projects.remediations.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
             answer="answer",
             draft_answer="draft_answer",
         )
@@ -55,7 +55,7 @@ class TestRemediations:
     def test_raw_response_create(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
         )
 
         assert response.is_closed is True
@@ -68,7 +68,7 @@ class TestRemediations:
     def test_streaming_response_create(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -84,7 +84,7 @@ class TestRemediations:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.remediations.with_raw_response.create(
                 project_id="",
-                question="question",
+                question="x",
             )
 
     @pytest.mark.skip()
@@ -636,7 +636,7 @@ class TestAsyncRemediations:
     async def test_method_create(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
         )
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
@@ -645,7 +645,7 @@ class TestAsyncRemediations:
     async def test_method_create_with_all_params(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
             answer="answer",
             draft_answer="draft_answer",
         )
@@ -656,7 +656,7 @@ class TestAsyncRemediations:
     async def test_raw_response_create(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
         )
 
         assert response.is_closed is True
@@ -669,7 +669,7 @@ class TestAsyncRemediations:
     async def test_streaming_response_create(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.create(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            question="question",
+            question="x",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -685,7 +685,7 @@ class TestAsyncRemediations:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.remediations.with_raw_response.create(
                 project_id="",
-                question="question",
+                question="x",
             )
 
     @pytest.mark.skip()
