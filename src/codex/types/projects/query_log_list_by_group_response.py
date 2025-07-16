@@ -364,10 +364,10 @@ class QueryLogsByGroupQueryLog(BaseModel):
     """If true, the response was guardrailed"""
 
     messages: Optional[List[QueryLogsByGroupQueryLogMessage]] = None
-    """Optional message history to provide conversation context for the query.
+    """Message history to provide conversation context for the query.
 
-    Used to rewrite query into a self-contained version of itself. If not provided,
-    the query will be treated as self-contained.
+    Used for TrustworthyRAG and to rewrite query into a self-contained version of
+    itself.
     """
 
     original_question: Optional[str] = None
