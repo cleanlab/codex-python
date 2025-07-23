@@ -286,7 +286,7 @@ class QueryLogsResource(SyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank"]]
+        sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
         | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -646,7 +646,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank"]]
+        sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
         | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
