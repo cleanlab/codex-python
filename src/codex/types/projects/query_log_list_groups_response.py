@@ -15,19 +15,6 @@ __all__ = [
     "Context",
     "DeterministicGuardrailsResults",
     "Message",
-    "MessageChatCompletionDeveloperMessageParam",
-    "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
-    "MessageChatCompletionSystemMessageParam",
-    "MessageChatCompletionSystemMessageParamContentUnionMember1",
-    "MessageChatCompletionUserMessageParamOutput",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1File",
-    "MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile",
     "MessageChatCompletionAssistantMessageParamOutput",
     "MessageChatCompletionAssistantMessageParamOutputAudio",
     "MessageChatCompletionAssistantMessageParamOutputContentUnionMember1",
@@ -38,7 +25,20 @@ __all__ = [
     "MessageChatCompletionAssistantMessageParamOutputToolCallFunction",
     "MessageChatCompletionToolMessageParam",
     "MessageChatCompletionToolMessageParamContentUnionMember1",
+    "MessageChatCompletionUserMessageParamOutput",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1File",
+    "MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile",
+    "MessageChatCompletionSystemMessageParam",
+    "MessageChatCompletionSystemMessageParamContentUnionMember1",
     "MessageChatCompletionFunctionMessageParam",
+    "MessageChatCompletionDeveloperMessageParam",
+    "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
 ]
 
 
@@ -89,100 +89,6 @@ class DeterministicGuardrailsResults(BaseModel):
     should_guardrail: bool
 
     matches: Optional[List[str]] = None
-
-
-class MessageChatCompletionDeveloperMessageParamContentUnionMember1(BaseModel):
-    text: str
-
-    type: Literal["text"]
-
-
-class MessageChatCompletionDeveloperMessageParam(BaseModel):
-    content: Union[str, List[MessageChatCompletionDeveloperMessageParamContentUnionMember1]]
-
-    role: Literal["developer"]
-
-    name: Optional[str] = None
-
-
-class MessageChatCompletionSystemMessageParamContentUnionMember1(BaseModel):
-    text: str
-
-    type: Literal["text"]
-
-
-class MessageChatCompletionSystemMessageParam(BaseModel):
-    content: Union[str, List[MessageChatCompletionSystemMessageParamContentUnionMember1]]
-
-    role: Literal["system"]
-
-    name: Optional[str] = None
-
-
-class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam(BaseModel):
-    text: str
-
-    type: Literal["text"]
-
-
-class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL(
-    BaseModel
-):
-    url: str
-
-    detail: Optional[Literal["auto", "low", "high"]] = None
-
-
-class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam(BaseModel):
-    image_url: MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL
-
-    type: Literal["image_url"]
-
-
-class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio(
-    BaseModel
-):
-    data: str
-
-    format: Literal["wav", "mp3"]
-
-
-class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam(BaseModel):
-    input_audio: (
-        MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio
-    )
-
-    type: Literal["input_audio"]
-
-
-class MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile(BaseModel):
-    file_data: Optional[str] = None
-
-    file_id: Optional[str] = None
-
-    filename: Optional[str] = None
-
-
-class MessageChatCompletionUserMessageParamOutputContentUnionMember1File(BaseModel):
-    file: MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile
-
-    type: Literal["file"]
-
-
-MessageChatCompletionUserMessageParamOutputContentUnionMember1: TypeAlias = Union[
-    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam,
-    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam,
-    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam,
-    MessageChatCompletionUserMessageParamOutputContentUnionMember1File,
-]
-
-
-class MessageChatCompletionUserMessageParamOutput(BaseModel):
-    content: Union[str, List[MessageChatCompletionUserMessageParamOutputContentUnionMember1]]
-
-    role: Literal["user"]
-
-    name: Optional[str] = None
 
 
 class MessageChatCompletionAssistantMessageParamOutputAudio(BaseModel):
@@ -259,6 +165,86 @@ class MessageChatCompletionToolMessageParam(BaseModel):
     tool_call_id: str
 
 
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL(
+    BaseModel
+):
+    url: str
+
+    detail: Optional[Literal["auto", "low", "high"]] = None
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam(BaseModel):
+    image_url: MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParamImageURL
+
+    type: Literal["image_url"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio(
+    BaseModel
+):
+    data: str
+
+    format: Literal["wav", "mp3"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam(BaseModel):
+    input_audio: (
+        MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio
+    )
+
+    type: Literal["input_audio"]
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile(BaseModel):
+    file_data: Optional[str] = None
+
+    file_id: Optional[str] = None
+
+    filename: Optional[str] = None
+
+
+class MessageChatCompletionUserMessageParamOutputContentUnionMember1File(BaseModel):
+    file: MessageChatCompletionUserMessageParamOutputContentUnionMember1FileFile
+
+    type: Literal["file"]
+
+
+MessageChatCompletionUserMessageParamOutputContentUnionMember1: TypeAlias = Union[
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartTextParam,
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartImageParam,
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1ChatCompletionContentPartInputAudioParam,
+    MessageChatCompletionUserMessageParamOutputContentUnionMember1File,
+]
+
+
+class MessageChatCompletionUserMessageParamOutput(BaseModel):
+    content: Union[str, List[MessageChatCompletionUserMessageParamOutputContentUnionMember1]]
+
+    role: Literal["user"]
+
+    name: Optional[str] = None
+
+
+class MessageChatCompletionSystemMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionSystemMessageParam(BaseModel):
+    content: Union[str, List[MessageChatCompletionSystemMessageParamContentUnionMember1]]
+
+    role: Literal["system"]
+
+    name: Optional[str] = None
+
+
 class MessageChatCompletionFunctionMessageParam(BaseModel):
     content: Optional[str] = None
 
@@ -267,13 +253,27 @@ class MessageChatCompletionFunctionMessageParam(BaseModel):
     role: Literal["function"]
 
 
+class MessageChatCompletionDeveloperMessageParamContentUnionMember1(BaseModel):
+    text: str
+
+    type: Literal["text"]
+
+
+class MessageChatCompletionDeveloperMessageParam(BaseModel):
+    content: Union[str, List[MessageChatCompletionDeveloperMessageParamContentUnionMember1]]
+
+    role: Literal["developer"]
+
+    name: Optional[str] = None
+
+
 Message: TypeAlias = Union[
-    MessageChatCompletionDeveloperMessageParam,
-    MessageChatCompletionSystemMessageParam,
-    MessageChatCompletionUserMessageParamOutput,
     MessageChatCompletionAssistantMessageParamOutput,
     MessageChatCompletionToolMessageParam,
+    MessageChatCompletionUserMessageParamOutput,
+    MessageChatCompletionSystemMessageParam,
     MessageChatCompletionFunctionMessageParam,
+    MessageChatCompletionDeveloperMessageParam,
 ]
 
 
