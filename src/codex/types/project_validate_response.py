@@ -48,8 +48,8 @@ class ProjectValidateResponse(BaseModel):
 
     expert_answer: Optional[str] = None
     """
-    Alternate SME-provided answer from Codex if the response was flagged as bad and
-    an answer was found in the Codex Project, or None otherwise.
+    Alternate SME-provided answer from Codex if a relevant answer was found in the
+    Codex Project, or None otherwise.
     """
 
     is_bad_response: bool

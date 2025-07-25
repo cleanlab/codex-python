@@ -333,4 +333,6 @@ class Config(TypedDict, total=False):
 
     query_use_llm_matching: bool
 
+    tlm_evals_model: str
+
     upper_llm_match_distance_threshold: float

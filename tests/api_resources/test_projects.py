@@ -18,8 +18,6 @@ from codex.types import (
 )
 from tests.utils import assert_matches_type
 
-# pyright: reportDeprecated=false
-
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -120,6 +118,7 @@ class TestProjects:
                 "lower_llm_match_distance_threshold": 0,
                 "max_distance": 0,
                 "query_use_llm_matching": True,
+                "tlm_evals_model": "tlm_evals_model",
                 "upper_llm_match_distance_threshold": 0,
             },
             name="name",
@@ -295,6 +294,7 @@ class TestProjects:
                 "lower_llm_match_distance_threshold": 0,
                 "max_distance": 0,
                 "query_use_llm_matching": True,
+                "tlm_evals_model": "tlm_evals_model",
                 "upper_llm_match_distance_threshold": 0,
             },
             description="description",
@@ -464,64 +464,6 @@ class TestProjects:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_increment_queries(self, client: Codex) -> None:
-        with pytest.warns(DeprecationWarning):
-            project = client.projects.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert_matches_type(object, project, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_increment_queries_with_all_params(self, client: Codex) -> None:
-        with pytest.warns(DeprecationWarning):
-            project = client.projects.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                count=0,
-            )
-
-        assert_matches_type(object, project, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_increment_queries(self, client: Codex) -> None:
-        with pytest.warns(DeprecationWarning):
-            response = client.projects.with_raw_response.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = response.parse()
-        assert_matches_type(object, project, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_increment_queries(self, client: Codex) -> None:
-        with pytest.warns(DeprecationWarning):
-            with client.projects.with_streaming_response.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ) as response:
-                assert not response.is_closed
-                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-                project = response.parse()
-                assert_matches_type(object, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_increment_queries(self, client: Codex) -> None:
-        with pytest.warns(DeprecationWarning):
-            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-                client.projects.with_raw_response.increment_queries(
-                    project_id="",
-                )
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_invite_sme(self, client: Codex) -> None:
         project = client.projects.invite_sme(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -632,7 +574,7 @@ class TestProjects:
         project = client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
@@ -643,7 +585,7 @@ class TestProjects:
         project = client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
             use_llm_matching=True,
             constrain_outputs=["string"],
@@ -652,9 +594,25 @@ class TestProjects:
             eval_scores={"foo": 0},
             messages=[
                 {
+                    "role": "assistant",
+                    "audio": {"id": "id"},
                     "content": "string",
-                    "role": "developer",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
                     "name": "name",
+                    "refusal": "refusal",
+                    "tool_calls": [
+                        {
+                            "id": "id",
+                            "function": {
+                                "arguments": "arguments",
+                                "name": "name",
+                            },
+                            "type": "function",
+                        }
+                    ],
                 }
             ],
             options={
@@ -685,7 +643,7 @@ class TestProjects:
         response = client.projects.with_raw_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
 
@@ -700,7 +658,7 @@ class TestProjects:
         with client.projects.with_streaming_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         ) as response:
             assert not response.is_closed
@@ -718,7 +676,7 @@ class TestProjects:
             client.projects.with_raw_response.validate(
                 project_id="",
                 context="context",
-                query="query",
+                query="x",
                 response="string",
             )
 
@@ -822,6 +780,7 @@ class TestAsyncProjects:
                 "lower_llm_match_distance_threshold": 0,
                 "max_distance": 0,
                 "query_use_llm_matching": True,
+                "tlm_evals_model": "tlm_evals_model",
                 "upper_llm_match_distance_threshold": 0,
             },
             name="name",
@@ -997,6 +956,7 @@ class TestAsyncProjects:
                 "lower_llm_match_distance_threshold": 0,
                 "max_distance": 0,
                 "query_use_llm_matching": True,
+                "tlm_evals_model": "tlm_evals_model",
                 "upper_llm_match_distance_threshold": 0,
             },
             description="description",
@@ -1166,64 +1126,6 @@ class TestAsyncProjects:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_increment_queries(self, async_client: AsyncCodex) -> None:
-        with pytest.warns(DeprecationWarning):
-            project = await async_client.projects.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert_matches_type(object, project, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_increment_queries_with_all_params(self, async_client: AsyncCodex) -> None:
-        with pytest.warns(DeprecationWarning):
-            project = await async_client.projects.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                count=0,
-            )
-
-        assert_matches_type(object, project, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_increment_queries(self, async_client: AsyncCodex) -> None:
-        with pytest.warns(DeprecationWarning):
-            response = await async_client.projects.with_raw_response.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = await response.parse()
-        assert_matches_type(object, project, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_increment_queries(self, async_client: AsyncCodex) -> None:
-        with pytest.warns(DeprecationWarning):
-            async with async_client.projects.with_streaming_response.increment_queries(
-                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ) as response:
-                assert not response.is_closed
-                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-                project = await response.parse()
-                assert_matches_type(object, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_increment_queries(self, async_client: AsyncCodex) -> None:
-        with pytest.warns(DeprecationWarning):
-            with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-                await async_client.projects.with_raw_response.increment_queries(
-                    project_id="",
-                )
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_method_invite_sme(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.invite_sme(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1334,7 +1236,7 @@ class TestAsyncProjects:
         project = await async_client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
@@ -1345,7 +1247,7 @@ class TestAsyncProjects:
         project = await async_client.projects.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
             use_llm_matching=True,
             constrain_outputs=["string"],
@@ -1354,9 +1256,25 @@ class TestAsyncProjects:
             eval_scores={"foo": 0},
             messages=[
                 {
+                    "role": "assistant",
+                    "audio": {"id": "id"},
                     "content": "string",
-                    "role": "developer",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
                     "name": "name",
+                    "refusal": "refusal",
+                    "tool_calls": [
+                        {
+                            "id": "id",
+                            "function": {
+                                "arguments": "arguments",
+                                "name": "name",
+                            },
+                            "type": "function",
+                        }
+                    ],
                 }
             ],
             options={
@@ -1387,7 +1305,7 @@ class TestAsyncProjects:
         response = await async_client.projects.with_raw_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         )
 
@@ -1402,7 +1320,7 @@ class TestAsyncProjects:
         async with async_client.projects.with_streaming_response.validate(
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             context="context",
-            query="query",
+            query="x",
             response="string",
         ) as response:
             assert not response.is_closed
@@ -1420,6 +1338,6 @@ class TestAsyncProjects:
             await async_client.projects.with_raw_response.validate(
                 project_id="",
                 context="context",
-                query="query",
+                query="x",
                 response="string",
             )

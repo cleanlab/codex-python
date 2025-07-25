@@ -323,6 +323,8 @@ class ProjectConfig(BaseModel):
 
     query_use_llm_matching: Optional[bool] = None
 
+    tlm_evals_model: Optional[str] = None
+
     upper_llm_match_distance_threshold: Optional[float] = None
 
 

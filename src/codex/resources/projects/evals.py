@@ -18,7 +18,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.projects import eval_create_params, eval_update_params
+from ...types.projects import eval_list_params, eval_create_params, eval_update_params
 from ...types.project_return_schema import ProjectReturnSchema
 from ...types.projects.eval_list_response import EvalListResponse
 
@@ -324,6 +324,9 @@ class EvalsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
+        guardrails_only: bool | NotGiven = NOT_GIVEN,
+        limit: Optional[int] | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -332,7 +335,7 @@ class EvalsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EvalListResponse:
         """
-        Get the evaluations config for a project.
+        Get the evaluations config for a project with optional pagination.
 
         Args:
           extra_headers: Send extra headers
@@ -348,7 +351,18 @@ class EvalsResource(SyncAPIResource):
         return self._get(
             f"/api/projects/{project_id}/evals",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "guardrails_only": guardrails_only,
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    eval_list_params.EvalListParams,
+                ),
             ),
             cast_to=EvalListResponse,
         )
@@ -689,6 +703,9 @@ class AsyncEvalsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
+        guardrails_only: bool | NotGiven = NOT_GIVEN,
+        limit: Optional[int] | NotGiven = NOT_GIVEN,
+        offset: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -697,7 +714,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> EvalListResponse:
         """
-        Get the evaluations config for a project.
+        Get the evaluations config for a project with optional pagination.
 
         Args:
           extra_headers: Send extra headers
@@ -713,7 +730,18 @@ class AsyncEvalsResource(AsyncAPIResource):
         return await self._get(
             f"/api/projects/{project_id}/evals",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "guardrails_only": guardrails_only,
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    eval_list_params.EvalListParams,
+                ),
             ),
             cast_to=EvalListResponse,
         )

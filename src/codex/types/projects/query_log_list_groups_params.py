@@ -44,7 +44,7 @@ class QueryLogListGroupsParams(TypedDict, total=False):
     ]
     """Filter logs that have ANY of these primary evaluation issues (OR operation)"""
 
-    sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank"]]
+    sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
 
     was_cache_hit: Optional[bool]
     """Filter by cache hit status"""

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing_extensions
 from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal
 
@@ -22,7 +21,6 @@ from ...types import (
     project_update_params,
     project_validate_params,
     project_invite_sme_params,
-    project_increment_queries_params,
     project_retrieve_analytics_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
@@ -345,45 +343,6 @@ class ProjectsResource(SyncAPIResource):
             f"/api/projects/{project_id}/export",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
-    @typing_extensions.deprecated("deprecated")
-    def increment_queries(
-        self,
-        project_id: str,
-        *,
-        count: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        Increment the queries metric for a project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not project_id:
-            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return self._post(
-            f"/api/projects/{project_id}/increment_queries",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"count": count}, project_increment_queries_params.ProjectIncrementQueriesParams),
             ),
             cast_to=object,
         )
@@ -956,47 +915,6 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=object,
         )
 
-    @typing_extensions.deprecated("deprecated")
-    async def increment_queries(
-        self,
-        project_id: str,
-        *,
-        count: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        Increment the queries metric for a project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not project_id:
-            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        return await self._post(
-            f"/api/projects/{project_id}/increment_queries",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"count": count}, project_increment_queries_params.ProjectIncrementQueriesParams
-                ),
-            ),
-            cast_to=object,
-        )
-
     async def invite_sme(
         self,
         project_id: str,
@@ -1308,11 +1226,6 @@ class ProjectsResourceWithRawResponse:
         self.export = to_raw_response_wrapper(
             projects.export,
         )
-        self.increment_queries = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                projects.increment_queries  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.invite_sme = to_raw_response_wrapper(
             projects.invite_sme,
         )
@@ -1361,11 +1274,6 @@ class AsyncProjectsResourceWithRawResponse:
         )
         self.export = async_to_raw_response_wrapper(
             projects.export,
-        )
-        self.increment_queries = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                projects.increment_queries  # pyright: ignore[reportDeprecated],
-            )
         )
         self.invite_sme = async_to_raw_response_wrapper(
             projects.invite_sme,
@@ -1416,11 +1324,6 @@ class ProjectsResourceWithStreamingResponse:
         self.export = to_streamed_response_wrapper(
             projects.export,
         )
-        self.increment_queries = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                projects.increment_queries  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.invite_sme = to_streamed_response_wrapper(
             projects.invite_sme,
         )
@@ -1469,11 +1372,6 @@ class AsyncProjectsResourceWithStreamingResponse:
         )
         self.export = async_to_streamed_response_wrapper(
             projects.export,
-        )
-        self.increment_queries = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                projects.increment_queries  # pyright: ignore[reportDeprecated],
-            )
         )
         self.invite_sme = async_to_streamed_response_wrapper(
             projects.invite_sme,
