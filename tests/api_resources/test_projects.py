@@ -594,9 +594,25 @@ class TestProjects:
             eval_scores={"foo": 0},
             messages=[
                 {
+                    "role": "assistant",
+                    "audio": {"id": "id"},
                     "content": "string",
-                    "role": "developer",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
                     "name": "name",
+                    "refusal": "refusal",
+                    "tool_calls": [
+                        {
+                            "id": "id",
+                            "function": {
+                                "arguments": "arguments",
+                                "name": "name",
+                            },
+                            "type": "function",
+                        }
+                    ],
                 }
             ],
             options={
@@ -1240,9 +1256,25 @@ class TestAsyncProjects:
             eval_scores={"foo": 0},
             messages=[
                 {
+                    "role": "assistant",
+                    "audio": {"id": "id"},
                     "content": "string",
-                    "role": "developer",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
                     "name": "name",
+                    "refusal": "refusal",
+                    "tool_calls": [
+                        {
+                            "id": "id",
+                            "function": {
+                                "arguments": "arguments",
+                                "name": "name",
+                            },
+                            "type": "function",
+                        }
+                    ],
                 }
             ],
             options={

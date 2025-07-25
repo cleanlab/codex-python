@@ -29,19 +29,6 @@ __all__ = [
     "ResponseChatCompletionUsageCompletionTokensDetails",
     "ResponseChatCompletionUsagePromptTokensDetails",
     "Message",
-    "MessageChatCompletionDeveloperMessageParam",
-    "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
-    "MessageChatCompletionSystemMessageParam",
-    "MessageChatCompletionSystemMessageParamContentUnionMember1",
-    "MessageChatCompletionUserMessageParamInput",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartTextParam",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParam",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParamImageURL",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParam",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1File",
-    "MessageChatCompletionUserMessageParamInputContentUnionMember1FileFile",
     "MessageChatCompletionAssistantMessageParamInput",
     "MessageChatCompletionAssistantMessageParamInputAudio",
     "MessageChatCompletionAssistantMessageParamInputContentUnionMember1",
@@ -52,7 +39,20 @@ __all__ = [
     "MessageChatCompletionAssistantMessageParamInputToolCallFunction",
     "MessageChatCompletionToolMessageParam",
     "MessageChatCompletionToolMessageParamContentUnionMember1",
+    "MessageChatCompletionUserMessageParamInput",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartTextParam",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParam",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParamImageURL",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParam",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1File",
+    "MessageChatCompletionUserMessageParamInputContentUnionMember1FileFile",
+    "MessageChatCompletionSystemMessageParam",
+    "MessageChatCompletionSystemMessageParamContentUnionMember1",
     "MessageChatCompletionFunctionMessageParam",
+    "MessageChatCompletionDeveloperMessageParam",
+    "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
     "Options",
 ]
 
@@ -440,108 +440,6 @@ ResponseChatCompletion: TypeAlias = Union[ResponseChatCompletionTyped, Dict[str,
 Response: TypeAlias = Union[str, ResponseChatCompletion]
 
 
-class MessageChatCompletionDeveloperMessageParamContentUnionMember1(TypedDict, total=False):
-    text: Required[str]
-
-    type: Required[Literal["text"]]
-
-
-class MessageChatCompletionDeveloperMessageParam(TypedDict, total=False):
-    content: Required[Union[str, Iterable[MessageChatCompletionDeveloperMessageParamContentUnionMember1]]]
-
-    role: Required[Literal["developer"]]
-
-    name: str
-
-
-class MessageChatCompletionSystemMessageParamContentUnionMember1(TypedDict, total=False):
-    text: Required[str]
-
-    type: Required[Literal["text"]]
-
-
-class MessageChatCompletionSystemMessageParam(TypedDict, total=False):
-    content: Required[Union[str, Iterable[MessageChatCompletionSystemMessageParamContentUnionMember1]]]
-
-    role: Required[Literal["system"]]
-
-    name: str
-
-
-class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartTextParam(
-    TypedDict, total=False
-):
-    text: Required[str]
-
-    type: Required[Literal["text"]]
-
-
-class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParamImageURL(
-    TypedDict, total=False
-):
-    url: Required[str]
-
-    detail: Literal["auto", "low", "high"]
-
-
-class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParam(
-    TypedDict, total=False
-):
-    image_url: Required[
-        MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParamImageURL
-    ]
-
-    type: Required[Literal["image_url"]]
-
-
-class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio(
-    TypedDict, total=False
-):
-    data: Required[str]
-
-    format: Required[Literal["wav", "mp3"]]
-
-
-class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParam(
-    TypedDict, total=False
-):
-    input_audio: Required[
-        MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio
-    ]
-
-    type: Required[Literal["input_audio"]]
-
-
-class MessageChatCompletionUserMessageParamInputContentUnionMember1FileFile(TypedDict, total=False):
-    file_data: str
-
-    file_id: str
-
-    filename: str
-
-
-class MessageChatCompletionUserMessageParamInputContentUnionMember1File(TypedDict, total=False):
-    file: Required[MessageChatCompletionUserMessageParamInputContentUnionMember1FileFile]
-
-    type: Required[Literal["file"]]
-
-
-MessageChatCompletionUserMessageParamInputContentUnionMember1: TypeAlias = Union[
-    MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartTextParam,
-    MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParam,
-    MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParam,
-    MessageChatCompletionUserMessageParamInputContentUnionMember1File,
-]
-
-
-class MessageChatCompletionUserMessageParamInput(TypedDict, total=False):
-    content: Required[Union[str, Iterable[MessageChatCompletionUserMessageParamInputContentUnionMember1]]]
-
-    role: Required[Literal["user"]]
-
-    name: str
-
-
 class MessageChatCompletionAssistantMessageParamInputAudio(TypedDict, total=False):
     id: Required[str]
 
@@ -618,6 +516,94 @@ class MessageChatCompletionToolMessageParam(TypedDict, total=False):
     tool_call_id: Required[str]
 
 
+class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartTextParam(
+    TypedDict, total=False
+):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParamImageURL(
+    TypedDict, total=False
+):
+    url: Required[str]
+
+    detail: Literal["auto", "low", "high"]
+
+
+class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParam(
+    TypedDict, total=False
+):
+    image_url: Required[
+        MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParamImageURL
+    ]
+
+    type: Required[Literal["image_url"]]
+
+
+class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio(
+    TypedDict, total=False
+):
+    data: Required[str]
+
+    format: Required[Literal["wav", "mp3"]]
+
+
+class MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParam(
+    TypedDict, total=False
+):
+    input_audio: Required[
+        MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParamInputAudio
+    ]
+
+    type: Required[Literal["input_audio"]]
+
+
+class MessageChatCompletionUserMessageParamInputContentUnionMember1FileFile(TypedDict, total=False):
+    file_data: str
+
+    file_id: str
+
+    filename: str
+
+
+class MessageChatCompletionUserMessageParamInputContentUnionMember1File(TypedDict, total=False):
+    file: Required[MessageChatCompletionUserMessageParamInputContentUnionMember1FileFile]
+
+    type: Required[Literal["file"]]
+
+
+MessageChatCompletionUserMessageParamInputContentUnionMember1: TypeAlias = Union[
+    MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartTextParam,
+    MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartImageParam,
+    MessageChatCompletionUserMessageParamInputContentUnionMember1ChatCompletionContentPartInputAudioParam,
+    MessageChatCompletionUserMessageParamInputContentUnionMember1File,
+]
+
+
+class MessageChatCompletionUserMessageParamInput(TypedDict, total=False):
+    content: Required[Union[str, Iterable[MessageChatCompletionUserMessageParamInputContentUnionMember1]]]
+
+    role: Required[Literal["user"]]
+
+    name: str
+
+
+class MessageChatCompletionSystemMessageParamContentUnionMember1(TypedDict, total=False):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionSystemMessageParam(TypedDict, total=False):
+    content: Required[Union[str, Iterable[MessageChatCompletionSystemMessageParamContentUnionMember1]]]
+
+    role: Required[Literal["system"]]
+
+    name: str
+
+
 class MessageChatCompletionFunctionMessageParam(TypedDict, total=False):
     content: Required[Optional[str]]
 
@@ -626,13 +612,27 @@ class MessageChatCompletionFunctionMessageParam(TypedDict, total=False):
     role: Required[Literal["function"]]
 
 
+class MessageChatCompletionDeveloperMessageParamContentUnionMember1(TypedDict, total=False):
+    text: Required[str]
+
+    type: Required[Literal["text"]]
+
+
+class MessageChatCompletionDeveloperMessageParam(TypedDict, total=False):
+    content: Required[Union[str, Iterable[MessageChatCompletionDeveloperMessageParamContentUnionMember1]]]
+
+    role: Required[Literal["developer"]]
+
+    name: str
+
+
 Message: TypeAlias = Union[
-    MessageChatCompletionDeveloperMessageParam,
-    MessageChatCompletionSystemMessageParam,
-    MessageChatCompletionUserMessageParamInput,
     MessageChatCompletionAssistantMessageParamInput,
     MessageChatCompletionToolMessageParam,
+    MessageChatCompletionUserMessageParamInput,
+    MessageChatCompletionSystemMessageParam,
     MessageChatCompletionFunctionMessageParam,
+    MessageChatCompletionDeveloperMessageParam,
 ]
 
 
