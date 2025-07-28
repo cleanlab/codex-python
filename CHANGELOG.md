@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.1.0-alpha.24 (2025-07-28)
+
+Full Changelog: [v0.1.0-alpha.23...v0.1.0-alpha.24](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.23...v0.1.0-alpha.24)
+
+### Features
+
+* **api:** api update ([ce6d89f](https://github.com/cleanlab/codex-python/commit/ce6d89f3c885765b21c6ba43b1b7b9a1ebf8a61e))
+* **api:** api update ([1a06cfc](https://github.com/cleanlab/codex-python/commit/1a06cfc7c19943ac468b2ec9f2787215363cf77e))
+* **api:** api update ([2ee8095](https://github.com/cleanlab/codex-python/commit/2ee809593ddb15c4de776a2048883287ec5c0cdb))
+* **api:** api update ([6992031](https://github.com/cleanlab/codex-python/commit/6992031e6aa610031f24d818040050b0fc185c34))
+* **api:** api update ([7e7caf9](https://github.com/cleanlab/codex-python/commit/7e7caf9a3ad214c5df3686122e4f26b850dcb8b0))
+* **api:** api update ([0a33c47](https://github.com/cleanlab/codex-python/commit/0a33c4710d4890d17ddd973ba4a2ed183e45e4c7))
+* **api:** api update ([575d190](https://github.com/cleanlab/codex-python/commit/575d1901319984fea901ce216323a5259e17f98c))
+* **api:** api update ([f55f4b7](https://github.com/cleanlab/codex-python/commit/f55f4b768f8c1d00bdf61e56b0a7227c8424c5b6))
+* **api:** api update ([b956ce0](https://github.com/cleanlab/codex-python/commit/b956ce083ef3c507a7649577724f337a562c427a))
+* **api:** remove deprecated endpoint increment_queries ([6b52a98](https://github.com/cleanlab/codex-python/commit/6b52a985af9df1b6618d0685fafee2bae7e98566))
+
+
+### Bug Fixes
+
+* **client:** don't send Content-Type header on GET requests ([4732aae](https://github.com/cleanlab/codex-python/commit/4732aaeb03872abffb4e13df6dd1994711bd4268))
+* **parsing:** correctly handle nested discriminated unions ([b374589](https://github.com/cleanlab/codex-python/commit/b374589baf01ca1236cf0823305e6bca037cf12b))
+* **parsing:** ignore empty metadata ([1cdf391](https://github.com/cleanlab/codex-python/commit/1cdf391742b196d5a723307e8c202a69e00b371d))
+* **parsing:** parse extra field types ([3c74ca0](https://github.com/cleanlab/codex-python/commit/3c74ca0f1a913bed65cc4c6580dda25a07a90b74))
+
+
+### Chores
+
+* **internal:** bump pinned h11 dep ([7ce51e9](https://github.com/cleanlab/codex-python/commit/7ce51e93023f66f3e343e379fc1930ddba335e9b))
+* **package:** mark python 3.13 as supported ([5cba949](https://github.com/cleanlab/codex-python/commit/5cba94956fff8ca4de99426a20e5c67f0ce6a2ac))
+* **project:** add settings file for vscode ([00df8ec](https://github.com/cleanlab/codex-python/commit/00df8ec35d44e5bdc6e68661a92d9d21905222c7))
+* **readme:** fix version rendering on pypi ([d05336d](https://github.com/cleanlab/codex-python/commit/d05336d89f5a49b09d7b1f85e7cb3ed74035157a))
+
 ## 0.1.0-alpha.23 (2025-07-07)
 
 Full Changelog: [v0.1.0-alpha.22...v0.1.0-alpha.23](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.22...v0.1.0-alpha.23)
