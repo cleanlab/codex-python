@@ -622,7 +622,6 @@ class TestProjects:
                 "model": "model",
                 "num_candidate_responses": 0,
                 "num_consistency_samples": 0,
-                "num_self_reflections": 0,
                 "reasoning_effort": "reasoning_effort",
                 "similarity_measure": "similarity_measure",
                 "use_self_reflection": True,
@@ -631,17 +630,6 @@ class TestProjects:
             quality_preset="best",
             rewritten_question="rewritten_question",
             task="task",
-            tools=[
-                {
-                    "function": {
-                        "name": "name",
-                        "description": "description",
-                        "parameters": {},
-                        "strict": True,
-                    },
-                    "type": "function",
-                }
-            ],
             x_client_library_version="x-client-library-version",
             x_integration_type="x-integration-type",
             x_source="x-source",
@@ -1296,7 +1284,6 @@ class TestAsyncProjects:
                 "model": "model",
                 "num_candidate_responses": 0,
                 "num_consistency_samples": 0,
-                "num_self_reflections": 0,
                 "reasoning_effort": "reasoning_effort",
                 "similarity_measure": "similarity_measure",
                 "use_self_reflection": True,
@@ -1305,17 +1292,6 @@ class TestAsyncProjects:
             quality_preset="best",
             rewritten_question="rewritten_question",
             task="task",
-            tools=[
-                {
-                    "function": {
-                        "name": "name",
-                        "description": "description",
-                        "parameters": {},
-                        "strict": True,
-                    },
-                    "type": "function",
-                }
-            ],
             x_client_library_version="x-client-library-version",
             x_integration_type="x-integration-type",
             x_source="x-source",

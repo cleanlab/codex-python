@@ -14,8 +14,6 @@ __all__ = [
     "FormattedNonGuardrailEvalScores",
     "Context",
     "DeterministicGuardrailsResults",
-    "EvaluatedResponseToolCall",
-    "EvaluatedResponseToolCallFunction",
     "Message",
     "MessageChatCompletionAssistantMessageParamOutput",
     "MessageChatCompletionAssistantMessageParamOutputAudio",
@@ -41,8 +39,6 @@ __all__ = [
     "MessageChatCompletionFunctionMessageParam",
     "MessageChatCompletionDeveloperMessageParam",
     "MessageChatCompletionDeveloperMessageParamContentUnionMember1",
-    "Tool",
-    "ToolFunction",
 ]
 
 
@@ -93,20 +89,6 @@ class DeterministicGuardrailsResults(BaseModel):
     should_guardrail: bool
 
     matches: Optional[List[str]] = None
-
-
-class EvaluatedResponseToolCallFunction(BaseModel):
-    arguments: str
-
-    name: str
-
-
-class EvaluatedResponseToolCall(BaseModel):
-    id: str
-
-    function: EvaluatedResponseToolCallFunction
-
-    type: Literal["function"]
 
 
 class MessageChatCompletionAssistantMessageParamOutputAudio(BaseModel):
@@ -295,22 +277,6 @@ Message: TypeAlias = Union[
 ]
 
 
-class ToolFunction(BaseModel):
-    name: str
-
-    description: Optional[str] = None
-
-    parameters: Optional[object] = None
-
-    strict: Optional[bool] = None
-
-
-class Tool(BaseModel):
-    function: ToolFunction
-
-    type: Literal["function"]
-
-
 class QueryLogListGroupsResponse(BaseModel):
     id: str
 
@@ -381,12 +347,6 @@ class QueryLogListGroupsResponse(BaseModel):
     evaluated_response: Optional[str] = None
     """The response being evaluated from the RAG system (before any remediation)"""
 
-    evaluated_response_tool_calls: Optional[List[EvaluatedResponseToolCall]] = None
-    """Tool calls from the evaluated response, if any.
-
-    Used to log tool calls in the query log.
-    """
-
     guardrail_evals: Optional[List[str]] = None
     """Evals that should trigger guardrail"""
 
@@ -412,9 +372,3 @@ class QueryLogListGroupsResponse(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    tools: Optional[List[Tool]] = None
-    """Tools to use for the LLM call.
-
-    If not provided, it is assumed no tools were provided to the LLM.
-    """

@@ -16,8 +16,6 @@ __all__ = [
     "QueryLogsByGroupQueryLogFormattedNonGuardrailEvalScores",
     "QueryLogsByGroupQueryLogContext",
     "QueryLogsByGroupQueryLogDeterministicGuardrailsResults",
-    "QueryLogsByGroupQueryLogEvaluatedResponseToolCall",
-    "QueryLogsByGroupQueryLogEvaluatedResponseToolCallFunction",
     "QueryLogsByGroupQueryLogMessage",
     "QueryLogsByGroupQueryLogMessageChatCompletionAssistantMessageParamOutput",
     "QueryLogsByGroupQueryLogMessageChatCompletionAssistantMessageParamOutputAudio",
@@ -43,8 +41,6 @@ __all__ = [
     "QueryLogsByGroupQueryLogMessageChatCompletionFunctionMessageParam",
     "QueryLogsByGroupQueryLogMessageChatCompletionDeveloperMessageParam",
     "QueryLogsByGroupQueryLogMessageChatCompletionDeveloperMessageParamContentUnionMember1",
-    "QueryLogsByGroupQueryLogTool",
-    "QueryLogsByGroupQueryLogToolFunction",
 ]
 
 
@@ -95,20 +91,6 @@ class QueryLogsByGroupQueryLogDeterministicGuardrailsResults(BaseModel):
     should_guardrail: bool
 
     matches: Optional[List[str]] = None
-
-
-class QueryLogsByGroupQueryLogEvaluatedResponseToolCallFunction(BaseModel):
-    arguments: str
-
-    name: str
-
-
-class QueryLogsByGroupQueryLogEvaluatedResponseToolCall(BaseModel):
-    id: str
-
-    function: QueryLogsByGroupQueryLogEvaluatedResponseToolCallFunction
-
-    type: Literal["function"]
 
 
 class QueryLogsByGroupQueryLogMessageChatCompletionAssistantMessageParamOutputAudio(BaseModel):
@@ -305,22 +287,6 @@ QueryLogsByGroupQueryLogMessage: TypeAlias = Union[
 ]
 
 
-class QueryLogsByGroupQueryLogToolFunction(BaseModel):
-    name: str
-
-    description: Optional[str] = None
-
-    parameters: Optional[object] = None
-
-    strict: Optional[bool] = None
-
-
-class QueryLogsByGroupQueryLogTool(BaseModel):
-    function: QueryLogsByGroupQueryLogToolFunction
-
-    type: Literal["function"]
-
-
 class QueryLogsByGroupQueryLog(BaseModel):
     id: str
 
@@ -391,12 +357,6 @@ class QueryLogsByGroupQueryLog(BaseModel):
     evaluated_response: Optional[str] = None
     """The response being evaluated from the RAG system (before any remediation)"""
 
-    evaluated_response_tool_calls: Optional[List[QueryLogsByGroupQueryLogEvaluatedResponseToolCall]] = None
-    """Tool calls from the evaluated response, if any.
-
-    Used to log tool calls in the query log.
-    """
-
     guardrail_evals: Optional[List[str]] = None
     """Evals that should trigger guardrail"""
 
@@ -422,12 +382,6 @@ class QueryLogsByGroupQueryLog(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    tools: Optional[List[QueryLogsByGroupQueryLogTool]] = None
-    """Tools to use for the LLM call.
-
-    If not provided, it is assumed no tools were provided to the LLM.
-    """
 
 
 class QueryLogsByGroup(BaseModel):
