@@ -15,8 +15,6 @@ __all__ = [
     "QueryLogFormattedNonGuardrailEvalScores",
     "QueryLogContext",
     "QueryLogDeterministicGuardrailsResults",
-    "QueryLogEvaluatedResponseToolCall",
-    "QueryLogEvaluatedResponseToolCallFunction",
     "QueryLogMessage",
     "QueryLogMessageChatCompletionAssistantMessageParamOutput",
     "QueryLogMessageChatCompletionAssistantMessageParamOutputAudio",
@@ -42,8 +40,6 @@ __all__ = [
     "QueryLogMessageChatCompletionFunctionMessageParam",
     "QueryLogMessageChatCompletionDeveloperMessageParam",
     "QueryLogMessageChatCompletionDeveloperMessageParamContentUnionMember1",
-    "QueryLogTool",
-    "QueryLogToolFunction",
 ]
 
 
@@ -94,20 +90,6 @@ class QueryLogDeterministicGuardrailsResults(BaseModel):
     should_guardrail: bool
 
     matches: Optional[List[str]] = None
-
-
-class QueryLogEvaluatedResponseToolCallFunction(BaseModel):
-    arguments: str
-
-    name: str
-
-
-class QueryLogEvaluatedResponseToolCall(BaseModel):
-    id: str
-
-    function: QueryLogEvaluatedResponseToolCallFunction
-
-    type: Literal["function"]
 
 
 class QueryLogMessageChatCompletionAssistantMessageParamOutputAudio(BaseModel):
@@ -302,22 +284,6 @@ QueryLogMessage: TypeAlias = Union[
 ]
 
 
-class QueryLogToolFunction(BaseModel):
-    name: str
-
-    description: Optional[str] = None
-
-    parameters: Optional[object] = None
-
-    strict: Optional[bool] = None
-
-
-class QueryLogTool(BaseModel):
-    function: QueryLogToolFunction
-
-    type: Literal["function"]
-
-
 class QueryLog(BaseModel):
     id: str
 
@@ -382,12 +348,6 @@ class QueryLog(BaseModel):
     evaluated_response: Optional[str] = None
     """The response being evaluated from the RAG system (before any remediation)"""
 
-    evaluated_response_tool_calls: Optional[List[QueryLogEvaluatedResponseToolCall]] = None
-    """Tool calls from the evaluated response, if any.
-
-    Used to log tool calls in the query log.
-    """
-
     guardrail_evals: Optional[List[str]] = None
     """Evals that should trigger guardrail"""
 
@@ -413,12 +373,6 @@ class QueryLog(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    tools: Optional[List[QueryLogTool]] = None
-    """Tools to use for the LLM call.
-
-    If not provided, it is assumed no tools were provided to the LLM.
-    """
 
 
 class RemediationListResolvedLogsResponse(BaseModel):
