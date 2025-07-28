@@ -460,6 +460,7 @@ class ProjectsResource(SyncAPIResource):
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[project_validate_params.Tool]] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -504,17 +505,16 @@ class ProjectsResource(SyncAPIResource):
 
               The default values corresponding to each quality preset are:
 
-              - **best:** `num_candidate_responses` = 6, `num_consistency_samples` = 8,
-                `use_self_reflection` = True. This preset improves LLM responses.
-              - **high:** `num_candidate_responses` = 4, `num_consistency_samples` = 8,
-                `use_self_reflection` = True. This preset improves LLM responses.
-              - **medium:** `num_candidate_responses` = 1, `num_consistency_samples` = 8,
-                `use_self_reflection` = True.
-              - **low:** `num_candidate_responses` = 1, `num_consistency_samples` = 4,
-                `use_self_reflection` = True.
-              - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
-                `use_self_reflection` = False. When using `get_trustworthiness_score()` on
-                "base" preset, a faster self-reflection is employed.
+              - **best:** `num_consistency_samples` = 8, `num_self_reflections` = 3,
+                `reasoning_effort` = `"high"`.
+              - **high:** `num_consistency_samples` = 4, `num_self_reflections` = 3,
+                `reasoning_effort` = `"high"`.
+              - **medium:** `num_consistency_samples` = 0, `num_self_reflections` = 3,
+                `reasoning_effort` = `"high"`.
+              - **low:** `num_consistency_samples` = 0, `num_self_reflections` = 3,
+                `reasoning_effort` = `"none"`.
+              - **base:** `num_consistency_samples` = 0, `num_self_reflections` = 1,
+                `reasoning_effort` = `"none"`.
 
               By default, TLM uses the: "medium" `quality_preset`, "gpt-4.1-mini" base
               `model`, and `max_tokens` is set to 512. You can set custom values for these
@@ -550,12 +550,11 @@ class ProjectsResource(SyncAPIResource):
                   strange prompts or prompts that are too vague/open-ended to receive a clearly defined 'good' response.
                   TLM measures consistency via the degree of contradiction between sampled responses that the model considers plausible.
 
-                  use_self_reflection (bool, default = `True`): whether the LLM is asked to reflect on the given response and directly evaluate correctness/confidence.
-                  Setting this False disables reflection and will reduce runtimes/costs, but potentially also the reliability of trustworthiness scores.
-                  Reflection helps quantify aleatoric uncertainty associated with challenging prompts
-                  and catches responses that are noticeably incorrect/bad upon further analysis.
+                  num_self_reflections(int, default = 3): the number of self-reflections to perform where the LLM is asked to reflect on the given response and directly evaluate correctness/confidence.
+                  The maximum number of self-reflections currently supported is 3. Lower values will reduce runtimes/costs, but potentially also the reliability of trustworthiness scores.
+                  Reflection helps quantify aleatoric uncertainty associated with challenging prompts and catches responses that are noticeably incorrect/bad upon further analysis.
 
-                  similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
+                  similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "discrepancy"): how the
                   trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
                   Supported similarity measures include - "semantic" (based on natural language inference),
                   "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
@@ -574,6 +573,8 @@ class ProjectsResource(SyncAPIResource):
                   - name: Name of the evaluation criteria.
                   - criteria: Instructions specifying the evaluation criteria.
 
+                  use_self_reflection (bool, default = `True`): deprecated. Use `num_self_reflections` instead.
+
           prompt: The prompt to use for the TLM call. If not provided, the prompt will be
               generated from the messages.
 
@@ -581,6 +582,9 @@ class ProjectsResource(SyncAPIResource):
 
           rewritten_question: The re-written query if it was provided by the client to Codex from a user to be
               used instead of the original query.
+
+          tools: Tools to use for the LLM call. If not provided, it is assumed no tools were
+              provided to the LLM.
 
           extra_headers: Send extra headers
 
@@ -620,6 +624,7 @@ class ProjectsResource(SyncAPIResource):
                     "quality_preset": quality_preset,
                     "rewritten_question": rewritten_question,
                     "task": task,
+                    "tools": tools,
                 },
                 project_validate_params.ProjectValidateParams,
             ),
@@ -1028,6 +1033,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[project_validate_params.Tool]] | NotGiven = NOT_GIVEN,
         x_client_library_version: str | NotGiven = NOT_GIVEN,
         x_integration_type: str | NotGiven = NOT_GIVEN,
         x_source: str | NotGiven = NOT_GIVEN,
@@ -1072,17 +1078,16 @@ class AsyncProjectsResource(AsyncAPIResource):
 
               The default values corresponding to each quality preset are:
 
-              - **best:** `num_candidate_responses` = 6, `num_consistency_samples` = 8,
-                `use_self_reflection` = True. This preset improves LLM responses.
-              - **high:** `num_candidate_responses` = 4, `num_consistency_samples` = 8,
-                `use_self_reflection` = True. This preset improves LLM responses.
-              - **medium:** `num_candidate_responses` = 1, `num_consistency_samples` = 8,
-                `use_self_reflection` = True.
-              - **low:** `num_candidate_responses` = 1, `num_consistency_samples` = 4,
-                `use_self_reflection` = True.
-              - **base:** `num_candidate_responses` = 1, `num_consistency_samples` = 0,
-                `use_self_reflection` = False. When using `get_trustworthiness_score()` on
-                "base" preset, a faster self-reflection is employed.
+              - **best:** `num_consistency_samples` = 8, `num_self_reflections` = 3,
+                `reasoning_effort` = `"high"`.
+              - **high:** `num_consistency_samples` = 4, `num_self_reflections` = 3,
+                `reasoning_effort` = `"high"`.
+              - **medium:** `num_consistency_samples` = 0, `num_self_reflections` = 3,
+                `reasoning_effort` = `"high"`.
+              - **low:** `num_consistency_samples` = 0, `num_self_reflections` = 3,
+                `reasoning_effort` = `"none"`.
+              - **base:** `num_consistency_samples` = 0, `num_self_reflections` = 1,
+                `reasoning_effort` = `"none"`.
 
               By default, TLM uses the: "medium" `quality_preset`, "gpt-4.1-mini" base
               `model`, and `max_tokens` is set to 512. You can set custom values for these
@@ -1118,12 +1123,11 @@ class AsyncProjectsResource(AsyncAPIResource):
                   strange prompts or prompts that are too vague/open-ended to receive a clearly defined 'good' response.
                   TLM measures consistency via the degree of contradiction between sampled responses that the model considers plausible.
 
-                  use_self_reflection (bool, default = `True`): whether the LLM is asked to reflect on the given response and directly evaluate correctness/confidence.
-                  Setting this False disables reflection and will reduce runtimes/costs, but potentially also the reliability of trustworthiness scores.
-                  Reflection helps quantify aleatoric uncertainty associated with challenging prompts
-                  and catches responses that are noticeably incorrect/bad upon further analysis.
+                  num_self_reflections(int, default = 3): the number of self-reflections to perform where the LLM is asked to reflect on the given response and directly evaluate correctness/confidence.
+                  The maximum number of self-reflections currently supported is 3. Lower values will reduce runtimes/costs, but potentially also the reliability of trustworthiness scores.
+                  Reflection helps quantify aleatoric uncertainty associated with challenging prompts and catches responses that are noticeably incorrect/bad upon further analysis.
 
-                  similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "semantic"): how the
+                  similarity_measure ({"semantic", "string", "embedding", "embedding_large", "code", "discrepancy"}, default = "discrepancy"): how the
                   trustworthiness scoring's consistency algorithm measures similarity between alternative responses considered plausible by the model.
                   Supported similarity measures include - "semantic" (based on natural language inference),
                   "embedding" (based on vector embedding similarity), "embedding_large" (based on a larger embedding model),
@@ -1142,6 +1146,8 @@ class AsyncProjectsResource(AsyncAPIResource):
                   - name: Name of the evaluation criteria.
                   - criteria: Instructions specifying the evaluation criteria.
 
+                  use_self_reflection (bool, default = `True`): deprecated. Use `num_self_reflections` instead.
+
           prompt: The prompt to use for the TLM call. If not provided, the prompt will be
               generated from the messages.
 
@@ -1149,6 +1155,9 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           rewritten_question: The re-written query if it was provided by the client to Codex from a user to be
               used instead of the original query.
+
+          tools: Tools to use for the LLM call. If not provided, it is assumed no tools were
+              provided to the LLM.
 
           extra_headers: Send extra headers
 
@@ -1188,6 +1197,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "quality_preset": quality_preset,
                     "rewritten_question": rewritten_question,
                     "task": task,
+                    "tools": tools,
                 },
                 project_validate_params.ProjectValidateParams,
             ),
