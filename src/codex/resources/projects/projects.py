@@ -352,7 +352,7 @@ class ProjectsResource(SyncAPIResource):
         project_id: str,
         *,
         email: str,
-        page_type: Literal["query_log", "remediation"],
+        page_type: Literal["query_log", "remediation", "prioritized_issue"],
         url_query_string: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -925,7 +925,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         project_id: str,
         *,
         email: str,
-        page_type: Literal["query_log", "remediation"],
+        page_type: Literal["query_log", "remediation", "prioritized_issue"],
         url_query_string: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
