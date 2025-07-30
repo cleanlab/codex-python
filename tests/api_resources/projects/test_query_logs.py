@@ -106,6 +106,7 @@ class TestQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
@@ -170,6 +171,7 @@ class TestQueryLogs:
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
@@ -233,6 +235,7 @@ class TestQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(SyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
@@ -405,6 +408,7 @@ class TestAsyncQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
@@ -469,6 +473,7 @@ class TestAsyncQueryLogs:
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
@@ -532,6 +537,7 @@ class TestAsyncQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(AsyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])

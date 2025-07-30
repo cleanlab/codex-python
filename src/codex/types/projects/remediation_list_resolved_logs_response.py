@@ -349,6 +349,8 @@ class QueryLog(BaseModel):
 
     remediation_id: str
 
+    tool_call_names: Optional[List[str]] = None
+
     was_cache_hit: Optional[bool] = None
     """If similar query already answered, or None if cache was not checked"""
 
