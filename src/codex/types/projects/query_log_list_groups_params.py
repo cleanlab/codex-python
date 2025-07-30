@@ -46,5 +46,8 @@ class QueryLogListGroupsParams(TypedDict, total=False):
 
     sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
 
+    tool_call_names: Optional[List[str]]
+    """Filter by names of tools called in the assistant response"""
+
     was_cache_hit: Optional[bool]
     """Filter by cache hit status"""
