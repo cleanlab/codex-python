@@ -100,6 +100,7 @@ class QueryLogsResource(SyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -131,6 +132,8 @@ class QueryLogsResource(SyncAPIResource):
           failed_evals: Filter by evals that failed
 
           guardrailed: Filter by guardrailed status
+
+          has_tool_calls: Filter by whether the query log has tool calls
 
           passed_evals: Filter by evals that passed
 
@@ -165,6 +168,7 @@ class QueryLogsResource(SyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -189,6 +193,7 @@ class QueryLogsResource(SyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -222,6 +227,8 @@ class QueryLogsResource(SyncAPIResource):
           failed_evals: Filter by evals that failed
 
           guardrailed: Filter by guardrailed status
+
+          has_tool_calls: Filter by whether the query log has tool calls
 
           needs_review: Filter logs that need review
 
@@ -259,6 +266,7 @@ class QueryLogsResource(SyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,
@@ -285,6 +293,7 @@ class QueryLogsResource(SyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -318,6 +327,8 @@ class QueryLogsResource(SyncAPIResource):
           failed_evals: Filter by evals that failed
 
           guardrailed: Filter by guardrailed status
+
+          has_tool_calls: Filter by whether the query log has tool calls
 
           needs_review: Filter log groups that need review
 
@@ -354,6 +365,7 @@ class QueryLogsResource(SyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,
@@ -472,6 +484,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -503,6 +516,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           failed_evals: Filter by evals that failed
 
           guardrailed: Filter by guardrailed status
+
+          has_tool_calls: Filter by whether the query log has tool calls
 
           passed_evals: Filter by evals that passed
 
@@ -537,6 +552,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
@@ -561,6 +577,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -594,6 +611,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           failed_evals: Filter by evals that failed
 
           guardrailed: Filter by guardrailed status
+
+          has_tool_calls: Filter by whether the query log has tool calls
 
           needs_review: Filter logs that need review
 
@@ -631,6 +650,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,
@@ -657,6 +677,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -690,6 +711,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           failed_evals: Filter by evals that failed
 
           guardrailed: Filter by guardrailed status
+
+          has_tool_calls: Filter by whether the query log has tool calls
 
           needs_review: Filter log groups that need review
 
@@ -726,6 +749,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,

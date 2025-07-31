@@ -27,6 +27,9 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     guardrailed: Optional[bool]
     """Filter by guardrailed status"""
 
+    has_tool_calls: Optional[bool]
+    """Filter by whether the query log has tool calls"""
+
     limit: int
 
     needs_review: Optional[bool]

@@ -314,6 +314,9 @@ class Tool(BaseModel):
 class QueryLogListGroupsResponse(BaseModel):
     id: str
 
+    any_escalated: bool
+    """Whether any query log in the group was escalated"""
+
     created_at: datetime
 
     formatted_escalation_eval_scores: Optional[Dict[str, FormattedEscalationEvalScores]] = None
