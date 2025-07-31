@@ -27,6 +27,9 @@ class QueryLogListGroupsParams(TypedDict, total=False):
     guardrailed: Optional[bool]
     """Filter by guardrailed status"""
 
+    has_tool_calls: Optional[bool]
+    """Filter by whether the query log has tool calls"""
+
     limit: int
 
     needs_review: Optional[bool]
@@ -45,6 +48,9 @@ class QueryLogListGroupsParams(TypedDict, total=False):
     """Filter logs that have ANY of these primary evaluation issues (OR operation)"""
 
     sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
+
+    tool_call_names: Optional[List[str]]
+    """Filter by names of tools called in the assistant response"""
 
     was_cache_hit: Optional[bool]
     """Filter by cache hit status"""

@@ -346,6 +346,8 @@ class QueryLogRetrieveResponse(BaseModel):
 
     remediation_status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
 
+    tool_call_names: Optional[List[str]] = None
+
     was_cache_hit: Optional[bool] = None
     """If similar query already answered, or None if cache was not checked"""
 

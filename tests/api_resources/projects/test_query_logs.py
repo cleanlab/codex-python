@@ -100,12 +100,14 @@ class TestQueryLogs:
             custom_metadata="custom_metadata",
             failed_evals=["string"],
             guardrailed=True,
+            has_tool_calls=True,
             limit=1,
             offset=0,
             order="asc",
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
@@ -162,6 +164,7 @@ class TestQueryLogs:
             custom_metadata="custom_metadata",
             failed_evals=["string"],
             guardrailed=True,
+            has_tool_calls=True,
             limit=1,
             needs_review=True,
             offset=0,
@@ -170,6 +173,7 @@ class TestQueryLogs:
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
@@ -226,6 +230,7 @@ class TestQueryLogs:
             custom_metadata="custom_metadata",
             failed_evals=["string"],
             guardrailed=True,
+            has_tool_calls=True,
             limit=1,
             needs_review=True,
             offset=0,
@@ -233,6 +238,7 @@ class TestQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(SyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
@@ -399,12 +405,14 @@ class TestAsyncQueryLogs:
             custom_metadata="custom_metadata",
             failed_evals=["string"],
             guardrailed=True,
+            has_tool_calls=True,
             limit=1,
             offset=0,
             order="asc",
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
@@ -461,6 +469,7 @@ class TestAsyncQueryLogs:
             custom_metadata="custom_metadata",
             failed_evals=["string"],
             guardrailed=True,
+            has_tool_calls=True,
             limit=1,
             needs_review=True,
             offset=0,
@@ -469,6 +478,7 @@ class TestAsyncQueryLogs:
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
@@ -525,6 +535,7 @@ class TestAsyncQueryLogs:
             custom_metadata="custom_metadata",
             failed_evals=["string"],
             guardrailed=True,
+            has_tool_calls=True,
             limit=1,
             needs_review=True,
             offset=0,
@@ -532,6 +543,7 @@ class TestAsyncQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             sort="created_at",
+            tool_call_names=["string"],
             was_cache_hit=True,
         )
         assert_matches_type(AsyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])

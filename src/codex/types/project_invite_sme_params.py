@@ -10,6 +10,6 @@ __all__ = ["ProjectInviteSmeParams"]
 class ProjectInviteSmeParams(TypedDict, total=False):
     email: Required[str]
 
-    page_type: Required[Literal["query_log", "remediation"]]
+    page_type: Required[Literal["query_log", "remediation", "prioritized_issue"]]
 
     url_query_string: Required[str]

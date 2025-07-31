@@ -314,6 +314,9 @@ class Tool(BaseModel):
 class QueryLogListGroupsResponse(BaseModel):
     id: str
 
+    any_escalated: bool
+    """Whether any query log in the group was escalated"""
+
     created_at: datetime
 
     formatted_escalation_eval_scores: Optional[Dict[str, FormattedEscalationEvalScores]] = None
@@ -345,6 +348,8 @@ class QueryLogListGroupsResponse(BaseModel):
     remediation_id: str
 
     remediation_status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
+
+    tool_call_names: Optional[List[str]] = None
 
     total_count: int
 
