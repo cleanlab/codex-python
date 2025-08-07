@@ -66,7 +66,7 @@ class ProjectValidateParams(TypedDict, total=False):
 
     response: Required[Response]
 
-    use_llm_matching: bool
+    use_llm_matching: Optional[bool]
 
     constrain_outputs: Optional[List[str]]
 
