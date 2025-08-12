@@ -33,6 +33,7 @@ class TestTlm:
             constrain_outputs=["string"],
             options={
                 "custom_eval_criteria": [{}],
+                "disable_trustworthiness": True,
                 "log": ["string"],
                 "max_tokens": 0,
                 "model": "model",
@@ -92,6 +93,7 @@ class TestTlm:
             constrain_outputs=["string"],
             options={
                 "custom_eval_criteria": [{}],
+                "disable_trustworthiness": True,
                 "log": ["string"],
                 "max_tokens": 0,
                 "model": "model",
@@ -157,6 +159,7 @@ class TestAsyncTlm:
             constrain_outputs=["string"],
             options={
                 "custom_eval_criteria": [{}],
+                "disable_trustworthiness": True,
                 "log": ["string"],
                 "max_tokens": 0,
                 "model": "model",
@@ -216,6 +219,7 @@ class TestAsyncTlm:
             constrain_outputs=["string"],
             options={
                 "custom_eval_criteria": [{}],
+                "disable_trustworthiness": True,
                 "log": ["string"],
                 "max_tokens": 0,
                 "model": "model",
