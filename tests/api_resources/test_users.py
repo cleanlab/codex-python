@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestUsers:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_activate_account(self, client: Codex) -> None:
         user = client.users.activate_account(
@@ -27,7 +27,7 @@ class TestUsers:
         )
         assert_matches_type(UserSchemaPublic, user, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_activate_account_with_all_params(self, client: Codex) -> None:
         user = client.users.activate_account(
@@ -41,7 +41,7 @@ class TestUsers:
         )
         assert_matches_type(UserSchemaPublic, user, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_activate_account(self, client: Codex) -> None:
         response = client.users.with_raw_response.activate_account(
@@ -54,7 +54,7 @@ class TestUsers:
         user = response.parse()
         assert_matches_type(UserSchemaPublic, user, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_activate_account(self, client: Codex) -> None:
         with client.users.with_streaming_response.activate_account(
@@ -75,7 +75,7 @@ class TestAsyncUsers:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_activate_account(self, async_client: AsyncCodex) -> None:
         user = await async_client.users.activate_account(
@@ -84,7 +84,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(UserSchemaPublic, user, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_activate_account_with_all_params(self, async_client: AsyncCodex) -> None:
         user = await async_client.users.activate_account(
@@ -98,7 +98,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(UserSchemaPublic, user, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_activate_account(self, async_client: AsyncCodex) -> None:
         response = await async_client.users.with_raw_response.activate_account(
@@ -111,7 +111,7 @@ class TestAsyncUsers:
         user = await response.parse()
         assert_matches_type(UserSchemaPublic, user, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_activate_account(self, async_client: AsyncCodex) -> None:
         async with async_client.users.with_streaming_response.activate_account(

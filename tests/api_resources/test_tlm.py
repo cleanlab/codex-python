@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestTlm:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_prompt(self, client: Codex) -> None:
         tlm = client.tlm.prompt(
@@ -25,7 +25,7 @@ class TestTlm:
         )
         assert_matches_type(TlmPromptResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_prompt_with_all_params(self, client: Codex) -> None:
         tlm = client.tlm.prompt(
@@ -48,7 +48,7 @@ class TestTlm:
         )
         assert_matches_type(TlmPromptResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_prompt(self, client: Codex) -> None:
         response = client.tlm.with_raw_response.prompt(
@@ -60,7 +60,7 @@ class TestTlm:
         tlm = response.parse()
         assert_matches_type(TlmPromptResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_prompt(self, client: Codex) -> None:
         with client.tlm.with_streaming_response.prompt(
@@ -74,7 +74,7 @@ class TestTlm:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_score(self, client: Codex) -> None:
         tlm = client.tlm.score(
@@ -83,7 +83,7 @@ class TestTlm:
         )
         assert_matches_type(TlmScoreResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_score_with_all_params(self, client: Codex) -> None:
         tlm = client.tlm.score(
@@ -107,7 +107,7 @@ class TestTlm:
         )
         assert_matches_type(TlmScoreResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_score(self, client: Codex) -> None:
         response = client.tlm.with_raw_response.score(
@@ -120,7 +120,7 @@ class TestTlm:
         tlm = response.parse()
         assert_matches_type(TlmScoreResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_score(self, client: Codex) -> None:
         with client.tlm.with_streaming_response.score(
@@ -141,7 +141,7 @@ class TestAsyncTlm:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_prompt(self, async_client: AsyncCodex) -> None:
         tlm = await async_client.tlm.prompt(
@@ -149,7 +149,7 @@ class TestAsyncTlm:
         )
         assert_matches_type(TlmPromptResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_prompt_with_all_params(self, async_client: AsyncCodex) -> None:
         tlm = await async_client.tlm.prompt(
@@ -172,7 +172,7 @@ class TestAsyncTlm:
         )
         assert_matches_type(TlmPromptResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_prompt(self, async_client: AsyncCodex) -> None:
         response = await async_client.tlm.with_raw_response.prompt(
@@ -184,7 +184,7 @@ class TestAsyncTlm:
         tlm = await response.parse()
         assert_matches_type(TlmPromptResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_prompt(self, async_client: AsyncCodex) -> None:
         async with async_client.tlm.with_streaming_response.prompt(
@@ -198,7 +198,7 @@ class TestAsyncTlm:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_score(self, async_client: AsyncCodex) -> None:
         tlm = await async_client.tlm.score(
@@ -207,7 +207,7 @@ class TestAsyncTlm:
         )
         assert_matches_type(TlmScoreResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_score_with_all_params(self, async_client: AsyncCodex) -> None:
         tlm = await async_client.tlm.score(
@@ -231,7 +231,7 @@ class TestAsyncTlm:
         )
         assert_matches_type(TlmScoreResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_score(self, async_client: AsyncCodex) -> None:
         response = await async_client.tlm.with_raw_response.score(
@@ -244,7 +244,7 @@ class TestAsyncTlm:
         tlm = await response.parse()
         assert_matches_type(TlmScoreResponse, tlm, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_score(self, async_client: AsyncCodex) -> None:
         async with async_client.tlm.with_streaming_response.score(
