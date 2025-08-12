@@ -30,7 +30,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestQueryLogs:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         query_log = client.projects.query_logs.retrieve(
@@ -39,7 +39,7 @@ class TestQueryLogs:
         )
         assert_matches_type(QueryLogRetrieveResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Codex) -> None:
         response = client.projects.query_logs.with_raw_response.retrieve(
@@ -52,7 +52,7 @@ class TestQueryLogs:
         query_log = response.parse()
         assert_matches_type(QueryLogRetrieveResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Codex) -> None:
         with client.projects.query_logs.with_streaming_response.retrieve(
@@ -67,7 +67,7 @@ class TestQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -82,7 +82,7 @@ class TestQueryLogs:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Codex) -> None:
         query_log = client.projects.query_logs.list(
@@ -90,7 +90,7 @@ class TestQueryLogs:
         )
         assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Codex) -> None:
         query_log = client.projects.query_logs.list(
@@ -112,7 +112,7 @@ class TestQueryLogs:
         )
         assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.projects.query_logs.with_raw_response.list(
@@ -124,7 +124,7 @@ class TestQueryLogs:
         query_log = response.parse()
         assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Codex) -> None:
         with client.projects.query_logs.with_streaming_response.list(
@@ -138,7 +138,7 @@ class TestQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -146,7 +146,7 @@ class TestQueryLogs:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_by_group(self, client: Codex) -> None:
         query_log = client.projects.query_logs.list_by_group(
@@ -154,7 +154,7 @@ class TestQueryLogs:
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_by_group_with_all_params(self, client: Codex) -> None:
         query_log = client.projects.query_logs.list_by_group(
@@ -178,7 +178,7 @@ class TestQueryLogs:
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_by_group(self, client: Codex) -> None:
         response = client.projects.query_logs.with_raw_response.list_by_group(
@@ -190,7 +190,7 @@ class TestQueryLogs:
         query_log = response.parse()
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_by_group(self, client: Codex) -> None:
         with client.projects.query_logs.with_streaming_response.list_by_group(
@@ -204,7 +204,7 @@ class TestQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_by_group(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -212,7 +212,7 @@ class TestQueryLogs:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_groups(self, client: Codex) -> None:
         query_log = client.projects.query_logs.list_groups(
@@ -220,7 +220,7 @@ class TestQueryLogs:
         )
         assert_matches_type(SyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_groups_with_all_params(self, client: Codex) -> None:
         query_log = client.projects.query_logs.list_groups(
@@ -243,7 +243,7 @@ class TestQueryLogs:
         )
         assert_matches_type(SyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_groups(self, client: Codex) -> None:
         response = client.projects.query_logs.with_raw_response.list_groups(
@@ -255,7 +255,7 @@ class TestQueryLogs:
         query_log = response.parse()
         assert_matches_type(SyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_groups(self, client: Codex) -> None:
         with client.projects.query_logs.with_streaming_response.list_groups(
@@ -269,7 +269,7 @@ class TestQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_groups(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -277,7 +277,7 @@ class TestQueryLogs:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_start_remediation(self, client: Codex) -> None:
         query_log = client.projects.query_logs.start_remediation(
@@ -286,7 +286,7 @@ class TestQueryLogs:
         )
         assert_matches_type(QueryLogStartRemediationResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_start_remediation(self, client: Codex) -> None:
         response = client.projects.query_logs.with_raw_response.start_remediation(
@@ -299,7 +299,7 @@ class TestQueryLogs:
         query_log = response.parse()
         assert_matches_type(QueryLogStartRemediationResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_start_remediation(self, client: Codex) -> None:
         with client.projects.query_logs.with_streaming_response.start_remediation(
@@ -314,7 +314,7 @@ class TestQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_start_remediation(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -335,7 +335,7 @@ class TestAsyncQueryLogs:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.retrieve(
@@ -344,7 +344,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(QueryLogRetrieveResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.query_logs.with_raw_response.retrieve(
@@ -357,7 +357,7 @@ class TestAsyncQueryLogs:
         query_log = await response.parse()
         assert_matches_type(QueryLogRetrieveResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.query_logs.with_streaming_response.retrieve(
@@ -372,7 +372,7 @@ class TestAsyncQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -387,7 +387,7 @@ class TestAsyncQueryLogs:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.list(
@@ -395,7 +395,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.list(
@@ -417,7 +417,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.query_logs.with_raw_response.list(
@@ -429,7 +429,7 @@ class TestAsyncQueryLogs:
         query_log = await response.parse()
         assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.query_logs.with_streaming_response.list(
@@ -443,7 +443,7 @@ class TestAsyncQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -451,7 +451,7 @@ class TestAsyncQueryLogs:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_by_group(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.list_by_group(
@@ -459,7 +459,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_by_group_with_all_params(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.list_by_group(
@@ -483,7 +483,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_by_group(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.query_logs.with_raw_response.list_by_group(
@@ -495,7 +495,7 @@ class TestAsyncQueryLogs:
         query_log = await response.parse()
         assert_matches_type(QueryLogListByGroupResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_by_group(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.query_logs.with_streaming_response.list_by_group(
@@ -509,7 +509,7 @@ class TestAsyncQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_by_group(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -517,7 +517,7 @@ class TestAsyncQueryLogs:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_groups(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.list_groups(
@@ -525,7 +525,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(AsyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_groups_with_all_params(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.list_groups(
@@ -548,7 +548,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(AsyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_groups(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.query_logs.with_raw_response.list_groups(
@@ -560,7 +560,7 @@ class TestAsyncQueryLogs:
         query_log = await response.parse()
         assert_matches_type(AsyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse], query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_groups(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.query_logs.with_streaming_response.list_groups(
@@ -574,7 +574,7 @@ class TestAsyncQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_groups(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -582,7 +582,7 @@ class TestAsyncQueryLogs:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_start_remediation(self, async_client: AsyncCodex) -> None:
         query_log = await async_client.projects.query_logs.start_remediation(
@@ -591,7 +591,7 @@ class TestAsyncQueryLogs:
         )
         assert_matches_type(QueryLogStartRemediationResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_start_remediation(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.query_logs.with_raw_response.start_remediation(
@@ -604,7 +604,7 @@ class TestAsyncQueryLogs:
         query_log = await response.parse()
         assert_matches_type(QueryLogStartRemediationResponse, query_log, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_start_remediation(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.query_logs.with_streaming_response.start_remediation(
@@ -619,7 +619,7 @@ class TestAsyncQueryLogs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_start_remediation(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):

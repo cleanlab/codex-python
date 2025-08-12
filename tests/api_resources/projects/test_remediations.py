@@ -30,7 +30,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestRemediations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Codex) -> None:
         remediation = client.projects.remediations.create(
@@ -39,7 +39,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Codex) -> None:
         remediation = client.projects.remediations.create(
@@ -50,7 +50,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.create(
@@ -63,7 +63,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.create(
@@ -78,7 +78,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_create(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -87,7 +87,7 @@ class TestRemediations:
                 question="x",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         remediation = client.projects.remediations.retrieve(
@@ -96,7 +96,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationRetrieveResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.retrieve(
@@ -109,7 +109,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationRetrieveResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.retrieve(
@@ -124,7 +124,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -139,7 +139,7 @@ class TestRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Codex) -> None:
         remediation = client.projects.remediations.list(
@@ -147,7 +147,7 @@ class TestRemediations:
         )
         assert_matches_type(SyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Codex) -> None:
         remediation = client.projects.remediations.list(
@@ -165,7 +165,7 @@ class TestRemediations:
         )
         assert_matches_type(SyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.list(
@@ -177,7 +177,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(SyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.list(
@@ -191,7 +191,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -199,7 +199,7 @@ class TestRemediations:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Codex) -> None:
         remediation = client.projects.remediations.delete(
@@ -208,7 +208,7 @@ class TestRemediations:
         )
         assert remediation is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.delete(
@@ -221,7 +221,7 @@ class TestRemediations:
         remediation = response.parse()
         assert remediation is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.delete(
@@ -236,7 +236,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -251,7 +251,7 @@ class TestRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_edit_answer(self, client: Codex) -> None:
         remediation = client.projects.remediations.edit_answer(
@@ -261,7 +261,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationEditAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_edit_answer(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.edit_answer(
@@ -275,7 +275,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationEditAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_edit_answer(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.edit_answer(
@@ -291,7 +291,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_edit_answer(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -308,7 +308,7 @@ class TestRemediations:
                 answer="answer",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_edit_draft_answer(self, client: Codex) -> None:
         remediation = client.projects.remediations.edit_draft_answer(
@@ -318,7 +318,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationEditDraftAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_edit_draft_answer(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.edit_draft_answer(
@@ -332,7 +332,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationEditDraftAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_edit_draft_answer(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.edit_draft_answer(
@@ -348,7 +348,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_edit_draft_answer(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -365,7 +365,7 @@ class TestRemediations:
                 draft_answer="draft_answer",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get_resolved_logs_count(self, client: Codex) -> None:
         remediation = client.projects.remediations.get_resolved_logs_count(
@@ -374,7 +374,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationGetResolvedLogsCountResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get_resolved_logs_count(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.get_resolved_logs_count(
@@ -387,7 +387,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationGetResolvedLogsCountResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get_resolved_logs_count(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.get_resolved_logs_count(
@@ -402,7 +402,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get_resolved_logs_count(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -417,7 +417,7 @@ class TestRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_resolved_logs(self, client: Codex) -> None:
         remediation = client.projects.remediations.list_resolved_logs(
@@ -426,7 +426,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationListResolvedLogsResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_resolved_logs(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.list_resolved_logs(
@@ -439,7 +439,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationListResolvedLogsResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_resolved_logs(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.list_resolved_logs(
@@ -454,7 +454,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list_resolved_logs(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -469,7 +469,7 @@ class TestRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_pause(self, client: Codex) -> None:
         remediation = client.projects.remediations.pause(
@@ -478,7 +478,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationPauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_pause(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.pause(
@@ -491,7 +491,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationPauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_pause(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.pause(
@@ -506,7 +506,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_pause(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -521,7 +521,7 @@ class TestRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_publish(self, client: Codex) -> None:
         remediation = client.projects.remediations.publish(
@@ -530,7 +530,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationPublishResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_publish(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.publish(
@@ -543,7 +543,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationPublishResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_publish(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.publish(
@@ -558,7 +558,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_publish(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -573,7 +573,7 @@ class TestRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_unpause(self, client: Codex) -> None:
         remediation = client.projects.remediations.unpause(
@@ -582,7 +582,7 @@ class TestRemediations:
         )
         assert_matches_type(RemediationUnpauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_unpause(self, client: Codex) -> None:
         response = client.projects.remediations.with_raw_response.unpause(
@@ -595,7 +595,7 @@ class TestRemediations:
         remediation = response.parse()
         assert_matches_type(RemediationUnpauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_unpause(self, client: Codex) -> None:
         with client.projects.remediations.with_streaming_response.unpause(
@@ -610,7 +610,7 @@ class TestRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_unpause(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -631,7 +631,7 @@ class TestAsyncRemediations:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.create(
@@ -640,7 +640,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.create(
@@ -651,7 +651,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.create(
@@ -664,7 +664,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationCreateResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.create(
@@ -679,7 +679,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_create(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -688,7 +688,7 @@ class TestAsyncRemediations:
                 question="x",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.retrieve(
@@ -697,7 +697,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationRetrieveResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.retrieve(
@@ -710,7 +710,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationRetrieveResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.retrieve(
@@ -725,7 +725,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -740,7 +740,7 @@ class TestAsyncRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.list(
@@ -748,7 +748,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(AsyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.list(
@@ -766,7 +766,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(AsyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.list(
@@ -778,7 +778,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(AsyncOffsetPageRemediations[RemediationListResponse], remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.list(
@@ -792,7 +792,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -800,7 +800,7 @@ class TestAsyncRemediations:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.delete(
@@ -809,7 +809,7 @@ class TestAsyncRemediations:
         )
         assert remediation is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.delete(
@@ -822,7 +822,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert remediation is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.delete(
@@ -837,7 +837,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -852,7 +852,7 @@ class TestAsyncRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_edit_answer(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.edit_answer(
@@ -862,7 +862,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationEditAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_edit_answer(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.edit_answer(
@@ -876,7 +876,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationEditAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_edit_answer(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.edit_answer(
@@ -892,7 +892,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_edit_answer(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -909,7 +909,7 @@ class TestAsyncRemediations:
                 answer="answer",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_edit_draft_answer(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.edit_draft_answer(
@@ -919,7 +919,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationEditDraftAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_edit_draft_answer(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.edit_draft_answer(
@@ -933,7 +933,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationEditDraftAnswerResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_edit_draft_answer(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.edit_draft_answer(
@@ -949,7 +949,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_edit_draft_answer(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -966,7 +966,7 @@ class TestAsyncRemediations:
                 draft_answer="draft_answer",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get_resolved_logs_count(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.get_resolved_logs_count(
@@ -975,7 +975,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationGetResolvedLogsCountResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get_resolved_logs_count(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.get_resolved_logs_count(
@@ -988,7 +988,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationGetResolvedLogsCountResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get_resolved_logs_count(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.get_resolved_logs_count(
@@ -1003,7 +1003,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get_resolved_logs_count(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1018,7 +1018,7 @@ class TestAsyncRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_resolved_logs(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.list_resolved_logs(
@@ -1027,7 +1027,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationListResolvedLogsResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_resolved_logs(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.list_resolved_logs(
@@ -1040,7 +1040,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationListResolvedLogsResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_resolved_logs(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.list_resolved_logs(
@@ -1055,7 +1055,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list_resolved_logs(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1070,7 +1070,7 @@ class TestAsyncRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_pause(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.pause(
@@ -1079,7 +1079,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationPauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_pause(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.pause(
@@ -1092,7 +1092,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationPauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_pause(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.pause(
@@ -1107,7 +1107,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_pause(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1122,7 +1122,7 @@ class TestAsyncRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_publish(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.publish(
@@ -1131,7 +1131,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationPublishResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_publish(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.publish(
@@ -1144,7 +1144,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationPublishResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_publish(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.publish(
@@ -1159,7 +1159,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_publish(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1174,7 +1174,7 @@ class TestAsyncRemediations:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_unpause(self, async_client: AsyncCodex) -> None:
         remediation = await async_client.projects.remediations.unpause(
@@ -1183,7 +1183,7 @@ class TestAsyncRemediations:
         )
         assert_matches_type(RemediationUnpauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_unpause(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.remediations.with_raw_response.unpause(
@@ -1196,7 +1196,7 @@ class TestAsyncRemediations:
         remediation = await response.parse()
         assert_matches_type(RemediationUnpauseResponse, remediation, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_unpause(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.remediations.with_streaming_response.unpause(
@@ -1211,7 +1211,7 @@ class TestAsyncRemediations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_unpause(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):

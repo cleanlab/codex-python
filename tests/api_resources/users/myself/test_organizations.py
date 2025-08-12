@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestOrganizations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Codex) -> None:
         organization = client.users.myself.organizations.list()
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.users.myself.organizations.with_raw_response.list()
@@ -33,7 +33,7 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Codex) -> None:
         with client.users.myself.organizations.with_streaming_response.list() as response:
@@ -51,13 +51,13 @@ class TestAsyncOrganizations:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         organization = await async_client.users.myself.organizations.list()
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.users.myself.organizations.with_raw_response.list()
@@ -67,7 +67,7 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(UserOrganizationsSchema, organization, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.users.myself.organizations.with_streaming_response.list() as response:

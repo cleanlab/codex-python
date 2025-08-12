@@ -24,7 +24,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestProjects:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Codex) -> None:
         project = client.projects.create(
@@ -34,7 +34,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Codex) -> None:
         project = client.projects.create(
@@ -128,7 +128,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Codex) -> None:
         response = client.projects.with_raw_response.create(
@@ -142,7 +142,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Codex) -> None:
         with client.projects.with_streaming_response.create(
@@ -158,7 +158,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Codex) -> None:
         project = client.projects.retrieve(
@@ -166,7 +166,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Codex) -> None:
         response = client.projects.with_raw_response.retrieve(
@@ -178,7 +178,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Codex) -> None:
         with client.projects.with_streaming_response.retrieve(
@@ -192,7 +192,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -200,7 +200,7 @@ class TestProjects:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Codex) -> None:
         project = client.projects.update(
@@ -208,7 +208,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Codex) -> None:
         project = client.projects.update(
@@ -302,7 +302,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Codex) -> None:
         response = client.projects.with_raw_response.update(
@@ -314,7 +314,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Codex) -> None:
         with client.projects.with_streaming_response.update(
@@ -328,7 +328,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -336,13 +336,13 @@ class TestProjects:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Codex) -> None:
         project = client.projects.list()
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Codex) -> None:
         project = client.projects.list(
@@ -356,7 +356,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Codex) -> None:
         response = client.projects.with_raw_response.list()
@@ -366,7 +366,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Codex) -> None:
         with client.projects.with_streaming_response.list() as response:
@@ -378,7 +378,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Codex) -> None:
         project = client.projects.delete(
@@ -386,7 +386,7 @@ class TestProjects:
         )
         assert project is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Codex) -> None:
         response = client.projects.with_raw_response.delete(
@@ -398,7 +398,7 @@ class TestProjects:
         project = response.parse()
         assert project is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Codex) -> None:
         with client.projects.with_streaming_response.delete(
@@ -412,7 +412,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -420,7 +420,7 @@ class TestProjects:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_export(self, client: Codex) -> None:
         project = client.projects.export(
@@ -428,7 +428,7 @@ class TestProjects:
         )
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_export(self, client: Codex) -> None:
         response = client.projects.with_raw_response.export(
@@ -440,7 +440,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_export(self, client: Codex) -> None:
         with client.projects.with_streaming_response.export(
@@ -454,7 +454,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_export(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -462,7 +462,7 @@ class TestProjects:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_invite_sme(self, client: Codex) -> None:
         project = client.projects.invite_sme(
@@ -473,7 +473,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_invite_sme(self, client: Codex) -> None:
         response = client.projects.with_raw_response.invite_sme(
@@ -488,7 +488,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_invite_sme(self, client: Codex) -> None:
         with client.projects.with_streaming_response.invite_sme(
@@ -505,7 +505,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_invite_sme(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -516,7 +516,7 @@ class TestProjects:
                 url_query_string="url_query_string",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_analytics(self, client: Codex) -> None:
         project = client.projects.retrieve_analytics(
@@ -524,7 +524,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_analytics_with_all_params(self, client: Codex) -> None:
         project = client.projects.retrieve_analytics(
@@ -534,7 +534,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_analytics(self, client: Codex) -> None:
         response = client.projects.with_raw_response.retrieve_analytics(
@@ -546,7 +546,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_analytics(self, client: Codex) -> None:
         with client.projects.with_streaming_response.retrieve_analytics(
@@ -560,7 +560,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve_analytics(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -568,7 +568,7 @@ class TestProjects:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_validate(self, client: Codex) -> None:
         project = client.projects.validate(
@@ -579,7 +579,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_validate_with_all_params(self, client: Codex) -> None:
         project = client.projects.validate(
@@ -649,7 +649,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_validate(self, client: Codex) -> None:
         response = client.projects.with_raw_response.validate(
@@ -664,7 +664,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_validate(self, client: Codex) -> None:
         with client.projects.with_streaming_response.validate(
@@ -681,7 +681,7 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_validate(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -698,7 +698,7 @@ class TestAsyncProjects:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.create(
@@ -708,7 +708,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.create(
@@ -802,7 +802,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.create(
@@ -816,7 +816,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.create(
@@ -832,7 +832,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.retrieve(
@@ -840,7 +840,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.retrieve(
@@ -852,7 +852,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.retrieve(
@@ -866,7 +866,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -874,7 +874,7 @@ class TestAsyncProjects:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.update(
@@ -882,7 +882,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.update(
@@ -976,7 +976,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.update(
@@ -988,7 +988,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectReturnSchema, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.update(
@@ -1002,7 +1002,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1010,13 +1010,13 @@ class TestAsyncProjects:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.list()
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.list(
@@ -1030,7 +1030,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.list()
@@ -1040,7 +1040,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.list() as response:
@@ -1052,7 +1052,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.delete(
@@ -1060,7 +1060,7 @@ class TestAsyncProjects:
         )
         assert project is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.delete(
@@ -1072,7 +1072,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert project is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.delete(
@@ -1086,7 +1086,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1094,7 +1094,7 @@ class TestAsyncProjects:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_export(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.export(
@@ -1102,7 +1102,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_export(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.export(
@@ -1114,7 +1114,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_export(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.export(
@@ -1128,7 +1128,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_export(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1136,7 +1136,7 @@ class TestAsyncProjects:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_invite_sme(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.invite_sme(
@@ -1147,7 +1147,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_invite_sme(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.invite_sme(
@@ -1162,7 +1162,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectInviteSmeResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_invite_sme(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.invite_sme(
@@ -1179,7 +1179,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_invite_sme(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1190,7 +1190,7 @@ class TestAsyncProjects:
                 url_query_string="url_query_string",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_analytics(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.retrieve_analytics(
@@ -1198,7 +1198,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_analytics_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.retrieve_analytics(
@@ -1208,7 +1208,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_analytics(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.retrieve_analytics(
@@ -1220,7 +1220,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectRetrieveAnalyticsResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_analytics(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.retrieve_analytics(
@@ -1234,7 +1234,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve_analytics(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
@@ -1242,7 +1242,7 @@ class TestAsyncProjects:
                 project_id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_validate(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.validate(
@@ -1253,7 +1253,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_validate_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.validate(
@@ -1323,7 +1323,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_validate(self, async_client: AsyncCodex) -> None:
         response = await async_client.projects.with_raw_response.validate(
@@ -1338,7 +1338,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectValidateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_validate(self, async_client: AsyncCodex) -> None:
         async with async_client.projects.with_streaming_response.validate(
@@ -1355,7 +1355,7 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_validate(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
