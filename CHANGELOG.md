@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.1.0-alpha.25 (2025-08-22)
+
+Full Changelog: [v0.1.0-alpha.24...v0.1.0-alpha.25](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.24...v0.1.0-alpha.25)
+
+### Features
+
+* **api:** add user feedback ([a8394fa](https://github.com/cleanlab/codex-python/commit/a8394fa20e8385f5eaede7b9eb441c606595de03))
+* **api:** api update ([4bc752b](https://github.com/cleanlab/codex-python/commit/4bc752b640eec68c028e794c9f2c31aed9838e4e))
+* **api:** api update ([d51e2a9](https://github.com/cleanlab/codex-python/commit/d51e2a96fecd86c009beb70094671de889efb0b1))
+* **api:** api update ([d3a1591](https://github.com/cleanlab/codex-python/commit/d3a15910605f36066acb6529614d2e327500006d))
+* **api:** api update ([eddd6b2](https://github.com/cleanlab/codex-python/commit/eddd6b26ab55327c807f57e30f4ec2c9003a97d6))
+* **api:** api update ([9c5d83e](https://github.com/cleanlab/codex-python/commit/9c5d83e1d073b04af320bb53099f7a0540479698))
+* **api:** api update ([bdfdd70](https://github.com/cleanlab/codex-python/commit/bdfdd70d31dc1e83af8507d5c264f7e9e08f2a99))
+* **api:** api update ([70be786](https://github.com/cleanlab/codex-python/commit/70be78674ba9b7f67398efac93bb8c5094616d8f))
+* **client:** support file upload requests ([370bb62](https://github.com/cleanlab/codex-python/commit/370bb62b04ff454dff20252887f3f441f762b2aa))
+
+
+### Chores
+
+* **internal:** codegen related update ([04b7858](https://github.com/cleanlab/codex-python/commit/04b785856210a867d07f973d2c53c9dcecd03981))
+* **internal:** codegen related update ([6e1f882](https://github.com/cleanlab/codex-python/commit/6e1f8826a9a8c9867cf758528cf99040cb499c1a))
+* **internal:** fix ruff target version ([6d3b8a2](https://github.com/cleanlab/codex-python/commit/6d3b8a2dc580ca9fddd2ea82147116465373739f))
+* **internal:** update comment in script ([dfc7725](https://github.com/cleanlab/codex-python/commit/dfc7725fab501bc8812028a6eb93ecd4e5b0f4da))
+* update @stainless-api/prism-cli to v5.15.0 ([b46d19e](https://github.com/cleanlab/codex-python/commit/b46d19ec2a1058452eea206a8833413466e8ff73))
+* update github action ([5608ea3](https://github.com/cleanlab/codex-python/commit/5608ea3c1e5980d747fb471bd25ada79e0df8c04))
+
 ## 0.1.0-alpha.24 (2025-07-28)
 
 Full Changelog: [v0.1.0-alpha.23...v0.1.0-alpha.24](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.23...v0.1.0-alpha.24)

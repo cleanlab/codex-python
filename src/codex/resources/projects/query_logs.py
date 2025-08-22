@@ -25,11 +25,17 @@ from ...pagination import (
     AsyncOffsetPageQueryLogGroups,
 )
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.projects import query_log_list_params, query_log_list_groups_params, query_log_list_by_group_params
+from ...types.projects import (
+    query_log_list_params,
+    query_log_list_groups_params,
+    query_log_list_by_group_params,
+    query_log_add_user_feedback_params,
+)
 from ...types.projects.query_log_list_response import QueryLogListResponse
 from ...types.projects.query_log_retrieve_response import QueryLogRetrieveResponse
 from ...types.projects.query_log_list_groups_response import QueryLogListGroupsResponse
 from ...types.projects.query_log_list_by_group_response import QueryLogListByGroupResponse
+from ...types.projects.query_log_add_user_feedback_response import QueryLogAddUserFeedbackResponse
 from ...types.projects.query_log_start_remediation_response import QueryLogStartRemediationResponse
 
 __all__ = ["QueryLogsResource", "AsyncQueryLogsResource"]
@@ -100,6 +106,7 @@ class QueryLogsResource(SyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -109,6 +116,7 @@ class QueryLogsResource(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score"]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -131,9 +139,13 @@ class QueryLogsResource(SyncAPIResource):
 
           guardrailed: Filter by guardrailed status
 
+          has_tool_calls: Filter by whether the query log has tool calls
+
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
 
@@ -162,18 +174,60 @@ class QueryLogsResource(SyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
+                        "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_params.QueryLogListParams,
                 ),
             ),
             model=QueryLogListResponse,
+        )
+
+    def add_user_feedback(
+        self,
+        query_log_id: str,
+        *,
+        project_id: str,
+        key: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> QueryLogAddUserFeedbackResponse:
+        """
+        Add User Feedback Route
+
+        Args:
+          key: A key describing the criteria of the feedback, eg 'rating'
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not query_log_id:
+            raise ValueError(f"Expected a non-empty value for `query_log_id` but received {query_log_id!r}")
+        return self._post(
+            f"/api/projects/{project_id}/query_logs/{query_log_id}/user_feedback",
+            body=maybe_transform({"key": key}, query_log_add_user_feedback_params.QueryLogAddUserFeedbackParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=QueryLogAddUserFeedbackResponse,
         )
 
     def list_by_group(
@@ -185,6 +239,7 @@ class QueryLogsResource(SyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -196,6 +251,7 @@ class QueryLogsResource(SyncAPIResource):
         | NotGiven = NOT_GIVEN,
         remediation_ids: List[str] | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score"]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -218,6 +274,8 @@ class QueryLogsResource(SyncAPIResource):
 
           guardrailed: Filter by guardrailed status
 
+          has_tool_calls: Filter by whether the query log has tool calls
+
           needs_review: Filter logs that need review
 
           passed_evals: Filter by evals that passed
@@ -225,6 +283,8 @@ class QueryLogsResource(SyncAPIResource):
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
           remediation_ids: List of groups to list child logs for
+
+          tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
 
@@ -252,6 +312,7 @@ class QueryLogsResource(SyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,
@@ -260,6 +321,7 @@ class QueryLogsResource(SyncAPIResource):
                         "primary_eval_issue": primary_eval_issue,
                         "remediation_ids": remediation_ids,
                         "sort": sort,
+                        "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_by_group_params.QueryLogListByGroupParams,
@@ -277,6 +339,7 @@ class QueryLogsResource(SyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -288,6 +351,7 @@ class QueryLogsResource(SyncAPIResource):
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
         | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -310,11 +374,15 @@ class QueryLogsResource(SyncAPIResource):
 
           guardrailed: Filter by guardrailed status
 
+          has_tool_calls: Filter by whether the query log has tool calls
+
           needs_review: Filter log groups that need review
 
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
 
@@ -343,6 +411,7 @@ class QueryLogsResource(SyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,
@@ -350,6 +419,7 @@ class QueryLogsResource(SyncAPIResource):
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
+                        "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_groups_params.QueryLogListGroupsParams,
@@ -460,6 +530,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
@@ -469,6 +540,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score"]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -491,9 +563,13 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           guardrailed: Filter by guardrailed status
 
+          has_tool_calls: Filter by whether the query log has tool calls
+
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
 
@@ -522,18 +598,62 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
+                        "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_params.QueryLogListParams,
                 ),
             ),
             model=QueryLogListResponse,
+        )
+
+    async def add_user_feedback(
+        self,
+        query_log_id: str,
+        *,
+        project_id: str,
+        key: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> QueryLogAddUserFeedbackResponse:
+        """
+        Add User Feedback Route
+
+        Args:
+          key: A key describing the criteria of the feedback, eg 'rating'
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not query_log_id:
+            raise ValueError(f"Expected a non-empty value for `query_log_id` but received {query_log_id!r}")
+        return await self._post(
+            f"/api/projects/{project_id}/query_logs/{query_log_id}/user_feedback",
+            body=await async_maybe_transform(
+                {"key": key}, query_log_add_user_feedback_params.QueryLogAddUserFeedbackParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=QueryLogAddUserFeedbackResponse,
         )
 
     async def list_by_group(
@@ -545,6 +665,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -556,6 +677,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         | NotGiven = NOT_GIVEN,
         remediation_ids: List[str] | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score"]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -578,6 +700,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           guardrailed: Filter by guardrailed status
 
+          has_tool_calls: Filter by whether the query log has tool calls
+
           needs_review: Filter logs that need review
 
           passed_evals: Filter by evals that passed
@@ -585,6 +709,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
           remediation_ids: List of groups to list child logs for
+
+          tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
 
@@ -612,6 +738,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,
@@ -620,6 +747,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "primary_eval_issue": primary_eval_issue,
                         "remediation_ids": remediation_ids,
                         "sort": sort,
+                        "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_by_group_params.QueryLogListByGroupParams,
@@ -637,6 +765,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
+        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
@@ -648,6 +777,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
         | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -670,11 +800,15 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           guardrailed: Filter by guardrailed status
 
+          has_tool_calls: Filter by whether the query log has tool calls
+
           needs_review: Filter log groups that need review
 
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
 
@@ -703,6 +837,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "custom_metadata": custom_metadata,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
+                        "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
                         "offset": offset,
@@ -710,6 +845,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "sort": sort,
+                        "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_groups_params.QueryLogListGroupsParams,
@@ -765,6 +901,9 @@ class QueryLogsResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             query_logs.list,
         )
+        self.add_user_feedback = to_raw_response_wrapper(
+            query_logs.add_user_feedback,
+        )
         self.list_by_group = to_raw_response_wrapper(
             query_logs.list_by_group,
         )
@@ -785,6 +924,9 @@ class AsyncQueryLogsResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             query_logs.list,
+        )
+        self.add_user_feedback = async_to_raw_response_wrapper(
+            query_logs.add_user_feedback,
         )
         self.list_by_group = async_to_raw_response_wrapper(
             query_logs.list_by_group,
@@ -807,6 +949,9 @@ class QueryLogsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             query_logs.list,
         )
+        self.add_user_feedback = to_streamed_response_wrapper(
+            query_logs.add_user_feedback,
+        )
         self.list_by_group = to_streamed_response_wrapper(
             query_logs.list_by_group,
         )
@@ -827,6 +972,9 @@ class AsyncQueryLogsResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             query_logs.list,
+        )
+        self.add_user_feedback = async_to_streamed_response_wrapper(
+            query_logs.add_user_feedback,
         )
         self.list_by_group = async_to_streamed_response_wrapper(
             query_logs.list_by_group,

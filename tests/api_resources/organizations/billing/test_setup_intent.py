@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSetupIntent:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Codex) -> None:
         setup_intent = client.organizations.billing.setup_intent.create(
@@ -25,7 +25,7 @@ class TestSetupIntent:
         )
         assert_matches_type(OrganizationBillingSetupIntent, setup_intent, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Codex) -> None:
         response = client.organizations.billing.setup_intent.with_raw_response.create(
@@ -37,7 +37,7 @@ class TestSetupIntent:
         setup_intent = response.parse()
         assert_matches_type(OrganizationBillingSetupIntent, setup_intent, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Codex) -> None:
         with client.organizations.billing.setup_intent.with_streaming_response.create(
@@ -51,7 +51,7 @@ class TestSetupIntent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_create(self, client: Codex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `organization_id` but received ''"):
@@ -65,7 +65,7 @@ class TestAsyncSetupIntent:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncCodex) -> None:
         setup_intent = await async_client.organizations.billing.setup_intent.create(
@@ -73,7 +73,7 @@ class TestAsyncSetupIntent:
         )
         assert_matches_type(OrganizationBillingSetupIntent, setup_intent, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCodex) -> None:
         response = await async_client.organizations.billing.setup_intent.with_raw_response.create(
@@ -85,7 +85,7 @@ class TestAsyncSetupIntent:
         setup_intent = await response.parse()
         assert_matches_type(OrganizationBillingSetupIntent, setup_intent, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCodex) -> None:
         async with async_client.organizations.billing.setup_intent.with_streaming_response.create(
@@ -99,7 +99,7 @@ class TestAsyncSetupIntent:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_create(self, async_client: AsyncCodex) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `organization_id` but received ''"):

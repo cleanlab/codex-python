@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestVerification:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_resend(self, client: Codex) -> None:
         verification = client.users.verification.resend()
         assert_matches_type(VerificationResendResponse, verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_resend(self, client: Codex) -> None:
         response = client.users.verification.with_raw_response.resend()
@@ -33,7 +33,7 @@ class TestVerification:
         verification = response.parse()
         assert_matches_type(VerificationResendResponse, verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_resend(self, client: Codex) -> None:
         with client.users.verification.with_streaming_response.resend() as response:
@@ -51,13 +51,13 @@ class TestAsyncVerification:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_resend(self, async_client: AsyncCodex) -> None:
         verification = await async_client.users.verification.resend()
         assert_matches_type(VerificationResendResponse, verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_resend(self, async_client: AsyncCodex) -> None:
         response = await async_client.users.verification.with_raw_response.resend()
@@ -67,7 +67,7 @@ class TestAsyncVerification:
         verification = await response.parse()
         assert_matches_type(VerificationResendResponse, verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_resend(self, async_client: AsyncCodex) -> None:
         async with async_client.users.verification.with_streaming_response.resend() as response:
