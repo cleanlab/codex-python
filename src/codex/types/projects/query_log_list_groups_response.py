@@ -337,9 +337,6 @@ class QueryLogListGroupsResponse(BaseModel):
 
     formatted_original_question: Optional[str] = None
 
-    impact_score: float
-    """Impact score used for prioritization sorting"""
-
     is_bad_response: bool
 
     needs_review: bool
