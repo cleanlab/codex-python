@@ -59,9 +59,6 @@ class ProjectValidateResponse(BaseModel):
     to answer, if it does not already exist.
     """
 
-    log_id: str
-    """The UUID of the query log entry created for this validation request."""
-
     should_guardrail: bool
     """
     True if the response should be guardrailed by the AI system, False if the

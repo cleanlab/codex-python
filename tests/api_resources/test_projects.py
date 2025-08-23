@@ -617,7 +617,6 @@ class TestProjects:
             ],
             options={
                 "custom_eval_criteria": [{}],
-                "disable_persistence": True,
                 "disable_trustworthiness": True,
                 "log": ["string"],
                 "max_tokens": 0,
@@ -1293,7 +1292,6 @@ class TestAsyncProjects:
             ],
             options={
                 "custom_eval_criteria": [{}],
-                "disable_persistence": True,
                 "disable_trustworthiness": True,
                 "log": ["string"],
                 "max_tokens": 0,
