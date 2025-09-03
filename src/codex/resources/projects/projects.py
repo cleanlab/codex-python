@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Iterable, Optional
+from typing import Dict, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -23,7 +23,7 @@ from ...types import (
     project_invite_sme_params,
     project_retrieve_analytics_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
 from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from .query_logs import (
@@ -450,7 +450,7 @@ class ProjectsResource(SyncAPIResource):
         query: str,
         response: project_validate_params.Response,
         use_llm_matching: Optional[bool] | NotGiven = NOT_GIVEN,
-        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
@@ -1028,7 +1028,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         query: str,
         response: project_validate_params.Response,
         use_llm_matching: Optional[bool] | NotGiven = NOT_GIVEN,
-        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,

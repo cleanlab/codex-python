@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -104,13 +104,13 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
@@ -127,7 +127,7 @@ class QueryLogsResource(SyncAPIResource):
             ]
         ]
         | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -248,19 +248,19 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        remediation_ids: List[str] | NotGiven = NOT_GIVEN,
+        remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         sort: Optional[
             Literal[
                 "created_at",
@@ -273,7 +273,7 @@ class QueryLogsResource(SyncAPIResource):
             ]
         ]
         | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -359,21 +359,21 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
         | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -550,13 +550,13 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
@@ -573,7 +573,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             ]
         ]
         | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -696,19 +696,19 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        remediation_ids: List[str] | NotGiven = NOT_GIVEN,
+        remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         sort: Optional[
             Literal[
                 "created_at",
@@ -721,7 +721,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             ]
         ]
         | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -807,21 +807,21 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
         offset: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
         sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
         | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

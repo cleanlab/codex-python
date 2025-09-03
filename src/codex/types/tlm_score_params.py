@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["TlmScoreParams", "Options"]
 
@@ -13,7 +15,7 @@ class TlmScoreParams(TypedDict, total=False):
 
     response: Required[str]
 
-    constrain_outputs: Optional[List[str]]
+    constrain_outputs: Optional[SequenceNotStr[str]]
 
     options: Optional[Options]
     """
@@ -121,7 +123,7 @@ class Options(TypedDict, total=False):
 
     disable_trustworthiness: bool
 
-    log: List[str]
+    log: SequenceNotStr[str]
 
     max_tokens: int
 
