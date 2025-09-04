@@ -115,18 +115,7 @@ class QueryLogsResource(SyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        sort: Optional[
-            Literal[
-                "created_at",
-                "primary_eval_issue_score",
-                "score_trustworthiness",
-                "score_context_sufficiency",
-                "score_response_helpfulness",
-                "score_query_ease",
-                "score_response_groundedness",
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
+        sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -261,18 +250,7 @@ class QueryLogsResource(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[
-            Literal[
-                "created_at",
-                "primary_eval_issue_score",
-                "score_trustworthiness",
-                "score_context_sufficiency",
-                "score_response_helpfulness",
-                "score_query_ease",
-                "score_response_groundedness",
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
+        sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -561,18 +539,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        sort: Optional[
-            Literal[
-                "created_at",
-                "primary_eval_issue_score",
-                "score_trustworthiness",
-                "score_context_sufficiency",
-                "score_response_helpfulness",
-                "score_query_ease",
-                "score_response_groundedness",
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
+        sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -709,18 +676,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[
-            Literal[
-                "created_at",
-                "primary_eval_issue_score",
-                "score_trustworthiness",
-                "score_context_sufficiency",
-                "score_response_helpfulness",
-                "score_query_ease",
-                "score_response_groundedness",
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
+        sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
