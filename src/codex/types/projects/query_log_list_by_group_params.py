@@ -51,17 +51,7 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     remediation_ids: SequenceNotStr[str]
     """List of groups to list child logs for"""
 
-    sort: Optional[
-        Literal[
-            "created_at",
-            "primary_eval_issue_score",
-            "score_trustworthiness",
-            "score_context_sufficiency",
-            "score_response_helpfulness",
-            "score_query_ease",
-            "score_response_groundedness",
-        ]
-    ]
+    sort: Optional[str]
 
     tool_call_names: Optional[SequenceNotStr[str]]
     """Filter by names of tools called in the assistant response"""
