@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.1.0-alpha.26 (2025-09-05)
+
+Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
+
+### Features
+
+* **api:** api update ([3b745af](https://github.com/cleanlab/codex-python/commit/3b745afa4569af091b3a62228af62c036c84718d))
+* **api:** api update ([9bb8f17](https://github.com/cleanlab/codex-python/commit/9bb8f17149849ea312caf7b895f02a2c38ac3270))
+* **api:** api update ([ecbda1c](https://github.com/cleanlab/codex-python/commit/ecbda1ca9f1aaf40a325e105cc0659ea0e318511))
+* **api:** api update ([4151cf2](https://github.com/cleanlab/codex-python/commit/4151cf288ea4f75ac7c6eb5c07c9861d67b5ad92))
+* **api:** api update ([cfc87fb](https://github.com/cleanlab/codex-python/commit/cfc87fb65a3a29f0584b7dffccc79f2442307fa9))
+* **api:** manual updates ([5a4e424](https://github.com/cleanlab/codex-python/commit/5a4e424744a6a0e8efc8e6d96c1472508bcc3b00))
+* improve future compat with pydantic v3 ([d9ffa38](https://github.com/cleanlab/codex-python/commit/d9ffa3812e5eb836fc85532d57a92937ef3ad7ec))
+* **types:** replace List[str] with SequenceNotStr in params ([07bdde8](https://github.com/cleanlab/codex-python/commit/07bdde83153c609ff2b86a4190911cab160aaae2))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([7a7b9a3](https://github.com/cleanlab/codex-python/commit/7a7b9a3ee6cfed2e57359a54c1b9292f06cc71b6))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([ead0105](https://github.com/cleanlab/codex-python/commit/ead0105a68c77ae308cc0d40c34245265e9cb2b6))
+* **internal:** change ci workflow machines ([052599a](https://github.com/cleanlab/codex-python/commit/052599aee2e484d9cc305983da900878374db17d))
+* **internal:** move mypy configurations to `pyproject.toml` file ([6285dbe](https://github.com/cleanlab/codex-python/commit/6285dbe7fdc7e6eede39d589ac92d8481595e5e3))
+* **internal:** update pyright exclude list ([cc58363](https://github.com/cleanlab/codex-python/commit/cc58363a9c78ce08437508d3c64cb9b29b43e9bd))
+
 ## 0.1.0-alpha.25 (2025-08-22)
 
 Full Changelog: [v0.1.0-alpha.24...v0.1.0-alpha.25](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.24...v0.1.0-alpha.25)
