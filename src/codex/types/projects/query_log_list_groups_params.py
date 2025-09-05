@@ -6,6 +6,7 @@ from typing import List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 
 __all__ = ["QueryLogListGroupsParams"]
@@ -21,7 +22,7 @@ class QueryLogListGroupsParams(TypedDict, total=False):
     custom_metadata: Optional[str]
     """Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}"""
 
-    failed_evals: Optional[List[str]]
+    failed_evals: Optional[SequenceNotStr[str]]
     """Filter by evals that failed"""
 
     guardrailed: Optional[bool]
@@ -39,7 +40,7 @@ class QueryLogListGroupsParams(TypedDict, total=False):
 
     order: Literal["asc", "desc"]
 
-    passed_evals: Optional[List[str]]
+    passed_evals: Optional[SequenceNotStr[str]]
     """Filter by evals that passed"""
 
     primary_eval_issue: Optional[
@@ -49,7 +50,7 @@ class QueryLogListGroupsParams(TypedDict, total=False):
 
     sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
 
-    tool_call_names: Optional[List[str]]
+    tool_call_names: Optional[SequenceNotStr[str]]
     """Filter by names of tools called in the assistant response"""
 
     was_cache_hit: Optional[bool]

@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import builtins
-from typing import Dict, List, Union, Iterable, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
@@ -68,7 +69,7 @@ class ProjectValidateParams(TypedDict, total=False):
 
     use_llm_matching: Optional[bool]
 
-    constrain_outputs: Optional[List[str]]
+    constrain_outputs: Optional[SequenceNotStr[str]]
 
     custom_eval_thresholds: Optional[Dict[str, float]]
     """Optional custom thresholds for specific evals.
@@ -656,7 +657,7 @@ class Options(TypedDict, total=False):
 
     disable_trustworthiness: bool
 
-    log: List[str]
+    log: SequenceNotStr[str]
 
     max_tokens: int
 

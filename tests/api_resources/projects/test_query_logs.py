@@ -21,6 +21,7 @@ from codex.types.projects import (
     QueryLogRetrieveResponse,
     QueryLogListGroupsResponse,
     QueryLogListByGroupResponse,
+    QueryLogUpdateMetadataResponse,
     QueryLogAddUserFeedbackResponse,
     QueryLogStartRemediationResponse,
 )
@@ -107,7 +108,7 @@ class TestQueryLogs:
             order="asc",
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
-            sort="created_at",
+            sort="sort",
             tool_call_names=["string"],
             was_cache_hit=True,
         )
@@ -230,7 +231,7 @@ class TestQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            sort="created_at",
+            sort="sort",
             tool_call_names=["string"],
             was_cache_hit=True,
         )
@@ -387,6 +388,63 @@ class TestQueryLogs:
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_update_metadata(self, client: Codex) -> None:
+        query_log = client.projects.query_logs.update_metadata(
+            query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body={},
+        )
+        assert_matches_type(QueryLogUpdateMetadataResponse, query_log, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_update_metadata(self, client: Codex) -> None:
+        response = client.projects.query_logs.with_raw_response.update_metadata(
+            query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body={},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        query_log = response.parse()
+        assert_matches_type(QueryLogUpdateMetadataResponse, query_log, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_update_metadata(self, client: Codex) -> None:
+        with client.projects.query_logs.with_streaming_response.update_metadata(
+            query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body={},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            query_log = response.parse()
+            assert_matches_type(QueryLogUpdateMetadataResponse, query_log, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_update_metadata(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.query_logs.with_raw_response.update_metadata(
+                query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                project_id="",
+                body={},
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `query_log_id` but received ''"):
+            client.projects.query_logs.with_raw_response.update_metadata(
+                query_log_id="",
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                body={},
+            )
+
 
 class TestAsyncQueryLogs:
     parametrize = pytest.mark.parametrize(
@@ -469,7 +527,7 @@ class TestAsyncQueryLogs:
             order="asc",
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
-            sort="created_at",
+            sort="sort",
             tool_call_names=["string"],
             was_cache_hit=True,
         )
@@ -592,7 +650,7 @@ class TestAsyncQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            sort="created_at",
+            sort="sort",
             tool_call_names=["string"],
             was_cache_hit=True,
         )
@@ -747,4 +805,61 @@ class TestAsyncQueryLogs:
             await async_client.projects.query_logs.with_raw_response.start_remediation(
                 query_log_id="",
                 project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_update_metadata(self, async_client: AsyncCodex) -> None:
+        query_log = await async_client.projects.query_logs.update_metadata(
+            query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body={},
+        )
+        assert_matches_type(QueryLogUpdateMetadataResponse, query_log, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_update_metadata(self, async_client: AsyncCodex) -> None:
+        response = await async_client.projects.query_logs.with_raw_response.update_metadata(
+            query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body={},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        query_log = await response.parse()
+        assert_matches_type(QueryLogUpdateMetadataResponse, query_log, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_update_metadata(self, async_client: AsyncCodex) -> None:
+        async with async_client.projects.query_logs.with_streaming_response.update_metadata(
+            query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body={},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            query_log = await response.parse()
+            assert_matches_type(QueryLogUpdateMetadataResponse, query_log, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_update_metadata(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.query_logs.with_raw_response.update_metadata(
+                query_log_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                project_id="",
+                body={},
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `query_log_id` but received ''"):
+            await async_client.projects.query_logs.with_raw_response.update_metadata(
+                query_log_id="",
+                project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                body={},
             )

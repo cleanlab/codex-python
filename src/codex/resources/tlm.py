@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Literal
 
 import httpx
 
 from ..types import tlm_score_params, tlm_prompt_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,7 +49,7 @@ class TlmResource(SyncAPIResource):
         self,
         *,
         prompt: str,
-        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         options: Optional[tlm_prompt_params.Options] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
@@ -187,7 +187,7 @@ class TlmResource(SyncAPIResource):
         *,
         prompt: str,
         response: str,
-        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         options: Optional[tlm_score_params.Options] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
@@ -351,7 +351,7 @@ class AsyncTlmResource(AsyncAPIResource):
         self,
         *,
         prompt: str,
-        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         options: Optional[tlm_prompt_params.Options] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
@@ -489,7 +489,7 @@ class AsyncTlmResource(AsyncAPIResource):
         *,
         prompt: str,
         response: str,
-        constrain_outputs: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         options: Optional[tlm_score_params.Options] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
