@@ -206,6 +206,7 @@ from codex.types.projects import (
     QueryLogListByGroupResponse,
     QueryLogListGroupsResponse,
     QueryLogStartRemediationResponse,
+    QueryLogUpdateMetadataResponse,
 )
 ```
 
@@ -217,6 +218,7 @@ Methods:
 - <code title="get /api/projects/{project_id}/query_logs/logs_by_group">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">list_by_group</a>(project_id, \*\*<a href="src/codex/types/projects/query_log_list_by_group_params.py">params</a>) -> <a href="./src/codex/types/projects/query_log_list_by_group_response.py">QueryLogListByGroupResponse</a></code>
 - <code title="get /api/projects/{project_id}/query_logs/groups">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">list_groups</a>(project_id, \*\*<a href="src/codex/types/projects/query_log_list_groups_params.py">params</a>) -> <a href="./src/codex/types/projects/query_log_list_groups_response.py">SyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse]</a></code>
 - <code title="post /api/projects/{project_id}/query_logs/{query_log_id}/start_remediation">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">start_remediation</a>(query_log_id, \*, project_id) -> <a href="./src/codex/types/projects/query_log_start_remediation_response.py">QueryLogStartRemediationResponse</a></code>
+- <code title="put /api/projects/{project_id}/query_logs/{query_log_id}/metadata">client.projects.query_logs.<a href="./src/codex/resources/projects/query_logs.py">update_metadata</a>(query_log_id, \*, project_id, \*\*<a href="src/codex/types/projects/query_log_update_metadata_params.py">params</a>) -> <a href="./src/codex/types/projects/query_log_update_metadata_response.py">QueryLogUpdateMetadataResponse</a></code>
 
 ## Remediations
 
