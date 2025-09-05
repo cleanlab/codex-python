@@ -29,12 +29,14 @@ from ...types.projects import (
     query_log_list_params,
     query_log_list_groups_params,
     query_log_list_by_group_params,
+    query_log_update_metadata_params,
     query_log_add_user_feedback_params,
 )
 from ...types.projects.query_log_list_response import QueryLogListResponse
 from ...types.projects.query_log_retrieve_response import QueryLogRetrieveResponse
 from ...types.projects.query_log_list_groups_response import QueryLogListGroupsResponse
 from ...types.projects.query_log_list_by_group_response import QueryLogListByGroupResponse
+from ...types.projects.query_log_update_metadata_response import QueryLogUpdateMetadataResponse
 from ...types.projects.query_log_add_user_feedback_response import QueryLogAddUserFeedbackResponse
 from ...types.projects.query_log_start_remediation_response import QueryLogStartRemediationResponse
 
@@ -464,6 +466,44 @@ class QueryLogsResource(SyncAPIResource):
             cast_to=QueryLogStartRemediationResponse,
         )
 
+    def update_metadata(
+        self,
+        query_log_id: str,
+        *,
+        project_id: str,
+        body: object,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> QueryLogUpdateMetadataResponse:
+        """
+        Update Metadata Route
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not query_log_id:
+            raise ValueError(f"Expected a non-empty value for `query_log_id` but received {query_log_id!r}")
+        return self._put(
+            f"/api/projects/{project_id}/query_logs/{query_log_id}/metadata",
+            body=maybe_transform(body, query_log_update_metadata_params.QueryLogUpdateMetadataParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=QueryLogUpdateMetadataResponse,
+        )
+
 
 class AsyncQueryLogsResource(AsyncAPIResource):
     @cached_property
@@ -890,6 +930,44 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             cast_to=QueryLogStartRemediationResponse,
         )
 
+    async def update_metadata(
+        self,
+        query_log_id: str,
+        *,
+        project_id: str,
+        body: object,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> QueryLogUpdateMetadataResponse:
+        """
+        Update Metadata Route
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not project_id:
+            raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        if not query_log_id:
+            raise ValueError(f"Expected a non-empty value for `query_log_id` but received {query_log_id!r}")
+        return await self._put(
+            f"/api/projects/{project_id}/query_logs/{query_log_id}/metadata",
+            body=await async_maybe_transform(body, query_log_update_metadata_params.QueryLogUpdateMetadataParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=QueryLogUpdateMetadataResponse,
+        )
+
 
 class QueryLogsResourceWithRawResponse:
     def __init__(self, query_logs: QueryLogsResource) -> None:
@@ -912,6 +990,9 @@ class QueryLogsResourceWithRawResponse:
         )
         self.start_remediation = to_raw_response_wrapper(
             query_logs.start_remediation,
+        )
+        self.update_metadata = to_raw_response_wrapper(
+            query_logs.update_metadata,
         )
 
 
@@ -937,6 +1018,9 @@ class AsyncQueryLogsResourceWithRawResponse:
         self.start_remediation = async_to_raw_response_wrapper(
             query_logs.start_remediation,
         )
+        self.update_metadata = async_to_raw_response_wrapper(
+            query_logs.update_metadata,
+        )
 
 
 class QueryLogsResourceWithStreamingResponse:
@@ -961,6 +1045,9 @@ class QueryLogsResourceWithStreamingResponse:
         self.start_remediation = to_streamed_response_wrapper(
             query_logs.start_remediation,
         )
+        self.update_metadata = to_streamed_response_wrapper(
+            query_logs.update_metadata,
+        )
 
 
 class AsyncQueryLogsResourceWithStreamingResponse:
@@ -984,4 +1071,7 @@ class AsyncQueryLogsResourceWithStreamingResponse:
         )
         self.start_remediation = async_to_streamed_response_wrapper(
             query_logs.start_remediation,
+        )
+        self.update_metadata = async_to_streamed_response_wrapper(
+            query_logs.update_metadata,
         )
