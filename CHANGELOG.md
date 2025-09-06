@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.27 (2025-09-06)
+
+Full Changelog: [v0.1.0-alpha.26...v0.1.0-alpha.27](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.26...v0.1.0-alpha.27)
+
+### Chores
+
+* **tests:** simplify `get_platform` test ([1c03b05](https://github.com/cleanlab/codex-python/commit/1c03b059628ef850cde4760950bc4e7a4d830015))
+
 ## 0.1.0-alpha.26 (2025-09-05)
 
 Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
