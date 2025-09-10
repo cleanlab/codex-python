@@ -108,7 +108,7 @@ class TestQueryLogs:
             order="asc",
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
-            sort="sort",
+            sort="created_at",
             tool_call_names=["string"],
             was_cache_hit=True,
         )
@@ -231,7 +231,7 @@ class TestQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            sort="sort",
+            sort="created_at",
             tool_call_names=["string"],
             was_cache_hit=True,
         )
@@ -527,7 +527,7 @@ class TestAsyncQueryLogs:
             order="asc",
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
-            sort="sort",
+            sort="created_at",
             tool_call_names=["string"],
             was_cache_hit=True,
         )
@@ -650,7 +650,7 @@ class TestAsyncQueryLogs:
             passed_evals=["string"],
             primary_eval_issue=["hallucination"],
             remediation_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            sort="sort",
+            sort="created_at",
             tool_call_names=["string"],
             was_cache_hit=True,
         )

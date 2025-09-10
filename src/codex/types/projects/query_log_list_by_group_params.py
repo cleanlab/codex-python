@@ -52,6 +52,17 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     """List of groups to list child logs for"""
 
     sort: Optional[str]
+    """Field or score to sort by.
+
+    Available fields: 'created_at', 'primary_eval_issue_score'.
+
+    For eval scores, use '.eval.' prefix followed by the eval name.
+
+    Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+    '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+    Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
+    """
 
     tool_call_names: Optional[SequenceNotStr[str]]
     """Filter by names of tools called in the assistant response"""

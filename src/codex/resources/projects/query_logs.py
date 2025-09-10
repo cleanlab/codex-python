@@ -147,6 +147,17 @@ class QueryLogsResource(SyncAPIResource):
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
+          sort: Field or score to sort by.
+
+              Available fields: 'created_at', 'primary_eval_issue_score'.
+
+              For eval scores, use '.eval.' prefix followed by the eval name.
+
+              Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+              '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+              Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
+
           tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
@@ -286,6 +297,17 @@ class QueryLogsResource(SyncAPIResource):
 
           remediation_ids: List of groups to list child logs for
 
+          sort: Field or score to sort by.
+
+              Available fields: 'created_at', 'primary_eval_issue_score'.
+
+              For eval scores, use '.eval.' prefix followed by the eval name.
+
+              Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+              '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+              Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
+
           tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
@@ -351,8 +373,7 @@ class QueryLogsResource(SyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
-        | NotGiven = NOT_GIVEN,
+        sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -383,6 +404,18 @@ class QueryLogsResource(SyncAPIResource):
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          sort: Field or score to sort by.
+
+              Available fields: 'created_at', 'custom_rank', 'impact_score',
+              'primary_eval_issue_score', 'total_count'.
+
+              For eval scores, use '.eval.' prefix followed by the eval name.
+
+              Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+              '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+              Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
 
@@ -609,6 +642,17 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
+          sort: Field or score to sort by.
+
+              Available fields: 'created_at', 'primary_eval_issue_score'.
+
+              For eval scores, use '.eval.' prefix followed by the eval name.
+
+              Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+              '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+              Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
+
           tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
@@ -750,6 +794,17 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           remediation_ids: List of groups to list child logs for
 
+          sort: Field or score to sort by.
+
+              Available fields: 'created_at', 'primary_eval_issue_score'.
+
+              For eval scores, use '.eval.' prefix followed by the eval name.
+
+              Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+              '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+              Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
+
           tool_call_names: Filter by names of tools called in the assistant response
 
           was_cache_hit: Filter by cache hit status
@@ -815,8 +870,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
-        | NotGiven = NOT_GIVEN,
+        sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -847,6 +901,18 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          sort: Field or score to sort by.
+
+              Available fields: 'created_at', 'custom_rank', 'impact_score',
+              'primary_eval_issue_score', 'total_count'.
+
+              For eval scores, use '.eval.' prefix followed by the eval name.
+
+              Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+              '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+              Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
 

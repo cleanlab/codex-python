@@ -48,7 +48,19 @@ class QueryLogListGroupsParams(TypedDict, total=False):
     ]
     """Filter logs that have ANY of these primary evaluation issues (OR operation)"""
 
-    sort: Optional[Literal["created_at", "primary_eval_issue_score", "total_count", "custom_rank", "impact_score"]]
+    sort: Optional[str]
+    """Field or score to sort by.
+
+    Available fields: 'created_at', 'custom_rank', 'impact_score',
+    'primary_eval_issue_score', 'total_count'.
+
+    For eval scores, use '.eval.' prefix followed by the eval name.
+
+    Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+    '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+    Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
+    """
 
     tool_call_names: Optional[SequenceNotStr[str]]
     """Filter by names of tools called in the assistant response"""
