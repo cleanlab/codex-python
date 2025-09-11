@@ -401,6 +401,9 @@ class QueryLogListGroupsResponse(BaseModel):
     guardrailed: Optional[bool] = None
     """If true, the response was guardrailed"""
 
+    manual_review_status_override: Optional[Literal["addressed", "unaddressed"]] = None
+    """Manual review status override for remediations."""
+
     messages: Optional[List[Message]] = None
     """Message history to provide conversation context for the query.
 

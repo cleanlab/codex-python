@@ -35,3 +35,6 @@ class RemediationListResponse(BaseModel):
     answer: Optional[str] = None
 
     draft_answer: Optional[str] = None
+
+    manual_review_status_override: Optional[Literal["addressed", "unaddressed"]] = None
+    """Manual review status override for remediations."""
