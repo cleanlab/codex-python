@@ -106,6 +106,7 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -136,6 +137,8 @@ class QueryLogsResource(SyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          expert_review_status: Filter by expert review status
 
           failed_evals: Filter by evals that failed
 
@@ -185,6 +188,7 @@ class QueryLogsResource(SyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "expert_review_status": expert_review_status,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,
@@ -250,6 +254,7 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -282,6 +287,8 @@ class QueryLogsResource(SyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          expert_review_status: Filter by expert review status
 
           failed_evals: Filter by evals that failed
 
@@ -334,6 +341,7 @@ class QueryLogsResource(SyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "expert_review_status": expert_review_status,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,
@@ -361,6 +369,7 @@ class QueryLogsResource(SyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -392,6 +401,8 @@ class QueryLogsResource(SyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          expert_review_status: Filter by expert review status
 
           failed_evals: Filter by evals that failed
 
@@ -444,6 +455,7 @@ class QueryLogsResource(SyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "expert_review_status": expert_review_status,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,
@@ -601,6 +613,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -631,6 +644,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          expert_review_status: Filter by expert review status
 
           failed_evals: Filter by evals that failed
 
@@ -680,6 +695,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "expert_review_status": expert_review_status,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,
@@ -747,6 +763,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -779,6 +796,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          expert_review_status: Filter by expert review status
 
           failed_evals: Filter by evals that failed
 
@@ -831,6 +850,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "expert_review_status": expert_review_status,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,
@@ -858,6 +878,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
         custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
+        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
         failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
         has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -889,6 +910,8 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           created_at_start: Filter logs created at or after this timestamp
 
           custom_metadata: Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}
+
+          expert_review_status: Filter by expert review status
 
           failed_evals: Filter by evals that failed
 
@@ -941,6 +964,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "created_at_end": created_at_end,
                         "created_at_start": created_at_start,
                         "custom_metadata": custom_metadata,
+                        "expert_review_status": expert_review_status,
                         "failed_evals": failed_evals,
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,

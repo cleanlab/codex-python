@@ -22,6 +22,9 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     custom_metadata: Optional[str]
     """Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}"""
 
+    expert_review_status: Optional[Literal["good", "bad"]]
+    """Filter by expert review status"""
+
     failed_evals: Optional[SequenceNotStr[str]]
     """Filter by evals that failed"""
 
