@@ -45,6 +45,7 @@ __all__ = [
     "QueryLogsByGroupQueryLogMessageChatCompletionDeveloperMessageParamContentUnionMember1",
     "QueryLogsByGroupQueryLogTool",
     "QueryLogsByGroupQueryLogToolFunction",
+    "Filters",
 ]
 
 
@@ -456,11 +457,62 @@ class QueryLogsByGroup(BaseModel):
     total_count: int
 
 
+class Filters(BaseModel):
+    custom_metadata_dict: Optional[object] = None
+
+    created_at_end: Optional[datetime] = None
+    """Filter logs created at or before this timestamp"""
+
+    created_at_start: Optional[datetime] = None
+    """Filter logs created at or after this timestamp"""
+
+    custom_metadata: Optional[str] = None
+    """Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}"""
+
+    expert_review_status: Optional[Literal["good", "bad"]] = None
+    """Filter by expert review status"""
+
+    failed_evals: Optional[List[str]] = None
+    """Filter by evals that failed"""
+
+    guardrailed: Optional[bool] = None
+    """Filter by guardrailed status"""
+
+    has_tool_calls: Optional[bool] = None
+    """Filter by whether the query log has tool calls"""
+
+    needs_review: Optional[bool] = None
+    """Filter logs that need review"""
+
+    passed_evals: Optional[List[str]] = None
+    """Filter by evals that passed"""
+
+    primary_eval_issue: Optional[
+        List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
+    ] = None
+    """Filter logs that have ANY of these primary evaluation issues (OR operation)"""
+
+    search_text: Optional[str] = None
+    """
+    Case-insensitive search across evaluated_response and question fields
+    (original_question if available, otherwise question)
+    """
+
+    tool_call_names: Optional[List[str]] = None
+    """Filter by names of tools called in the assistant response"""
+
+    was_cache_hit: Optional[bool] = None
+    """Filter by cache hit status"""
+
+
 class QueryLogListByGroupResponse(BaseModel):
     custom_metadata_columns: List[str]
     """Columns of the custom metadata"""
 
     query_logs_by_group: Dict[str, QueryLogsByGroup]
+
+    filters: Optional[Filters] = None
+    """Applied filters for the query"""
 
     tool_names: Optional[List[str]] = None
     """Names of the tools available in queries"""

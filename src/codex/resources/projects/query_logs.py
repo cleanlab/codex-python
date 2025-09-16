@@ -118,6 +118,7 @@ class QueryLogsResource(SyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
+        search_text: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -149,6 +150,9 @@ class QueryLogsResource(SyncAPIResource):
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          search_text: Case-insensitive search across evaluated_response and question fields
+              (original_question if available, otherwise question)
 
           sort: Field or score to sort by.
 
@@ -197,6 +201,7 @@ class QueryLogsResource(SyncAPIResource):
                         "order": order,
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
+                        "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
@@ -268,6 +273,7 @@ class QueryLogsResource(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        search_text: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -303,6 +309,9 @@ class QueryLogsResource(SyncAPIResource):
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
           remediation_ids: List of groups to list child logs for
+
+          search_text: Case-insensitive search across evaluated_response and question fields
+              (original_question if available, otherwise question)
 
           sort: Field or score to sort by.
 
@@ -352,6 +361,7 @@ class QueryLogsResource(SyncAPIResource):
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "remediation_ids": remediation_ids,
+                        "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
@@ -382,6 +392,7 @@ class QueryLogsResource(SyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
+        search_text: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -415,6 +426,9 @@ class QueryLogsResource(SyncAPIResource):
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          search_text: Case-insensitive search across evaluated_response and question fields
+              (original_question if available, otherwise question)
 
           sort: Field or score to sort by.
 
@@ -465,6 +479,7 @@ class QueryLogsResource(SyncAPIResource):
                         "order": order,
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
+                        "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
@@ -625,6 +640,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
+        search_text: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -656,6 +672,9 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          search_text: Case-insensitive search across evaluated_response and question fields
+              (original_question if available, otherwise question)
 
           sort: Field or score to sort by.
 
@@ -704,6 +723,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "order": order,
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
+                        "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
@@ -777,6 +797,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
+        search_text: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -812,6 +833,9 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
 
           remediation_ids: List of groups to list child logs for
+
+          search_text: Case-insensitive search across evaluated_response and question fields
+              (original_question if available, otherwise question)
 
           sort: Field or score to sort by.
 
@@ -861,6 +885,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
                         "remediation_ids": remediation_ids,
+                        "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
@@ -891,6 +916,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
         | NotGiven = NOT_GIVEN,
+        search_text: Optional[str] | NotGiven = NOT_GIVEN,
         sort: Optional[str] | NotGiven = NOT_GIVEN,
         tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -924,6 +950,9 @@ class AsyncQueryLogsResource(AsyncAPIResource):
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
+
+          search_text: Case-insensitive search across evaluated_response and question fields
+              (original_question if available, otherwise question)
 
           sort: Field or score to sort by.
 
@@ -974,6 +1003,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "order": order,
                         "passed_evals": passed_evals,
                         "primary_eval_issue": primary_eval_issue,
+                        "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
                         "was_cache_hit": was_cache_hit,
