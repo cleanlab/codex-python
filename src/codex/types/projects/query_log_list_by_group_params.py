@@ -54,6 +54,12 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     remediation_ids: SequenceNotStr[str]
     """List of groups to list child logs for"""
 
+    search_text: Optional[str]
+    """
+    Case-insensitive search across evaluated_response and question fields
+    (original_question if available, otherwise question)
+    """
+
     sort: Optional[str]
     """Field or score to sort by.
 

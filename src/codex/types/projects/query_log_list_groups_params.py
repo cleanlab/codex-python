@@ -51,6 +51,12 @@ class QueryLogListGroupsParams(TypedDict, total=False):
     ]
     """Filter logs that have ANY of these primary evaluation issues (OR operation)"""
 
+    search_text: Optional[str]
+    """
+    Case-insensitive search across evaluated_response and question fields
+    (original_question if available, otherwise question)
+    """
+
     sort: Optional[str]
     """Field or score to sort by.
 

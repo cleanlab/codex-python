@@ -333,6 +333,10 @@ class Config(TypedDict, total=False):
 
     query_use_llm_matching: bool
 
+    question_match_llm_prompt: str
+
+    question_match_llm_prompt_with_answer: str
+
     tlm_evals_model: str
 
     upper_llm_match_distance_threshold: float
