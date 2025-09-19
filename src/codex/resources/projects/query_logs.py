@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -73,7 +73,7 @@ class QueryLogsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogRetrieveResponse:
         """
         Get Query Log Route
@@ -103,31 +103,31 @@ class QueryLogsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
-        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        custom_metadata: Optional[str] | Omit = omit,
+        expert_review_status: Optional[Literal["good", "bad"]] | Omit = omit,
+        failed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
+        guardrailed: Optional[bool] | Omit = omit,
+        has_tool_calls: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
-        | NotGiven = NOT_GIVEN,
-        search_text: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[str] | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        search_text: Optional[str] | Omit = omit,
+        sort: Optional[str] | Omit = omit,
+        tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
+        was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncOffsetPageQueryLogs[QueryLogListResponse]:
         """
         List query logs by project ID.
@@ -223,7 +223,7 @@ class QueryLogsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogAddUserFeedbackResponse:
         """
         Add User Feedback Route
@@ -256,33 +256,33 @@ class QueryLogsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
-        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        custom_metadata: Optional[str] | Omit = omit,
+        expert_review_status: Optional[Literal["good", "bad"]] | Omit = omit,
+        failed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
+        guardrailed: Optional[bool] | Omit = omit,
+        has_tool_calls: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        needs_review: Optional[bool] | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
-        | NotGiven = NOT_GIVEN,
-        remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        search_text: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[str] | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        remediation_ids: SequenceNotStr[str] | Omit = omit,
+        search_text: Optional[str] | Omit = omit,
+        sort: Optional[str] | Omit = omit,
+        tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
+        was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogListByGroupResponse:
         """
         List query log group by remediation ID.
@@ -376,32 +376,32 @@ class QueryLogsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
-        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        custom_metadata: Optional[str] | Omit = omit,
+        expert_review_status: Optional[Literal["good", "bad"]] | Omit = omit,
+        failed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
+        guardrailed: Optional[bool] | Omit = omit,
+        has_tool_calls: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        needs_review: Optional[bool] | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
-        | NotGiven = NOT_GIVEN,
-        search_text: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[str] | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        search_text: Optional[str] | Omit = omit,
+        sort: Optional[str] | Omit = omit,
+        tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
+        was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse]:
         """
         List query log groups by project ID.
@@ -500,7 +500,7 @@ class QueryLogsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogStartRemediationResponse:
         """
         Start Remediation Route
@@ -537,7 +537,7 @@ class QueryLogsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogUpdateMetadataResponse:
         """
         Update Metadata Route
@@ -595,7 +595,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogRetrieveResponse:
         """
         Get Query Log Route
@@ -625,31 +625,31 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
-        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        custom_metadata: Optional[str] | Omit = omit,
+        expert_review_status: Optional[Literal["good", "bad"]] | Omit = omit,
+        failed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
+        guardrailed: Optional[bool] | Omit = omit,
+        has_tool_calls: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
-        | NotGiven = NOT_GIVEN,
-        search_text: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[str] | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        search_text: Optional[str] | Omit = omit,
+        sort: Optional[str] | Omit = omit,
+        tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
+        was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[QueryLogListResponse, AsyncOffsetPageQueryLogs[QueryLogListResponse]]:
         """
         List query logs by project ID.
@@ -745,7 +745,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogAddUserFeedbackResponse:
         """
         Add User Feedback Route
@@ -780,33 +780,33 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
-        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        custom_metadata: Optional[str] | Omit = omit,
+        expert_review_status: Optional[Literal["good", "bad"]] | Omit = omit,
+        failed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
+        guardrailed: Optional[bool] | Omit = omit,
+        has_tool_calls: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        needs_review: Optional[bool] | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
-        | NotGiven = NOT_GIVEN,
-        remediation_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        search_text: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[str] | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        remediation_ids: SequenceNotStr[str] | Omit = omit,
+        search_text: Optional[str] | Omit = omit,
+        sort: Optional[str] | Omit = omit,
+        tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
+        was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogListByGroupResponse:
         """
         List query log group by remediation ID.
@@ -900,32 +900,32 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[str] | NotGiven = NOT_GIVEN,
-        expert_review_status: Optional[Literal["good", "bad"]] | NotGiven = NOT_GIVEN,
-        failed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        guardrailed: Optional[bool] | NotGiven = NOT_GIVEN,
-        has_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        needs_review: Optional[bool] | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        passed_evals: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        custom_metadata: Optional[str] | Omit = omit,
+        expert_review_status: Optional[Literal["good", "bad"]] | Omit = omit,
+        failed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
+        guardrailed: Optional[bool] | Omit = omit,
+        has_tool_calls: Optional[bool] | Omit = omit,
+        limit: int | Omit = omit,
+        needs_review: Optional[bool] | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
         primary_eval_issue: Optional[
             List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
         ]
-        | NotGiven = NOT_GIVEN,
-        search_text: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Optional[str] | NotGiven = NOT_GIVEN,
-        tool_call_names: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        was_cache_hit: Optional[bool] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        search_text: Optional[str] | Omit = omit,
+        sort: Optional[str] | Omit = omit,
+        tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
+        was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[QueryLogListGroupsResponse, AsyncOffsetPageQueryLogGroups[QueryLogListGroupsResponse]]:
         """
         List query log groups by project ID.
@@ -1024,7 +1024,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogStartRemediationResponse:
         """
         Start Remediation Route
@@ -1061,7 +1061,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> QueryLogUpdateMetadataResponse:
         """
         Update Metadata Route
