@@ -456,7 +456,6 @@ class ProjectsResource(SyncAPIResource):
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         messages: Iterable[project_validate_params.Message] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
-        prompt: Optional[str] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
@@ -576,12 +575,8 @@ class ProjectsResource(SyncAPIResource):
                   When this parameter is 1, `TLM.prompt()` simply returns a standard LLM response and does not attempt to auto-improve it.
                   This parameter has no effect when `disable_trustworthiness` is True.
 
-                  disable_trustworthiness (bool, default = False): if True, trustworthiness scoring is disabled and TLM will not compute trust scores for responses.
-                  This is useful when you only want to use custom evaluation criteria or when you want to minimize computational overhead and only need the base LLM response.
-                  The following parameters will be ignored when `disable_trustworthiness` is True: `num_consistency_samples`, `num_self_reflections`, `num_candidate_responses`, `reasoning_effort`, `similarity_measure`.
-
-          prompt: The prompt to use for the TLM call. If not provided, the prompt will be
-              generated from the messages.
+                  disable_trustworthiness (bool, default = False): if True, TLM will not compute trust scores,
+                  useful if you only want to compute custom evaluation criteria.
 
           quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
 
@@ -625,7 +620,6 @@ class ProjectsResource(SyncAPIResource):
                     "eval_scores": eval_scores,
                     "messages": messages,
                     "options": options,
-                    "prompt": prompt,
                     "quality_preset": quality_preset,
                     "rewritten_question": rewritten_question,
                     "task": task,
@@ -1034,7 +1028,6 @@ class AsyncProjectsResource(AsyncAPIResource):
         eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
         messages: Iterable[project_validate_params.Message] | NotGiven = NOT_GIVEN,
         options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
-        prompt: Optional[str] | NotGiven = NOT_GIVEN,
         quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
         rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
         task: Optional[str] | NotGiven = NOT_GIVEN,
@@ -1154,12 +1147,8 @@ class AsyncProjectsResource(AsyncAPIResource):
                   When this parameter is 1, `TLM.prompt()` simply returns a standard LLM response and does not attempt to auto-improve it.
                   This parameter has no effect when `disable_trustworthiness` is True.
 
-                  disable_trustworthiness (bool, default = False): if True, trustworthiness scoring is disabled and TLM will not compute trust scores for responses.
-                  This is useful when you only want to use custom evaluation criteria or when you want to minimize computational overhead and only need the base LLM response.
-                  The following parameters will be ignored when `disable_trustworthiness` is True: `num_consistency_samples`, `num_self_reflections`, `num_candidate_responses`, `reasoning_effort`, `similarity_measure`.
-
-          prompt: The prompt to use for the TLM call. If not provided, the prompt will be
-              generated from the messages.
+                  disable_trustworthiness (bool, default = False): if True, TLM will not compute trust scores,
+                  useful if you only want to compute custom evaluation criteria.
 
           quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
 
@@ -1203,7 +1192,6 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "eval_scores": eval_scores,
                     "messages": messages,
                     "options": options,
-                    "prompt": prompt,
                     "quality_preset": quality_preset,
                     "rewritten_question": rewritten_question,
                     "task": task,
