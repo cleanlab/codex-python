@@ -7,7 +7,7 @@ from datetime import datetime
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -51,18 +51,18 @@ class AccessKeysResource(SyncAPIResource):
         project_id: str,
         *,
         name: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        x_client_library_version: str | NotGiven = NOT_GIVEN,
-        x_integration_type: str | NotGiven = NOT_GIVEN,
-        x_source: str | NotGiven = NOT_GIVEN,
-        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
+        description: Optional[str] | Omit = omit,
+        expires_at: Union[str, datetime, None] | Omit = omit,
+        x_client_library_version: str | Omit = omit,
+        x_integration_type: str | Omit = omit,
+        x_source: str | Omit = omit,
+        x_stainless_package_version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeySchema:
         """
         Create a new access key.
@@ -115,7 +115,7 @@ class AccessKeysResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeySchema:
         """
         Get a single access key.
@@ -147,14 +147,14 @@ class AccessKeysResource(SyncAPIResource):
         *,
         project_id: str,
         name: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        description: Optional[str] | Omit = omit,
+        expires_at: Union[str, datetime, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeySchema:
         """
         Update an existing access key.
@@ -197,7 +197,7 @@ class AccessKeysResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeyListResponse:
         """
         List all access keys for a project.
@@ -231,7 +231,7 @@ class AccessKeysResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete an existing access key.
@@ -266,7 +266,7 @@ class AccessKeysResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeyRetrieveProjectIDResponse:
         """Get the project ID from an access key."""
         return self._get(
@@ -287,7 +287,7 @@ class AccessKeysResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Revoke an access key.
@@ -340,18 +340,18 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         project_id: str,
         *,
         name: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        x_client_library_version: str | NotGiven = NOT_GIVEN,
-        x_integration_type: str | NotGiven = NOT_GIVEN,
-        x_source: str | NotGiven = NOT_GIVEN,
-        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
+        description: Optional[str] | Omit = omit,
+        expires_at: Union[str, datetime, None] | Omit = omit,
+        x_client_library_version: str | Omit = omit,
+        x_integration_type: str | Omit = omit,
+        x_source: str | Omit = omit,
+        x_stainless_package_version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeySchema:
         """
         Create a new access key.
@@ -404,7 +404,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeySchema:
         """
         Get a single access key.
@@ -436,14 +436,14 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         *,
         project_id: str,
         name: str,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        description: Optional[str] | Omit = omit,
+        expires_at: Union[str, datetime, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeySchema:
         """
         Update an existing access key.
@@ -486,7 +486,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeyListResponse:
         """
         List all access keys for a project.
@@ -520,7 +520,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete an existing access key.
@@ -555,7 +555,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccessKeyRetrieveProjectIDResponse:
         """Get the project ID from an access key."""
         return await self._get(
@@ -576,7 +576,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Revoke an access key.

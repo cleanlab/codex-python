@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -65,14 +65,14 @@ class RemediationsResource(SyncAPIResource):
         project_id: str,
         *,
         question: str,
-        answer: Optional[str] | NotGiven = NOT_GIVEN,
-        draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
+        answer: Optional[str] | Omit = omit,
+        draft_answer: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationCreateResponse:
         """
         Create Remediation Route
@@ -114,7 +114,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationRetrieveResponse:
         """
         Get Remediation Route
@@ -144,22 +144,22 @@ class RemediationsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        last_edited_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        last_edited_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        last_edited_by: Optional[str] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "last_edited_at", "resolved_logs_count"]] | NotGiven = NOT_GIVEN,
-        status: Optional[List[Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "PAUSED"]]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        last_edited_at_end: Union[str, datetime, None] | Omit = omit,
+        last_edited_at_start: Union[str, datetime, None] | Omit = omit,
+        last_edited_by: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        sort: Optional[Literal["created_at", "last_edited_at", "resolved_logs_count"]] | Omit = omit,
+        status: Optional[List[Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "PAUSED"]]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncOffsetPageRemediations[RemediationListResponse]:
         """
         List remediations by project ID.
@@ -224,7 +224,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete Remediation Route
@@ -262,7 +262,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationEditAnswerResponse:
         """
         Edit Answer Route
@@ -300,7 +300,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationEditDraftAnswerResponse:
         """
         Edit Draft Answer Route
@@ -339,7 +339,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationGetResolvedLogsCountResponse:
         """
         Get Remediation With Resolved Logs Count Route
@@ -375,7 +375,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationListResolvedLogsResponse:
         """
         List resolved logs by remediation ID.
@@ -411,7 +411,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationPauseResponse:
         """
         Pause Remediation Route
@@ -447,7 +447,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationPublishResponse:
         """
         Publish Remediation Route
@@ -483,7 +483,7 @@ class RemediationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationUnpauseResponse:
         """
         Unpause Remediation Route
@@ -535,14 +535,14 @@ class AsyncRemediationsResource(AsyncAPIResource):
         project_id: str,
         *,
         question: str,
-        answer: Optional[str] | NotGiven = NOT_GIVEN,
-        draft_answer: Optional[str] | NotGiven = NOT_GIVEN,
+        answer: Optional[str] | Omit = omit,
+        draft_answer: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationCreateResponse:
         """
         Create Remediation Route
@@ -584,7 +584,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationRetrieveResponse:
         """
         Get Remediation Route
@@ -614,22 +614,22 @@ class AsyncRemediationsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        created_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        created_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        last_edited_at_end: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        last_edited_at_start: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        last_edited_by: Optional[str] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        sort: Optional[Literal["created_at", "last_edited_at", "resolved_logs_count"]] | NotGiven = NOT_GIVEN,
-        status: Optional[List[Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "PAUSED"]]] | NotGiven = NOT_GIVEN,
+        created_at_end: Union[str, datetime, None] | Omit = omit,
+        created_at_start: Union[str, datetime, None] | Omit = omit,
+        last_edited_at_end: Union[str, datetime, None] | Omit = omit,
+        last_edited_at_start: Union[str, datetime, None] | Omit = omit,
+        last_edited_by: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        sort: Optional[Literal["created_at", "last_edited_at", "resolved_logs_count"]] | Omit = omit,
+        status: Optional[List[Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "PAUSED"]]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[RemediationListResponse, AsyncOffsetPageRemediations[RemediationListResponse]]:
         """
         List remediations by project ID.
@@ -694,7 +694,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete Remediation Route
@@ -732,7 +732,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationEditAnswerResponse:
         """
         Edit Answer Route
@@ -772,7 +772,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationEditDraftAnswerResponse:
         """
         Edit Draft Answer Route
@@ -811,7 +811,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationGetResolvedLogsCountResponse:
         """
         Get Remediation With Resolved Logs Count Route
@@ -847,7 +847,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationListResolvedLogsResponse:
         """
         List resolved logs by remediation ID.
@@ -883,7 +883,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationPauseResponse:
         """
         Pause Remediation Route
@@ -919,7 +919,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationPublishResponse:
         """
         Publish Remediation Route
@@ -955,7 +955,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RemediationUnpauseResponse:
         """
         Unpause Remediation Route
