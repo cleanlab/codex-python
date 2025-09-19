@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.27 (2025-09-19)
+
+Full Changelog: [v0.1.0-alpha.26...v0.1.0-alpha.27](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.26...v0.1.0-alpha.27)
+
+### Features
+
+* **api:** api update ([7075aca](https://github.com/cleanlab/codex-python/commit/7075aca8381929be65bd7d0310a501620bbede90))
+* **api:** api update ([54beb02](https://github.com/cleanlab/codex-python/commit/54beb025117a30e6b0e56986bde48457e6539d01))
+* **api:** api update ([16ec26b](https://github.com/cleanlab/codex-python/commit/16ec26b53edf9724bf78f1267a641eb711bdc3e5))
+* **api:** api update ([9a65cae](https://github.com/cleanlab/codex-python/commit/9a65cae3b351709a98eb4bc8f695e91f397c4994))
+* **api:** api update ([7ccf252](https://github.com/cleanlab/codex-python/commit/7ccf252ba391da0a565e0fd1dd33cc9223a1eb9a))
+
+
+### Chores
+
+* **internal:** update pydantic dependency ([2c0bd75](https://github.com/cleanlab/codex-python/commit/2c0bd7546c46ad96707d948d34f60df28c701697))
+* **tests:** simplify `get_platform` test ([1c03b05](https://github.com/cleanlab/codex-python/commit/1c03b059628ef850cde4760950bc4e7a4d830015))
+* **types:** change optional parameter type from NotGiven to Omit ([5cd7ee0](https://github.com/cleanlab/codex-python/commit/5cd7ee0987fe4e29292e3e9c738fe2bd5945d008))
+
 ## 0.1.0-alpha.26 (2025-09-05)
 
 Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
