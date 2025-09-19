@@ -45,6 +45,7 @@ __all__ = [
     "QueryLogsByGroupQueryLogMessageChatCompletionDeveloperMessageParamContentUnionMember1",
     "QueryLogsByGroupQueryLogTool",
     "QueryLogsByGroupQueryLogToolFunction",
+    "Filters",
 ]
 
 
@@ -399,11 +400,26 @@ class QueryLogsByGroupQueryLog(BaseModel):
     Used to log tool calls in the query log.
     """
 
+    expert_review_created_at: Optional[datetime] = None
+    """When the expert review was created"""
+
+    expert_review_created_by_user_id: Optional[str] = None
+    """ID of the user who created the expert review"""
+
+    expert_review_explanation: Optional[str] = None
+    """Expert explanation when marked as bad"""
+
+    expert_review_status: Optional[Literal["good", "bad"]] = None
+    """Expert review status: 'good' or 'bad'"""
+
     guardrail_evals: Optional[List[str]] = None
     """Evals that should trigger guardrail"""
 
     guardrailed: Optional[bool] = None
     """If true, the response was guardrailed"""
+
+    manual_review_status_override: Optional[Literal["addressed", "unaddressed"]] = None
+    """Manual review status override for remediations."""
 
     messages: Optional[List[QueryLogsByGroupQueryLogMessage]] = None
     """Message history to provide conversation context for the query.
@@ -425,6 +441,9 @@ class QueryLogsByGroupQueryLog(BaseModel):
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
 
+    similar_query_log_guardrail_explanation: Optional[str] = None
+    """Explanation from a similar bad query log that caused this to be guardrailed"""
+
     tools: Optional[List[QueryLogsByGroupQueryLogTool]] = None
     """Tools to use for the LLM call.
 
@@ -438,11 +457,62 @@ class QueryLogsByGroup(BaseModel):
     total_count: int
 
 
+class Filters(BaseModel):
+    custom_metadata_dict: Optional[object] = None
+
+    created_at_end: Optional[datetime] = None
+    """Filter logs created at or before this timestamp"""
+
+    created_at_start: Optional[datetime] = None
+    """Filter logs created at or after this timestamp"""
+
+    custom_metadata: Optional[str] = None
+    """Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}"""
+
+    expert_review_status: Optional[Literal["good", "bad"]] = None
+    """Filter by expert review status"""
+
+    failed_evals: Optional[List[str]] = None
+    """Filter by evals that failed"""
+
+    guardrailed: Optional[bool] = None
+    """Filter by guardrailed status"""
+
+    has_tool_calls: Optional[bool] = None
+    """Filter by whether the query log has tool calls"""
+
+    needs_review: Optional[bool] = None
+    """Filter logs that need review"""
+
+    passed_evals: Optional[List[str]] = None
+    """Filter by evals that passed"""
+
+    primary_eval_issue: Optional[
+        List[Literal["hallucination", "search_failure", "unhelpful", "difficult_query", "ungrounded"]]
+    ] = None
+    """Filter logs that have ANY of these primary evaluation issues (OR operation)"""
+
+    search_text: Optional[str] = None
+    """
+    Case-insensitive search across evaluated_response and question fields
+    (original_question if available, otherwise question)
+    """
+
+    tool_call_names: Optional[List[str]] = None
+    """Filter by names of tools called in the assistant response"""
+
+    was_cache_hit: Optional[bool] = None
+    """Filter by cache hit status"""
+
+
 class QueryLogListByGroupResponse(BaseModel):
     custom_metadata_columns: List[str]
     """Columns of the custom metadata"""
 
     query_logs_by_group: Dict[str, QueryLogsByGroup]
+
+    filters: Optional[Filters] = None
+    """Applied filters for the query"""
 
     tool_names: Optional[List[str]] = None
     """Names of the tools available in queries"""

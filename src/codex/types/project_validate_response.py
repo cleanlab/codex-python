@@ -52,6 +52,9 @@ class ProjectValidateResponse(BaseModel):
     Codex Project, or None otherwise.
     """
 
+    expert_review_guardrail_explanation: Optional[str] = None
+    """Explanation from a similar bad query log that caused this to be guardrailed"""
+
     is_bad_response: bool
     """True if the response is flagged as potentially bad, False otherwise.
 

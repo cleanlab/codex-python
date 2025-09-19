@@ -22,6 +22,9 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     custom_metadata: Optional[str]
     """Filter by custom metadata as JSON string: {"key1": "value1", "key2": "value2"}"""
 
+    expert_review_status: Optional[Literal["good", "bad"]]
+    """Filter by expert review status"""
+
     failed_evals: Optional[SequenceNotStr[str]]
     """Filter by evals that failed"""
 
@@ -51,7 +54,24 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     remediation_ids: SequenceNotStr[str]
     """List of groups to list child logs for"""
 
+    search_text: Optional[str]
+    """
+    Case-insensitive search across evaluated_response and question fields
+    (original_question if available, otherwise question)
+    """
+
     sort: Optional[str]
+    """Field or score to sort by.
+
+    Available fields: 'created_at', 'primary_eval_issue_score'.
+
+    For eval scores, use '.eval.' prefix followed by the eval name.
+
+    Default eval scores: '.eval.trustworthiness', '.eval.context_sufficiency',
+    '.eval.response_helpfulness', '.eval.query_ease', '.eval.response_groundedness'.
+
+    Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
+    """
 
     tool_call_names: Optional[SequenceNotStr[str]]
     """Filter by names of tools called in the assistant response"""

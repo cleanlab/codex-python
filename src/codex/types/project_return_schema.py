@@ -322,6 +322,10 @@ class Config(BaseModel):
 
     query_use_llm_matching: Optional[bool] = None
 
+    question_match_llm_prompt: Optional[str] = None
+
+    question_match_llm_prompt_with_answer: Optional[str] = None
+
     tlm_evals_model: Optional[str] = None
 
     upper_llm_match_distance_threshold: Optional[float] = None

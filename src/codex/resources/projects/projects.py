@@ -23,7 +23,7 @@ from ...types import (
     project_invite_sme_params,
     project_retrieve_analytics_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, SequenceNotStr
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from .query_logs import (
@@ -110,14 +110,14 @@ class ProjectsResource(SyncAPIResource):
         config: project_create_params.Config,
         name: str,
         organization_id: str,
-        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
+        auto_clustering_enabled: bool | Omit = omit,
+        description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Create a new project.
@@ -158,7 +158,7 @@ class ProjectsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveResponse:
         """
         Get a single project.
@@ -186,16 +186,16 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        auto_clustering_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        config: Optional[project_update_params.Config] | NotGiven = NOT_GIVEN,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
+        auto_clustering_enabled: Optional[bool] | Omit = omit,
+        config: Optional[project_update_params.Config] | Omit = omit,
+        description: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Update a project.
@@ -231,19 +231,19 @@ class ProjectsResource(SyncAPIResource):
     def list(
         self,
         *,
-        include_unaddressed_counts: bool | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
-        query: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
+        include_unaddressed_counts: bool | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        organization_id: str | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        sort: Literal["created_at", "updated_at"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
         """
         List projects for organization.
@@ -289,7 +289,7 @@ class ProjectsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a project.
@@ -323,7 +323,7 @@ class ProjectsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Export all data for a project as a JSON file.
@@ -359,7 +359,7 @@ class ProjectsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectInviteSmeResponse:
         """
         Invite a subject matter expert to view a specific query log or remediation.
@@ -397,14 +397,14 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        end: int | NotGiven = NOT_GIVEN,
-        start: int | NotGiven = NOT_GIVEN,
+        end: int | Omit = omit,
+        start: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveAnalyticsResponse:
         """
         Get Project Analytics Route
@@ -449,28 +449,27 @@ class ProjectsResource(SyncAPIResource):
         context: str,
         query: str,
         response: project_validate_params.Response,
-        use_llm_matching: Optional[bool] | NotGiven = NOT_GIVEN,
-        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
-        eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
-        messages: Iterable[project_validate_params.Message] | NotGiven = NOT_GIVEN,
-        options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
-        prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
-        rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
-        task: Optional[str] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[project_validate_params.Tool]] | NotGiven = NOT_GIVEN,
-        x_client_library_version: str | NotGiven = NOT_GIVEN,
-        x_integration_type: str | NotGiven = NOT_GIVEN,
-        x_source: str | NotGiven = NOT_GIVEN,
-        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
+        use_llm_matching: Optional[bool] | Omit = omit,
+        constrain_outputs: Optional[SequenceNotStr[str]] | Omit = omit,
+        custom_eval_thresholds: Optional[Dict[str, float]] | Omit = omit,
+        custom_metadata: Optional[object] | Omit = omit,
+        eval_scores: Optional[Dict[str, float]] | Omit = omit,
+        messages: Iterable[project_validate_params.Message] | Omit = omit,
+        options: Optional[project_validate_params.Options] | Omit = omit,
+        quality_preset: Literal["best", "high", "medium", "low", "base"] | Omit = omit,
+        rewritten_question: Optional[str] | Omit = omit,
+        task: Optional[str] | Omit = omit,
+        tools: Optional[Iterable[project_validate_params.Tool]] | Omit = omit,
+        x_client_library_version: str | Omit = omit,
+        x_integration_type: str | Omit = omit,
+        x_source: str | Omit = omit,
+        x_stainless_package_version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectValidateResponse:
         """
         Evaluate whether a response, given the provided query and context, is
@@ -576,12 +575,8 @@ class ProjectsResource(SyncAPIResource):
                   When this parameter is 1, `TLM.prompt()` simply returns a standard LLM response and does not attempt to auto-improve it.
                   This parameter has no effect when `disable_trustworthiness` is True.
 
-                  disable_trustworthiness (bool, default = False): if True, trustworthiness scoring is disabled and TLM will not compute trust scores for responses.
-                  This is useful when you only want to use custom evaluation criteria or when you want to minimize computational overhead and only need the base LLM response.
-                  The following parameters will be ignored when `disable_trustworthiness` is True: `num_consistency_samples`, `num_self_reflections`, `num_candidate_responses`, `reasoning_effort`, `similarity_measure`.
-
-          prompt: The prompt to use for the TLM call. If not provided, the prompt will be
-              generated from the messages.
+                  disable_trustworthiness (bool, default = False): if True, TLM will not compute trust scores,
+                  useful if you only want to compute custom evaluation criteria.
 
           quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
 
@@ -625,7 +620,6 @@ class ProjectsResource(SyncAPIResource):
                     "eval_scores": eval_scores,
                     "messages": messages,
                     "options": options,
-                    "prompt": prompt,
                     "quality_preset": quality_preset,
                     "rewritten_question": rewritten_question,
                     "task": task,
@@ -688,14 +682,14 @@ class AsyncProjectsResource(AsyncAPIResource):
         config: project_create_params.Config,
         name: str,
         organization_id: str,
-        auto_clustering_enabled: bool | NotGiven = NOT_GIVEN,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
+        auto_clustering_enabled: bool | Omit = omit,
+        description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Create a new project.
@@ -736,7 +730,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveResponse:
         """
         Get a single project.
@@ -764,16 +758,16 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        auto_clustering_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        config: Optional[project_update_params.Config] | NotGiven = NOT_GIVEN,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
+        auto_clustering_enabled: Optional[bool] | Omit = omit,
+        config: Optional[project_update_params.Config] | Omit = omit,
+        description: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Update a project.
@@ -809,19 +803,19 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        include_unaddressed_counts: bool | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
-        query: Optional[str] | NotGiven = NOT_GIVEN,
-        sort: Literal["created_at", "updated_at"] | NotGiven = NOT_GIVEN,
+        include_unaddressed_counts: bool | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        organization_id: str | Omit = omit,
+        query: Optional[str] | Omit = omit,
+        sort: Literal["created_at", "updated_at"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
         """
         List projects for organization.
@@ -867,7 +861,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a project.
@@ -901,7 +895,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Export all data for a project as a JSON file.
@@ -937,7 +931,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectInviteSmeResponse:
         """
         Invite a subject matter expert to view a specific query log or remediation.
@@ -975,14 +969,14 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        end: int | NotGiven = NOT_GIVEN,
-        start: int | NotGiven = NOT_GIVEN,
+        end: int | Omit = omit,
+        start: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveAnalyticsResponse:
         """
         Get Project Analytics Route
@@ -1027,28 +1021,27 @@ class AsyncProjectsResource(AsyncAPIResource):
         context: str,
         query: str,
         response: project_validate_params.Response,
-        use_llm_matching: Optional[bool] | NotGiven = NOT_GIVEN,
-        constrain_outputs: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
-        custom_eval_thresholds: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
-        custom_metadata: Optional[object] | NotGiven = NOT_GIVEN,
-        eval_scores: Optional[Dict[str, float]] | NotGiven = NOT_GIVEN,
-        messages: Iterable[project_validate_params.Message] | NotGiven = NOT_GIVEN,
-        options: Optional[project_validate_params.Options] | NotGiven = NOT_GIVEN,
-        prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        quality_preset: Literal["best", "high", "medium", "low", "base"] | NotGiven = NOT_GIVEN,
-        rewritten_question: Optional[str] | NotGiven = NOT_GIVEN,
-        task: Optional[str] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[project_validate_params.Tool]] | NotGiven = NOT_GIVEN,
-        x_client_library_version: str | NotGiven = NOT_GIVEN,
-        x_integration_type: str | NotGiven = NOT_GIVEN,
-        x_source: str | NotGiven = NOT_GIVEN,
-        x_stainless_package_version: str | NotGiven = NOT_GIVEN,
+        use_llm_matching: Optional[bool] | Omit = omit,
+        constrain_outputs: Optional[SequenceNotStr[str]] | Omit = omit,
+        custom_eval_thresholds: Optional[Dict[str, float]] | Omit = omit,
+        custom_metadata: Optional[object] | Omit = omit,
+        eval_scores: Optional[Dict[str, float]] | Omit = omit,
+        messages: Iterable[project_validate_params.Message] | Omit = omit,
+        options: Optional[project_validate_params.Options] | Omit = omit,
+        quality_preset: Literal["best", "high", "medium", "low", "base"] | Omit = omit,
+        rewritten_question: Optional[str] | Omit = omit,
+        task: Optional[str] | Omit = omit,
+        tools: Optional[Iterable[project_validate_params.Tool]] | Omit = omit,
+        x_client_library_version: str | Omit = omit,
+        x_integration_type: str | Omit = omit,
+        x_source: str | Omit = omit,
+        x_stainless_package_version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectValidateResponse:
         """
         Evaluate whether a response, given the provided query and context, is
@@ -1154,12 +1147,8 @@ class AsyncProjectsResource(AsyncAPIResource):
                   When this parameter is 1, `TLM.prompt()` simply returns a standard LLM response and does not attempt to auto-improve it.
                   This parameter has no effect when `disable_trustworthiness` is True.
 
-                  disable_trustworthiness (bool, default = False): if True, trustworthiness scoring is disabled and TLM will not compute trust scores for responses.
-                  This is useful when you only want to use custom evaluation criteria or when you want to minimize computational overhead and only need the base LLM response.
-                  The following parameters will be ignored when `disable_trustworthiness` is True: `num_consistency_samples`, `num_self_reflections`, `num_candidate_responses`, `reasoning_effort`, `similarity_measure`.
-
-          prompt: The prompt to use for the TLM call. If not provided, the prompt will be
-              generated from the messages.
+                  disable_trustworthiness (bool, default = False): if True, TLM will not compute trust scores,
+                  useful if you only want to compute custom evaluation criteria.
 
           quality_preset: The quality preset to use for the TLM or Trustworthy RAG API.
 
@@ -1203,7 +1192,6 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "eval_scores": eval_scores,
                     "messages": messages,
                     "options": options,
-                    "prompt": prompt,
                     "quality_preset": quality_preset,
                     "rewritten_question": rewritten_question,
                     "task": task,

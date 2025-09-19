@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Union, Mapping, cast
+from typing import Any, Dict, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -11,7 +11,6 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Omit,
     Headers,
     Timeout,
@@ -19,10 +18,11 @@ from ._types import (
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import tlm, health
+from .resources import health
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
@@ -58,7 +58,6 @@ class Codex(SyncAPIClient):
     organizations: organizations.OrganizationsResource
     users: users.UsersResource
     projects: projects.ProjectsResource
-    tlm: tlm.TlmResource
     with_raw_response: CodexWithRawResponse
     with_streaming_response: CodexWithStreamedResponse
 
@@ -75,9 +74,9 @@ class Codex(SyncAPIClient):
         auth_token: str | None = None,
         api_key: str | None = None,
         access_key: str | None = None,
-        environment: Literal["production", "staging", "local"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        environment: Literal["production", "staging", "local"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -143,7 +142,6 @@ class Codex(SyncAPIClient):
         self.organizations = organizations.OrganizationsResource(self)
         self.users = users.UsersResource(self)
         self.projects = projects.ProjectsResource(self)
-        self.tlm = tlm.TlmResource(self)
         self.with_raw_response = CodexWithRawResponse(self)
         self.with_streaming_response = CodexWithStreamedResponse(self)
 
@@ -216,9 +214,9 @@ class Codex(SyncAPIClient):
         access_key: str | None = None,
         environment: Literal["production", "staging", "local"] | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -304,7 +302,6 @@ class AsyncCodex(AsyncAPIClient):
     organizations: organizations.AsyncOrganizationsResource
     users: users.AsyncUsersResource
     projects: projects.AsyncProjectsResource
-    tlm: tlm.AsyncTlmResource
     with_raw_response: AsyncCodexWithRawResponse
     with_streaming_response: AsyncCodexWithStreamedResponse
 
@@ -321,9 +318,9 @@ class AsyncCodex(AsyncAPIClient):
         auth_token: str | None = None,
         api_key: str | None = None,
         access_key: str | None = None,
-        environment: Literal["production", "staging", "local"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        environment: Literal["production", "staging", "local"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -389,7 +386,6 @@ class AsyncCodex(AsyncAPIClient):
         self.organizations = organizations.AsyncOrganizationsResource(self)
         self.users = users.AsyncUsersResource(self)
         self.projects = projects.AsyncProjectsResource(self)
-        self.tlm = tlm.AsyncTlmResource(self)
         self.with_raw_response = AsyncCodexWithRawResponse(self)
         self.with_streaming_response = AsyncCodexWithStreamedResponse(self)
 
@@ -462,9 +458,9 @@ class AsyncCodex(AsyncAPIClient):
         access_key: str | None = None,
         environment: Literal["production", "staging", "local"] | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -551,7 +547,6 @@ class CodexWithRawResponse:
         self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
         self.users = users.UsersResourceWithRawResponse(client.users)
         self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
-        self.tlm = tlm.TlmResourceWithRawResponse(client.tlm)
 
 
 class AsyncCodexWithRawResponse:
@@ -560,7 +555,6 @@ class AsyncCodexWithRawResponse:
         self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
         self.users = users.AsyncUsersResourceWithRawResponse(client.users)
         self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
-        self.tlm = tlm.AsyncTlmResourceWithRawResponse(client.tlm)
 
 
 class CodexWithStreamedResponse:
@@ -569,7 +563,6 @@ class CodexWithStreamedResponse:
         self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
         self.users = users.UsersResourceWithStreamingResponse(client.users)
         self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
-        self.tlm = tlm.TlmResourceWithStreamingResponse(client.tlm)
 
 
 class AsyncCodexWithStreamedResponse:
@@ -578,7 +571,6 @@ class AsyncCodexWithStreamedResponse:
         self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
         self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
         self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
-        self.tlm = tlm.AsyncTlmResourceWithStreamingResponse(client.tlm)
 
 
 Client = Codex

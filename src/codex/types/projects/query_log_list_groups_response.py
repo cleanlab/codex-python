@@ -395,11 +395,26 @@ class QueryLogListGroupsResponse(BaseModel):
     Used to log tool calls in the query log.
     """
 
+    expert_review_created_at: Optional[datetime] = None
+    """When the expert review was created"""
+
+    expert_review_created_by_user_id: Optional[str] = None
+    """ID of the user who created the expert review"""
+
+    expert_review_explanation: Optional[str] = None
+    """Expert explanation when marked as bad"""
+
+    expert_review_status: Optional[Literal["good", "bad"]] = None
+    """Expert review status: 'good' or 'bad'"""
+
     guardrail_evals: Optional[List[str]] = None
     """Evals that should trigger guardrail"""
 
     guardrailed: Optional[bool] = None
     """If true, the response was guardrailed"""
+
+    manual_review_status_override: Optional[Literal["addressed", "unaddressed"]] = None
+    """Manual review status override for remediations."""
 
     messages: Optional[List[Message]] = None
     """Message history to provide conversation context for the query.
@@ -420,6 +435,9 @@ class QueryLogListGroupsResponse(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
+
+    similar_query_log_guardrail_explanation: Optional[str] = None
+    """Explanation from a similar bad query log that caused this to be guardrailed"""
 
     tools: Optional[List[Tool]] = None
     """Tools to use for the LLM call.

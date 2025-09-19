@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import required_args, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -52,22 +52,22 @@ class EvalsResource(SyncAPIResource):
         criteria: str,
         eval_key: str,
         name: str,
-        context_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        is_default: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        context_identifier: Optional[str] | Omit = omit,
+        enabled: bool | Omit = omit,
+        is_default: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        query_identifier: Optional[str] | Omit = omit,
+        response_identifier: Optional[str] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Create a new custom eval for a project.
@@ -150,22 +150,22 @@ class EvalsResource(SyncAPIResource):
         criteria: str,
         body_eval_key: str,
         name: str,
-        context_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        is_default: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        context_identifier: Optional[str] | Omit = omit,
+        enabled: bool | Omit = omit,
+        is_default: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        query_identifier: Optional[str] | Omit = omit,
+        response_identifier: Optional[str] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Update an existing eval for a project.
@@ -220,18 +220,18 @@ class EvalsResource(SyncAPIResource):
         *,
         project_id: str,
         body_eval_key: str,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        enabled: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Update an existing eval for a project.
@@ -270,25 +270,25 @@ class EvalsResource(SyncAPIResource):
         path_eval_key: str,
         *,
         project_id: str,
-        criteria: str | NotGiven = NOT_GIVEN,
+        criteria: str | Omit = omit,
         body_eval_key: str,
-        name: str | NotGiven = NOT_GIVEN,
-        context_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        is_default: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        name: str | Omit = omit,
+        context_identifier: Optional[str] | Omit = omit,
+        enabled: bool | Omit = omit,
+        is_default: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        query_identifier: Optional[str] | Omit = omit,
+        response_identifier: Optional[str] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
@@ -324,15 +324,15 @@ class EvalsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        guardrails_only: bool | NotGiven = NOT_GIVEN,
-        limit: Optional[int] | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
+        guardrails_only: bool | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EvalListResponse:
         """
         Get the evaluations config for a project with optional pagination.
@@ -377,7 +377,7 @@ class EvalsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Remove a custom eval for a project.
@@ -431,22 +431,22 @@ class AsyncEvalsResource(AsyncAPIResource):
         criteria: str,
         eval_key: str,
         name: str,
-        context_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        is_default: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        context_identifier: Optional[str] | Omit = omit,
+        enabled: bool | Omit = omit,
+        is_default: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        query_identifier: Optional[str] | Omit = omit,
+        response_identifier: Optional[str] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Create a new custom eval for a project.
@@ -529,22 +529,22 @@ class AsyncEvalsResource(AsyncAPIResource):
         criteria: str,
         body_eval_key: str,
         name: str,
-        context_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        is_default: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        context_identifier: Optional[str] | Omit = omit,
+        enabled: bool | Omit = omit,
+        is_default: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        query_identifier: Optional[str] | Omit = omit,
+        response_identifier: Optional[str] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Update an existing eval for a project.
@@ -599,18 +599,18 @@ class AsyncEvalsResource(AsyncAPIResource):
         *,
         project_id: str,
         body_eval_key: str,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        enabled: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Update an existing eval for a project.
@@ -649,25 +649,25 @@ class AsyncEvalsResource(AsyncAPIResource):
         path_eval_key: str,
         *,
         project_id: str,
-        criteria: str | NotGiven = NOT_GIVEN,
+        criteria: str | Omit = omit,
         body_eval_key: str,
-        name: str | NotGiven = NOT_GIVEN,
-        context_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        is_default: bool | NotGiven = NOT_GIVEN,
-        priority: Optional[int] | NotGiven = NOT_GIVEN,
-        query_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        response_identifier: Optional[str] | NotGiven = NOT_GIVEN,
-        should_escalate: bool | NotGiven = NOT_GIVEN,
-        should_guardrail: bool | NotGiven = NOT_GIVEN,
-        threshold: float | NotGiven = NOT_GIVEN,
-        threshold_direction: Literal["above", "below"] | NotGiven = NOT_GIVEN,
+        name: str | Omit = omit,
+        context_identifier: Optional[str] | Omit = omit,
+        enabled: bool | Omit = omit,
+        is_default: bool | Omit = omit,
+        priority: Optional[int] | Omit = omit,
+        query_identifier: Optional[str] | Omit = omit,
+        response_identifier: Optional[str] | Omit = omit,
+        should_escalate: bool | Omit = omit,
+        should_guardrail: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        threshold_direction: Literal["above", "below"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
@@ -703,15 +703,15 @@ class AsyncEvalsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        guardrails_only: bool | NotGiven = NOT_GIVEN,
-        limit: Optional[int] | NotGiven = NOT_GIVEN,
-        offset: int | NotGiven = NOT_GIVEN,
+        guardrails_only: bool | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EvalListResponse:
         """
         Get the evaluations config for a project with optional pagination.
@@ -756,7 +756,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectReturnSchema:
         """
         Remove a custom eval for a project.
