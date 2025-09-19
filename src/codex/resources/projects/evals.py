@@ -54,6 +54,7 @@ class EvalsResource(SyncAPIResource):
         name: str,
         context_identifier: Optional[str] | Omit = omit,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         is_default: bool | Omit = omit,
         priority: Optional[int] | Omit = omit,
         query_identifier: Optional[str] | Omit = omit,
@@ -85,6 +86,9 @@ class EvalsResource(SyncAPIResource):
               context.
 
           enabled: Allows the evaluation to be disabled without removing it
+
+          guardrailed_fallback_message: Fallback message to use if this eval fails and causes the response to be
+              guardrailed
 
           is_default: Whether the eval is a default, built-in eval or a custom eval
 
@@ -124,6 +128,7 @@ class EvalsResource(SyncAPIResource):
                     "name": name,
                     "context_identifier": context_identifier,
                     "enabled": enabled,
+                    "guardrailed_fallback_message": guardrailed_fallback_message,
                     "is_default": is_default,
                     "priority": priority,
                     "query_identifier": query_identifier,
@@ -152,6 +157,7 @@ class EvalsResource(SyncAPIResource):
         name: str,
         context_identifier: Optional[str] | Omit = omit,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         is_default: bool | Omit = omit,
         priority: Optional[int] | Omit = omit,
         query_identifier: Optional[str] | Omit = omit,
@@ -183,6 +189,9 @@ class EvalsResource(SyncAPIResource):
               context.
 
           enabled: Allows the evaluation to be disabled without removing it
+
+          guardrailed_fallback_message: Fallback message to use if this eval fails and causes the response to be
+              guardrailed
 
           is_default: Whether the eval is a default, built-in eval or a custom eval
 
@@ -221,6 +230,7 @@ class EvalsResource(SyncAPIResource):
         project_id: str,
         body_eval_key: str,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         priority: Optional[int] | Omit = omit,
         should_escalate: bool | Omit = omit,
         should_guardrail: bool | Omit = omit,
@@ -241,6 +251,9 @@ class EvalsResource(SyncAPIResource):
               and eval_scores dictionary key to check against threshold
 
           enabled: Allows the evaluation to be disabled without removing it
+
+          guardrailed_fallback_message: Fallback message to use if this eval fails and causes the response to be
+              guardrailed
 
           priority: Priority order for evals (lower number = higher priority) to determine primary
               eval issue to surface
@@ -275,6 +288,7 @@ class EvalsResource(SyncAPIResource):
         name: str | Omit = omit,
         context_identifier: Optional[str] | Omit = omit,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         is_default: bool | Omit = omit,
         priority: Optional[int] | Omit = omit,
         query_identifier: Optional[str] | Omit = omit,
@@ -303,6 +317,7 @@ class EvalsResource(SyncAPIResource):
                     "name": name,
                     "context_identifier": context_identifier,
                     "enabled": enabled,
+                    "guardrailed_fallback_message": guardrailed_fallback_message,
                     "is_default": is_default,
                     "priority": priority,
                     "query_identifier": query_identifier,
@@ -433,6 +448,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         name: str,
         context_identifier: Optional[str] | Omit = omit,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         is_default: bool | Omit = omit,
         priority: Optional[int] | Omit = omit,
         query_identifier: Optional[str] | Omit = omit,
@@ -464,6 +480,9 @@ class AsyncEvalsResource(AsyncAPIResource):
               context.
 
           enabled: Allows the evaluation to be disabled without removing it
+
+          guardrailed_fallback_message: Fallback message to use if this eval fails and causes the response to be
+              guardrailed
 
           is_default: Whether the eval is a default, built-in eval or a custom eval
 
@@ -503,6 +522,7 @@ class AsyncEvalsResource(AsyncAPIResource):
                     "name": name,
                     "context_identifier": context_identifier,
                     "enabled": enabled,
+                    "guardrailed_fallback_message": guardrailed_fallback_message,
                     "is_default": is_default,
                     "priority": priority,
                     "query_identifier": query_identifier,
@@ -531,6 +551,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         name: str,
         context_identifier: Optional[str] | Omit = omit,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         is_default: bool | Omit = omit,
         priority: Optional[int] | Omit = omit,
         query_identifier: Optional[str] | Omit = omit,
@@ -562,6 +583,9 @@ class AsyncEvalsResource(AsyncAPIResource):
               context.
 
           enabled: Allows the evaluation to be disabled without removing it
+
+          guardrailed_fallback_message: Fallback message to use if this eval fails and causes the response to be
+              guardrailed
 
           is_default: Whether the eval is a default, built-in eval or a custom eval
 
@@ -600,6 +624,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         project_id: str,
         body_eval_key: str,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         priority: Optional[int] | Omit = omit,
         should_escalate: bool | Omit = omit,
         should_guardrail: bool | Omit = omit,
@@ -620,6 +645,9 @@ class AsyncEvalsResource(AsyncAPIResource):
               and eval_scores dictionary key to check against threshold
 
           enabled: Allows the evaluation to be disabled without removing it
+
+          guardrailed_fallback_message: Fallback message to use if this eval fails and causes the response to be
+              guardrailed
 
           priority: Priority order for evals (lower number = higher priority) to determine primary
               eval issue to surface
@@ -654,6 +682,7 @@ class AsyncEvalsResource(AsyncAPIResource):
         name: str | Omit = omit,
         context_identifier: Optional[str] | Omit = omit,
         enabled: bool | Omit = omit,
+        guardrailed_fallback_message: Optional[str] | Omit = omit,
         is_default: bool | Omit = omit,
         priority: Optional[int] | Omit = omit,
         query_identifier: Optional[str] | Omit = omit,
@@ -682,6 +711,7 @@ class AsyncEvalsResource(AsyncAPIResource):
                     "name": name,
                     "context_identifier": context_identifier,
                     "enabled": enabled,
+                    "guardrailed_fallback_message": guardrailed_fallback_message,
                     "is_default": is_default,
                     "priority": priority,
                     "query_identifier": query_identifier,

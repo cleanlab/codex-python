@@ -33,6 +33,12 @@ class EvalCreateParams(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     is_default: bool
     """Whether the eval is a default, built-in eval or a custom eval"""
 

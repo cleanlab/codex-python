@@ -46,6 +46,12 @@ class ConfigEvalConfigCustomEvalsEvals(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     is_default: Optional[bool] = None
     """Whether the eval is a default, built-in eval or a custom eval"""
 
@@ -99,6 +105,12 @@ class ConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     priority: Optional[int] = None
     """
     Priority order for evals (lower number = higher priority) to determine primary
@@ -133,6 +145,12 @@ class ConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
 
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
+
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
 
     priority: Optional[int] = None
     """
@@ -169,6 +187,12 @@ class ConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     priority: Optional[int] = None
     """
     Priority order for evals (lower number = higher priority) to determine primary
@@ -204,6 +228,12 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     priority: Optional[int] = None
     """
     Priority order for evals (lower number = higher priority) to determine primary
@@ -238,6 +268,12 @@ class ConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
 
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
+
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
 
     priority: Optional[int] = None
     """

@@ -19,6 +19,7 @@ __all__ = [
     "ProjectConfigEvalConfigDefaultEvalsResponseGroundedness",
     "ProjectConfigEvalConfigDefaultEvalsResponseHelpfulness",
     "ProjectConfigEvalConfigDefaultEvalsTrustworthiness",
+    "Filters",
 ]
 
 
@@ -46,6 +47,12 @@ class ProjectConfigEvalConfigCustomEvalsEvals(BaseModel):
 
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
+
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
 
     is_default: Optional[bool] = None
     """Whether the eval is a default, built-in eval or a custom eval"""
@@ -100,6 +107,12 @@ class ProjectConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     priority: Optional[int] = None
     """
     Priority order for evals (lower number = higher priority) to determine primary
@@ -134,6 +147,12 @@ class ProjectConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
 
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
+
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
 
     priority: Optional[int] = None
     """
@@ -170,6 +189,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     priority: Optional[int] = None
     """
     Priority order for evals (lower number = higher priority) to determine primary
@@ -205,6 +230,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
     priority: Optional[int] = None
     """
     Priority order for evals (lower number = higher priority) to determine primary
@@ -239,6 +270,12 @@ class ProjectConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
 
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
+
+    guardrailed_fallback_message: Optional[str] = None
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
 
     priority: Optional[int] = None
     """
@@ -354,7 +391,14 @@ class Project(BaseModel):
     unaddressed_count: Optional[int] = None
 
 
+class Filters(BaseModel):
+    query: Optional[str] = None
+
+
 class ProjectListResponse(BaseModel):
     projects: List[Project]
 
     total_count: int
+
+    filters: Optional[Filters] = None
+    """Applied filters for the projects list request"""

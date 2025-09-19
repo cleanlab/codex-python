@@ -12,10 +12,14 @@ class DeterministicGuardrailsResults(BaseModel):
 
     should_guardrail: bool
 
+    fallback_message: Optional[str] = None
+
     matches: Optional[List[str]] = None
 
 
 class EvalScores(BaseModel):
+    guardrailed_fallback_message: Optional[str] = None
+
     score: Optional[float] = None
 
     triggered: bool
