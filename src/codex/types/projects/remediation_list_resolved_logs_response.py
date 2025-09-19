@@ -93,6 +93,8 @@ class QueryLogDeterministicGuardrailsResults(BaseModel):
 
     should_guardrail: bool
 
+    fallback_message: Optional[str] = None
+
     matches: Optional[List[str]] = None
 
 
