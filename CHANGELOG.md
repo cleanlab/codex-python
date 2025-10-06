@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.29 (2025-10-06)
+
+Full Changelog: [v0.1.0-alpha.28...v0.1.0-alpha.29](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.28...v0.1.0-alpha.29)
+
+### Features
+
+* **api:** add /detect to accessible routes ([73dd089](https://github.com/cleanlab/codex-python/commit/73dd08944de0337c7fca6d131931b1d89b75be26))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([a8f1181](https://github.com/cleanlab/codex-python/commit/a8f1181ff0440c76fcef8f7ed4ea56468b77ee44))
+
 ## 0.1.0-alpha.28 (2025-09-19)
 
 Full Changelog: [v0.1.0-alpha.27...v0.1.0-alpha.28](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.27...v0.1.0-alpha.28)

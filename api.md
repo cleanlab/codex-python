@@ -139,6 +139,7 @@ from codex.types import (
     ProjectReturnSchema,
     ProjectRetrieveResponse,
     ProjectListResponse,
+    ProjectDetectResponse,
     ProjectInviteSmeResponse,
     ProjectRetrieveAnalyticsResponse,
     ProjectValidateResponse,
@@ -152,6 +153,7 @@ Methods:
 - <code title="put /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">update</a>(project_id, \*\*<a href="src/codex/types/project_update_params.py">params</a>) -> <a href="./src/codex/types/project_return_schema.py">ProjectReturnSchema</a></code>
 - <code title="get /api/projects/">client.projects.<a href="./src/codex/resources/projects/projects.py">list</a>(\*\*<a href="src/codex/types/project_list_params.py">params</a>) -> <a href="./src/codex/types/project_list_response.py">ProjectListResponse</a></code>
 - <code title="delete /api/projects/{project_id}">client.projects.<a href="./src/codex/resources/projects/projects.py">delete</a>(project_id) -> None</code>
+- <code title="post /api/projects/{project_id}/detect">client.projects.<a href="./src/codex/resources/projects/projects.py">detect</a>(project_id, \*\*<a href="src/codex/types/project_detect_params.py">params</a>) -> <a href="./src/codex/types/project_detect_response.py">ProjectDetectResponse</a></code>
 - <code title="get /api/projects/{project_id}/export">client.projects.<a href="./src/codex/resources/projects/projects.py">export</a>(project_id) -> object</code>
 - <code title="post /api/projects/{project_id}/notifications">client.projects.<a href="./src/codex/resources/projects/projects.py">invite_sme</a>(project_id, \*\*<a href="src/codex/types/project_invite_sme_params.py">params</a>) -> <a href="./src/codex/types/project_invite_sme_response.py">ProjectInviteSmeResponse</a></code>
 - <code title="get /api/projects/{project_id}/analytics/">client.projects.<a href="./src/codex/resources/projects/projects.py">retrieve_analytics</a>(project_id, \*\*<a href="src/codex/types/project_retrieve_analytics_params.py">params</a>) -> <a href="./src/codex/types/project_retrieve_analytics_response.py">ProjectRetrieveAnalyticsResponse</a></code>
