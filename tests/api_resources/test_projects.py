@@ -11,6 +11,7 @@ from codex import Codex, AsyncCodex
 from codex.types import (
     ProjectListResponse,
     ProjectReturnSchema,
+    ProjectDetectResponse,
     ProjectRetrieveResponse,
     ProjectValidateResponse,
     ProjectInviteSmeResponse,
@@ -434,6 +435,202 @@ class TestProjects:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.with_raw_response.delete(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_detect(self, client: Codex) -> None:
+        project = client.projects.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+        )
+        assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_detect_with_all_params(self, client: Codex) -> None:
+        project = client.projects.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+            constrain_outputs=["string"],
+            eval_config={
+                "custom_evals": {
+                    "evals": {
+                        "foo": {
+                            "criteria": "criteria",
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "context_identifier": "context_identifier",
+                            "enabled": True,
+                            "guardrailed_fallback_message": "guardrailed_fallback_message",
+                            "is_default": True,
+                            "priority": 0,
+                            "query_identifier": "query_identifier",
+                            "response_identifier": "response_identifier",
+                            "should_escalate": True,
+                            "should_guardrail": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        }
+                    }
+                },
+                "default_evals": {
+                    "context_sufficiency": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "query_ease": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "response_groundedness": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "response_helpfulness": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "trustworthiness": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                },
+            },
+            messages=[
+                {
+                    "role": "assistant",
+                    "audio": {"id": "id"},
+                    "content": "string",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
+                    "name": "name",
+                    "refusal": "refusal",
+                    "tool_calls": [
+                        {
+                            "id": "id",
+                            "function": {
+                                "arguments": "arguments",
+                                "name": "name",
+                            },
+                            "type": "function",
+                        }
+                    ],
+                }
+            ],
+            options={
+                "custom_eval_criteria": [{}],
+                "disable_persistence": True,
+                "disable_trustworthiness": True,
+                "log": ["string"],
+                "max_tokens": 0,
+                "model": "model",
+                "num_candidate_responses": 0,
+                "num_consistency_samples": 0,
+                "num_self_reflections": 0,
+                "reasoning_effort": "reasoning_effort",
+                "similarity_measure": "similarity_measure",
+                "use_self_reflection": True,
+            },
+            quality_preset="best",
+            rewritten_question="rewritten_question",
+            task="task",
+            tools=[
+                {
+                    "function": {
+                        "name": "name",
+                        "description": "description",
+                        "parameters": {},
+                        "strict": True,
+                    },
+                    "type": "function",
+                }
+            ],
+        )
+        assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_detect(self, client: Codex) -> None:
+        response = client.projects.with_raw_response.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_detect(self, client: Codex) -> None:
+        with client.projects.with_streaming_response.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_detect(self, client: Codex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            client.projects.with_raw_response.detect(
+                project_id="",
+                context="context",
+                query="x",
+                response="string",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -1125,6 +1322,202 @@ class TestAsyncProjects:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.with_raw_response.delete(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_detect(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+        )
+        assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_detect_with_all_params(self, async_client: AsyncCodex) -> None:
+        project = await async_client.projects.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+            constrain_outputs=["string"],
+            eval_config={
+                "custom_evals": {
+                    "evals": {
+                        "foo": {
+                            "criteria": "criteria",
+                            "eval_key": "eval_key",
+                            "name": "name",
+                            "context_identifier": "context_identifier",
+                            "enabled": True,
+                            "guardrailed_fallback_message": "guardrailed_fallback_message",
+                            "is_default": True,
+                            "priority": 0,
+                            "query_identifier": "query_identifier",
+                            "response_identifier": "response_identifier",
+                            "should_escalate": True,
+                            "should_guardrail": True,
+                            "threshold": 0,
+                            "threshold_direction": "above",
+                        }
+                    }
+                },
+                "default_evals": {
+                    "context_sufficiency": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "query_ease": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "response_groundedness": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "response_helpfulness": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                    "trustworthiness": {
+                        "eval_key": "eval_key",
+                        "name": "name",
+                        "enabled": True,
+                        "guardrailed_fallback_message": "guardrailed_fallback_message",
+                        "priority": 0,
+                        "should_escalate": True,
+                        "should_guardrail": True,
+                        "threshold": 0,
+                        "threshold_direction": "above",
+                    },
+                },
+            },
+            messages=[
+                {
+                    "role": "assistant",
+                    "audio": {"id": "id"},
+                    "content": "string",
+                    "function_call": {
+                        "arguments": "arguments",
+                        "name": "name",
+                    },
+                    "name": "name",
+                    "refusal": "refusal",
+                    "tool_calls": [
+                        {
+                            "id": "id",
+                            "function": {
+                                "arguments": "arguments",
+                                "name": "name",
+                            },
+                            "type": "function",
+                        }
+                    ],
+                }
+            ],
+            options={
+                "custom_eval_criteria": [{}],
+                "disable_persistence": True,
+                "disable_trustworthiness": True,
+                "log": ["string"],
+                "max_tokens": 0,
+                "model": "model",
+                "num_candidate_responses": 0,
+                "num_consistency_samples": 0,
+                "num_self_reflections": 0,
+                "reasoning_effort": "reasoning_effort",
+                "similarity_measure": "similarity_measure",
+                "use_self_reflection": True,
+            },
+            quality_preset="best",
+            rewritten_question="rewritten_question",
+            task="task",
+            tools=[
+                {
+                    "function": {
+                        "name": "name",
+                        "description": "description",
+                        "parameters": {},
+                        "strict": True,
+                    },
+                    "type": "function",
+                }
+            ],
+        )
+        assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_detect(self, async_client: AsyncCodex) -> None:
+        response = await async_client.projects.with_raw_response.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_detect(self, async_client: AsyncCodex) -> None:
+        async with async_client.projects.with_streaming_response.detect(
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            context="context",
+            query="x",
+            response="string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(ProjectDetectResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_detect(self, async_client: AsyncCodex) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
+            await async_client.projects.with_raw_response.detect(
+                project_id="",
+                context="context",
+                query="x",
+                response="string",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
