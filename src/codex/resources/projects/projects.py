@@ -564,8 +564,9 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        end: int | Omit = omit,
-        start: int | Omit = omit,
+        end: Optional[int] | Omit = omit,
+        metadata_filters: Optional[str] | Omit = omit,
+        start: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -574,12 +575,46 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveAnalyticsResponse:
         """
-        Get Project Analytics Route
+        Retrieve analytics data for a project including queries, bad responses, and
+        answers published.
+
+            **Metadata Filtering:**
+            - Filter by custom metadata fields using key-value pairs
+            - Supports single values: `{"department": "Engineering"}`
+            - Supports multiple values: `{"priority": ["high", "medium"]}`
+            - Supports null/missing values: `{"department": []}` or `{"department": [null]}`
+
+            **Available Metadata Fields:**
+            - Only metadata keys that exist on query logs are returned in `metadata_fields`
+            - Fields with ≤12 unique values show as "select" type with checkbox options
+            - Fields with >12 unique values show as "input" type for text search
+            - Fields with no data are excluded from the response entirely
+
+            **Null Value Behavior:**
+            - Empty arrays `[]` are automatically converted to `[null]` to filter for records where the metadata field is missing or null
+            - Use `[null]` explicitly to filter for records where the field is missing or null
+            - Use `["value1", null, "value2"]` to include both specific values and null values
+            - Records match if the metadata field is null, missing from custom_metadata, or custom_metadata itself is null
+
+            **Date Filtering:**
+            - Provide `start` only: filter logs created at or after this timestamp
+            - Provide `end` only: filter logs created at or before this timestamp
+            - Provide both: filter logs created within the time range
+            - Provide neither: include all logs regardless of creation time
 
         Args:
-          end: End timestamp in seconds since epoch
+          end: Filter logs created at or before this timestamp (epoch seconds). Can be used
+              alone for upper-bound filtering.
 
-          start: Start timestamp in seconds since epoch
+          metadata_filters:
+              Metadata filters as JSON string. Examples:
+                      - Single value: '{"department": "Engineering"}'
+                      - Multiple values: '{"priority": ["high", "medium"]}'
+                      - Null/missing values: '{"department": []}' or '{"department": [null]}'
+                      - Mixed values: '{"status": ["active", null, "pending"]}'
+
+          start: Filter logs created at or after this timestamp (epoch seconds). Can be used
+              alone for lower-bound filtering.
 
           extra_headers: Send extra headers
 
@@ -601,6 +636,7 @@ class ProjectsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "end": end,
+                        "metadata_filters": metadata_filters,
                         "start": start,
                     },
                     project_retrieve_analytics_params.ProjectRetrieveAnalyticsParams,
@@ -1301,8 +1337,9 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        end: int | Omit = omit,
-        start: int | Omit = omit,
+        end: Optional[int] | Omit = omit,
+        metadata_filters: Optional[str] | Omit = omit,
+        start: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1311,12 +1348,46 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveAnalyticsResponse:
         """
-        Get Project Analytics Route
+        Retrieve analytics data for a project including queries, bad responses, and
+        answers published.
+
+            **Metadata Filtering:**
+            - Filter by custom metadata fields using key-value pairs
+            - Supports single values: `{"department": "Engineering"}`
+            - Supports multiple values: `{"priority": ["high", "medium"]}`
+            - Supports null/missing values: `{"department": []}` or `{"department": [null]}`
+
+            **Available Metadata Fields:**
+            - Only metadata keys that exist on query logs are returned in `metadata_fields`
+            - Fields with ≤12 unique values show as "select" type with checkbox options
+            - Fields with >12 unique values show as "input" type for text search
+            - Fields with no data are excluded from the response entirely
+
+            **Null Value Behavior:**
+            - Empty arrays `[]` are automatically converted to `[null]` to filter for records where the metadata field is missing or null
+            - Use `[null]` explicitly to filter for records where the field is missing or null
+            - Use `["value1", null, "value2"]` to include both specific values and null values
+            - Records match if the metadata field is null, missing from custom_metadata, or custom_metadata itself is null
+
+            **Date Filtering:**
+            - Provide `start` only: filter logs created at or after this timestamp
+            - Provide `end` only: filter logs created at or before this timestamp
+            - Provide both: filter logs created within the time range
+            - Provide neither: include all logs regardless of creation time
 
         Args:
-          end: End timestamp in seconds since epoch
+          end: Filter logs created at or before this timestamp (epoch seconds). Can be used
+              alone for upper-bound filtering.
 
-          start: Start timestamp in seconds since epoch
+          metadata_filters:
+              Metadata filters as JSON string. Examples:
+                      - Single value: '{"department": "Engineering"}'
+                      - Multiple values: '{"priority": ["high", "medium"]}'
+                      - Null/missing values: '{"department": []}' or '{"department": [null]}'
+                      - Mixed values: '{"status": ["active", null, "pending"]}'
+
+          start: Filter logs created at or after this timestamp (epoch seconds). Can be used
+              alone for lower-bound filtering.
 
           extra_headers: Send extra headers
 
@@ -1338,6 +1409,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "end": end,
+                        "metadata_filters": metadata_filters,
                         "start": start,
                     },
                     project_retrieve_analytics_params.ProjectRetrieveAnalyticsParams,
