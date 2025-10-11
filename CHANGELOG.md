@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.30 (2025-10-11)
+
+Full Changelog: [v0.1.0-alpha.29...v0.1.0-alpha.30](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.29...v0.1.0-alpha.30)
+
+### Features
+
+* **api:** api update ([cb2c6ed](https://github.com/cleanlab/codex-python/commit/cb2c6ed08eb4286ec580cc0e48c7954657d48df1))
+* **api:** api update ([c515d78](https://github.com/cleanlab/codex-python/commit/c515d7888f17019a2307e47520a39790cd9d0209))
+
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([8e2cc28](https://github.com/cleanlab/codex-python/commit/8e2cc28bac8208d5b0eaa39fcc03248188af076a))
+
 ## 0.1.0-alpha.29 (2025-10-06)
 
 Full Changelog: [v0.1.0-alpha.28...v0.1.0-alpha.29](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.28...v0.1.0-alpha.29)
