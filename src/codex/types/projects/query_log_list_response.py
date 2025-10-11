@@ -410,6 +410,12 @@ class QueryLogListResponse(BaseModel):
     itself.
     """
 
+    original_assistant_response: Optional[str] = None
+    """The original assistant response that would have been displayed to the user.
+
+    This may be `None` if this is a tool call step.
+    """
+
     original_question: Optional[str] = None
     """The original question that was asked before any rewriting or processing.
 
