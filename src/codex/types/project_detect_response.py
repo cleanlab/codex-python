@@ -28,8 +28,6 @@ class EvalScores(BaseModel):
 
     triggered_guardrail: bool
 
-    failed: Optional[bool] = None
-
     log: Optional[object] = None
 
 
