@@ -28,8 +28,6 @@ class EvalScores(BaseModel):
 
     triggered_guardrail: bool
 
-    failed: Optional[bool] = None
-
     log: Optional[object] = None
 
 
@@ -58,13 +56,6 @@ class ProjectValidateResponse(BaseModel):
 
     expert_review_guardrail_explanation: Optional[str] = None
     """Explanation from a similar bad query log that caused this to be guardrailed"""
-
-    is_bad_response: bool
-    """True if the response is flagged as potentially bad, False otherwise.
-
-    When True, a lookup is performed, which logs this query in the project for SMEs
-    to answer, if it does not already exist.
-    """
 
     log_id: str
     """The UUID of the query log entry created for this validation request."""
