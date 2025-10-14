@@ -50,24 +50,32 @@ __all__ = [
 
 
 class QueryLogsByGroupQueryLogFormattedEscalationEvalScores(BaseModel):
+    display_name: str
+
     score: float
 
     status: Literal["pass", "fail"]
 
 
 class QueryLogsByGroupQueryLogFormattedEvalScores(BaseModel):
+    display_name: str
+
     score: float
 
     status: Literal["pass", "fail"]
 
 
 class QueryLogsByGroupQueryLogFormattedGuardrailEvalScores(BaseModel):
+    display_name: str
+
     score: float
 
     status: Literal["pass", "fail"]
 
 
 class QueryLogsByGroupQueryLogFormattedNonGuardrailEvalScores(BaseModel):
+    display_name: str
+
     score: float
 
     status: Literal["pass", "fail"]
@@ -384,6 +392,9 @@ class QueryLogsByGroupQueryLog(BaseModel):
     escalation_evals: Optional[List[str]] = None
     """Evals that should trigger escalation to SME"""
 
+    eval_display_names: Optional[Dict[str, str]] = None
+    """Mapping of eval keys to display names at time of creation"""
+
     eval_issue_labels: Optional[List[str]] = None
     """Labels derived from evaluation scores"""
 
@@ -400,6 +411,18 @@ class QueryLogsByGroupQueryLog(BaseModel):
     """Tool calls from the evaluated response, if any.
 
     Used to log tool calls in the query log.
+    """
+
+    expert_guardrail_override_explanation: Optional[str] = None
+    """
+    Explanation of why the response was either guardrailed or not guardrailed by
+    expert review. Expert review will override the original guardrail decision.
+    """
+
+    expert_override_log_id: Optional[str] = None
+    """
+    ID of the query log with expert review that overrode the original guardrail
+    decision.
     """
 
     expert_review_created_at: Optional[datetime] = None
@@ -448,9 +471,6 @@ class QueryLogsByGroupQueryLog(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    similar_query_log_guardrail_explanation: Optional[str] = None
-    """Explanation from a similar bad query log that caused this to be guardrailed"""
 
     tools: Optional[List[QueryLogsByGroupQueryLogTool]] = None
     """Tools to use for the LLM call.

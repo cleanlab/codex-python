@@ -54,8 +54,11 @@ class ProjectDetectResponse(BaseModel):
     Codex Project, or None otherwise.
     """
 
-    expert_review_guardrail_explanation: Optional[str] = None
-    """Explanation from a similar bad query log that caused this to be guardrailed"""
+    expert_guardrail_override_explanation: Optional[str] = None
+    """
+    Explanation of why the response was either guardrailed or not guardrailed by
+    expert review. Expert review will override the original guardrail decision.
+    """
 
     should_guardrail: bool
     """
