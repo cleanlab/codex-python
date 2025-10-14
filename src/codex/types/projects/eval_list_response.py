@@ -15,6 +15,12 @@ class Eval(BaseModel):
     how
     """
 
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, prefer standardized labels; otherwise use configured name.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
