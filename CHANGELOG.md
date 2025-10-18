@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.31 (2025-10-18)
+
+Full Changelog: [v0.1.0-alpha.30...v0.1.0-alpha.31](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.30...v0.1.0-alpha.31)
+
+### Features
+
+* **api:** api update ([377dc6b](https://github.com/cleanlab/codex-python/commit/377dc6b4dad3ba898b9fda4fe305d4c25b1ee781))
+* **api:** api update ([321392c](https://github.com/cleanlab/codex-python/commit/321392cfd9ac98fe1ad0b06d21f26441e70c90fc))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([666f855](https://github.com/cleanlab/codex-python/commit/666f855d5532589f5ffbe0b53a5de65355ec33aa))
+
 ## 0.1.0-alpha.30 (2025-10-14)
 
 Full Changelog: [v0.1.0-alpha.29...v0.1.0-alpha.30](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.29...v0.1.0-alpha.30)
