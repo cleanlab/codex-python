@@ -99,6 +99,12 @@ class ConfigEvalConfigCustomEvals(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -140,6 +146,12 @@ class ConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -181,6 +193,12 @@ class ConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -222,6 +240,12 @@ class ConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -263,6 +287,12 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property

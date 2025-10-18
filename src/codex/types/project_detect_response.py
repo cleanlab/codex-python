@@ -1,20 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 
 from .._models import BaseModel
 
-__all__ = ["ProjectDetectResponse", "DeterministicGuardrailsResults", "EvalScores"]
-
-
-class DeterministicGuardrailsResults(BaseModel):
-    guardrail_name: str
-
-    should_guardrail: bool
-
-    fallback_message: Optional[str] = None
-
-    matches: Optional[List[str]] = None
+__all__ = ["ProjectDetectResponse", "EvalScores"]
 
 
 class EvalScores(BaseModel):
@@ -32,9 +22,6 @@ class EvalScores(BaseModel):
 
 
 class ProjectDetectResponse(BaseModel):
-    deterministic_guardrails_results: Optional[Dict[str, DeterministicGuardrailsResults]] = None
-    """Results from deterministic guardrails applied to the response."""
-
     escalated_to_sme: bool
     """
     True if the question should be escalated to Codex for an SME to review, False

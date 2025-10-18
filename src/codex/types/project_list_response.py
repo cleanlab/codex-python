@@ -101,6 +101,12 @@ class ProjectConfigEvalConfigCustomEvals(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -142,6 +148,12 @@ class ProjectConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -183,6 +195,12 @@ class ProjectConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -224,6 +242,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -265,6 +289,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
+    display_name: str
+    """Human-friendly name for display.
+
+    For default evals, use standardized labels from DEFAULT_EVAL_ISSUE_TYPE_LABELS.
+    """
+
     eval_key: str
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
