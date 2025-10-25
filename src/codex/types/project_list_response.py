@@ -381,6 +381,8 @@ class ProjectConfigEvalConfig(BaseModel):
 
 
 class ProjectConfig(BaseModel):
+    ai_guidance_threshold: Optional[float] = None
+
     clustering_use_llm_matching: Optional[bool] = None
 
     eval_config: Optional[ProjectConfigEvalConfig] = None
