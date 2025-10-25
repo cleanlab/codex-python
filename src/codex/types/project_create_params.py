@@ -354,6 +354,8 @@ class ConfigEvalConfig(TypedDict, total=False):
 
 
 class Config(TypedDict, total=False):
+    ai_guidance_threshold: float
+
     clustering_use_llm_matching: bool
 
     eval_config: ConfigEvalConfig

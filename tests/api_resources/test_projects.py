@@ -40,6 +40,7 @@ class TestProjects:
     def test_method_create_with_all_params(self, client: Codex) -> None:
         project = client.projects.create(
             config={
+                "ai_guidance_threshold": 0,
                 "clustering_use_llm_matching": True,
                 "eval_config": {
                     "custom_evals": {
@@ -224,6 +225,7 @@ class TestProjects:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             auto_clustering_enabled=True,
             config={
+                "ai_guidance_threshold": 0,
                 "clustering_use_llm_matching": True,
                 "eval_config": {
                     "custom_evals": {
@@ -928,6 +930,7 @@ class TestAsyncProjects:
     async def test_method_create_with_all_params(self, async_client: AsyncCodex) -> None:
         project = await async_client.projects.create(
             config={
+                "ai_guidance_threshold": 0,
                 "clustering_use_llm_matching": True,
                 "eval_config": {
                     "custom_evals": {
@@ -1112,6 +1115,7 @@ class TestAsyncProjects:
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             auto_clustering_enabled=True,
             config={
+                "ai_guidance_threshold": 0,
                 "clustering_use_llm_matching": True,
                 "eval_config": {
                     "custom_evals": {
