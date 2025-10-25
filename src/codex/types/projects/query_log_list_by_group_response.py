@@ -374,6 +374,9 @@ class QueryLogsByGroupQueryLog(BaseModel):
     was_cache_hit: Optional[bool] = None
     """If similar query already answered, or None if cache was not checked"""
 
+    ai_guidance_id: Optional[str] = None
+    """ID of the AI guidance remediation that was created from this query log."""
+
     context: Optional[List[QueryLogsByGroupQueryLogContext]] = None
     """RAG context used for the query"""
 

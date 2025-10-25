@@ -379,6 +379,8 @@ class ConfigEvalConfig(BaseModel):
 
 
 class Config(BaseModel):
+    ai_guidance_threshold: Optional[float] = None
+
     clustering_use_llm_matching: Optional[bool] = None
 
     eval_config: Optional[ConfigEvalConfig] = None
