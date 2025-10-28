@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.31 (2025-10-28)
+
+Full Changelog: [v0.1.0-alpha.30...v0.1.0-alpha.31](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.30...v0.1.0-alpha.31)
+
+### Features
+
+* **api:** add create from template ([bb733b1](https://github.com/cleanlab/codex-python/commit/bb733b1122b9e52160acb3e3b92b00bf941efce5))
+* **api:** api update ([1481cd8](https://github.com/cleanlab/codex-python/commit/1481cd895f093e9f044e438b7c26fc52f73ee791))
+* **api:** api update ([5468580](https://github.com/cleanlab/codex-python/commit/546858021affa494867222bf7e87fb55c867df41))
+* **api:** api update ([766e331](https://github.com/cleanlab/codex-python/commit/766e3314ad8a72522fa29804b3edc328bab3b4af))
+* **api:** api update ([377dc6b](https://github.com/cleanlab/codex-python/commit/377dc6b4dad3ba898b9fda4fe305d4c25b1ee781))
+* **api:** api update ([321392c](https://github.com/cleanlab/codex-python/commit/321392cfd9ac98fe1ad0b06d21f26441e70c90fc))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([666f855](https://github.com/cleanlab/codex-python/commit/666f855d5532589f5ffbe0b53a5de65355ec33aa))
+
 ## 0.1.0-alpha.30 (2025-10-14)
 
 Full Changelog: [v0.1.0-alpha.29...v0.1.0-alpha.30](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.29...v0.1.0-alpha.30)
