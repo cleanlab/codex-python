@@ -416,6 +416,8 @@ class Project(BaseModel):
 
     created_by_user_id: str
 
+    is_template: bool
+
     name: str
 
     organization_id: str
