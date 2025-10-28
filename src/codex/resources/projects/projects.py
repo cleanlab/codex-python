@@ -23,6 +23,7 @@ from ...types import (
     project_validate_params,
     project_invite_sme_params,
     project_retrieve_analytics_params,
+    project_create_from_template_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, strip_not_given, async_maybe_transform
@@ -314,6 +315,55 @@ class ProjectsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    def create_from_template(
+        self,
+        *,
+        organization_id: str,
+        template_project_id: str | Omit = omit,
+        description: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectReturnSchema:
+        """
+        Create a new project from a template project.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/api/projects/create-from-template",
+            body=maybe_transform(
+                {
+                    "organization_id": organization_id,
+                    "description": description,
+                    "name": name,
+                },
+                project_create_from_template_params.ProjectCreateFromTemplateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"template_project_id": template_project_id},
+                    project_create_from_template_params.ProjectCreateFromTemplateParams,
+                ),
+            ),
+            cast_to=ProjectReturnSchema,
         )
 
     def detect(
@@ -1089,6 +1139,55 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def create_from_template(
+        self,
+        *,
+        organization_id: str,
+        template_project_id: str | Omit = omit,
+        description: Optional[str] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectReturnSchema:
+        """
+        Create a new project from a template project.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/api/projects/create-from-template",
+            body=await async_maybe_transform(
+                {
+                    "organization_id": organization_id,
+                    "description": description,
+                    "name": name,
+                },
+                project_create_from_template_params.ProjectCreateFromTemplateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"template_project_id": template_project_id},
+                    project_create_from_template_params.ProjectCreateFromTemplateParams,
+                ),
+            ),
+            cast_to=ProjectReturnSchema,
+        )
+
     async def detect(
         self,
         project_id: str,
@@ -1635,6 +1734,9 @@ class ProjectsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             projects.delete,
         )
+        self.create_from_template = to_raw_response_wrapper(
+            projects.create_from_template,
+        )
         self.detect = to_raw_response_wrapper(
             projects.detect,
         )
@@ -1686,6 +1788,9 @@ class AsyncProjectsResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             projects.delete,
+        )
+        self.create_from_template = async_to_raw_response_wrapper(
+            projects.create_from_template,
         )
         self.detect = async_to_raw_response_wrapper(
             projects.detect,
@@ -1739,6 +1844,9 @@ class ProjectsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             projects.delete,
         )
+        self.create_from_template = to_streamed_response_wrapper(
+            projects.create_from_template,
+        )
         self.detect = to_streamed_response_wrapper(
             projects.detect,
         )
@@ -1790,6 +1898,9 @@ class AsyncProjectsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             projects.delete,
+        )
+        self.create_from_template = async_to_streamed_response_wrapper(
+            projects.create_from_template,
         )
         self.detect = async_to_streamed_response_wrapper(
             projects.detect,
