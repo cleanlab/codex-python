@@ -11,12 +11,18 @@ __all__ = [
     "ConfigEvalConfig",
     "ConfigEvalConfigCustomEvals",
     "ConfigEvalConfigCustomEvalsEvals",
+    "ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback",
     "ConfigEvalConfigDefaultEvals",
     "ConfigEvalConfigDefaultEvalsContextSufficiency",
+    "ConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback",
     "ConfigEvalConfigDefaultEvalsQueryEase",
+    "ConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback",
     "ConfigEvalConfigDefaultEvalsResponseGroundedness",
+    "ConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback",
     "ConfigEvalConfigDefaultEvalsResponseHelpfulness",
+    "ConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback",
     "ConfigEvalConfigDefaultEvalsTrustworthiness",
+    "ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback",
 ]
 
 
@@ -30,6 +36,23 @@ class ProjectCreateParams(TypedDict, total=False):
     auto_clustering_enabled: bool
 
     description: Optional[str]
+
+
+class ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
 
 
 class ConfigEvalConfigCustomEvalsEvals(TypedDict, total=False):
@@ -57,11 +80,8 @@ class ConfigEvalConfigCustomEvalsEvals(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback]
+    """message, priority, type"""
 
     is_default: bool
     """Whether the eval is a default, built-in eval or a custom eval"""
@@ -103,6 +123,23 @@ class ConfigEvalConfigCustomEvals(TypedDict, total=False):
     evals: Dict[str, ConfigEvalConfigCustomEvalsEvals]
 
 
+class ConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
+
+
 class ConfigEvalConfigDefaultEvalsContextSufficiency(TypedDict, total=False):
     eval_key: Required[str]
     """
@@ -116,11 +153,8 @@ class ConfigEvalConfigDefaultEvalsContextSufficiency(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[ConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback]
+    """message, priority, type"""
 
     priority: Optional[int]
     """
@@ -142,6 +176,23 @@ class ConfigEvalConfigDefaultEvalsContextSufficiency(TypedDict, total=False):
 
     threshold_direction: Literal["above", "below"]
     """Whether the evaluation fails when score is above or below the threshold"""
+
+
+class ConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
 
 
 class ConfigEvalConfigDefaultEvalsQueryEase(TypedDict, total=False):
@@ -157,11 +208,8 @@ class ConfigEvalConfigDefaultEvalsQueryEase(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[ConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback]
+    """message, priority, type"""
 
     priority: Optional[int]
     """
@@ -183,6 +231,23 @@ class ConfigEvalConfigDefaultEvalsQueryEase(TypedDict, total=False):
 
     threshold_direction: Literal["above", "below"]
     """Whether the evaluation fails when score is above or below the threshold"""
+
+
+class ConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
 
 
 class ConfigEvalConfigDefaultEvalsResponseGroundedness(TypedDict, total=False):
@@ -198,11 +263,8 @@ class ConfigEvalConfigDefaultEvalsResponseGroundedness(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[ConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback]
+    """message, priority, type"""
 
     priority: Optional[int]
     """
@@ -224,6 +286,23 @@ class ConfigEvalConfigDefaultEvalsResponseGroundedness(TypedDict, total=False):
 
     threshold_direction: Literal["above", "below"]
     """Whether the evaluation fails when score is above or below the threshold"""
+
+
+class ConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
 
 
 class ConfigEvalConfigDefaultEvalsResponseHelpfulness(TypedDict, total=False):
@@ -239,11 +318,8 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulness(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[ConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback]
+    """message, priority, type"""
 
     priority: Optional[int]
     """
@@ -267,6 +343,23 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulness(TypedDict, total=False):
     """Whether the evaluation fails when score is above or below the threshold"""
 
 
+class ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
+
+
 class ConfigEvalConfigDefaultEvalsTrustworthiness(TypedDict, total=False):
     eval_key: Required[str]
     """
@@ -280,11 +373,8 @@ class ConfigEvalConfigDefaultEvalsTrustworthiness(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback]
+    """message, priority, type"""
 
     priority: Optional[int]
     """

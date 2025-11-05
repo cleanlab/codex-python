@@ -5,7 +5,24 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["EvalListResponse", "Eval"]
+__all__ = ["EvalListResponse", "Eval", "EvalGuardrailedFallback"]
+
+
+class EvalGuardrailedFallback(BaseModel):
+    message: str
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: int
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Literal["ai_guidance", "expert_answer"]
+    """Type of fallback to use if response is guardrailed"""
 
 
 class Eval(BaseModel):
@@ -39,11 +56,8 @@ class Eval(BaseModel):
     enabled: Optional[bool] = None
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str] = None
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[EvalGuardrailedFallback] = None
+    """message, priority, type"""
 
     is_default: Optional[bool] = None
     """Whether the eval is a default, built-in eval or a custom eval"""
