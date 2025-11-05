@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.32 (2025-11-05)
+
+Full Changelog: [v0.1.0-alpha.31...v0.1.0-alpha.32](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.31...v0.1.0-alpha.32)
+
+### Features
+
+* **api:** api update ([e8c8537](https://github.com/cleanlab/codex-python/commit/e8c853706394437e0738d53594a7d635df224117))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([b5a889c](https://github.com/cleanlab/codex-python/commit/b5a889c4bdd788df03f310e30d6a3ee304193f53))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([8f06048](https://github.com/cleanlab/codex-python/commit/8f06048416bf39cdad0290b23fd8d930be869223))
+* **internal:** grammar fix (it's -&gt; its) ([9d4a431](https://github.com/cleanlab/codex-python/commit/9d4a4318fac51055f63af10ba451b26bc6c1f179))
+
 ## 0.1.0-alpha.31 (2025-10-28)
 
 Full Changelog: [v0.1.0-alpha.30...v0.1.0-alpha.31](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.30...v0.1.0-alpha.31)
