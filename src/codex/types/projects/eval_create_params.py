@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["EvalCreateParams"]
+__all__ = ["EvalCreateParams", "GuardrailedFallback"]
 
 
 class EvalCreateParams(TypedDict, total=False):
@@ -33,11 +33,8 @@ class EvalCreateParams(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[GuardrailedFallback]
+    """message, priority, type"""
 
     is_default: bool
     """Whether the eval is a default, built-in eval or a custom eval"""
@@ -73,3 +70,20 @@ class EvalCreateParams(TypedDict, total=False):
 
     threshold_direction: Literal["above", "below"]
     """Whether the evaluation fails when score is above or below the threshold"""
+
+
+class GuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""

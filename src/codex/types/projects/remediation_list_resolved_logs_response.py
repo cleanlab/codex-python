@@ -15,8 +15,10 @@ __all__ = [
     "QueryLogFormattedNonGuardrailEvalScores",
     "QueryLogContext",
     "QueryLogDeterministicGuardrailsResults",
+    "QueryLogDeterministicGuardrailsResultsGuardrailedFallback",
     "QueryLogEvaluatedResponseToolCall",
     "QueryLogEvaluatedResponseToolCallFunction",
+    "QueryLogGuardrailedFallback",
     "QueryLogMessage",
     "QueryLogMessageChatCompletionAssistantMessageParamOutput",
     "QueryLogMessageChatCompletionAssistantMessageParamOutputAudio",
@@ -96,12 +98,29 @@ class QueryLogContext(BaseModel):
     """Title or heading of the document. Useful for display and context."""
 
 
+class QueryLogDeterministicGuardrailsResultsGuardrailedFallback(BaseModel):
+    message: str
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: int
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Literal["ai_guidance", "expert_answer"]
+    """Type of fallback to use if response is guardrailed"""
+
+
 class QueryLogDeterministicGuardrailsResults(BaseModel):
     guardrail_name: str
 
     should_guardrail: bool
 
-    fallback_message: Optional[str] = None
+    guardrailed_fallback: Optional[QueryLogDeterministicGuardrailsResultsGuardrailedFallback] = None
 
     matches: Optional[List[str]] = None
 
@@ -118,6 +137,26 @@ class QueryLogEvaluatedResponseToolCall(BaseModel):
     function: QueryLogEvaluatedResponseToolCallFunction
 
     type: Literal["function"]
+
+
+class QueryLogGuardrailedFallback(BaseModel):
+    message: str
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: int
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Literal["ai_guidance", "expert_answer"]
+    """Type of fallback to use if response is guardrailed"""
+
+    guardrail_name: Optional[str] = None
+    """Name of the guardrail that triggered the fallback"""
 
 
 class QueryLogMessageChatCompletionAssistantMessageParamOutputAudio(BaseModel):
@@ -435,6 +474,12 @@ class QueryLog(BaseModel):
 
     guardrailed: Optional[bool] = None
     """If true, the response was guardrailed"""
+
+    guardrailed_fallback: Optional[QueryLogGuardrailedFallback] = None
+    """
+    Name, fallback message, priority, and type for for the triggered guardrail with
+    the highest priority
+    """
 
     messages: Optional[List[QueryLogMessage]] = None
     """Message history to provide conversation context for the query.

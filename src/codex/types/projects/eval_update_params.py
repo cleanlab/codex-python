@@ -7,7 +7,13 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["EvalUpdateParams", "CustomEvalCreateOrUpdateSchema", "DefaultEvalUpdateSchema"]
+__all__ = [
+    "EvalUpdateParams",
+    "CustomEvalCreateOrUpdateSchema",
+    "CustomEvalCreateOrUpdateSchemaGuardrailedFallback",
+    "DefaultEvalUpdateSchema",
+    "DefaultEvalUpdateSchemaGuardrailedFallback",
+]
 
 
 class CustomEvalCreateOrUpdateSchema(TypedDict, total=False):
@@ -37,11 +43,8 @@ class CustomEvalCreateOrUpdateSchema(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[CustomEvalCreateOrUpdateSchemaGuardrailedFallback]
+    """message, priority, type"""
 
     is_default: bool
     """Whether the eval is a default, built-in eval or a custom eval"""
@@ -79,6 +82,23 @@ class CustomEvalCreateOrUpdateSchema(TypedDict, total=False):
     """Whether the evaluation fails when score is above or below the threshold"""
 
 
+class CustomEvalCreateOrUpdateSchemaGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
+
+
 class DefaultEvalUpdateSchema(TypedDict, total=False):
     project_id: Required[str]
 
@@ -91,11 +111,8 @@ class DefaultEvalUpdateSchema(TypedDict, total=False):
     enabled: bool
     """Allows the evaluation to be disabled without removing it"""
 
-    guardrailed_fallback_message: Optional[str]
-    """
-    Fallback message to use if this eval fails and causes the response to be
-    guardrailed
-    """
+    guardrailed_fallback: Optional[DefaultEvalUpdateSchemaGuardrailedFallback]
+    """message, priority, type"""
 
     priority: Optional[int]
     """
@@ -117,6 +134,23 @@ class DefaultEvalUpdateSchema(TypedDict, total=False):
 
     threshold_direction: Literal["above", "below"]
     """Whether the evaluation fails when score is above or below the threshold"""
+
+
+class DefaultEvalUpdateSchemaGuardrailedFallback(TypedDict, total=False):
+    message: Required[str]
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: Required[int]
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Required[Literal["ai_guidance", "expert_answer"]]
+    """Type of fallback to use if response is guardrailed"""
 
 
 EvalUpdateParams: TypeAlias = Union[CustomEvalCreateOrUpdateSchema, DefaultEvalUpdateSchema]
