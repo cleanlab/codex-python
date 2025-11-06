@@ -1,14 +1,32 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, Optional
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["ProjectDetectResponse", "EvalScores"]
+__all__ = ["ProjectDetectResponse", "EvalScores", "EvalScoresGuardrailedFallback", "GuardrailedFallback"]
+
+
+class EvalScoresGuardrailedFallback(BaseModel):
+    message: str
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: int
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Literal["ai_guidance", "expert_answer"]
+    """Type of fallback to use if response is guardrailed"""
 
 
 class EvalScores(BaseModel):
-    guardrailed_fallback_message: Optional[str] = None
+    guardrailed_fallback: Optional[EvalScoresGuardrailedFallback] = None
 
     score: Optional[float] = None
 
@@ -19,6 +37,26 @@ class EvalScores(BaseModel):
     triggered_guardrail: bool
 
     log: Optional[object] = None
+
+
+class GuardrailedFallback(BaseModel):
+    message: str
+    """
+    Fallback message to use if this eval fails and causes the response to be
+    guardrailed
+    """
+
+    priority: int
+    """
+    Priority order for guardrails (lower number = higher priority) to determine
+    which fallback to use if multiple guardrails are triggered
+    """
+
+    type: Literal["ai_guidance", "expert_answer"]
+    """Type of fallback to use if response is guardrailed"""
+
+    guardrail_name: Optional[str] = None
+    """Name of the guardrail that triggered the fallback"""
 
 
 class ProjectDetectResponse(BaseModel):
@@ -45,6 +83,12 @@ class ProjectDetectResponse(BaseModel):
     """
     Explanation of why the response was either guardrailed or not guardrailed by
     expert review. Expert review will override the original guardrail decision.
+    """
+
+    guardrailed_fallback: Optional[GuardrailedFallback] = None
+    """
+    Name, fallback message, fallback priority, and fallback type of the triggered
+    guardrail with the highest fallback priority
     """
 
     should_guardrail: bool
