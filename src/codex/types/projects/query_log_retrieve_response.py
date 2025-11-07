@@ -403,6 +403,9 @@ class QueryLogRetrieveResponse(BaseModel):
     ai_guidance_id: Optional[str] = None
     """ID of the AI guidance remediation that was created from this query log."""
 
+    applied_expert_answer_id: Optional[str] = None
+    """ID of the expert answer that was applied to the query."""
+
     context: Optional[List[Context]] = None
     """RAG context used for the query"""
 
@@ -477,6 +480,8 @@ class QueryLogRetrieveResponse(BaseModel):
     Name, fallback message, priority, and type for for the triggered guardrail with
     the highest priority
     """
+
+    issue_id: Optional[str] = None
 
     manual_review_status_override: Optional[Literal["addressed", "unaddressed"]] = None
     """Manual review status override for remediations."""
