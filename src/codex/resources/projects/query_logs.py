@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal
@@ -252,6 +253,7 @@ class QueryLogsResource(SyncAPIResource):
             cast_to=QueryLogAddUserFeedbackResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list_by_group(
         self,
         project_id: str,
@@ -372,6 +374,7 @@ class QueryLogsResource(SyncAPIResource):
             cast_to=QueryLogListByGroupResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list_groups(
         self,
         project_id: str,
@@ -490,6 +493,7 @@ class QueryLogsResource(SyncAPIResource):
             model=QueryLogListGroupsResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def start_remediation(
         self,
         query_log_id: str,
@@ -776,6 +780,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             cast_to=QueryLogAddUserFeedbackResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def list_by_group(
         self,
         project_id: str,
@@ -896,6 +901,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             cast_to=QueryLogListByGroupResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list_groups(
         self,
         project_id: str,
@@ -1014,6 +1020,7 @@ class AsyncQueryLogsResource(AsyncAPIResource):
             model=QueryLogListGroupsResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def start_remediation(
         self,
         query_log_id: str,
@@ -1102,14 +1109,20 @@ class QueryLogsResourceWithRawResponse:
         self.add_user_feedback = to_raw_response_wrapper(
             query_logs.add_user_feedback,
         )
-        self.list_by_group = to_raw_response_wrapper(
-            query_logs.list_by_group,
+        self.list_by_group = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                query_logs.list_by_group,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_groups = to_raw_response_wrapper(
-            query_logs.list_groups,
+        self.list_groups = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                query_logs.list_groups,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.start_remediation = to_raw_response_wrapper(
-            query_logs.start_remediation,
+        self.start_remediation = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                query_logs.start_remediation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.update_metadata = to_raw_response_wrapper(
             query_logs.update_metadata,
@@ -1129,14 +1142,20 @@ class AsyncQueryLogsResourceWithRawResponse:
         self.add_user_feedback = async_to_raw_response_wrapper(
             query_logs.add_user_feedback,
         )
-        self.list_by_group = async_to_raw_response_wrapper(
-            query_logs.list_by_group,
+        self.list_by_group = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                query_logs.list_by_group,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_groups = async_to_raw_response_wrapper(
-            query_logs.list_groups,
+        self.list_groups = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                query_logs.list_groups,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.start_remediation = async_to_raw_response_wrapper(
-            query_logs.start_remediation,
+        self.start_remediation = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                query_logs.start_remediation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.update_metadata = async_to_raw_response_wrapper(
             query_logs.update_metadata,
@@ -1156,14 +1175,20 @@ class QueryLogsResourceWithStreamingResponse:
         self.add_user_feedback = to_streamed_response_wrapper(
             query_logs.add_user_feedback,
         )
-        self.list_by_group = to_streamed_response_wrapper(
-            query_logs.list_by_group,
+        self.list_by_group = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                query_logs.list_by_group,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_groups = to_streamed_response_wrapper(
-            query_logs.list_groups,
+        self.list_groups = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                query_logs.list_groups,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.start_remediation = to_streamed_response_wrapper(
-            query_logs.start_remediation,
+        self.start_remediation = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                query_logs.start_remediation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.update_metadata = to_streamed_response_wrapper(
             query_logs.update_metadata,
@@ -1183,14 +1208,20 @@ class AsyncQueryLogsResourceWithStreamingResponse:
         self.add_user_feedback = async_to_streamed_response_wrapper(
             query_logs.add_user_feedback,
         )
-        self.list_by_group = async_to_streamed_response_wrapper(
-            query_logs.list_by_group,
+        self.list_by_group = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                query_logs.list_by_group,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_groups = async_to_streamed_response_wrapper(
-            query_logs.list_groups,
+        self.list_groups = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                query_logs.list_groups,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.start_remediation = async_to_streamed_response_wrapper(
-            query_logs.start_remediation,
+        self.start_remediation = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                query_logs.start_remediation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.update_metadata = async_to_streamed_response_wrapper(
             query_logs.update_metadata,

@@ -365,6 +365,8 @@ class QueryLogRetrieveResponse(BaseModel):
 
     created_at: datetime
 
+    expert_answer_id: Optional[str] = None
+
     formatted_escalation_eval_scores: Optional[Dict[str, FormattedEscalationEvalScores]] = None
 
     formatted_eval_scores: Optional[Dict[str, FormattedEvalScores]] = None
@@ -385,15 +387,16 @@ class QueryLogRetrieveResponse(BaseModel):
 
     is_bad_response: bool
 
+    issue_id: Optional[str] = None
+
+    issue_status: Literal["addressed", "unaddressed"]
+    """Manual review status override for remediations."""
+
     needs_review: bool
 
     project_id: str
 
     question: str
-
-    remediation_id: str
-
-    remediation_status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
 
     tool_call_names: Optional[List[str]] = None
 
@@ -481,8 +484,6 @@ class QueryLogRetrieveResponse(BaseModel):
     the highest priority
     """
 
-    issue_id: Optional[str] = None
-
     manual_review_status_override: Optional[Literal["addressed", "unaddressed"]] = None
     """Manual review status override for remediations."""
 
@@ -511,9 +512,6 @@ class QueryLogRetrieveResponse(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    served_remediation_id: Optional[str] = None
-    """ID of the remediation that was served if cache hit, otherwise None."""
 
     tools: Optional[List[Tool]] = None
     """Tools to use for the LLM call.
