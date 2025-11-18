@@ -51,7 +51,8 @@ from .access_keys import (
     AccessKeysResourceWithStreamingResponse,
     AsyncAccessKeysResourceWithStreamingResponse,
 )
-from .remediations import (
+from ..._base_client import make_request_options
+from .remediations.remediations import (
     RemediationsResource,
     AsyncRemediationsResource,
     RemediationsResourceWithRawResponse,
@@ -59,7 +60,6 @@ from .remediations import (
     RemediationsResourceWithStreamingResponse,
     AsyncRemediationsResourceWithStreamingResponse,
 )
-from ..._base_client import make_request_options
 from ...types.project_list_response import ProjectListResponse
 from ...types.project_return_schema import ProjectReturnSchema
 from ...types.project_detect_response import ProjectDetectResponse
