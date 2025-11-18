@@ -9,39 +9,51 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ...._utils import maybe_transform, async_maybe_transform
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncOffsetPageRemediations, AsyncOffsetPageRemediations
-from ..._base_client import AsyncPaginator, make_request_options
-from ...types.projects import (
+from ....pagination import SyncOffsetPageRemediations, AsyncOffsetPageRemediations
+from .expert_answers import (
+    ExpertAnswersResource,
+    AsyncExpertAnswersResource,
+    ExpertAnswersResourceWithRawResponse,
+    AsyncExpertAnswersResourceWithRawResponse,
+    ExpertAnswersResourceWithStreamingResponse,
+    AsyncExpertAnswersResourceWithStreamingResponse,
+)
+from ...._base_client import AsyncPaginator, make_request_options
+from ....types.projects import (
     remediation_list_params,
     remediation_create_params,
     remediation_edit_answer_params,
     remediation_edit_draft_answer_params,
 )
-from ...types.projects.remediation_list_response import RemediationListResponse
-from ...types.projects.remediation_pause_response import RemediationPauseResponse
-from ...types.projects.remediation_create_response import RemediationCreateResponse
-from ...types.projects.remediation_publish_response import RemediationPublishResponse
-from ...types.projects.remediation_unpause_response import RemediationUnpauseResponse
-from ...types.projects.remediation_retrieve_response import RemediationRetrieveResponse
-from ...types.projects.remediation_edit_answer_response import RemediationEditAnswerResponse
-from ...types.projects.remediation_edit_draft_answer_response import RemediationEditDraftAnswerResponse
-from ...types.projects.remediation_list_resolved_logs_response import RemediationListResolvedLogsResponse
-from ...types.projects.remediation_get_resolved_logs_count_response import RemediationGetResolvedLogsCountResponse
+from ....types.projects.remediation_list_response import RemediationListResponse
+from ....types.projects.remediation_pause_response import RemediationPauseResponse
+from ....types.projects.remediation_create_response import RemediationCreateResponse
+from ....types.projects.remediation_publish_response import RemediationPublishResponse
+from ....types.projects.remediation_unpause_response import RemediationUnpauseResponse
+from ....types.projects.remediation_retrieve_response import RemediationRetrieveResponse
+from ....types.projects.remediation_edit_answer_response import RemediationEditAnswerResponse
+from ....types.projects.remediation_edit_draft_answer_response import RemediationEditDraftAnswerResponse
+from ....types.projects.remediation_list_resolved_logs_response import RemediationListResolvedLogsResponse
+from ....types.projects.remediation_get_resolved_logs_count_response import RemediationGetResolvedLogsCountResponse
 
 __all__ = ["RemediationsResource", "AsyncRemediationsResource"]
 
 
 class RemediationsResource(SyncAPIResource):
+    @cached_property
+    def expert_answers(self) -> ExpertAnswersResource:
+        return ExpertAnswersResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> RemediationsResourceWithRawResponse:
         """
@@ -523,6 +535,10 @@ class RemediationsResource(SyncAPIResource):
 
 
 class AsyncRemediationsResource(AsyncAPIResource):
+    @cached_property
+    def expert_answers(self) -> AsyncExpertAnswersResource:
+        return AsyncExpertAnswersResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncRemediationsResourceWithRawResponse:
         """
@@ -1065,6 +1081,10 @@ class RemediationsResourceWithRawResponse:
             )
         )
 
+    @cached_property
+    def expert_answers(self) -> ExpertAnswersResourceWithRawResponse:
+        return ExpertAnswersResourceWithRawResponse(self._remediations.expert_answers)
+
 
 class AsyncRemediationsResourceWithRawResponse:
     def __init__(self, remediations: AsyncRemediationsResource) -> None:
@@ -1125,6 +1145,10 @@ class AsyncRemediationsResourceWithRawResponse:
                 remediations.unpause,  # pyright: ignore[reportDeprecated],
             )
         )
+
+    @cached_property
+    def expert_answers(self) -> AsyncExpertAnswersResourceWithRawResponse:
+        return AsyncExpertAnswersResourceWithRawResponse(self._remediations.expert_answers)
 
 
 class RemediationsResourceWithStreamingResponse:
@@ -1187,6 +1211,10 @@ class RemediationsResourceWithStreamingResponse:
             )
         )
 
+    @cached_property
+    def expert_answers(self) -> ExpertAnswersResourceWithStreamingResponse:
+        return ExpertAnswersResourceWithStreamingResponse(self._remediations.expert_answers)
+
 
 class AsyncRemediationsResourceWithStreamingResponse:
     def __init__(self, remediations: AsyncRemediationsResource) -> None:
@@ -1247,3 +1275,7 @@ class AsyncRemediationsResourceWithStreamingResponse:
                 remediations.unpause,  # pyright: ignore[reportDeprecated],
             )
         )
+
+    @cached_property
+    def expert_answers(self) -> AsyncExpertAnswersResourceWithStreamingResponse:
+        return AsyncExpertAnswersResourceWithStreamingResponse(self._remediations.expert_answers)
