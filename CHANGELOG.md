@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.1.0-alpha.33 (2025-11-18)
+
+Full Changelog: [v0.1.0-alpha.32...v0.1.0-alpha.33](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.32...v0.1.0-alpha.33)
+
+### Features
+
+* **api:** add expert answer endpoints ([68ec69e](https://github.com/cleanlab/codex-python/commit/68ec69ebf6aecfc216daba6a898cae0d24e0c0be))
+* **api:** api update ([57567dc](https://github.com/cleanlab/codex-python/commit/57567dcc746b17735296ef990be1fc5518cc312b))
+* **api:** api update ([6f52772](https://github.com/cleanlab/codex-python/commit/6f5277261b360cb04ff317371841a22145f7fae8))
+
+
+### Bug Fixes
+
+* compat with Python 3.14 ([0ec7ffd](https://github.com/cleanlab/codex-python/commit/0ec7ffdf3a5def6fdd42f58c6df579593073ed0c))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([1225af1](https://github.com/cleanlab/codex-python/commit/1225af1da7aa3442931b29a049c951aa656a5d03))
+
+
+### Chores
+
+* **package:** drop Python 3.8 support ([b5ef513](https://github.com/cleanlab/codex-python/commit/b5ef513181cd5725100b45e798290e523fdf3b76))
+
 ## 0.1.0-alpha.32 (2025-11-05)
 
 Full Changelog: [v0.1.0-alpha.31...v0.1.0-alpha.32](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.31...v0.1.0-alpha.32)
