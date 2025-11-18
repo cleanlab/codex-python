@@ -391,13 +391,13 @@ class QueryLogListGroupsResponse(BaseModel):
 
     is_bad_response: bool
 
+    issue_id: Optional[str] = None
+
     needs_review: bool
 
     project_id: str
 
     question: str
-
-    remediation_id: str
 
     remediation_status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
 
@@ -489,8 +489,6 @@ class QueryLogListGroupsResponse(BaseModel):
     the highest priority
     """
 
-    issue_id: Optional[str] = None
-
     manual_review_status_override: Optional[Literal["addressed", "unaddressed"]] = None
     """Manual review status override for remediations."""
 
@@ -519,9 +517,6 @@ class QueryLogListGroupsResponse(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    served_remediation_id: Optional[str] = None
-    """ID of the remediation that was served if cache hit, otherwise None."""
 
     tools: Optional[List[Tool]] = None
     """Tools to use for the LLM call.

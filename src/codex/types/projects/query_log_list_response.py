@@ -385,11 +385,11 @@ class QueryLogListResponse(BaseModel):
 
     is_bad_response: bool
 
+    issue_id: Optional[str] = None
+
     project_id: str
 
     question: str
-
-    remediation_id: str
 
     tool_call_names: Optional[List[str]] = None
 
@@ -477,8 +477,6 @@ class QueryLogListResponse(BaseModel):
     the highest priority
     """
 
-    issue_id: Optional[str] = None
-
     messages: Optional[List[Message]] = None
     """Message history to provide conversation context for the query.
 
@@ -504,9 +502,6 @@ class QueryLogListResponse(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    served_remediation_id: Optional[str] = None
-    """ID of the remediation that was served if cache hit, otherwise None."""
 
     tools: Optional[List[Tool]] = None
     """Tools to use for the LLM call.

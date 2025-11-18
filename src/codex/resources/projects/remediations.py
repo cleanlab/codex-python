@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal
@@ -60,6 +61,7 @@ class RemediationsResource(SyncAPIResource):
         """
         return RemediationsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def create(
         self,
         project_id: str,
@@ -104,6 +106,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationCreateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def retrieve(
         self,
         remediation_id: str,
@@ -140,6 +143,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationRetrieveResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         project_id: str,
@@ -214,6 +218,7 @@ class RemediationsResource(SyncAPIResource):
             model=RemediationListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def delete(
         self,
         remediation_id: str,
@@ -251,6 +256,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def edit_answer(
         self,
         remediation_id: str,
@@ -289,6 +295,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationEditAnswerResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def edit_draft_answer(
         self,
         remediation_id: str,
@@ -329,6 +336,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationEditDraftAnswerResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def get_resolved_logs_count(
         self,
         remediation_id: str,
@@ -365,6 +373,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationGetResolvedLogsCountResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list_resolved_logs(
         self,
         remediation_id: str,
@@ -401,6 +410,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationListResolvedLogsResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def pause(
         self,
         remediation_id: str,
@@ -437,6 +447,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationPauseResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def publish(
         self,
         remediation_id: str,
@@ -473,6 +484,7 @@ class RemediationsResource(SyncAPIResource):
             cast_to=RemediationPublishResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def unpause(
         self,
         remediation_id: str,
@@ -530,6 +542,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
         """
         return AsyncRemediationsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def create(
         self,
         project_id: str,
@@ -574,6 +587,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationCreateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def retrieve(
         self,
         remediation_id: str,
@@ -610,6 +624,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationRetrieveResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         project_id: str,
@@ -684,6 +699,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             model=RemediationListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def delete(
         self,
         remediation_id: str,
@@ -721,6 +737,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def edit_answer(
         self,
         remediation_id: str,
@@ -761,6 +778,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationEditAnswerResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def edit_draft_answer(
         self,
         remediation_id: str,
@@ -801,6 +819,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationEditDraftAnswerResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def get_resolved_logs_count(
         self,
         remediation_id: str,
@@ -837,6 +856,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationGetResolvedLogsCountResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def list_resolved_logs(
         self,
         remediation_id: str,
@@ -873,6 +893,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationListResolvedLogsResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def pause(
         self,
         remediation_id: str,
@@ -909,6 +930,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationPauseResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def publish(
         self,
         remediation_id: str,
@@ -945,6 +967,7 @@ class AsyncRemediationsResource(AsyncAPIResource):
             cast_to=RemediationPublishResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def unpause(
         self,
         remediation_id: str,
@@ -986,38 +1009,60 @@ class RemediationsResourceWithRawResponse:
     def __init__(self, remediations: RemediationsResource) -> None:
         self._remediations = remediations
 
-        self.create = to_raw_response_wrapper(
-            remediations.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = to_raw_response_wrapper(
-            remediations.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_raw_response_wrapper(
-            remediations.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = to_raw_response_wrapper(
-            remediations.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_answer = to_raw_response_wrapper(
-            remediations.edit_answer,
+        self.edit_answer = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.edit_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_draft_answer = to_raw_response_wrapper(
-            remediations.edit_draft_answer,
+        self.edit_draft_answer = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.edit_draft_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_resolved_logs_count = to_raw_response_wrapper(
-            remediations.get_resolved_logs_count,
+        self.get_resolved_logs_count = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.get_resolved_logs_count,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_resolved_logs = to_raw_response_wrapper(
-            remediations.list_resolved_logs,
+        self.list_resolved_logs = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.list_resolved_logs,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.pause = to_raw_response_wrapper(
-            remediations.pause,
+        self.pause = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.pause,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.publish = to_raw_response_wrapper(
-            remediations.publish,
+        self.publish = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.publish,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.unpause = to_raw_response_wrapper(
-            remediations.unpause,
+        self.unpause = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                remediations.unpause,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -1025,38 +1070,60 @@ class AsyncRemediationsResourceWithRawResponse:
     def __init__(self, remediations: AsyncRemediationsResource) -> None:
         self._remediations = remediations
 
-        self.create = async_to_raw_response_wrapper(
-            remediations.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = async_to_raw_response_wrapper(
-            remediations.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_raw_response_wrapper(
-            remediations.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = async_to_raw_response_wrapper(
-            remediations.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_answer = async_to_raw_response_wrapper(
-            remediations.edit_answer,
+        self.edit_answer = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.edit_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_draft_answer = async_to_raw_response_wrapper(
-            remediations.edit_draft_answer,
+        self.edit_draft_answer = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.edit_draft_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_resolved_logs_count = async_to_raw_response_wrapper(
-            remediations.get_resolved_logs_count,
+        self.get_resolved_logs_count = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.get_resolved_logs_count,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_resolved_logs = async_to_raw_response_wrapper(
-            remediations.list_resolved_logs,
+        self.list_resolved_logs = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.list_resolved_logs,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.pause = async_to_raw_response_wrapper(
-            remediations.pause,
+        self.pause = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.pause,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.publish = async_to_raw_response_wrapper(
-            remediations.publish,
+        self.publish = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.publish,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.unpause = async_to_raw_response_wrapper(
-            remediations.unpause,
+        self.unpause = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                remediations.unpause,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -1064,38 +1131,60 @@ class RemediationsResourceWithStreamingResponse:
     def __init__(self, remediations: RemediationsResource) -> None:
         self._remediations = remediations
 
-        self.create = to_streamed_response_wrapper(
-            remediations.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = to_streamed_response_wrapper(
-            remediations.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_streamed_response_wrapper(
-            remediations.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = to_streamed_response_wrapper(
-            remediations.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_answer = to_streamed_response_wrapper(
-            remediations.edit_answer,
+        self.edit_answer = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.edit_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_draft_answer = to_streamed_response_wrapper(
-            remediations.edit_draft_answer,
+        self.edit_draft_answer = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.edit_draft_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_resolved_logs_count = to_streamed_response_wrapper(
-            remediations.get_resolved_logs_count,
+        self.get_resolved_logs_count = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.get_resolved_logs_count,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_resolved_logs = to_streamed_response_wrapper(
-            remediations.list_resolved_logs,
+        self.list_resolved_logs = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.list_resolved_logs,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.pause = to_streamed_response_wrapper(
-            remediations.pause,
+        self.pause = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.pause,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.publish = to_streamed_response_wrapper(
-            remediations.publish,
+        self.publish = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.publish,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.unpause = to_streamed_response_wrapper(
-            remediations.unpause,
+        self.unpause = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                remediations.unpause,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -1103,36 +1192,58 @@ class AsyncRemediationsResourceWithStreamingResponse:
     def __init__(self, remediations: AsyncRemediationsResource) -> None:
         self._remediations = remediations
 
-        self.create = async_to_streamed_response_wrapper(
-            remediations.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = async_to_streamed_response_wrapper(
-            remediations.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_streamed_response_wrapper(
-            remediations.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = async_to_streamed_response_wrapper(
-            remediations.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_answer = async_to_streamed_response_wrapper(
-            remediations.edit_answer,
+        self.edit_answer = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.edit_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.edit_draft_answer = async_to_streamed_response_wrapper(
-            remediations.edit_draft_answer,
+        self.edit_draft_answer = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.edit_draft_answer,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_resolved_logs_count = async_to_streamed_response_wrapper(
-            remediations.get_resolved_logs_count,
+        self.get_resolved_logs_count = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.get_resolved_logs_count,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list_resolved_logs = async_to_streamed_response_wrapper(
-            remediations.list_resolved_logs,
+        self.list_resolved_logs = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.list_resolved_logs,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.pause = async_to_streamed_response_wrapper(
-            remediations.pause,
+        self.pause = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.pause,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.publish = async_to_streamed_response_wrapper(
-            remediations.publish,
+        self.publish = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.publish,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.unpause = async_to_streamed_response_wrapper(
-            remediations.unpause,
+        self.unpause = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                remediations.unpause,  # pyright: ignore[reportDeprecated],
+            )
         )
