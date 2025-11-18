@@ -391,13 +391,13 @@ class QueryLogListGroupsResponse(BaseModel):
 
     is_bad_response: bool
 
+    issue_id: Optional[str] = None
+
     needs_review: bool
 
     project_id: str
 
     question: str
-
-    remediation_id: str
 
     remediation_status: Literal["ACTIVE", "DRAFT", "ACTIVE_WITH_DRAFT", "NOT_STARTED", "PAUSED", "NO_ACTION_NEEDED"]
 
@@ -410,6 +410,9 @@ class QueryLogListGroupsResponse(BaseModel):
 
     ai_guidance_id: Optional[str] = None
     """ID of the AI guidance remediation that was created from this query log."""
+
+    applied_expert_answer_id: Optional[str] = None
+    """ID of the expert answer that was applied to the query."""
 
     context: Optional[List[Context]] = None
     """RAG context used for the query"""
@@ -514,9 +517,6 @@ class QueryLogListGroupsResponse(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
-
-    served_remediation_id: Optional[str] = None
-    """ID of the remediation that was served if cache hit, otherwise None."""
 
     tools: Optional[List[Tool]] = None
     """Tools to use for the LLM call.
