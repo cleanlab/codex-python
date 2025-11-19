@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.34 (2025-11-19)
+
+Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)
+
+### Features
+
+* **api:** add expert review endpoints ([cda6f91](https://github.com/cleanlab/codex-python/commit/cda6f911fe678318779d23de9ecc77fb15594fa1))
+* **api:** api update ([5848aac](https://github.com/cleanlab/codex-python/commit/5848aac2eb02a789c20951056a7b802985d8b2ab))
+
 ## 0.1.0-alpha.33 (2025-11-18)
 
 Full Changelog: [v0.1.0-alpha.32...v0.1.0-alpha.33](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.32...v0.1.0-alpha.33)
