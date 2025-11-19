@@ -284,3 +284,24 @@ Methods:
 - <code title="patch /api/projects/{project_id}/expert_answers/{expert_answer_id}/pause">client.projects.remediations.expert_answers.<a href="./src/codex/resources/projects/remediations/expert_answers.py">pause</a>(expert_answer_id, \*, project_id) -> <a href="./src/codex/types/projects/remediations/expert_answer_pause_response.py">ExpertAnswerPauseResponse</a></code>
 - <code title="patch /api/projects/{project_id}/expert_answers/{expert_answer_id}/publish">client.projects.remediations.expert_answers.<a href="./src/codex/resources/projects/remediations/expert_answers.py">publish</a>(expert_answer_id, \*, project_id) -> <a href="./src/codex/types/projects/remediations/expert_answer_publish_response.py">ExpertAnswerPublishResponse</a></code>
 - <code title="patch /api/projects/{project_id}/expert_answers/{expert_answer_id}/unpause">client.projects.remediations.expert_answers.<a href="./src/codex/resources/projects/remediations/expert_answers.py">unpause</a>(expert_answer_id, \*, project_id) -> <a href="./src/codex/types/projects/remediations/expert_answer_unpause_response.py">ExpertAnswerUnpauseResponse</a></code>
+
+### ExpertReviews
+
+Types:
+
+```python
+from codex.types.projects.remediations import (
+    ExpertReviewCreateResponse,
+    ExpertReviewRetrieveResponse,
+    ExpertReviewListResponse,
+    ExpertReviewEditResponse,
+)
+```
+
+Methods:
+
+- <code title="post /api/projects/{project_id}/expert_reviews/">client.projects.remediations.expert_reviews.<a href="./src/codex/resources/projects/remediations/expert_reviews.py">create</a>(project_id, \*\*<a href="src/codex/types/projects/remediations/expert_review_create_params.py">params</a>) -> <a href="./src/codex/types/projects/remediations/expert_review_create_response.py">ExpertReviewCreateResponse</a></code>
+- <code title="get /api/projects/{project_id}/expert_reviews/{expert_review_id}">client.projects.remediations.expert_reviews.<a href="./src/codex/resources/projects/remediations/expert_reviews.py">retrieve</a>(expert_review_id, \*, project_id) -> <a href="./src/codex/types/projects/remediations/expert_review_retrieve_response.py">ExpertReviewRetrieveResponse</a></code>
+- <code title="get /api/projects/{project_id}/expert_reviews/">client.projects.remediations.expert_reviews.<a href="./src/codex/resources/projects/remediations/expert_reviews.py">list</a>(project_id, \*\*<a href="src/codex/types/projects/remediations/expert_review_list_params.py">params</a>) -> <a href="./src/codex/types/projects/remediations/expert_review_list_response.py">SyncOffsetPageExpertReviews[ExpertReviewListResponse]</a></code>
+- <code title="delete /api/projects/{project_id}/expert_reviews/{expert_review_id}">client.projects.remediations.expert_reviews.<a href="./src/codex/resources/projects/remediations/expert_reviews.py">delete</a>(expert_review_id, \*, project_id, \*\*<a href="src/codex/types/projects/remediations/expert_review_delete_params.py">params</a>) -> None</code>
+- <code title="patch /api/projects/{project_id}/expert_reviews/{expert_review_id}">client.projects.remediations.expert_reviews.<a href="./src/codex/resources/projects/remediations/expert_reviews.py">edit</a>(expert_review_id, \*, project_id, \*\*<a href="src/codex/types/projects/remediations/expert_review_edit_params.py">params</a>) -> <a href="./src/codex/types/projects/remediations/expert_review_edit_response.py">ExpertReviewEditResponse</a></code>

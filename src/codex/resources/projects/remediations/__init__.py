@@ -16,6 +16,14 @@ from .expert_answers import (
     ExpertAnswersResourceWithStreamingResponse,
     AsyncExpertAnswersResourceWithStreamingResponse,
 )
+from .expert_reviews import (
+    ExpertReviewsResource,
+    AsyncExpertReviewsResource,
+    ExpertReviewsResourceWithRawResponse,
+    AsyncExpertReviewsResourceWithRawResponse,
+    ExpertReviewsResourceWithStreamingResponse,
+    AsyncExpertReviewsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "ExpertAnswersResource",
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncExpertAnswersResourceWithRawResponse",
     "ExpertAnswersResourceWithStreamingResponse",
     "AsyncExpertAnswersResourceWithStreamingResponse",
+    "ExpertReviewsResource",
+    "AsyncExpertReviewsResource",
+    "ExpertReviewsResourceWithRawResponse",
+    "AsyncExpertReviewsResourceWithRawResponse",
+    "ExpertReviewsResourceWithStreamingResponse",
+    "AsyncExpertReviewsResourceWithStreamingResponse",
     "RemediationsResource",
     "AsyncRemediationsResource",
     "RemediationsResourceWithRawResponse",
