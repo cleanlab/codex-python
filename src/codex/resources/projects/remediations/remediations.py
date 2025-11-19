@@ -28,6 +28,14 @@ from .expert_answers import (
     ExpertAnswersResourceWithStreamingResponse,
     AsyncExpertAnswersResourceWithStreamingResponse,
 )
+from .expert_reviews import (
+    ExpertReviewsResource,
+    AsyncExpertReviewsResource,
+    ExpertReviewsResourceWithRawResponse,
+    AsyncExpertReviewsResourceWithRawResponse,
+    ExpertReviewsResourceWithStreamingResponse,
+    AsyncExpertReviewsResourceWithStreamingResponse,
+)
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.projects import (
     remediation_list_params,
@@ -53,6 +61,10 @@ class RemediationsResource(SyncAPIResource):
     @cached_property
     def expert_answers(self) -> ExpertAnswersResource:
         return ExpertAnswersResource(self._client)
+
+    @cached_property
+    def expert_reviews(self) -> ExpertReviewsResource:
+        return ExpertReviewsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> RemediationsResourceWithRawResponse:
@@ -538,6 +550,10 @@ class AsyncRemediationsResource(AsyncAPIResource):
     @cached_property
     def expert_answers(self) -> AsyncExpertAnswersResource:
         return AsyncExpertAnswersResource(self._client)
+
+    @cached_property
+    def expert_reviews(self) -> AsyncExpertReviewsResource:
+        return AsyncExpertReviewsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncRemediationsResourceWithRawResponse:
@@ -1085,6 +1101,10 @@ class RemediationsResourceWithRawResponse:
     def expert_answers(self) -> ExpertAnswersResourceWithRawResponse:
         return ExpertAnswersResourceWithRawResponse(self._remediations.expert_answers)
 
+    @cached_property
+    def expert_reviews(self) -> ExpertReviewsResourceWithRawResponse:
+        return ExpertReviewsResourceWithRawResponse(self._remediations.expert_reviews)
+
 
 class AsyncRemediationsResourceWithRawResponse:
     def __init__(self, remediations: AsyncRemediationsResource) -> None:
@@ -1149,6 +1169,10 @@ class AsyncRemediationsResourceWithRawResponse:
     @cached_property
     def expert_answers(self) -> AsyncExpertAnswersResourceWithRawResponse:
         return AsyncExpertAnswersResourceWithRawResponse(self._remediations.expert_answers)
+
+    @cached_property
+    def expert_reviews(self) -> AsyncExpertReviewsResourceWithRawResponse:
+        return AsyncExpertReviewsResourceWithRawResponse(self._remediations.expert_reviews)
 
 
 class RemediationsResourceWithStreamingResponse:
@@ -1215,6 +1239,10 @@ class RemediationsResourceWithStreamingResponse:
     def expert_answers(self) -> ExpertAnswersResourceWithStreamingResponse:
         return ExpertAnswersResourceWithStreamingResponse(self._remediations.expert_answers)
 
+    @cached_property
+    def expert_reviews(self) -> ExpertReviewsResourceWithStreamingResponse:
+        return ExpertReviewsResourceWithStreamingResponse(self._remediations.expert_reviews)
+
 
 class AsyncRemediationsResourceWithStreamingResponse:
     def __init__(self, remediations: AsyncRemediationsResource) -> None:
@@ -1279,3 +1307,7 @@ class AsyncRemediationsResourceWithStreamingResponse:
     @cached_property
     def expert_answers(self) -> AsyncExpertAnswersResourceWithStreamingResponse:
         return AsyncExpertAnswersResourceWithStreamingResponse(self._remediations.expert_answers)
+
+    @cached_property
+    def expert_reviews(self) -> AsyncExpertReviewsResourceWithStreamingResponse:
+        return AsyncExpertReviewsResourceWithStreamingResponse(self._remediations.expert_reviews)
