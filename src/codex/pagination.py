@@ -24,6 +24,8 @@ __all__ = [
     "AsyncOffsetPageQueryLogsByGroup",
     "SyncOffsetPageExpertAnswers",
     "AsyncOffsetPageExpertAnswers",
+    "SyncOffsetPageExpertReviews",
+    "AsyncOffsetPageExpertReviews",
 ]
 
 _BaseModelT = TypeVar("_BaseModelT", bound=BaseModel)
@@ -433,6 +435,66 @@ class AsyncOffsetPageExpertAnswers(BaseAsyncPage[_T], BasePage[_T], Generic[_T])
         if not expert_answers:
             return []
         return expert_answers
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class SyncOffsetPageExpertReviews(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    expert_reviews: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        expert_reviews = self.expert_reviews
+        if not expert_reviews:
+            return []
+        return expert_reviews
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        offset = self._options.params.get("offset") or 0
+        if not isinstance(offset, int):
+            raise ValueError(f'Expected "offset" param to be an integer but got {offset}')
+
+        length = len(self._get_page_items())
+        current_count = offset + length
+
+        total_count = self.total_count
+        if total_count is None:
+            return None
+
+        if current_count < total_count:
+            return PageInfo(params={"offset": current_count})
+
+        return None
+
+
+class AsyncOffsetPageExpertReviews(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    expert_reviews: List[_T]
+    total_count: Optional[int] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        expert_reviews = self.expert_reviews
+        if not expert_reviews:
+            return []
+        return expert_reviews
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
