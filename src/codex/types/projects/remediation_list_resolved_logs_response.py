@@ -409,6 +409,9 @@ class QueryLog(BaseModel):
     applied_expert_answer_id: Optional[str] = None
     """ID of the expert answer that was applied to the query."""
 
+    applied_expert_review_id: Optional[str] = None
+    """ID of the expert review that was applied to the query."""
+
     context: Optional[List[QueryLogContext]] = None
     """RAG context used for the query"""
 
@@ -468,6 +471,9 @@ class QueryLog(BaseModel):
 
     expert_review_explanation: Optional[str] = None
     """Expert explanation when marked as bad"""
+
+    expert_review_id: Optional[str] = None
+    """ID of the expert review that was created for the query."""
 
     expert_review_status: Optional[Literal["good", "bad"]] = None
     """Expert review status: 'good' or 'bad'"""
