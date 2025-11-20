@@ -467,12 +467,6 @@ class QueryLogsByGroupQueryLog(BaseModel):
     expert review. Expert review will override the original guardrail decision.
     """
 
-    expert_override_log_id: Optional[str] = None
-    """
-    ID of the query log with expert review that overrode the original guardrail
-    decision.
-    """
-
     expert_review_created_at: Optional[datetime] = None
     """When the expert review was created"""
 
