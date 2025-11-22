@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.35 (2025-11-22)
+
+Full Changelog: [v0.1.0-alpha.34...v0.1.0-alpha.35](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.34...v0.1.0-alpha.35)
+
+### Features
+
+* **api:** api update ([884de94](https://github.com/cleanlab/codex-python/commit/884de944e616b26580830817486bb85e74f1e7c4))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([4dec29c](https://github.com/cleanlab/codex-python/commit/4dec29cdf74dd3beeccf326678db7170156f0c44))
+
 ## 0.1.0-alpha.34 (2025-11-19)
 
 Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)

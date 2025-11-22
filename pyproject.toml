@@ -1,6 +1,6 @@
 [project]
 name = "codex-sdk"
-version = "0.1.0-alpha.34"
+version = "0.1.0-alpha.35"
 description = "Internal SDK used within cleanlab-codex package. Refer to https://pypi.org/project/cleanlab-codex/ instead."
 dynamic = ["readme"]
 license = "MIT"
@@ -24,6 +24,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Operating System :: OS Independent",
   "Operating System :: POSIX",
   "Operating System :: MacOS",

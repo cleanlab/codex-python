@@ -367,6 +367,8 @@ class QueryLogRetrieveResponse(BaseModel):
 
     expert_answer_id: Optional[str] = None
 
+    expert_override_log_id: Optional[str] = None
+
     formatted_escalation_eval_scores: Optional[Dict[str, FormattedEscalationEvalScores]] = None
 
     formatted_eval_scores: Optional[Dict[str, FormattedEvalScores]] = None
@@ -391,6 +393,8 @@ class QueryLogRetrieveResponse(BaseModel):
 
     issue_status: Literal["addressed", "unaddressed"]
     """Manual review status override for remediations."""
+
+    log_needs_review: bool
 
     needs_review: bool
 
@@ -455,12 +459,6 @@ class QueryLogRetrieveResponse(BaseModel):
     """
     Explanation of why the response was either guardrailed or not guardrailed by
     expert review. Expert review will override the original guardrail decision.
-    """
-
-    expert_override_log_id: Optional[str] = None
-    """
-    ID of the query log with expert review that overrode the original guardrail
-    decision.
     """
 
     expert_review_created_at: Optional[datetime] = None
