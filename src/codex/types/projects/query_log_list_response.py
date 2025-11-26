@@ -503,6 +503,15 @@ class QueryLogListResponse(BaseModel):
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
 
+    system_prompt: Optional[str] = None
+    """
+    Content of the first system message associated with this query log, if
+    available.
+    """
+
+    system_prompt_hash: Optional[str] = None
+    """SHA-256 hash of the system prompt content for quick equality checks."""
+
     tools: Optional[List[Tool]] = None
     """Tools to use for the LLM call.
 
