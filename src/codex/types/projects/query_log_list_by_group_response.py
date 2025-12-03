@@ -504,6 +504,12 @@ class QueryLogsByGroupQueryLog(BaseModel):
     itself.
     """
 
+    non_triggered_deterministic_guardrail_ids: Optional[List[str]] = None
+    """
+    UUIDs of deterministic guardrails that were checked but not triggered for this
+    query
+    """
+
     original_assistant_response: Optional[str] = None
     """The original assistant response that would have been displayed to the user.
 
@@ -537,6 +543,9 @@ class QueryLogsByGroupQueryLog(BaseModel):
 
     If not provided, it is assumed no tools were provided to the LLM.
     """
+
+    triggered_deterministic_guardrail_ids: Optional[List[str]] = None
+    """UUIDs of deterministic guardrails that were triggered for this query"""
 
 
 class QueryLogsByGroup(BaseModel):
@@ -572,6 +581,12 @@ class Filters(BaseModel):
     needs_review: Optional[bool] = None
     """Filter logs that need review"""
 
+    non_triggered_deterministic_guardrail_ids: Optional[List[str]] = None
+    """
+    Filter logs where ANY of these deterministic guardrail IDs were checked but not
+    triggered (OR operation)
+    """
+
     passed_evals: Optional[List[str]] = None
     """Filter by evals that passed"""
 
@@ -588,6 +603,12 @@ class Filters(BaseModel):
 
     tool_call_names: Optional[List[str]] = None
     """Filter by names of tools called in the assistant response"""
+
+    triggered_deterministic_guardrail_ids: Optional[List[str]] = None
+    """
+    Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
+    operation)
+    """
 
     was_cache_hit: Optional[bool] = None
     """Filter by cache hit status"""

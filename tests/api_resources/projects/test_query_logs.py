@@ -107,6 +107,7 @@ class TestQueryLogs:
             guardrailed=True,
             has_tool_calls=True,
             limit=1,
+            non_triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             offset=0,
             order="asc",
             passed_evals=["string"],
@@ -114,6 +115,7 @@ class TestQueryLogs:
             search_text="search_text",
             sort="created_at",
             tool_call_names=["string"],
+            triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             was_cache_hit=True,
         )
         assert_matches_type(SyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
@@ -234,6 +236,7 @@ class TestQueryLogs:
                 has_tool_calls=True,
                 limit=1,
                 needs_review=True,
+                non_triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 offset=0,
                 order="asc",
                 passed_evals=["string"],
@@ -242,6 +245,7 @@ class TestQueryLogs:
                 search_text="search_text",
                 sort="created_at",
                 tool_call_names=["string"],
+                triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 was_cache_hit=True,
             )
 
@@ -309,6 +313,7 @@ class TestQueryLogs:
                 has_tool_calls=True,
                 limit=1,
                 needs_review=True,
+                non_triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 offset=0,
                 order="asc",
                 passed_evals=["string"],
@@ -316,6 +321,7 @@ class TestQueryLogs:
                 search_text="search_text",
                 sort="created_at",
                 tool_call_names=["string"],
+                triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 was_cache_hit=True,
             )
 
@@ -553,6 +559,7 @@ class TestAsyncQueryLogs:
             guardrailed=True,
             has_tool_calls=True,
             limit=1,
+            non_triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             offset=0,
             order="asc",
             passed_evals=["string"],
@@ -560,6 +567,7 @@ class TestAsyncQueryLogs:
             search_text="search_text",
             sort="created_at",
             tool_call_names=["string"],
+            triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             was_cache_hit=True,
         )
         assert_matches_type(AsyncOffsetPageQueryLogs[QueryLogListResponse], query_log, path=["response"])
@@ -680,6 +688,7 @@ class TestAsyncQueryLogs:
                 has_tool_calls=True,
                 limit=1,
                 needs_review=True,
+                non_triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 offset=0,
                 order="asc",
                 passed_evals=["string"],
@@ -688,6 +697,7 @@ class TestAsyncQueryLogs:
                 search_text="search_text",
                 sort="created_at",
                 tool_call_names=["string"],
+                triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 was_cache_hit=True,
             )
 
@@ -755,6 +765,7 @@ class TestAsyncQueryLogs:
                 has_tool_calls=True,
                 limit=1,
                 needs_review=True,
+                non_triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 offset=0,
                 order="asc",
                 passed_evals=["string"],
@@ -762,6 +773,7 @@ class TestAsyncQueryLogs:
                 search_text="search_text",
                 sort="created_at",
                 tool_call_names=["string"],
+                triggered_deterministic_guardrail_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 was_cache_hit=True,
             )
 
