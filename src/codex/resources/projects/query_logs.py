@@ -112,7 +112,6 @@ class QueryLogsResource(SyncAPIResource):
         guardrailed: Optional[bool] | Omit = omit,
         has_tool_calls: Optional[bool] | Omit = omit,
         limit: int | Omit = omit,
-        non_triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -123,7 +122,6 @@ class QueryLogsResource(SyncAPIResource):
         search_text: Optional[str] | Omit = omit,
         sort: Optional[str] | Omit = omit,
         tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
-        triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -150,9 +148,6 @@ class QueryLogsResource(SyncAPIResource):
 
           has_tool_calls: Filter by whether the query log has tool calls
 
-          non_triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were checked but not
-              triggered (OR operation)
-
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
@@ -172,9 +167,6 @@ class QueryLogsResource(SyncAPIResource):
               Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
-
-          triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
-              operation)
 
           was_cache_hit: Filter by cache hit status
 
@@ -206,7 +198,6 @@ class QueryLogsResource(SyncAPIResource):
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,
                         "limit": limit,
-                        "non_triggered_deterministic_guardrail_ids": non_triggered_deterministic_guardrail_ids,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
@@ -214,7 +205,6 @@ class QueryLogsResource(SyncAPIResource):
                         "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
-                        "triggered_deterministic_guardrail_ids": triggered_deterministic_guardrail_ids,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_params.QueryLogListParams,
@@ -277,7 +267,6 @@ class QueryLogsResource(SyncAPIResource):
         has_tool_calls: Optional[bool] | Omit = omit,
         limit: int | Omit = omit,
         needs_review: Optional[bool] | Omit = omit,
-        non_triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -289,7 +278,6 @@ class QueryLogsResource(SyncAPIResource):
         search_text: Optional[str] | Omit = omit,
         sort: Optional[str] | Omit = omit,
         tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
-        triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -318,9 +306,6 @@ class QueryLogsResource(SyncAPIResource):
 
           needs_review: Filter logs that need review
 
-          non_triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were checked but not
-              triggered (OR operation)
-
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
@@ -342,9 +327,6 @@ class QueryLogsResource(SyncAPIResource):
               Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
-
-          triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
-              operation)
 
           was_cache_hit: Filter by cache hit status
 
@@ -376,7 +358,6 @@ class QueryLogsResource(SyncAPIResource):
                         "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
-                        "non_triggered_deterministic_guardrail_ids": non_triggered_deterministic_guardrail_ids,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
@@ -385,7 +366,6 @@ class QueryLogsResource(SyncAPIResource):
                         "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
-                        "triggered_deterministic_guardrail_ids": triggered_deterministic_guardrail_ids,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_by_group_params.QueryLogListByGroupParams,
@@ -408,7 +388,6 @@ class QueryLogsResource(SyncAPIResource):
         has_tool_calls: Optional[bool] | Omit = omit,
         limit: int | Omit = omit,
         needs_review: Optional[bool] | Omit = omit,
-        non_triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -419,7 +398,6 @@ class QueryLogsResource(SyncAPIResource):
         search_text: Optional[str] | Omit = omit,
         sort: Optional[str] | Omit = omit,
         tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
-        triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -448,9 +426,6 @@ class QueryLogsResource(SyncAPIResource):
 
           needs_review: Filter log groups that need review
 
-          non_triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were checked but not
-              triggered (OR operation)
-
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
@@ -471,9 +446,6 @@ class QueryLogsResource(SyncAPIResource):
               Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
-
-          triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
-              operation)
 
           was_cache_hit: Filter by cache hit status
 
@@ -506,7 +478,6 @@ class QueryLogsResource(SyncAPIResource):
                         "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
-                        "non_triggered_deterministic_guardrail_ids": non_triggered_deterministic_guardrail_ids,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
@@ -514,7 +485,6 @@ class QueryLogsResource(SyncAPIResource):
                         "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
-                        "triggered_deterministic_guardrail_ids": triggered_deterministic_guardrail_ids,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_groups_params.QueryLogListGroupsParams,
@@ -667,7 +637,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         guardrailed: Optional[bool] | Omit = omit,
         has_tool_calls: Optional[bool] | Omit = omit,
         limit: int | Omit = omit,
-        non_triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -678,7 +647,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         search_text: Optional[str] | Omit = omit,
         sort: Optional[str] | Omit = omit,
         tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
-        triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -705,9 +673,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           has_tool_calls: Filter by whether the query log has tool calls
 
-          non_triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were checked but not
-              triggered (OR operation)
-
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
@@ -727,9 +692,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
               Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
-
-          triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
-              operation)
 
           was_cache_hit: Filter by cache hit status
 
@@ -761,7 +723,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "guardrailed": guardrailed,
                         "has_tool_calls": has_tool_calls,
                         "limit": limit,
-                        "non_triggered_deterministic_guardrail_ids": non_triggered_deterministic_guardrail_ids,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
@@ -769,7 +730,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
-                        "triggered_deterministic_guardrail_ids": triggered_deterministic_guardrail_ids,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_params.QueryLogListParams,
@@ -834,7 +794,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         has_tool_calls: Optional[bool] | Omit = omit,
         limit: int | Omit = omit,
         needs_review: Optional[bool] | Omit = omit,
-        non_triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -846,7 +805,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         search_text: Optional[str] | Omit = omit,
         sort: Optional[str] | Omit = omit,
         tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
-        triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -875,9 +833,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           needs_review: Filter logs that need review
 
-          non_triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were checked but not
-              triggered (OR operation)
-
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
@@ -899,9 +854,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
               Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
-
-          triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
-              operation)
 
           was_cache_hit: Filter by cache hit status
 
@@ -933,7 +885,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
-                        "non_triggered_deterministic_guardrail_ids": non_triggered_deterministic_guardrail_ids,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
@@ -942,7 +893,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
-                        "triggered_deterministic_guardrail_ids": triggered_deterministic_guardrail_ids,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_by_group_params.QueryLogListByGroupParams,
@@ -965,7 +915,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         has_tool_calls: Optional[bool] | Omit = omit,
         limit: int | Omit = omit,
         needs_review: Optional[bool] | Omit = omit,
-        non_triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         passed_evals: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -976,7 +925,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
         search_text: Optional[str] | Omit = omit,
         sort: Optional[str] | Omit = omit,
         tool_call_names: Optional[SequenceNotStr[str]] | Omit = omit,
-        triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         was_cache_hit: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1005,9 +953,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
 
           needs_review: Filter log groups that need review
 
-          non_triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were checked but not
-              triggered (OR operation)
-
           passed_evals: Filter by evals that passed
 
           primary_eval_issue: Filter logs that have ANY of these primary evaluation issues (OR operation)
@@ -1028,9 +973,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
               Custom eval scores: '.eval.custom_eval_1', '.eval.custom_eval_2', etc.
 
           tool_call_names: Filter by names of tools called in the assistant response
-
-          triggered_deterministic_guardrail_ids: Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
-              operation)
 
           was_cache_hit: Filter by cache hit status
 
@@ -1063,7 +1005,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "has_tool_calls": has_tool_calls,
                         "limit": limit,
                         "needs_review": needs_review,
-                        "non_triggered_deterministic_guardrail_ids": non_triggered_deterministic_guardrail_ids,
                         "offset": offset,
                         "order": order,
                         "passed_evals": passed_evals,
@@ -1071,7 +1012,6 @@ class AsyncQueryLogsResource(AsyncAPIResource):
                         "search_text": search_text,
                         "sort": sort,
                         "tool_call_names": tool_call_names,
-                        "triggered_deterministic_guardrail_ids": triggered_deterministic_guardrail_ids,
                         "was_cache_hit": was_cache_hit,
                     },
                     query_log_list_groups_params.QueryLogListGroupsParams,
