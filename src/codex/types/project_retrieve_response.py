@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -9,6 +9,7 @@ from .._models import BaseModel
 __all__ = [
     "ProjectRetrieveResponse",
     "Config",
+    "ConfigDeterministicEval",
     "ConfigEvalConfig",
     "ConfigEvalConfigCustomEvals",
     "ConfigEvalConfigCustomEvalsEvals",
@@ -25,6 +26,14 @@ __all__ = [
     "ConfigEvalConfigDefaultEvalsTrustworthiness",
     "ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback",
 ]
+
+
+class ConfigDeterministicEval(BaseModel):
+    id: str
+
+    name: str
+
+    should_guardrail: bool
 
 
 class ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(BaseModel):
@@ -469,6 +478,8 @@ class ConfigEvalConfig(BaseModel):
 
 
 class Config(BaseModel):
+    deterministic_evals: List[ConfigDeterministicEval]
+
     ai_guidance_threshold: Optional[float] = None
 
     clustering_use_llm_matching: Optional[bool] = None
