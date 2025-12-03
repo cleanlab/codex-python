@@ -499,12 +499,6 @@ class QueryLogListGroupsResponse(BaseModel):
     itself.
     """
 
-    non_triggered_deterministic_guardrail_ids: Optional[List[str]] = None
-    """
-    UUIDs of deterministic guardrails that were checked but not triggered for this
-    query
-    """
-
     original_assistant_response: Optional[str] = None
     """The original assistant response that would have been displayed to the user.
 
@@ -538,6 +532,3 @@ class QueryLogListGroupsResponse(BaseModel):
 
     If not provided, it is assumed no tools were provided to the LLM.
     """
-
-    triggered_deterministic_guardrail_ids: Optional[List[str]] = None
-    """UUIDs of deterministic guardrails that were triggered for this query"""

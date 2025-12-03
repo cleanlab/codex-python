@@ -39,12 +39,6 @@ class QueryLogListByGroupParams(TypedDict, total=False):
     needs_review: Optional[bool]
     """Filter logs that need review"""
 
-    non_triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]]
-    """
-    Filter logs where ANY of these deterministic guardrail IDs were checked but not
-    triggered (OR operation)
-    """
-
     offset: int
 
     order: Literal["asc", "desc"]
@@ -81,12 +75,6 @@ class QueryLogListByGroupParams(TypedDict, total=False):
 
     tool_call_names: Optional[SequenceNotStr[str]]
     """Filter by names of tools called in the assistant response"""
-
-    triggered_deterministic_guardrail_ids: Optional[SequenceNotStr[str]]
-    """
-    Filter logs where ANY of these deterministic guardrail IDs were triggered (OR
-    operation)
-    """
 
     was_cache_hit: Optional[bool]
     """Filter by cache hit status"""
