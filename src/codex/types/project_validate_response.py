@@ -74,6 +74,10 @@ class EvalScores(BaseModel):
 
 
 class GuardrailedFallback(BaseModel):
+    """
+    Name, fallback message, fallback priority, and fallback type of the triggered guardrail with the highest fallback priority
+    """
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be

@@ -84,6 +84,12 @@ class QueryLogsByGroupQueryLogFormattedNonGuardrailEvalScores(BaseModel):
 
 
 class QueryLogsByGroupQueryLogContext(BaseModel):
+    """Represents a document in RAG contex.
+
+    This schema is designed to be flexible while maintaining structure for RAG systems.
+    It supports both simple string content and rich document metadata.
+    """
+
     content: str
     """The actual content/text of the document."""
 
@@ -142,6 +148,10 @@ class QueryLogsByGroupQueryLogEvaluatedResponseToolCall(BaseModel):
 
 
 class QueryLogsByGroupQueryLogGuardrailedFallback(BaseModel):
+    """
+    Name, fallback message, priority, and type for for the triggered guardrail with the highest priority
+    """
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -546,6 +556,8 @@ class QueryLogsByGroup(BaseModel):
 
 
 class Filters(BaseModel):
+    """Applied filters for the query"""
+
     custom_metadata_dict: Optional[object] = None
 
     created_at_end: Optional[datetime] = None

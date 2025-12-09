@@ -73,6 +73,8 @@ class EvalCreateParams(TypedDict, total=False):
 
 
 class GuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be

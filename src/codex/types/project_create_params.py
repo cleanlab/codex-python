@@ -39,6 +39,8 @@ class ProjectCreateParams(TypedDict, total=False):
 
 
 class ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -56,6 +58,11 @@ class ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(TypedDict, total=False
 
 
 class ConfigEvalConfigCustomEvalsEvals(TypedDict, total=False):
+    """A custom evaluation metric created by users.
+
+    The TLMEvalSchema are mutable and stored in the database.
+    """
+
     criteria: Required[str]
     """
     The evaluation criteria text that describes what aspect is being evaluated and
@@ -120,10 +127,14 @@ class ConfigEvalConfigCustomEvalsEvals(TypedDict, total=False):
 
 
 class ConfigEvalConfigCustomEvals(TypedDict, total=False):
+    """Configuration for custom evaluation metrics."""
+
     evals: Dict[str, ConfigEvalConfigCustomEvalsEvals]
 
 
 class ConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -141,6 +152,12 @@ class ConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback(TypedDic
 
 
 class ConfigEvalConfigDefaultEvalsContextSufficiency(TypedDict, total=False):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     eval_key: Required[str]
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -179,6 +196,8 @@ class ConfigEvalConfigDefaultEvalsContextSufficiency(TypedDict, total=False):
 
 
 class ConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -196,6 +215,12 @@ class ConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback(TypedDict, total=
 
 
 class ConfigEvalConfigDefaultEvalsQueryEase(TypedDict, total=False):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     eval_key: Required[str]
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -234,6 +259,8 @@ class ConfigEvalConfigDefaultEvalsQueryEase(TypedDict, total=False):
 
 
 class ConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -251,6 +278,12 @@ class ConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback(TypedD
 
 
 class ConfigEvalConfigDefaultEvalsResponseGroundedness(TypedDict, total=False):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     eval_key: Required[str]
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -289,6 +322,8 @@ class ConfigEvalConfigDefaultEvalsResponseGroundedness(TypedDict, total=False):
 
 
 class ConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -306,6 +341,12 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback(TypedDi
 
 
 class ConfigEvalConfigDefaultEvalsResponseHelpfulness(TypedDict, total=False):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     eval_key: Required[str]
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -344,6 +385,8 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulness(TypedDict, total=False):
 
 
 class ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -361,6 +404,12 @@ class ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback(TypedDict, 
 
 
 class ConfigEvalConfigDefaultEvalsTrustworthiness(TypedDict, total=False):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     eval_key: Required[str]
     """
     Unique key for eval metric - currently maps to the TrustworthyRAG name property
@@ -399,6 +448,8 @@ class ConfigEvalConfigDefaultEvalsTrustworthiness(TypedDict, total=False):
 
 
 class ConfigEvalConfigDefaultEvals(TypedDict, total=False):
+    """Configuration for default evaluation metrics."""
+
     context_sufficiency: ConfigEvalConfigDefaultEvalsContextSufficiency
     """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
 
@@ -436,6 +487,8 @@ class ConfigEvalConfigDefaultEvals(TypedDict, total=False):
 
 
 class ConfigEvalConfig(TypedDict, total=False):
+    """Configuration for project-specific evaluation metrics"""
+
     custom_evals: ConfigEvalConfigCustomEvals
     """Configuration for custom evaluation metrics."""
 

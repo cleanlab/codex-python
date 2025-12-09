@@ -83,6 +83,8 @@ class CustomEvalCreateOrUpdateSchema(TypedDict, total=False):
 
 
 class CustomEvalCreateOrUpdateSchemaGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -137,6 +139,8 @@ class DefaultEvalUpdateSchema(TypedDict, total=False):
 
 
 class DefaultEvalUpdateSchemaGuardrailedFallback(TypedDict, total=False):
+    """message, priority, type"""
+
     message: Required[str]
     """
     Fallback message to use if this eval fails and causes the response to be
