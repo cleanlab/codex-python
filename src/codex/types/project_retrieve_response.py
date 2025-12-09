@@ -28,6 +28,8 @@ __all__ = [
 
 
 class ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -45,6 +47,11 @@ class ConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(BaseModel):
 
 
 class ConfigEvalConfigCustomEvalsEvals(BaseModel):
+    """A custom evaluation metric created by users.
+
+    The TLMEvalSchema are mutable and stored in the database.
+    """
+
     criteria: str
     """
     The evaluation criteria text that describes what aspect is being evaluated and
@@ -115,10 +122,14 @@ class ConfigEvalConfigCustomEvalsEvals(BaseModel):
 
 
 class ConfigEvalConfigCustomEvals(BaseModel):
+    """Configuration for custom evaluation metrics."""
+
     evals: Optional[Dict[str, ConfigEvalConfigCustomEvalsEvals]] = None
 
 
 class ConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -136,6 +147,12 @@ class ConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback(BaseMode
 
 
 class ConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -180,6 +197,8 @@ class ConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -197,6 +216,12 @@ class ConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -241,6 +266,8 @@ class ConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -258,6 +285,12 @@ class ConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback(BaseMo
 
 
 class ConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -302,6 +335,8 @@ class ConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -319,6 +354,12 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback(BaseMod
 
 
 class ConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -363,6 +404,8 @@ class ConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -380,6 +423,12 @@ class ConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -424,6 +473,8 @@ class ConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
 
 
 class ConfigEvalConfigDefaultEvals(BaseModel):
+    """Configuration for default evaluation metrics."""
+
     context_sufficiency: Optional[ConfigEvalConfigDefaultEvalsContextSufficiency] = None
     """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
 
@@ -461,6 +512,8 @@ class ConfigEvalConfigDefaultEvals(BaseModel):
 
 
 class ConfigEvalConfig(BaseModel):
+    """Configuration for project-specific evaluation metrics"""
+
     custom_evals: Optional[ConfigEvalConfigCustomEvals] = None
     """Configuration for custom evaluation metrics."""
 

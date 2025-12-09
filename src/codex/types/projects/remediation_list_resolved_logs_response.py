@@ -82,6 +82,12 @@ class QueryLogFormattedNonGuardrailEvalScores(BaseModel):
 
 
 class QueryLogContext(BaseModel):
+    """Represents a document in RAG contex.
+
+    This schema is designed to be flexible while maintaining structure for RAG systems.
+    It supports both simple string content and rich document metadata.
+    """
+
     content: str
     """The actual content/text of the document."""
 
@@ -140,6 +146,10 @@ class QueryLogEvaluatedResponseToolCall(BaseModel):
 
 
 class QueryLogGuardrailedFallback(BaseModel):
+    """
+    Name, fallback message, priority, and type for for the triggered guardrail with the highest priority
+    """
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
