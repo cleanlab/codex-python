@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Mapping, cast
+from typing import TYPE_CHECKING, Any, Dict, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -21,8 +21,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import health
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
@@ -30,9 +30,13 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.users import users
-from .resources.projects import projects
-from .resources.organizations import organizations
+
+if TYPE_CHECKING:
+    from .resources import users, health, projects, organizations
+    from .resources.health import HealthResource, AsyncHealthResource
+    from .resources.users.users import UsersResource, AsyncUsersResource
+    from .resources.projects.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
 __all__ = [
     "ENVIRONMENTS",
@@ -54,13 +58,6 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Codex(SyncAPIClient):
-    health: health.HealthResource
-    organizations: organizations.OrganizationsResource
-    users: users.UsersResource
-    projects: projects.ProjectsResource
-    with_raw_response: CodexWithRawResponse
-    with_streaming_response: CodexWithStreamedResponse
-
     # client options
     auth_token: str | None
     api_key: str | None
@@ -138,12 +135,37 @@ class Codex(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.health = health.HealthResource(self)
-        self.organizations = organizations.OrganizationsResource(self)
-        self.users = users.UsersResource(self)
-        self.projects = projects.ProjectsResource(self)
-        self.with_raw_response = CodexWithRawResponse(self)
-        self.with_streaming_response = CodexWithStreamedResponse(self)
+    @cached_property
+    def health(self) -> HealthResource:
+        from .resources.health import HealthResource
+
+        return HealthResource(self)
+
+    @cached_property
+    def organizations(self) -> OrganizationsResource:
+        from .resources.organizations import OrganizationsResource
+
+        return OrganizationsResource(self)
+
+    @cached_property
+    def users(self) -> UsersResource:
+        from .resources.users import UsersResource
+
+        return UsersResource(self)
+
+    @cached_property
+    def projects(self) -> ProjectsResource:
+        from .resources.projects import ProjectsResource
+
+        return ProjectsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> CodexWithRawResponse:
+        return CodexWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> CodexWithStreamedResponse:
+        return CodexWithStreamedResponse(self)
 
     @property
     @override
@@ -298,13 +320,6 @@ class Codex(SyncAPIClient):
 
 
 class AsyncCodex(AsyncAPIClient):
-    health: health.AsyncHealthResource
-    organizations: organizations.AsyncOrganizationsResource
-    users: users.AsyncUsersResource
-    projects: projects.AsyncProjectsResource
-    with_raw_response: AsyncCodexWithRawResponse
-    with_streaming_response: AsyncCodexWithStreamedResponse
-
     # client options
     auth_token: str | None
     api_key: str | None
@@ -382,12 +397,37 @@ class AsyncCodex(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.health = health.AsyncHealthResource(self)
-        self.organizations = organizations.AsyncOrganizationsResource(self)
-        self.users = users.AsyncUsersResource(self)
-        self.projects = projects.AsyncProjectsResource(self)
-        self.with_raw_response = AsyncCodexWithRawResponse(self)
-        self.with_streaming_response = AsyncCodexWithStreamedResponse(self)
+    @cached_property
+    def health(self) -> AsyncHealthResource:
+        from .resources.health import AsyncHealthResource
+
+        return AsyncHealthResource(self)
+
+    @cached_property
+    def organizations(self) -> AsyncOrganizationsResource:
+        from .resources.organizations import AsyncOrganizationsResource
+
+        return AsyncOrganizationsResource(self)
+
+    @cached_property
+    def users(self) -> AsyncUsersResource:
+        from .resources.users import AsyncUsersResource
+
+        return AsyncUsersResource(self)
+
+    @cached_property
+    def projects(self) -> AsyncProjectsResource:
+        from .resources.projects import AsyncProjectsResource
+
+        return AsyncProjectsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncCodexWithRawResponse:
+        return AsyncCodexWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncCodexWithStreamedResponse:
+        return AsyncCodexWithStreamedResponse(self)
 
     @property
     @override
@@ -542,35 +582,127 @@ class AsyncCodex(AsyncAPIClient):
 
 
 class CodexWithRawResponse:
+    _client: Codex
+
     def __init__(self, client: Codex) -> None:
-        self.health = health.HealthResourceWithRawResponse(client.health)
-        self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
-        self.users = users.UsersResourceWithRawResponse(client.users)
-        self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
+        self._client = client
+
+    @cached_property
+    def health(self) -> health.HealthResourceWithRawResponse:
+        from .resources.health import HealthResourceWithRawResponse
+
+        return HealthResourceWithRawResponse(self._client.health)
+
+    @cached_property
+    def organizations(self) -> organizations.OrganizationsResourceWithRawResponse:
+        from .resources.organizations import OrganizationsResourceWithRawResponse
+
+        return OrganizationsResourceWithRawResponse(self._client.organizations)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithRawResponse:
+        from .resources.users import UsersResourceWithRawResponse
+
+        return UsersResourceWithRawResponse(self._client.users)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithRawResponse:
+        from .resources.projects import ProjectsResourceWithRawResponse
+
+        return ProjectsResourceWithRawResponse(self._client.projects)
 
 
 class AsyncCodexWithRawResponse:
+    _client: AsyncCodex
+
     def __init__(self, client: AsyncCodex) -> None:
-        self.health = health.AsyncHealthResourceWithRawResponse(client.health)
-        self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
-        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
-        self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
+        self._client = client
+
+    @cached_property
+    def health(self) -> health.AsyncHealthResourceWithRawResponse:
+        from .resources.health import AsyncHealthResourceWithRawResponse
+
+        return AsyncHealthResourceWithRawResponse(self._client.health)
+
+    @cached_property
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithRawResponse:
+        from .resources.organizations import AsyncOrganizationsResourceWithRawResponse
+
+        return AsyncOrganizationsResourceWithRawResponse(self._client.organizations)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithRawResponse:
+        from .resources.users import AsyncUsersResourceWithRawResponse
+
+        return AsyncUsersResourceWithRawResponse(self._client.users)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
+        from .resources.projects import AsyncProjectsResourceWithRawResponse
+
+        return AsyncProjectsResourceWithRawResponse(self._client.projects)
 
 
 class CodexWithStreamedResponse:
+    _client: Codex
+
     def __init__(self, client: Codex) -> None:
-        self.health = health.HealthResourceWithStreamingResponse(client.health)
-        self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
-        self.users = users.UsersResourceWithStreamingResponse(client.users)
-        self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
+        self._client = client
+
+    @cached_property
+    def health(self) -> health.HealthResourceWithStreamingResponse:
+        from .resources.health import HealthResourceWithStreamingResponse
+
+        return HealthResourceWithStreamingResponse(self._client.health)
+
+    @cached_property
+    def organizations(self) -> organizations.OrganizationsResourceWithStreamingResponse:
+        from .resources.organizations import OrganizationsResourceWithStreamingResponse
+
+        return OrganizationsResourceWithStreamingResponse(self._client.organizations)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithStreamingResponse:
+        from .resources.users import UsersResourceWithStreamingResponse
+
+        return UsersResourceWithStreamingResponse(self._client.users)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
+        from .resources.projects import ProjectsResourceWithStreamingResponse
+
+        return ProjectsResourceWithStreamingResponse(self._client.projects)
 
 
 class AsyncCodexWithStreamedResponse:
+    _client: AsyncCodex
+
     def __init__(self, client: AsyncCodex) -> None:
-        self.health = health.AsyncHealthResourceWithStreamingResponse(client.health)
-        self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
-        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
-        self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
+        self._client = client
+
+    @cached_property
+    def health(self) -> health.AsyncHealthResourceWithStreamingResponse:
+        from .resources.health import AsyncHealthResourceWithStreamingResponse
+
+        return AsyncHealthResourceWithStreamingResponse(self._client.health)
+
+    @cached_property
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithStreamingResponse:
+        from .resources.organizations import AsyncOrganizationsResourceWithStreamingResponse
+
+        return AsyncOrganizationsResourceWithStreamingResponse(self._client.organizations)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithStreamingResponse:
+        from .resources.users import AsyncUsersResourceWithStreamingResponse
+
+        return AsyncUsersResourceWithStreamingResponse(self._client.users)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
+        from .resources.projects import AsyncProjectsResourceWithStreamingResponse
+
+        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
 
 
 Client = Codex
