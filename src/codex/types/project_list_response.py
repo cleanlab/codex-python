@@ -30,6 +30,8 @@ __all__ = [
 
 
 class ProjectConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -47,6 +49,11 @@ class ProjectConfigEvalConfigCustomEvalsEvalsGuardrailedFallback(BaseModel):
 
 
 class ProjectConfigEvalConfigCustomEvalsEvals(BaseModel):
+    """A custom evaluation metric created by users.
+
+    The TLMEvalSchema are mutable and stored in the database.
+    """
+
     criteria: str
     """
     The evaluation criteria text that describes what aspect is being evaluated and
@@ -117,10 +124,14 @@ class ProjectConfigEvalConfigCustomEvalsEvals(BaseModel):
 
 
 class ProjectConfigEvalConfigCustomEvals(BaseModel):
+    """Configuration for custom evaluation metrics."""
+
     evals: Optional[Dict[str, ProjectConfigEvalConfigCustomEvalsEvals]] = None
 
 
 class ProjectConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -138,6 +149,12 @@ class ProjectConfigEvalConfigDefaultEvalsContextSufficiencyGuardrailedFallback(B
 
 
 class ProjectConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -182,6 +199,8 @@ class ProjectConfigEvalConfigDefaultEvalsContextSufficiency(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -199,6 +218,12 @@ class ProjectConfigEvalConfigDefaultEvalsQueryEaseGuardrailedFallback(BaseModel)
 
 
 class ProjectConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -243,6 +268,8 @@ class ProjectConfigEvalConfigDefaultEvalsQueryEase(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -260,6 +287,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseGroundednessGuardrailedFallback
 
 
 class ProjectConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -304,6 +337,8 @@ class ProjectConfigEvalConfigDefaultEvalsResponseGroundedness(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -321,6 +356,12 @@ class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulnessGuardrailedFallback(
 
 
 class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -365,6 +406,8 @@ class ProjectConfigEvalConfigDefaultEvalsResponseHelpfulness(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -382,6 +425,12 @@ class ProjectConfigEvalConfigDefaultEvalsTrustworthinessGuardrailedFallback(Base
 
 
 class ProjectConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
+    """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
+
+    The evaluation criteria and identifiers are immutable and system-managed,
+    while other properties like thresholds and priorities can be configured.
+    """
+
     display_name: str
     """Human-friendly name for display.
 
@@ -426,6 +475,8 @@ class ProjectConfigEvalConfigDefaultEvalsTrustworthiness(BaseModel):
 
 
 class ProjectConfigEvalConfigDefaultEvals(BaseModel):
+    """Configuration for default evaluation metrics."""
+
     context_sufficiency: Optional[ProjectConfigEvalConfigDefaultEvalsContextSufficiency] = None
     """A pre-configured evaluation metric from TrustworthyRAG or built into the system.
 
@@ -463,6 +514,8 @@ class ProjectConfigEvalConfigDefaultEvals(BaseModel):
 
 
 class ProjectConfigEvalConfig(BaseModel):
+    """Configuration for project-specific evaluation metrics"""
+
     custom_evals: Optional[ProjectConfigEvalConfigCustomEvals] = None
     """Configuration for custom evaluation metrics."""
 
@@ -522,6 +575,8 @@ class Project(BaseModel):
 
 
 class Filters(BaseModel):
+    """Applied filters for the projects list request"""
+
     query: Optional[str] = None
 
 

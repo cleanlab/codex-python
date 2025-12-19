@@ -16,6 +16,8 @@ class ExpertReviewListResponse(BaseModel):
 
     evaluated_response: Optional[str] = None
 
+    expert_override_log_id: str
+
     last_edited_at: datetime
 
     last_edited_by: Optional[str] = None

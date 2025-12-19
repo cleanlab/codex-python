@@ -9,6 +9,8 @@ __all__ = ["OrganizationListMembersResponse", "OrganizationListMembersResponseIt
 
 
 class OrganizationListMembersResponseItem(BaseModel):
+    """Schema for public organization member information."""
+
     email: str
 
     name: str

@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.1.0-alpha.35 (2025-12-19)
+
+Full Changelog: [v0.1.0-alpha.34...v0.1.0-alpha.35](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.34...v0.1.0-alpha.35)
+
+### Features
+
+* **api:** api update ([7f283d7](https://github.com/cleanlab/codex-python/commit/7f283d7abb4b9b79de86c88745fb66ea9943cdae))
+* **api:** api update ([7742c60](https://github.com/cleanlab/codex-python/commit/7742c60ecad518656a184513c5228a3447aa34c9))
+* **api:** api update ([94bacaf](https://github.com/cleanlab/codex-python/commit/94bacaf492809bc9bc15175d272de53ad2569895))
+* **api:** api update ([884de94](https://github.com/cleanlab/codex-python/commit/884de944e616b26580830817486bb85e74f1e7c4))
+
+
+### Bug Fixes
+
+* ensure streams are always closed ([2c971c4](https://github.com/cleanlab/codex-python/commit/2c971c4a93b0e407737648e83e555dc6c9b3a759))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([d64e474](https://github.com/cleanlab/codex-python/commit/d64e47443ef147240de6cba892e901dcab0b2d71))
+* use async_to_httpx_files in patch method ([019a1ab](https://github.com/cleanlab/codex-python/commit/019a1abef1d094ac6342a6e7fd467af396527d62))
+
+
+### Chores
+
+* add missing docstrings ([250433e](https://github.com/cleanlab/codex-python/commit/250433e37cb8ba034de2977ee6375f06390cc6c4))
+* add Python 3.14 classifier and testing ([4dec29c](https://github.com/cleanlab/codex-python/commit/4dec29cdf74dd3beeccf326678db7170156f0c44))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([1828526](https://github.com/cleanlab/codex-python/commit/18285268b4eec848b2be2df65cdbdf960424f72d))
+* **internal:** add `--fix` argument to lint script ([8ec9c71](https://github.com/cleanlab/codex-python/commit/8ec9c71e5ae01675ba75731d467f9bb0002eb9a3))
+* **internal:** add missing files argument to base client ([c8986ce](https://github.com/cleanlab/codex-python/commit/c8986ce9fa0eae5726ba6cb6692dfa11c60284f5))
+* speedup initial import ([9f17615](https://github.com/cleanlab/codex-python/commit/9f17615353be5ee705ea2f4713d9dc790b2ecb3b))
+* update lockfile ([230659a](https://github.com/cleanlab/codex-python/commit/230659a94b4921805c84224578df1324829e5d07))
+
 ## 0.1.0-alpha.34 (2025-11-19)
 
 Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/cleanlab/codex-python/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)

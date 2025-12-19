@@ -9,6 +9,8 @@ __all__ = ["EvalListResponse", "Eval", "EvalGuardrailedFallback"]
 
 
 class EvalGuardrailedFallback(BaseModel):
+    """message, priority, type"""
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -96,6 +98,8 @@ class Eval(BaseModel):
 
 
 class EvalListResponse(BaseModel):
+    """Schema for paginated evals response."""
+
     evals: List[Eval]
 
     total_count: int

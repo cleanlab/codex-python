@@ -81,6 +81,12 @@ class FormattedNonGuardrailEvalScores(BaseModel):
 
 
 class Context(BaseModel):
+    """Represents a document in RAG contex.
+
+    This schema is designed to be flexible while maintaining structure for RAG systems.
+    It supports both simple string content and rich document metadata.
+    """
+
     content: str
     """The actual content/text of the document."""
 
@@ -139,6 +145,10 @@ class EvaluatedResponseToolCall(BaseModel):
 
 
 class GuardrailedFallback(BaseModel):
+    """
+    Name, fallback message, priority, and type for for the triggered guardrail with the highest priority
+    """
+
     message: str
     """
     Fallback message to use if this eval fails and causes the response to be
@@ -450,12 +460,6 @@ class QueryLogListResponse(BaseModel):
     expert review. Expert review will override the original guardrail decision.
     """
 
-    expert_override_log_id: Optional[str] = None
-    """
-    ID of the query log with expert review that overrode the original guardrail
-    decision.
-    """
-
     expert_review_created_at: Optional[datetime] = None
     """When the expert review was created"""
 
@@ -508,6 +512,15 @@ class QueryLogListResponse(BaseModel):
 
     primary_eval_issue_score: Optional[float] = None
     """Score of the primary eval issue"""
+
+    system_prompt: Optional[str] = None
+    """
+    Content of the first system message associated with this query log, if
+    available.
+    """
+
+    system_prompt_hash: Optional[str] = None
+    """SHA-256 hash of the system prompt content for quick equality checks."""
 
     tools: Optional[List[Tool]] = None
     """Tools to use for the LLM call.
