@@ -209,19 +209,13 @@ class Codex(SyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.auth_token and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if headers.get("Authorization") or isinstance(custom_headers.get("Authorization"), Omit):
             return
 
-        if self.api_key and headers.get("X-API-Key"):
-            return
-        if isinstance(custom_headers.get("X-API-Key"), Omit):
+        if headers.get("X-API-Key") or isinstance(custom_headers.get("X-API-Key"), Omit):
             return
 
-        if self.access_key and headers.get("X-Access-Key"):
-            return
-        if isinstance(custom_headers.get("X-Access-Key"), Omit):
+        if headers.get("X-Access-Key") or isinstance(custom_headers.get("X-Access-Key"), Omit):
             return
 
         raise TypeError(
@@ -471,19 +465,13 @@ class AsyncCodex(AsyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.auth_token and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if headers.get("Authorization") or isinstance(custom_headers.get("Authorization"), Omit):
             return
 
-        if self.api_key and headers.get("X-API-Key"):
-            return
-        if isinstance(custom_headers.get("X-API-Key"), Omit):
+        if headers.get("X-API-Key") or isinstance(custom_headers.get("X-API-Key"), Omit):
             return
 
-        if self.access_key and headers.get("X-Access-Key"):
-            return
-        if isinstance(custom_headers.get("X-Access-Key"), Omit):
+        if headers.get("X-Access-Key") or isinstance(custom_headers.get("X-Access-Key"), Omit):
             return
 
         raise TypeError(
