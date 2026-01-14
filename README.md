@@ -17,7 +17,7 @@ The REST API documentation can be found on [help.cleanlab.ai](https://help.clean
 
 ```sh
 # install from PyPI
-pip install --pre codex-sdk
+pip install '--pre codex-sdk'
 ```
 
 ## Usage
@@ -78,7 +78,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre codex-sdk[aiohttp]
+pip install '--pre codex-sdk[aiohttp]'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
